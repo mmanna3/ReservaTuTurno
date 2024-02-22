@@ -3,5 +3,7 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
     "source.fixAll": "explicit"
-  }
+  },
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript", "typescript"]
 }
