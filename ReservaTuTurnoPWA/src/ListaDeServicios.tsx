@@ -7,13 +7,15 @@ interface Servicio {
   descripcion: string;
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const ListaDeServicios = () => {
   const [servicios, setServicios] = useState([]);
 
   useEffect(() => {
     async function getServicios() {
       try {
-        const response = await axios.get("http://localhost:5072/api/Servicio");
+        const response = await axios.get(API_BASE_URL + "/Servicio");
         setServicios(response.data);
       } catch (error) {
         console.error(error);
