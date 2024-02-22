@@ -34,15 +34,13 @@ before_build:
   - cd ..
   - ps: >-
       Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
-  - ps: >-
-      $Env:ASPNETCORE_ENVIRONMENT = "Production"
 build:
   project: ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln
   publish_wap: true
   parallel: true
   verbosity: minimal
 after_build:
-  - cmd: dotnet publish --framework net8.0 --self-contained true -r win-x64 ReservaTuTurnoApi --output %appveyor_build_folder%\dist
+  - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi --output %appveyor_build_folder%\dist
 artifacts:
   - path: dist
 deploy:
