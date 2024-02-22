@@ -34,6 +34,8 @@ before_build:
   - cd ..
   - ps: >-
       Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
+  - ps: >-
+      $Env:ASPNETCORE_ENVIRONMENT = "Production"
 build:
   project: ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln
   publish_wap: true
