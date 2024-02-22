@@ -1,6 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+interface Servicio {
+  id: number;
+  nombre: string;
+  descripcion: string;
+}
+
 const ListaDeServicios = () => {
   const [servicios, setServicios] = useState([]);
 
@@ -20,7 +26,7 @@ const ListaDeServicios = () => {
   return (
     <>
       <h2 className="text-2xl mb-4">Servicios</h2>
-      {servicios.map((s) => (
+      {servicios.map((s: Servicio) => (
         <div key={s.id} className="border rounded-lg p-8 mb-2">
           <p className="text-lg font-semibold mb-2">{s.nombre}</p>
           <p>{s.descripcion}</p>
