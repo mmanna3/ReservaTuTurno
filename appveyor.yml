@@ -1,0 +1,42 @@
+version: 1.0.{build}
+image: Visual Studio 2022
+branches:
+  only:
+    - main
+environment:
+  deploy_username:
+    secure: ZumRpgIeGcRgW3H7yXK0bQ==
+  deploy_password:
+    secure: SFAvHfsz398LTl83QbS5gw==
+  deploy_server:
+    secure: 9iCJXN3fcB5DufZMg1zVf3xhH5vWLdZxDXFZ1ttdGejbuBldZQQznbF4XXbmX7UnlHDOdIXo7EBb2MQOHqRXdpsKmn7qrcpWoukzYxFB9phYlSqFXRowjeFNDjAPAaFs
+  deploy_website:
+    secure: RjlovvhfNwCqtGz5G8sg1vIF6BAY7ICmuiGmTtFjV/Y=
+before_build:
+  - cmd: dotnet --version
+  - cmd: dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
+  - npm install --global yarn
+  - cd ReservaTuTurnoPWA
+  - yarn install
+  - yarn build
+  - cd ..
+- ps: >-
+      Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
+build:
+  project: ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln
+  publish_wap: true
+  parallel: true
+  verbosity: minimal
+after_build:
+  - cmd: dotnet publish --framework net8.0 --self-contained true -r win-x64 ReservaTuTurnoApi --output %appveyor_build_folder%\dist
+artifacts:
+  - path: dist
+deploy:
+  - provider: WebDeploy
+    remove_files: true
+    skip_dirs: \\App_Data;\\logs;\\aspnet_client;
+    server: $(deploy_server)
+    website: $(deploy_website)
+    username: $(deploy_username)
+    password: $(deploy_password)
+    ntlm: false
