@@ -34,6 +34,7 @@ public abstract class ABMCore<TRepo, TEntidad, TDTO> : ICoreABM<TDTO>
     public async Task<int> Crear(TDTO dto)
     {
         var entidad = Mapper.Map<TEntidad>(dto);
+        Repo.Crear(entidad);
         await BDVirtual.GuardarCambios();
         return entidad.Id;
     }

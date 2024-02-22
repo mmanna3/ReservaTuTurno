@@ -82,12 +82,12 @@ namespace Api.Api.Controllers
         // POST: api/Servicio
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Servicio>> PostServicio(Servicio servicio)
+        public async Task<ActionResult<Servicio>> Crear(ServicioDTO servicio)
         {
-            _context.Servicios.Add(servicio);
-            await _context.SaveChangesAsync();
+            var id = await _servicioCore.Crear(servicio); //Podría devolver el objeto creado en vez de el Id
+            servicio.Id = id;
 
-            return CreatedAtAction("GetServicio", new { id = servicio.Id }, servicio);
+            return CreatedAtAction("GetServicio", new { id }, servicio);
         }
 
         // DELETE: api/Servicio/5

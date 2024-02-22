@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CrearServicio from "./CrearServicio";
 
 interface Servicio {
   id: number;
@@ -11,6 +12,8 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ListaDeServicios = () => {
   const [servicios, setServicios] = useState([]);
+  const [recargar, setRecargar] = useState(0);
+
 
   useEffect(() => {
     async function getServicios() {
@@ -21,13 +24,14 @@ const ListaDeServicios = () => {
         console.error(error);
       }
     }
-
+    
     getServicios();
-  }, []);
+  }, [recargar]);
 
   return (
-    <>
-      <h2 className="text-2xl mb-4">Servicios</h2>
+    <>      
+      <CrearServicio onCreate={() => setRecargar(v => v+1)}/>
+      <h2 className="text-2xl mb-4 mt-16">Servicios</h2>
       {servicios.map((s: Servicio) => (
         <div key={s.id} className="border rounded-lg p-8 mb-2">
           <p className="text-lg font-semibold mb-2">{s.nombre}</p>
