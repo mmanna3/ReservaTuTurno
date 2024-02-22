@@ -20,7 +20,7 @@ before_build:
   - yarn install
   - yarn build
   - cd ..
-- ps: >-
+  - ps: >-
       Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
 build:
   project: ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln
