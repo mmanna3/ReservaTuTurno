@@ -15,18 +15,21 @@ namespace Api.Api.Controllers
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
         private readonly IServicioCore _servicioCore;
+        private readonly ILogger<ServicioController> _logger;
 
-        public ServicioController(AppDbContext context, IMapper mapper, IServicioCore servicioCore)
+        public ServicioController(AppDbContext context, IMapper mapper, IServicioCore servicioCore, ILogger<ServicioController> logger)
         {
             _context = context;
             _mapper = mapper;
             _servicioCore = servicioCore;
+            _logger = logger;
         }
 
         // GET: api/Servicio
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Servicio>>> GetServicios()
         {
+            _logger.LogInformation("Pa probar el logger");
             var dto = await _servicioCore.Listar();
             return Ok(dto);
         }
