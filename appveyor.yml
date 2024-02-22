@@ -12,6 +12,18 @@ environment:
     secure: 9iCJXN3fcB5DufZMg1zVf3xhH5vWLdZxDXFZ1ttdGejbuBldZQQznbF4XXbmX7UnlHDOdIXo7EBb2MQOHqRXdpsKmn7qrcpWoukzYxFB9phYlSqFXRowjeFNDjAPAaFs
   deploy_website:
     secure: RjlovvhfNwCqtGz5G8sg1vIF6BAY7ICmuiGmTtFjV/Y=
+  db_server:
+    secure: K3tw1JJQqsF0zSckjLdOJg==
+  db_name:
+    secure: t+vaJXx7FxW8zs+EoSWKiX2FAp/4kl8Alb7m7n+oVP8=
+  db_username:
+    secure: t+vaJXx7FxW8zs+EoSWKiX2FAp/4kl8Alb7m7n+oVP8=
+  db_password:
+    secure: DB/5MuvV4BAV3neZnx3j6w==
+install:
+  - ps: >-
+      $file = "./ReservaTuTurnoApi/Api/appsettings.Production.json";
+      (Get-Content $file).Replace("{db_server}", $env:db_server).Replace("{db_name}", $env:db_name).Replace("{db_username}", $env:db_username).Replace("{db_password}", $env:db_password) | Set-Content $file  
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
