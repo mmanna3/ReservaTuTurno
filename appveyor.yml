@@ -57,6 +57,11 @@ build:
   parallel: true
   verbosity: minimal
 after_build:
+  # Aplica migraciones
+  - cd ReservaTuTurnoApi/Api
+  - dotnet ef database update
+  - cd ../..
+  # Deploya
   - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi --output %appveyor_build_folder%\dist
 artifacts:
   - path: dist

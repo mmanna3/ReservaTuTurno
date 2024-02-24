@@ -1,8 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CrearServicio from "./CrearServicio";
-import { ServicioDTO } from "./dtos/servicioDTO";
+// import { ServicioDTO } from "./dtos/servicioDTO";
 
+interface ServicioDTO {
+  id: number;
+  nombre: string;
+  descripcion: string;
+}
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
