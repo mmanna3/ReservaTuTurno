@@ -1,5 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+  <!--  Esto es para deshabilitar el warning cuando un string es nullable y no le pusiste required.
+        No lo puedo poner con required en los DTO porque el csharp-2-typescript no lo convierte
+    -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>8618</NoWarn>
+  </PropertyGroup>
+  
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
