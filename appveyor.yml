@@ -29,6 +29,13 @@ before_build:
   # Restaura paquetes del back
   - dotnet --version
   - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
+  # Intenta generar cliente ts
+  - dotnet tool install swashbuckle.aspnetcore.cli -g
+  - dotnet tool install nswag.consolecore -g
+  - cd ReservaTuTurnoApi/Api
+  - swagger tofile --output swagger.json bin/Debug/net8.0/Api.dll v1
+  - nswag openapi2tsclient /input:swagger.json /output:clients.ts
+  - cd ../..
   # Genera dtos a partir del back
   - dotnet tool install --global CSharpToTypeScript.CLITool  
   - cd Scripts
