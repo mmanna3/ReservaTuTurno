@@ -33,6 +33,7 @@ before_build:
   - dotnet tool install swashbuckle.aspnetcore.cli -g
   - dotnet tool install nswag.consolecore -g
   - cd ReservaTuTurnoApi/Api
+  - dotnet build
   - swagger tofile --output swagger.json bin/Debug/net8.0/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:clients.ts
   - cd ../..
