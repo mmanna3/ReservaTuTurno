@@ -30,7 +30,7 @@ before_build:
   - dotnet --version
   - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
   # Para generar migraciones después
-  - dotnet tool install dotnet-ef -g
+  - dotnet tool install dotnet-ef --global --version 8.0.0
   # Intenta generar cliente ts
   - dotnet tool install swashbuckle.aspnetcore.cli -g
   - dotnet tool install nswag.consolecore -g
