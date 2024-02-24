@@ -1,7 +1,7 @@
 {
   "$schema": "https://adrianwilczynski.github.io/CSharpToTypeScript/cs2tsconfig.json",
   "input": "./../ReservaTuTurnoApi/Api/Core/DTOs",
-  "output": "./../ReservaTuTurnoPWA/src/dtos",
+  "output": "./../ReservaTuTurnoPWA/src/api/dtos",
   "useTabs": false,
   "tabSize": 4,
   "skipExport": false,
