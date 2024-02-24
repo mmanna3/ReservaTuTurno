@@ -37,8 +37,7 @@ before_build:
   - cd ReservaTuTurnoApi/Api
   - dotnet build
   - swagger tofile --output swagger.json bin/Debug/net8.0/Api.dll v1
-  - nswag openapi2tsclient /input:swagger.json /output:clients.ts
-  - head -20 swagger.json
+  - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
   - cd ../..
   # Genera dtos a partir del back
   - dotnet tool install --global CSharpToTypeScript.CLITool  
