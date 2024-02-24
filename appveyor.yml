@@ -61,7 +61,9 @@ build:
 after_build:
   # Aplica migraciones pendientes
   - cd ReservaTuTurnoApi/Api
-  - dotnet ef database update --connection (Get-Content appsettings.Production.json | ConvertFrom-Json).ConnectionStrings.Default
+  - ps: $DefaultConnectionString = (Get-Content appsettings.Production.json | ConvertFrom-Json).ConnectionStrings.Default
+  - ps: $DefaultConnectionString
+  - ps: dotnet ef database update --connection $DefaultConnectionString
   - cd ../..
   # Deploya
   - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi --output %appveyor_build_folder%\dist
