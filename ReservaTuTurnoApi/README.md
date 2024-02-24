@@ -1,3 +1,10 @@
+# Tools globales que hay que instalar
+```
+dotnet tool install dotnet-ef -g 
+dotnet tool install swashbuckle.aspnetcore.cli -g
+dotnet tool install nswag.consolecore -g
+```
+
 # BD
 
 ## Crear BD local
@@ -30,3 +37,4 @@ alias remove-migration="dotnet ef database remove"
 - Borar la última (sin aplicar): ```remove-migration``` 
 - Actualizar la BD: ```update-database```
 - Revertir migraciones aplicadas: ```update-database NombreUltimaMigracionBuena```
+
