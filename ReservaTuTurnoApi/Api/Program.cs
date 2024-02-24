@@ -5,6 +5,7 @@ using Api.Core.Servicios.Interfaces;
 using Api.Persistencia._Config;
 using Api.Persistencia.Repositorios;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using NLog;
 using NLog.Web;
 
@@ -33,11 +34,17 @@ try
 
 // builder = DependencyInjectionConfig.Configurar(builder);
 
+    builder.Services.AddOpenApiDocument();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    // builder.Services.AddSwaggerGen(options =>
+    // {
+    //     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger", Version = "v1" });
+    // });
+    
 
     var app = builder.Build();
 
@@ -46,6 +53,8 @@ try
     {
         app.UseSwagger();
         app.UseSwaggerUI();
+        
+        
         app.UseDeveloperExceptionPage();
 
         app.UseCors(policyBuilder =>
@@ -56,6 +65,8 @@ try
         );
     }
 
+    app.UseOpenApi();
+    
     app.UseDefaultFiles();
     app.UseStaticFiles();
 
@@ -67,11 +78,11 @@ try
 
     app.MapControllers();
     
-    using (var scope = app.Services.CreateScope())
-    {
-        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        db.Database.Migrate();
-    }
+    // using (var scope = app.Services.CreateScope())
+    // {
+    //     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    //     db.Database.Migrate();
+    // }
 
     app.Run();
 }

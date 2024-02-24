@@ -3,6 +3,7 @@ image: Visual Studio 2022
 branches:
   only:
     - main
+    - prueba-cliente-ts
 environment:
   deploy_username:
     secure: ZumRpgIeGcRgW3H7yXK0bQ==

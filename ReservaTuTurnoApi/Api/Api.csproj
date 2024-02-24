@@ -6,6 +6,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>8618</NoWarn>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
   
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -27,7 +32,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.8" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="NSwag.AspNetCore" Version="14.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
