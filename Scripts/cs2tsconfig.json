@@ -1,0 +1,20 @@
+{
+  "$schema": "https://adrianwilczynski.github.io/CSharpToTypeScript/cs2tsconfig.json",
+  "input": "./../ReservaTuTurnoApi/Api/Core/DTOs",
+  "output": "./../ReservaTuTurnoPWA/src/dtos",
+  "useTabs": false,
+  "tabSize": 4,
+  "skipExport": false,
+  "useKebabCase": false,
+  "appendModelSuffix": false,
+  "clearOutputDirectory": true,
+  "angularMode": false,
+  "partialOverride": false,
+  "preserveCasing": false,
+  "preserveInterfacePrefix": false,
+  "convertDatesTo": "string",
+  "convertNullablesTo": "null",
+  "importGeneration": "simple",
+  "quotationMark": "single",
+  "appendNewLine": false
+}

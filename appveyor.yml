@@ -27,6 +27,8 @@ install:
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
+  - ps: dotnet tool install --global CSharpToTypeScript.CLITool
+  - ps: cd Scripts;dotnet cs2ts
   - npm install --global yarn
   - cd ReservaTuTurnoPWA
   - yarn install

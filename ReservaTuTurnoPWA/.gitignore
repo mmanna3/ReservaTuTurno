@@ -23,3 +23,4 @@ dist-ssr
 *.sw?
 # Es de vite-pwa
 dev-dist
+src/dtos
