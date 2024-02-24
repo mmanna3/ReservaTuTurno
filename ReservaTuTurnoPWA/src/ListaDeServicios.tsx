@@ -1,21 +1,22 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import CrearServicio from "./CrearServicio";
-import { ServicioDTO } from "./dtos/servicioDTO";
+import { ServicioDTO, Client } from "./api/clients";
 
+// import { ServicioDTO } from "./dtos/servicioDTO";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ListaDeServicios = () => {
-  const [servicios, setServicios] = useState([]);
+  const [servicios, setServicios] = useState<ServicioDTO[]>([]);
   const [recargar, setRecargar] = useState(0);
-
 
   useEffect(() => {
     async function getServicios() {
       try {
-        const response = await axios.get(API_BASE_URL + "/Servicio");
-        setServicios(response.data);
+        // const response = await axios.get(API_BASE_URL + "/Servicio");
+        const client = new Client(API_BASE_URL);
+        const response = await client.servicioAll();
+        setServicios(response);
       } catch (error) {
         console.error(error);
       }

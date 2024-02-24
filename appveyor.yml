@@ -3,6 +3,7 @@ image: Visual Studio 2022
 branches:
   only:
     - main
+    - prueba-cliente-ts
 environment:
   deploy_username:
     secure: ZumRpgIeGcRgW3H7yXK0bQ==
@@ -28,6 +29,16 @@ before_build:
   # Restaura paquetes del back
   - dotnet --version
   - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
+  # Para generar migraciones después
+  - dotnet tool install dotnet-ef --global --version 8.0.0
+  # Intenta generar cliente ts
+  - dotnet tool install swashbuckle.aspnetcore.cli -g
+  - dotnet tool install nswag.consolecore -g
+  - cd ReservaTuTurnoApi/Api
+  - dotnet build
+  - swagger tofile --output swagger.json bin/Debug/net8.0/Api.dll v1
+  - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
+  - cd ../..
   # Genera dtos a partir del back
   - dotnet tool install --global CSharpToTypeScript.CLITool  
   - cd Scripts
@@ -47,6 +58,13 @@ build:
   parallel: true
   verbosity: minimal
 after_build:
+  # Aplica migraciones pendientes
+  - cd ReservaTuTurnoApi/Api
+  - ps: $DefaultConnectionString = (Get-Content appsettings.Production.json | ConvertFrom-Json).ConnectionStrings.Default
+  - ps: $DefaultConnectionString
+  - ps: dotnet ef database update --connection $DefaultConnectionString
+  - cd ../..
+  # Deploya
   - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi --output %appveyor_build_folder%\dist
 artifacts:
   - path: dist
