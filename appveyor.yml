@@ -25,10 +25,15 @@ install:
       $file = "./ReservaTuTurnoApi/Api/appsettings.Production.json";
       (Get-Content $file).Replace("{db_server}", $env:db_server).Replace("{db_name}", $env:db_name).Replace("{db_username}", $env:db_username).Replace("{db_password}", $env:db_password) | Set-Content $file  
 before_build:
-  - cmd: dotnet --version
-  - cmd: dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
-  - ps: dotnet tool install --global CSharpToTypeScript.CLITool
-  - ps: cd Scripts;dotnet cs2ts
+  # Restaura paquetes del back
+  - dotnet --version
+  - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
+  # Genera dtos a partir del back
+  - dotnet tool install --global CSharpToTypeScript.CLITool  
+  - cd Scripts
+  - dotnet cs2ts
+  - cd ..
+  # Compila la PWA
   - npm install --global yarn
   - cd ReservaTuTurnoPWA
   - yarn install
