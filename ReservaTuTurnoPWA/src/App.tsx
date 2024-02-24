@@ -1,11 +1,17 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
 import ListaDeServicios from "./ListaDeServicios";
 
 function App() {
+
+  const queryClient = new QueryClient();
+
   return (
     <>
-      <h1 className="text-3xl font-bold mb-8">Reservá tu turno</h1>
-      <ListaDeServicios />
+      <QueryClientProvider client={queryClient}>
+        <h1 className="text-3xl font-bold mb-8">Reservá tu turno</h1>
+        <ListaDeServicios />
+      </QueryClientProvider>
       {/* <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
