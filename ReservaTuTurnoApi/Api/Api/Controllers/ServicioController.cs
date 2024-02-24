@@ -27,7 +27,7 @@ namespace Api.Api.Controllers
 
         // GET: api/Servicio
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Servicio>>> GetServicios()
+        public async Task<ActionResult<IEnumerable<ServicioDTO>>> GetServicios()
         {
             _logger.LogInformation("Pa probar el logger");
             var dto = await _servicioCore.Listar();
