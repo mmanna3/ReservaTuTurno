@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import CrearServicio from "./CrearServicio";
-import { Client, ServicioDTO } from "./api/clients";
-import Spinner from "./utils/Spinner";
+import { Link } from "react-router-dom";
+import { Client, ServicioDTO } from "../../api/clients";
+import Spinner from "../../utils/Spinner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const client = new Client(API_BASE_URL);
@@ -18,8 +18,14 @@ const ListaDeServicios = () => {
 
   return (
     <>
-      <CrearServicio onCreate={() => null} />
       <h2 className="text-2xl mb-4 mt-16">Servicios</h2>
+      <div>
+        <button className="bg-pink-500 text-slate-50 w-full h-16 rounded-xl my-6">
+          <Link className="text-slate-50 text-lg" to="/servicios/crear">
+            Crear
+          </Link>
+        </button>
+      </div>
       {isLoading ? <Spinner tamanio="meh" /> : null}
       {error ? <div>Error: {error.message}</div> : null}
 
