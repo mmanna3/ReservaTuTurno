@@ -1,0 +1,54 @@
+version: "1.0"
+profile: "Default"
+tabs:
+  api-corriendo:
+    root: "$HOME/Sources/ReservaTuTurno/ReservaTuTurnoApi/Api"
+    title: "API corriendo..."
+    panes:
+      - title: "Corriendo..."
+        position: "1/1"
+        commands:        
+          - "tabset --color '#f5c5b0'"          
+          - clear
+          - dotnet run
+  api:
+    root: "$HOME/Sources/ReservaTuTurno/ReservaTuTurnoApi/Api"
+    title: "API"
+    panes:
+      - title: "API"
+        position: "1/1"
+        commands:
+          - "tabset --color '#f5d6a9'"
+          - clear
+  pwa-corriendo:
+    root: "$HOME/Sources/ReservaTuTurno/ReservaTuTurnoPWA"
+    title: "PWA Corriendo..."
+    panes:
+      - position: "1/1"
+        title: "PWA Corriendo..."
+        commands:
+          - "tabset --color '#03a1fc'"
+          - code .
+          - clear
+          - yarn dev
+  pwa:
+    root: "$HOME/Sources/ReservaTuTurno/ReservaTuTurnoPWA"
+    title: "PWA"
+    panes:
+      - position: "1/1"
+        title: "PWA"
+        commands:
+          - "tabset --color '#ae95ed'"
+          - clear
+  git:
+    focus: true
+    root: "$HOME/Sources/ReservaTuTurno"
+    title: "GIT"
+    panes:
+      - title: "GIT..."
+        position: 1/1
+        focus: true
+        commands:
+          - "tabset --color '#03a82f'"
+          - clear
+          - git st
