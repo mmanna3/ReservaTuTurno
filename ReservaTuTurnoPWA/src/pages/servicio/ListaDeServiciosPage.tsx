@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Client, ServicioDTO } from "../../api/clients";
-import Spinner from "../../utils/Spinner";
+import Spinner from "../../components/Spinner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const client = new Client(API_BASE_URL);
