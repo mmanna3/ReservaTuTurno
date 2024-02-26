@@ -2,8 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const Root = () => {
   return (
-    <>
-      {/* all the other elements */}
+    <>      
       <div className="max-w-7xl">
         <div className="absolute text-center transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
           <Outlet />
