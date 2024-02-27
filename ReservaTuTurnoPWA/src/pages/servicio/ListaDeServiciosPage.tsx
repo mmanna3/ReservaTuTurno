@@ -31,9 +31,18 @@ const ListaDeServicios = () => {
 
       {servicios
         ? servicios.map((s: ServicioDTO) => (
-            <div key={s.id} className="border rounded-lg p-8 mb-2">
-              <p className="text-lg font-semibold mb-2">{s.nombre}</p>
-              <p>{s.descripcion}</p>
+            <div
+              key={s.id}
+              className="border rounded-lg w-96 p-8 mb-2 text-zinc-500"
+            >
+              <p className="text-left text-lg font-semibold  mb-2 text-zinc-800">
+                {s.nombre}
+              </p>
+              <p className="text-left">{s.descripcion}</p>
+              <div className="flex justify-between mt-5 w-full">
+                <p>{s.precioPorDefecto}$</p>
+                <p>{s.duracionDelTurnoPorDefectoEnMinutos}min</p>
+              </div>
             </div>
           ))
         : null}

@@ -39,6 +39,16 @@ const CrearServicio = () => {
         <Form<ServicioDTO> onSubmit={onSubmit}>
           <Input<ServicioDTO> name="nombre" placeholder="Nombre" required />
           <Input<ServicioDTO> name="descripcion" placeholder="Descripción" />
+          <Input<ServicioDTO>
+            type="number"
+            name="precioPorDefecto"
+            placeholder="Precio"
+          />
+          <Input<ServicioDTO>
+            type="number"
+            name="duracionDelTurnoPorDefectoEnMinutos"
+            placeholder="Duración (en minutos)"
+          />
           <input
             type="submit"
             className="bg-pink-500 text-slate-50 w-48 mt-2 py-5 rounded-xl"
