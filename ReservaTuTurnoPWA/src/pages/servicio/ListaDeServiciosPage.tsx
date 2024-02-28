@@ -29,23 +29,25 @@ const ListaDeServicios = () => {
       {isLoading ? <Spinner tamanio="meh" /> : null}
       {error ? <div>Error: {error.message}</div> : null}
 
-      {servicios
-        ? servicios.map((s: ServicioDTO) => (
-            <div
-              key={s.id}
-              className="border rounded-lg w-96 p-8 mb-2 text-zinc-500"
-            >
-              <p className="text-left text-lg font-semibold  mb-2 text-zinc-800">
-                {s.nombre}
-              </p>
-              <p className="text-left">{s.descripcion}</p>
-              <div className="flex justify-between mt-5 w-full">
-                <p>{s.precioPorDefecto}$</p>
-                <p>{s.duracionDelTurnoPorDefectoEnMinutos}min</p>
+      <div className="overflow-auto">
+        {servicios
+          ? servicios.map((s: ServicioDTO) => (
+              <div
+                key={s.id}
+                className="border rounded-lg w-96 p-8 mb-2 text-zinc-500"
+              >
+                <p className="text-left text-lg font-semibold  mb-2 text-zinc-800">
+                  {s.nombre}
+                </p>
+                <p className="text-left">{s.descripcion}</p>
+                <div className="flex justify-between mt-5 w-full">
+                  <p>{s.precioPorDefecto}$</p>
+                  <p>{s.duracionDelTurnoPorDefectoEnMinutos}min</p>
+                </div>
               </div>
-            </div>
-          ))
-        : null}
+            ))
+          : null}
+      </div>
     </>
   );
 };
