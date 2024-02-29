@@ -12,6 +12,7 @@ const CrearServicio = () => {
   const navigate = useNavigate();
 
   const mutation = useMutation({
+    throwOnError: true,
     mutationFn: async (servicio: ServicioDTO) => {
       try {
         const servicioCreado = await client.servicioPOST(servicio);

@@ -14,6 +14,7 @@ const ListaDeServicios = () => {
   } = useQuery({
     queryKey: ["servicios"],
     queryFn: async () => await client.servicioAll(),
+    throwOnError: true,
   });
 
   return (
