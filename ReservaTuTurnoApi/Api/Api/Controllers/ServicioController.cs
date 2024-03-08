@@ -10,28 +10,15 @@ namespace Api.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicioController : ControllerBase
+    public class ServicioController : ABMController<ServicioDTO>
     {
         private readonly AppDbContext _context;
-        private readonly IMapper _mapper;
         private readonly IServicioCore _servicioCore;
-        private readonly ILogger<ServicioController> _logger;
 
-        public ServicioController(AppDbContext context, IMapper mapper, IServicioCore servicioCore, ILogger<ServicioController> logger)
+        public ServicioController(AppDbContext context, IServicioCore servicioCore) : base(servicioCore)
         {
             _context = context;
-            _mapper = mapper;
             _servicioCore = servicioCore;
-            _logger = logger;
-        }
-
-        // GET: api/Servicio
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ServicioDTO>>> GetServicios()
-        {
-            _logger.LogInformation("Pa probar el logger");
-            var dto = await _servicioCore.Listar();
-            return Ok(dto);
         }
 
         // GET: api/Servicio/5
