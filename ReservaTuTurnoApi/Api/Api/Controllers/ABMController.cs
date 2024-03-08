@@ -26,4 +26,14 @@ public abstract class ABMController<TDTO> : ControllerBase
         var dto = await _core.Listar();
         return Ok(dto);
     }
+    
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPost]
+    public async Task<ActionResult<TDTO>> Crear(TDTO dto)
+    {
+        var id = await _core.Crear(dto); //Podría devolver el objeto creado en vez de el Id
+        dto.Id = id;
+
+        return CreatedAtAction("GetServicio", new { id }, dto);
+    }
 }

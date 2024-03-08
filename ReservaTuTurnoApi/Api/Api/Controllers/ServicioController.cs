@@ -66,17 +66,6 @@ namespace Api.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/Servicio
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Servicio>> Crear(ServicioDTO servicio)
-        {
-            var id = await _servicioCore.Crear(servicio); //Podría devolver el objeto creado en vez de el Id
-            servicio.Id = id;
-
-            return CreatedAtAction("GetServicio", new { id }, servicio);
-        }
-
         // DELETE: api/Servicio/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteServicio(long id)
