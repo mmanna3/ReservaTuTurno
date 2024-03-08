@@ -1,10 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { Client, ServicioDTO } from "../../api/clients";
+import { api } from "../../api/api";
+import { ServicioDTO } from "../../api/clients";
 import Spinner from "../../components/Spinner";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const client = new Client(API_BASE_URL);
 
 const ListaDeServicios = () => {
   const {
@@ -13,7 +11,7 @@ const ListaDeServicios = () => {
     isLoading,
   } = useQuery({
     queryKey: ["servicios"],
-    queryFn: async () => await client.servicioAll(),
+    queryFn: async () => await api.servicioAll(),
     throwOnError: true,
   });
 
