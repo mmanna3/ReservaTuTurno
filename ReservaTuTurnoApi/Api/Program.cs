@@ -20,6 +20,8 @@ try
     builder.Services.AddScoped<IBDVirtual, BDVirtual>();
     builder.Services.AddScoped<IServicioRepo, ServicioRepo>();
     builder.Services.AddScoped<IServicioCore, ServicioCore>();
+    builder.Services.AddScoped<IProfesionalRepo, ProfesionalRepo>();
+    builder.Services.AddScoped<IProfesionalCore, ProfesionalCore>();
 
     builder.Services.AddControllers();
     
