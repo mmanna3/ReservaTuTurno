@@ -38,21 +38,22 @@ const CrearServicio = () => {
       <div className="border rounded-lg p-8 mb-2">
         <h2 className="text-2xl mb-4">Nuevo servicio</h2>
         <Form<ServicioDTO> onSubmit={onSubmit}>
-          <Input<ServicioDTO> name="nombre" placeholder="Nombre" required />
-          <Input<ServicioDTO> name="descripcion" placeholder="Descripción" />
+          <Input<ServicioDTO> name="nombre" label="Nombre" required />
+          <Input<ServicioDTO> name="descripcion" label="Descripción" />
           <Input<ServicioDTO>
             type="number"
             name="precioPorDefecto"
-            placeholder="Precio"
+            label="Precio"
           />
           <Input<ServicioDTO>
             type="number"
             name="duracionDelTurnoPorDefectoEnMinutos"
-            placeholder="Duración (en minutos)"
+            label="Duración"
+            placeholder="en minutos"
           />
           <input
             type="submit"
-            className="bg-pink-500 text-slate-50 w-48 mt-2 py-5 rounded-xl"
+            className="bg-pink-500 text-slate-50 w-48 mt-8 py-5 rounded"
             value="Crear"
           />
         </Form>
