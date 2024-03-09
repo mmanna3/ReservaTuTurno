@@ -38,13 +38,12 @@ const ListaDeProfesionales = () => {
               className="border rounded-lg w-64 p-8 mb-2 text-zinc-500"
             >
               <p className="text-left text-base font-semibold mb-2 text-zinc-800">
-                {s.nombre}
-              </p>
-              <p className="text-left text-sm">
                 {s.nombre} {s.apellido}
               </p>
               <div className="flex text-sm justify-between mt-5 w-full">
                 <p>{s.email}</p>
+              </div>
+              <div className="flex text-sm justify-between mt-5 w-full">
                 <p>{s.telefono}</p>
               </div>
             </div>
