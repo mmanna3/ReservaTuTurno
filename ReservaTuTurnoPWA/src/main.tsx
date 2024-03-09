@@ -2,19 +2,20 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary.tsx";
 import "./index.css";
+import ErrorPage from "./pages/ErrorPage.tsx";
 import Home from "./pages/HomePage.tsx";
 import Root from "./pages/RootPage.tsx";
+import ListaDeProfesionales from "./pages/profesional/ListaDeProfesionalesPage.tsx";
 import CrearServicio from "./pages/servicio/CrearServicioPage.tsx";
 import ListaDeServicios from "./pages/servicio/ListaDeServiciosPage.tsx";
-import ErrorBoundary from "./components/ErrorBoundary.tsx";
-import ErrorPage from "./pages/ErrorPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement:<ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "servicios/crear",
         element: <CrearServicio />,
+      },
+      {
+        path: "profesionales",
+        element: <ListaDeProfesionales />,
       },
     ],
   },
