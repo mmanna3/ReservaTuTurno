@@ -35,8 +35,8 @@ const CrearServicio = () => {
 
   return (
     <>
-      <div className="p-8 mb-2 w-full">
-        <h2 className="text-2xl mb-4">Nuevo servicio</h2>
+      <div className="w-full">
+        <h2 className="text-2xl mb-4 text-center">Nuevo servicio</h2>
         <Form<ServicioDTO> onSubmit={onSubmit}>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
           <Input<ServicioDTO> name="descripcion" label="Descripción" />
