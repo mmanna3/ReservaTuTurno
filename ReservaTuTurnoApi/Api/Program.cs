@@ -22,7 +22,9 @@ try
     builder.Services.AddScoped<IServicioCore, ServicioCore>();
     builder.Services.AddScoped<IProfesionalRepo, ProfesionalRepo>();
     builder.Services.AddScoped<IProfesionalCore, ProfesionalCore>();
-
+    builder.Services.AddScoped<ICategoriaDeServicioRepo, CategoriaDeServicioRepo>();
+    builder.Services.AddScoped<ICategoriaDeServicioCore, CategoriaDeServicioCore>();
+    
     builder.Services.AddControllers();
     
     // NLog: Setup NLog for Dependency injection
