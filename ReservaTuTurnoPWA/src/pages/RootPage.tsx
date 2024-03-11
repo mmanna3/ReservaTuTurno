@@ -4,7 +4,7 @@ const Root = () => {
   return (
     <>
       <div className="max-w-7xl w-full">
-        <div className="w-full max-w-[425px] mx-auto border">
+        <div className="w-full max-w-[425px] mx-auto border-x">
           <Outlet />
         </div>
       </div>
