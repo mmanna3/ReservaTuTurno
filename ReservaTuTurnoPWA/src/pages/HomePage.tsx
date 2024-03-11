@@ -18,6 +18,13 @@ const Home = () => {
           </button>
         </Link>
       </div>
+      <div>
+        <Link className="text-slate-50 text-lg" to="/servicios/categoria/crear">
+          <button className="bg-pink-500 text-slate-50 w-64 h-24 rounded-xl mt-8">
+            Crear categoría de servicio
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
