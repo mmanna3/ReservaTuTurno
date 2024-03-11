@@ -1,21 +1,28 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Client, ServicioDTO } from "../../api/clients";
+import { api } from "../../api/api";
+import { ServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const client = new Client(API_BASE_URL);
-
 const CrearServicio = () => {
+  // hay que controlar mejor los errores
+  // (el de categorías por ejemplo.)
+
   const navigate = useNavigate();
+
+  const { data: categorias } = useQuery({
+    queryKey: ["servicios"],
+    queryFn: async () => await api.categoriaDeServicioAll(),
+    throwOnError: true,
+  });
 
   const mutation = useMutation({
     throwOnError: true,
     mutationFn: async (servicio: ServicioDTO) => {
       try {
-        const servicioCreado = await client.servicioPOST(servicio);
+        const servicioCreado = await api.servicioPOST(servicio);
         console.log("servicioCreado", servicioCreado);
       } catch (error) {
         console.log(error);
