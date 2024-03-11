@@ -1,10 +1,24 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import Dropdown, { Option as DropdownOption } from "react-dropdown";
+import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
-import { ServicioDTO } from "../../api/clients";
+import { CategoriaDeServicioDTO, ServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
+
+const options = ["one", "two", "three"];
+
+const convertirEnOptions = (array: CategoriaDeServicioDTO[]) => {
+  return array.map((e) => {
+    const option: DropdownOption = {
+      label: e.nombre,
+      value: e.id?.toString() ?? "0",
+    };
+    return option;
+  });
+};
 
 const CrearServicio = () => {
   // hay que controlar mejor los errores
@@ -13,10 +27,12 @@ const CrearServicio = () => {
   const navigate = useNavigate();
 
   const { data: categorias } = useQuery({
-    queryKey: ["servicios"],
+    queryKey: ["categorias"],
     queryFn: async () => await api.categoriaDeServicioAll(),
     throwOnError: true,
   });
+
+  const options = convertirEnOptions(categorias || []);
 
   const mutation = useMutation({
     throwOnError: true,
@@ -33,8 +49,8 @@ const CrearServicio = () => {
   const onSubmit: SubmitHandler<ServicioDTO> = (data) => {
     try {
       console.log(data);
-      mutation.mutate(data);
-      navigate(-1);
+      // mutation.mutate(data);
+      // navigate(-1);
     } catch (error) {
       console.error(error);
     }
@@ -46,6 +62,20 @@ const CrearServicio = () => {
         <h2 className="text-2xl mb-4 text-center">Nuevo servicio</h2>
         <Form<ServicioDTO> onSubmit={onSubmit}>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
+          <div className="group">
+            <label className="text-[11px] bg-white left-1 z-10 relative px-1 top-2 w-auto group-focus-within:text-blue-500 group-focus-within:font-bold">
+              Categoría
+            </label>
+            <Dropdown
+              controlClassName="w-full"
+              className="w-full"
+              options={options}
+              onChange={(a) => console.log(a)}
+              // value={options[0]}
+              placeholder="Seleccioná una categoría"
+              placeholderClassName="text-slate-400"
+            />
+          </div>
           <Input<ServicioDTO> name="descripcion" label="Descripción" />
           <Input<ServicioDTO>
             type="number"
