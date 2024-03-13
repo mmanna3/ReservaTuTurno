@@ -33,7 +33,7 @@ export function Dropdown<T extends FieldValues>({
           control={control}
           name={props.name.toString()}
           rules={{ required: required }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange } }) => (
             <ReactDropdown
               className="group peer h-8 w-full"
               controlClassName="w-full h-16 !border-0 !bg-[#F9F9F9] !rounded-xl group-[.is-open]:!border-2 group-[.is-open]:!border-[#32BF8D]"
@@ -43,7 +43,7 @@ export function Dropdown<T extends FieldValues>({
               options={props.options}
               onChange={(e) => onChange(e.value)} // send value to hook form
               // onBlur={onBlur} // notify when input is touched/blur
-              value={value}
+              // value={value}
               placeholder={props.placeholder}
             />
           )}

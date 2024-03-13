@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Option as DropdownOption } from "react-dropdown";
 import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,22 +6,11 @@ import { api } from "../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
+import { convertirEnOptions } from "../../utils";
 import { Dropdown } from "./Dropdown";
 
-// Hacer esto genérico y decirle qué props son el label y el value
-const convertirEnOptions = (array: CategoriaDeServicioDTO[]) => {
-  return array.map((e) => {
-    const option: DropdownOption = {
-      label: e.nombre,
-      value: e.id?.toString() ?? "0",
-      className: "text-base !text-gray-900 h-11 border-b",
-    };
-    return option;
-  });
-};
-
 const CrearServicio = () => {
-  // hay que controlar mejor los errores
+  // hay que controlar mejor los errores de los get
   // (el de categorías por ejemplo.)
 
   const navigate = useNavigate();
@@ -33,7 +21,11 @@ const CrearServicio = () => {
     throwOnError: true,
   });
 
-  const options = convertirEnOptions(categorias || []);
+  const options = convertirEnOptions<CategoriaDeServicioDTO>(
+    categorias || [],
+    "nombre",
+    "id",
+  );
 
   const mutation = useMutation({
     throwOnError: true,
@@ -86,7 +78,6 @@ const CrearServicio = () => {
           />
           <input
             type="submit"
-            //bg-pink-500
             className="mt-8 h-16 w-[340px] rounded-xl bg-[#FC97DB] text-lg font-medium text-white"
             value="Agregar"
           />
