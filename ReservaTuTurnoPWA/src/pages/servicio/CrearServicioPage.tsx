@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import Dropdown, { Option as DropdownOption } from "react-dropdown";
+import { Option as DropdownOption } from "react-dropdown";
 import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,13 +7,14 @@ import { api } from "../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
+import { Dropdown } from "./Dropdown";
 
 const convertirEnOptions = (array: CategoriaDeServicioDTO[]) => {
   return array.map((e) => {
     const option: DropdownOption = {
       label: e.nombre,
       value: e.id?.toString() ?? "0",
-      className: "text-sm !text-gray-900",
+      className: "text-base !text-gray-900",
     };
     return option;
   });
@@ -59,26 +60,15 @@ const CrearServicio = () => {
     <>
       <div className="w-full">
         <Form<ServicioDTO> onSubmit={onSubmit}>
-          <h2 className="w-full text-left text-2xl mt-8 mb-2 font-medium">
+          <h2 className="mb-2 mt-8 w-full text-left text-2xl font-medium">
             Nuevo servicio
           </h2>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
-          <div className="group w-full mt-0 mb-3">
-            <label className="text-[12px] text-gray-700 bg-white left-1 z-10 relative px-1 top-3 w-auto group-focus-within:text-blue-500 group-focus-within:font-bold">
-              Categoría
-            </label>
-            <Dropdown
-              controlClassName="w-full h-12"
-              className="w-full h-8"
-              options={options}
-              onChange={(a) => console.log(a)}
-              // value={options[0]}
-              placeholder="Seleccioná una categoría"
-              placeholderClassName="text-sm text-gray-900 absolute top-[0.8rem]"
-              menuClassName="absolute !top-[2.7rem]"
-              arrowClassName="absolute !top-[1.4rem]"
-            />
-          </div>
+          <Dropdown
+            label="Categoría"
+            placeholder="Seleccioná una categoría"
+            options={options}
+          ></Dropdown>
           <Input<ServicioDTO> name="descripcion" label="Descripción" />
           <Input<ServicioDTO>
             type="number"
@@ -94,7 +84,7 @@ const CrearServicio = () => {
           <input
             type="submit"
             //bg-pink-500
-            className="bg-[#FC97DB] text-gray-700 h-12 mt-8 rounded text-lg w-[340px]"
+            className="mt-8 h-12 w-[340px] rounded bg-[#FC97DB] text-lg text-gray-700"
             value="Crear"
           />
         </Form>

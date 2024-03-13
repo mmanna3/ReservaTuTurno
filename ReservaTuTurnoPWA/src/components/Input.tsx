@@ -23,10 +23,10 @@ const Input = <T extends FieldValues>({
   } = useFormContext();
 
   return (
-    <div className="relative z-0 w-full group text-left -my-1">
+    <div className="group relative z-0 -my-[0.3rem] w-full text-left">
       <label
         htmlFor={props.name as string}
-        className={`text-[12px] bg-transparent text-gray-700 left-2 relative px-1 top-[1.6rem] w-auto group-focus-within:text-[#32BF8D] group-focus-visible:text-[#32BF8D] group-focus-within:font-bold ${
+        className={`relative left-2 top-[1.6rem] w-auto bg-transparent px-1 text-[12px] text-gray-700 group-focus-within:font-bold group-focus-within:text-[#32BF8D] group-focus-visible:text-[#32BF8D] ${
           errors[props.name as string] && "!text-red-600"
         }`}
       >
@@ -35,7 +35,7 @@ const Input = <T extends FieldValues>({
 
       <input
         {...props}
-        className={`bg-slate-50 pt-5 pl-3 h-16 text-10 border py-55-rem border-gray-300 text-grey-950 text-base rounded-lg focus:ring-[#32BF8D] focus-visible:outline-[#32BF8D] focus-visible:text-[#32BF8D] focus:border-[#32BF8D] block w-full p-2.5 placeholder-gray-400 ${
+        className={`text-10 py-55-rem text-grey-950 block h-16 w-full rounded-lg border border-gray-300 bg-slate-50 p-2.5 pl-3 pt-5 text-base placeholder-gray-400 focus:border-[#32BF8D] focus:ring-[#32BF8D] focus-visible:text-[#32BF8D] focus-visible:outline-[#32BF8D] ${
           errors[props.name as string] &&
           "border-red-600 focus:border-red-600 focus:ring-red-600 focus-visible:outline-red-600"
         }`}
@@ -43,9 +43,7 @@ const Input = <T extends FieldValues>({
       />
       {errors[props.name as string] &&
         errors[props.name]?.type === "required" && (
-          <span className="text-[11px] text-red-600">
-            Este campo es requerido
-          </span>
+          <span className="text-sm text-red-600">Este campo es requerido</span>
         )}
     </div>
   );
