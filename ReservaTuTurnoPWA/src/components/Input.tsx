@@ -43,7 +43,9 @@ const Input = <T extends FieldValues>({
       />
       {errors[props.name as string] &&
         errors[props.name]?.type === "required" && (
-          <span className="text-sm text-red-600">Este campo es requerido</span>
+          <span className="pl-3 text-sm text-red-600">
+            Este campo es requerido
+          </span>
         )}
     </div>
   );

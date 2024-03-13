@@ -9,12 +9,13 @@ import Form from "../../components/Form";
 import Input from "../../components/Input";
 import { Dropdown } from "./Dropdown";
 
+// Hacer esto genérico y decirle qué props son el label y el value
 const convertirEnOptions = (array: CategoriaDeServicioDTO[]) => {
   return array.map((e) => {
     const option: DropdownOption = {
       label: e.nombre,
       value: e.id?.toString() ?? "0",
-      className: "text-base !text-gray-900",
+      className: "text-base !text-gray-900 h-11 border-b",
     };
     return option;
   });
@@ -64,10 +65,12 @@ const CrearServicio = () => {
             Nuevo servicio
           </h2>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
-          <Dropdown
+          <Dropdown<ServicioDTO>
+            name="categoriaId"
             label="Categoría"
             placeholder="Seleccioná una categoría"
             options={options}
+            required
           ></Dropdown>
           <Input<ServicioDTO> name="descripcion" label="Descripción" />
           <Input<ServicioDTO>
