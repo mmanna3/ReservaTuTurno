@@ -8,13 +8,12 @@ import { CategoriaDeServicioDTO, ServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 
-const options = ["one", "two", "three"];
-
 const convertirEnOptions = (array: CategoriaDeServicioDTO[]) => {
   return array.map((e) => {
     const option: DropdownOption = {
       label: e.nombre,
       value: e.id?.toString() ?? "0",
+      className: "text-sm !text-gray-900",
     };
     return option;
   });
@@ -62,18 +61,20 @@ const CrearServicio = () => {
         <h2 className="text-2xl mb-4 text-center">Nuevo servicio</h2>
         <Form<ServicioDTO> onSubmit={onSubmit}>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
-          <div className="group">
+          <div className="group w-full px-2 mt-1 mb-3">
             <label className="text-[11px] bg-white left-1 z-10 relative px-1 top-2 w-auto group-focus-within:text-blue-500 group-focus-within:font-bold">
               Categoría
             </label>
             <Dropdown
-              controlClassName="w-full"
-              className="w-full"
+              controlClassName="w-full h-11"
+              className="w-full h-8"
               options={options}
               onChange={(a) => console.log(a)}
               // value={options[0]}
               placeholder="Seleccioná una categoría"
-              placeholderClassName="text-slate-400"
+              placeholderClassName="text-sm text-gray-900 absolute top-[0.7rem]"
+              menuClassName="absolute !top-[2.7rem]"
+              arrowClassName="absolute !top-[1.2rem]"
             />
           </div>
           <Input<ServicioDTO> name="descripcion" label="Descripción" />
