@@ -3,6 +3,7 @@ import { Controller, FieldValues, useFormContext } from "react-hook-form";
 
 interface IProps<T extends FieldValues> {
   name: keyof T;
+  type?: "int" | "string";
   label: string;
   placeholder?: string;
   options: Option[];
@@ -12,12 +13,18 @@ interface IProps<T extends FieldValues> {
 
 export function Dropdown<T extends FieldValues>({
   required = false,
+  type = "string",
   ...props
 }: IProps<T>) {
   const {
     control,
     formState: { errors },
   } = useFormContext();
+
+  const onChangeFunc = (e: Option) => {
+    if (type == "int") return Number(e.value);
+    return e.value;
+  };
 
   return (
     <>
@@ -41,7 +48,7 @@ export function Dropdown<T extends FieldValues>({
               menuClassName="absolute !top-[4rem] !bg-[#F9F9F9] rounded-xl"
               arrowClassName="absolute !top-[1.9rem] !right-4"
               options={props.options}
-              onChange={(e) => onChange(e.value)} // send value to hook form
+              onChange={(e) => onChange(onChangeFunc(e))} // send value to hook form
               // onBlur={onBlur} // notify when input is touched/blur
               // value={value}
               placeholder={props.placeholder}

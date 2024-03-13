@@ -6,7 +6,11 @@ import { api } from "../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
-import { convertirEnOptions } from "../../utils";
+import {
+  DuracionDelServicioArray,
+  IDuracionDelServicio,
+  convertirEnOptions,
+} from "../../utils";
 import { Dropdown } from "./Dropdown";
 
 const CrearServicio = () => {
@@ -27,6 +31,12 @@ const CrearServicio = () => {
     "id",
   );
 
+  const duracionOptions = convertirEnOptions<IDuracionDelServicio>(
+    DuracionDelServicioArray,
+    "label",
+    "value",
+  );
+
   const mutation = useMutation({
     throwOnError: true,
     mutationFn: async (servicio: ServicioDTO) => {
@@ -42,8 +52,8 @@ const CrearServicio = () => {
   const onSubmit: SubmitHandler<ServicioDTO> = (data) => {
     try {
       console.log(data);
-      // mutation.mutate(data);
-      // navigate(-1);
+      mutation.mutate(data);
+      navigate(-1);
     } catch (error) {
       console.error(error);
     }
@@ -58,7 +68,7 @@ const CrearServicio = () => {
           </h2>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
           <Dropdown<ServicioDTO>
-            name="categoriaId"
+            name="categoriaDeServicioId"
             label="Categoría"
             placeholder="Seleccioná una categoría"
             options={options}
@@ -69,13 +79,15 @@ const CrearServicio = () => {
             type="number"
             name="precioPorDefecto"
             label="Precio"
+            required
           />
-          <Input<ServicioDTO>
-            type="number"
+          <Dropdown<ServicioDTO>
             name="duracionDelTurnoPorDefectoEnMinutos"
             label="Duración"
-            placeholder="en minutos"
-          />
+            placeholder=""
+            options={duracionOptions}
+            required
+          ></Dropdown>
           <input
             type="submit"
             className="mt-8 h-16 w-[340px] rounded-xl bg-[#FC97DB] text-lg font-medium text-white"

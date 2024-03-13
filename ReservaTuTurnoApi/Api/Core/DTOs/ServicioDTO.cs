@@ -9,5 +9,5 @@ public class ServicioDTO : DTO
     public string? Descripcion { get; set; }
     public int? PrecioPorDefecto { get; set; }
     public int? DuracionDelTurnoPorDefectoEnMinutos { get; set; }
-    public int CategoriaId { get; set; }
+    public int CategoriaDeServicioId { get; set; }
 }
