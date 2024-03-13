@@ -58,23 +58,25 @@ const CrearServicio = () => {
   return (
     <>
       <div className="w-full">
-        <h2 className="text-2xl mb-4 text-center">Nuevo servicio</h2>
         <Form<ServicioDTO> onSubmit={onSubmit}>
+          <h2 className="w-full text-left text-2xl mt-8 mb-2 font-medium">
+            Nuevo servicio
+          </h2>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
-          <div className="group w-full px-2 mt-1 mb-3">
-            <label className="text-[11px] bg-white left-1 z-10 relative px-1 top-2 w-auto group-focus-within:text-blue-500 group-focus-within:font-bold">
+          <div className="group w-full mt-0 mb-3">
+            <label className="text-[12px] text-gray-700 bg-white left-1 z-10 relative px-1 top-3 w-auto group-focus-within:text-blue-500 group-focus-within:font-bold">
               Categoría
             </label>
             <Dropdown
-              controlClassName="w-full h-11"
+              controlClassName="w-full h-12"
               className="w-full h-8"
               options={options}
               onChange={(a) => console.log(a)}
               // value={options[0]}
               placeholder="Seleccioná una categoría"
-              placeholderClassName="text-sm text-gray-900 absolute top-[0.7rem]"
+              placeholderClassName="text-sm text-gray-900 absolute top-[0.8rem]"
               menuClassName="absolute !top-[2.7rem]"
-              arrowClassName="absolute !top-[1.2rem]"
+              arrowClassName="absolute !top-[1.4rem]"
             />
           </div>
           <Input<ServicioDTO> name="descripcion" label="Descripción" />
@@ -91,7 +93,8 @@ const CrearServicio = () => {
           />
           <input
             type="submit"
-            className="bg-pink-500 text-slate-50 w-48 mt-8 py-5 rounded"
+            //bg-pink-500
+            className="bg-[#FC97DB] text-gray-700 h-12 mt-8 rounded text-lg w-[340px]"
             value="Crear"
           />
         </Form>

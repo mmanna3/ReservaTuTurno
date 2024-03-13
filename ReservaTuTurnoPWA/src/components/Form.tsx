@@ -21,7 +21,7 @@ const Form = <T extends FieldValues>(props: PropsWithChildren<IProps<T>>) => {
     <FormProvider<T> {...methods}>
       <form
         onSubmit={methods.handleSubmit(props.onSubmit)}
-        className="flex flex-col justify-center items-center"
+        className="flex flex-col justify-center items-center px-12 py-5"
       >
         {props.children}
       </form>
