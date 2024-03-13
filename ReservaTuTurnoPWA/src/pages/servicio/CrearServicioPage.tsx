@@ -1,22 +1,31 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
-import { ServicioDTO } from "../../api/clients";
+import { CategoriaDeServicioDTO, ServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
+import { convertirEnOptions } from "../../utils";
+import { Dropdown } from "./Dropdown";
 
 const CrearServicio = () => {
-  // hay que controlar mejor los errores
+  // hay que controlar mejor los errores de los get
   // (el de categorías por ejemplo.)
 
   const navigate = useNavigate();
 
   const { data: categorias } = useQuery({
-    queryKey: ["servicios"],
+    queryKey: ["categorias"],
     queryFn: async () => await api.categoriaDeServicioAll(),
     throwOnError: true,
   });
+
+  const options = convertirEnOptions<CategoriaDeServicioDTO>(
+    categorias || [],
+    "nombre",
+    "id",
+  );
 
   const mutation = useMutation({
     throwOnError: true,
@@ -33,8 +42,8 @@ const CrearServicio = () => {
   const onSubmit: SubmitHandler<ServicioDTO> = (data) => {
     try {
       console.log(data);
-      mutation.mutate(data);
-      navigate(-1);
+      // mutation.mutate(data);
+      // navigate(-1);
     } catch (error) {
       console.error(error);
     }
@@ -43,9 +52,18 @@ const CrearServicio = () => {
   return (
     <>
       <div className="w-full">
-        <h2 className="text-2xl mb-4 text-center">Nuevo servicio</h2>
         <Form<ServicioDTO> onSubmit={onSubmit}>
+          <h2 className="mb-2 mt-8 w-full text-left text-2xl font-medium">
+            Nuevo servicio
+          </h2>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
+          <Dropdown<ServicioDTO>
+            name="categoriaId"
+            label="Categoría"
+            placeholder="Seleccioná una categoría"
+            options={options}
+            required
+          ></Dropdown>
           <Input<ServicioDTO> name="descripcion" label="Descripción" />
           <Input<ServicioDTO>
             type="number"
@@ -60,8 +78,8 @@ const CrearServicio = () => {
           />
           <input
             type="submit"
-            className="bg-pink-500 text-slate-50 w-48 mt-8 py-5 rounded"
-            value="Crear"
+            className="mt-8 h-16 w-[340px] rounded-xl bg-[#FC97DB] text-lg font-medium text-white"
+            value="Agregar"
           />
         </Form>
       </div>

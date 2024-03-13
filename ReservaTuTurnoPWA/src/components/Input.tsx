@@ -23,27 +23,27 @@ const Input = <T extends FieldValues>({
   } = useFormContext();
 
   return (
-    <div className="relative z-0 px-2 w-full group text-left">
+    <div className="group relative z-0 -my-[0.3rem] w-full text-left">
       <label
         htmlFor={props.name as string}
-        className={`text-[11px] bg-white left-1 relative px-1 top-2 w-auto group-focus-within:text-blue-500 group-focus-within:font-bold ${
-          errors[props.name as string] && "text-red-600"
+        className={`relative left-4 top-[1.8rem] w-auto bg-transparent px-1 text-[12px] text-gray-600 group-focus-within:font-bold group-focus-within:text-[#32BF8D] group-focus-visible:text-[#32BF8D] ${
+          errors[props.name as string] && "!text-red-600"
         }`}
       >
         {props.label}
       </label>
+
       <input
         {...props}
-        className={`h-10 text-10 border py-55-rem border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400 ${
+        className={`text-10 py-55-rem block h-16 w-full rounded-xl bg-[#F9F9F9] p-2.5 pl-5 pt-7 text-base text-gray-800 placeholder-gray-400 focus:border-[#32BF8D] focus:ring-[#32BF8D] focus-visible:text-[#32BF8D] focus-visible:outline-[#32BF8D] ${
           errors[props.name as string] &&
-          "border-red-600 focus:border-red-600 focus:ring-red-600"
+          "border-red-600 focus:border-red-600 focus:ring-red-600 focus-visible:outline-red-600"
         }`}
         {...register(props.name as string, { required: required })}
       />
-
       {errors[props.name as string] &&
         errors[props.name]?.type === "required" && (
-          <span className="text-[11px] text-red-600">
+          <span className="pl-3 text-sm text-red-600">
             Este campo es requerido
           </span>
         )}
