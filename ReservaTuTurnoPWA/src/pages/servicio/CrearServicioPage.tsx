@@ -84,7 +84,7 @@ const CrearServicio = () => {
           <input
             type="submit"
             //bg-pink-500
-            className="mt-8 h-20 w-[340px] rounded-lg bg-[#FC97DB] text-lg font-medium text-gray-600"
+            className="mt-8 h-16 w-[340px] rounded-xl bg-[#FC97DB] text-lg font-medium text-white"
             value="Agregar"
           />
         </Form>
