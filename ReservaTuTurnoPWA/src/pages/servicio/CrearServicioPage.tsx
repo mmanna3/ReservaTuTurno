@@ -84,8 +84,8 @@ const CrearServicio = () => {
           <input
             type="submit"
             //bg-pink-500
-            className="mt-8 h-12 w-[340px] rounded bg-[#FC97DB] text-lg text-gray-700"
-            value="Crear"
+            className="mt-8 h-20 w-[340px] rounded-lg bg-[#FC97DB] text-lg font-medium text-gray-600"
+            value="Agregar"
           />
         </Form>
       </div>
