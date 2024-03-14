@@ -35,7 +35,7 @@ const Input = <T extends FieldValues>({
 
       <input
         {...props}
-        className={`text-10 py-55-rem block h-16 w-full rounded-xl bg-[#F9F9F9] p-2.5 pl-5 pt-7 text-base text-gray-800 placeholder-gray-400 focus:border-[#32BF8D] focus:ring-[#32BF8D] focus-visible:text-[#32BF8D] focus-visible:outline-[#32BF8D] ${
+        className={`text-10 py-55-rem block h-16 w-full rounded-xl bg-[#F9F9F9] p-2.5 pl-5 pt-7 text-base text-gray-800 placeholder-gray-400 focus:border-[#32BF8D] focus:outline-[#32BF8D] focus:ring-[#32BF8D] focus-visible:text-[#32BF8D] focus-visible:outline-[#32BF8D] ${
           errors[props.name as string] &&
           "border-red-600 focus:border-red-600 focus:ring-red-600 focus-visible:outline-red-600"
         }`}
