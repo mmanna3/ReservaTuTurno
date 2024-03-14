@@ -5,12 +5,12 @@ const Footer = () => {
   return (
     <div className="flex h-20 items-center justify-around bg-[#F9F9F9]">
       <Link to="/home">
-        <Home size={24} color="black" />
+        <Home size={24} color="#1f2937" />
       </Link>
-      <Calendar size={24} color="black" iconStyle="Outline" />
-      <UserCircle size={24} color="black" />
+      <Calendar size={24} color="#1f2937" iconStyle="Outline" />
+      <UserCircle size={24} color="#1f2937" />
       <Link to="/servicios">
-        <Settings size={24} color="black" />
+        <Settings size={24} color="#1f2937" />
       </Link>
     </div>
   );

@@ -34,7 +34,7 @@ const CrearCategoriaDeServicio = () => {
   return (
     <>
       <div className="w-full">
-        <h2 className="text-2xl mb-4 text-center">
+        <h2 className="mb-4 text-center text-2xl">
           Nueva categoría de servicio
         </h2>
         <Form<CategoriaDeServicioDTO> onSubmit={onSubmit}>
@@ -49,7 +49,7 @@ const CrearCategoriaDeServicio = () => {
           />
           <input
             type="submit"
-            className="bg-pink-500 text-slate-50 w-48 mt-8 py-5 rounded"
+            className="bg-rosa mt-8 w-48 rounded py-5 text-slate-50"
             value="Crear"
           />
         </Form>

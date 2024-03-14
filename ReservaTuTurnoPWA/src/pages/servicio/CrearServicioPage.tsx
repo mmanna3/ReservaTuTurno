@@ -89,7 +89,7 @@ const CrearServicio = () => {
           ></Dropdown>
           <input
             type="submit"
-            className="mt-8 h-16 w-[340px] rounded-xl bg-[#FC97DB] text-lg font-medium text-white"
+            className="bg-rosa text-blanco mt-8 h-16 w-[340px] rounded-xl text-lg font-medium"
             value="Agregar"
           />
         </Form>

@@ -21,8 +21,8 @@ const ListaDeServicios = () => {
     <ContenedorCentradoConMargenes>
       <Titulo>Servicios</Titulo>
       <div>
-        <button className="my-6 h-16 w-64 rounded-xl bg-pink-500 text-slate-50">
-          <Link className="text-lg text-slate-50" to="/servicios/crear">
+        <button className="bg-rosa text-blanco my-6 h-16 w-64 rounded-xl">
+          <Link className="text-lg" to="/servicios/crear">
             Crear
           </Link>
         </button>
@@ -37,9 +37,9 @@ const ListaDeServicios = () => {
           {servicios?.map((s: ServicioDTO) => (
             <div
               key={s.id}
-              className="mb-2 w-64 rounded-lg border p-8 text-zinc-500"
+              className="text-gris mb-2 w-full rounded-lg border p-8"
             >
-              <p className="mb-2 text-left text-base font-semibold text-zinc-800">
+              <p className="text-negro mb-2 text-left text-base font-semibold">
                 {s.nombre}
               </p>
               <p className="text-left text-sm">{s.descripcion}</p>

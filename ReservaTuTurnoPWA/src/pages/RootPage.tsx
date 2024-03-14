@@ -9,7 +9,7 @@ const Root = () => {
         <div className="mx-auto w-full max-w-[425px]">
           <div className="grid h-screen grid-rows-[auto_1fr_auto]">
             <Header />
-            <main className="overflow-auto">
+            <main className="text-negro overflow-auto">
               <Outlet />
             </main>
             <Footer />

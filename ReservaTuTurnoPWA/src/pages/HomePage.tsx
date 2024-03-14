@@ -3,24 +3,24 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-8">Reservá tu turno</h1>
+      <h1 className="mb-8 text-3xl font-bold">Reservá tu turno</h1>
       <div>
-        <Link className="text-slate-50 text-lg" to="/servicios">
-          <button className="bg-pink-500 text-slate-50 w-64 h-24 rounded-xl mt-2">
+        <Link className="text-lg text-slate-50" to="/servicios">
+          <button className="bg-rosa mt-2 h-24 w-64 rounded-xl text-slate-50">
             Servicios
           </button>
         </Link>
       </div>
       <div>
-        <Link className="text-slate-50 text-lg" to="/profesionales">
-          <button className="bg-pink-500 text-slate-50 w-64 h-24 rounded-xl mt-8">
+        <Link className="text-lg text-slate-50" to="/profesionales">
+          <button className="bg-rosa mt-8 h-24 w-64 rounded-xl text-slate-50">
             Profesionales
           </button>
         </Link>
       </div>
       <div>
-        <Link className="text-slate-50 text-lg" to="/servicios/categoria/crear">
-          <button className="bg-pink-500 text-slate-50 w-64 h-24 rounded-xl mt-8">
+        <Link className="text-lg text-slate-50" to="/servicios/categoria/crear">
+          <button className="bg-rosa mt-8 h-24 w-64 rounded-xl text-slate-50">
             Crear categoría de servicio
           </button>
         </Link>
