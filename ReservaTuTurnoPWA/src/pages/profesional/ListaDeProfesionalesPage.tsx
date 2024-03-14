@@ -17,10 +17,10 @@ const ListaDeProfesionales = () => {
 
   return (
     <>
-      <h2 className="text-2xl mb-4 mt-16">Servicios</h2>
+      <h2 className="mb-4 mt-16 text-2xl">Profesionales</h2>
       <div>
-        <button className="bg-pink-500 text-slate-50 w-full h-16 rounded-xl my-6">
-          <Link className="text-slate-50 text-lg" to="/servicios/crear">
+        <button className="bg-rosa my-6 h-16 w-full rounded-xl text-slate-50">
+          <Link className="text-lg text-slate-50" to="/profesionales/crear">
             Crear
           </Link>
         </button>
@@ -35,15 +35,15 @@ const ListaDeProfesionales = () => {
           {profesionales?.map((s: ProfesionalDTO) => (
             <div
               key={s.id}
-              className="border rounded-lg w-64 p-8 mb-2 text-zinc-500"
+              className="text-gris mb-2 w-64 rounded-lg border p-8"
             >
-              <p className="text-left text-base font-semibold mb-2 text-zinc-800">
+              <p className="text-negro mb-2 text-left text-base font-semibold">
                 {s.nombre} {s.apellido}
               </p>
-              <div className="flex text-sm justify-between mt-5 w-full">
+              <div className="mt-5 flex w-full justify-between text-sm">
                 <p>{s.email}</p>
               </div>
-              <div className="flex text-sm justify-between mt-5 w-full">
+              <div className="mt-5 flex w-full justify-between text-sm">
                 <p>{s.telefono}</p>
               </div>
             </div>

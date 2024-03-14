@@ -30,8 +30,8 @@ export function Dropdown<T extends FieldValues>({
     <>
       <div className="group -my-[0.3rem] mb-7 w-full">
         <label
-          className={`relative left-4 top-[1.8rem] z-10 w-auto bg-transparent px-1 text-[12px] text-gray-700 peer-[.is-open]:!text-[#32BF8D] ${
-            errors[props.name as string] ? "!text-red-600" : ""
+          className={`text-gris relative left-4 top-[1.8rem] z-10 w-auto bg-transparent px-1 text-[12px] peer-[.is-open]:!text-[#32BF8D] ${
+            errors[props.name as string] ? "!text-rojo" : ""
           }`}
         >
           {props.label}
@@ -44,7 +44,7 @@ export function Dropdown<T extends FieldValues>({
             <ReactDropdown
               className="group peer h-8 w-full"
               controlClassName="w-full h-16 !border-0 !bg-[#F9F9F9] !rounded-xl group-[.is-open]:!border-2 group-[.is-open]:!border-[#32BF8D]"
-              placeholderClassName="text-base pl-[0.6rem] text-gray-800 absolute top-[1.8rem]"
+              placeholderClassName="text-base pl-[0.6rem] text-negro absolute top-[1.8rem]"
               menuClassName="absolute !top-[4rem] !bg-[#F9F9F9] rounded-xl"
               arrowClassName="absolute !top-[1.9rem] !right-4"
               options={props.options}
@@ -57,7 +57,7 @@ export function Dropdown<T extends FieldValues>({
         />
         {errors[props.name as string] &&
           errors[props.name]?.type === "required" && (
-            <div className="relative left-3 top-[2rem] text-sm text-red-600">
+            <div className="text-rojo relative left-3 top-[2rem] text-sm">
               Este campo es requerido
             </div>
           )}

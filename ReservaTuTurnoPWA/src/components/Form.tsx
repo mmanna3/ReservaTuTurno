@@ -5,6 +5,7 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
+import ContenedorCentradoConMargenes from "./ContenedorCentradoConMargenes";
 
 type PropsWithChildren<P> = P & { children?: ReactNode };
 
@@ -19,12 +20,11 @@ const Form = <T extends FieldValues>(props: PropsWithChildren<IProps<T>>) => {
 
   return (
     <FormProvider<T> {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(props.onSubmit)}
-        className="flex flex-col justify-center items-center px-12 py-5"
-      >
-        {props.children}
-      </form>
+      <ContenedorCentradoConMargenes>
+        <form onSubmit={methods.handleSubmit(props.onSubmit)}>
+          {props.children}
+        </form>
+      </ContenedorCentradoConMargenes>
     </FormProvider>
   );
 };
