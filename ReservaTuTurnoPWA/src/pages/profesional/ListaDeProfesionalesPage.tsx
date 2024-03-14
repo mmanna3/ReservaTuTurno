@@ -2,7 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { api } from "../../api/api";
 import { ProfesionalDTO } from "../../api/clients";
+import ContenedorCentradoConMargenes from "../../components/ContenedorCentradoConMargenes";
 import ContenidoConSpinnerYError from "../../components/ContenidoConSpinnerYError";
+import Titulo from "../../components/Titulo";
 
 const ListaDeProfesionales = () => {
   const {
@@ -16,28 +18,26 @@ const ListaDeProfesionales = () => {
   });
 
   return (
-    <>
-      <h2 className="mb-4 mt-16 text-2xl">Profesionales</h2>
-      <div>
-        <button className="bg-rosa my-6 h-16 w-full rounded-xl text-slate-50">
-          <Link className="text-lg text-slate-50" to="/profesionales/crear">
-            Crear
-          </Link>
-        </button>
-      </div>
+    <ContenedorCentradoConMargenes>
+      <Titulo>Profesionales</Titulo>
+      <button className="my-6 h-16 w-full rounded-xl bg-rosa text-slate-50">
+        <Link className="text-lg text-slate-50" to="/profesionales/crear">
+          Crear
+        </Link>
+      </button>
 
       <ContenidoConSpinnerYError
         isLoading={isLoading}
         error={error}
         hasData={profesionales === null ? false : true}
       >
-        <div className="h-screen overflow-auto">
+        <div className="h-screen w-full overflow-auto">
           {profesionales?.map((s: ProfesionalDTO) => (
             <div
               key={s.id}
-              className="text-gris mb-2 w-64 rounded-lg border p-8"
+              className="mb-2 w-64 w-full rounded-lg border p-8 text-gris"
             >
-              <p className="text-negro mb-2 text-left text-base font-semibold">
+              <p className="mb-2 text-left text-base font-semibold text-negro">
                 {s.nombre} {s.apellido}
               </p>
               <div className="mt-5 flex w-full justify-between text-sm">
@@ -50,7 +50,7 @@ const ListaDeProfesionales = () => {
           ))}
         </div>
       </ContenidoConSpinnerYError>
-    </>
+    </ContenedorCentradoConMargenes>
   );
 };
 

@@ -20,26 +20,25 @@ const ListaDeServicios = () => {
   return (
     <ContenedorCentradoConMargenes>
       <Titulo>Servicios</Titulo>
-      <div>
-        <button className="bg-rosa text-blanco my-6 h-16 w-64 rounded-xl">
-          <Link className="text-lg" to="/servicios/crear">
-            Crear
-          </Link>
-        </button>
-      </div>
+
+      <button className="my-6 h-16 w-full rounded-xl bg-rosa text-blanco">
+        <Link className="text-lg" to="/servicios/crear">
+          Crear
+        </Link>
+      </button>
 
       <ContenidoConSpinnerYError
         isLoading={isLoading}
         error={error}
         hasData={servicios === null ? false : true}
       >
-        <div className="h-screen overflow-auto">
+        <div className="overflow-autom h-screen w-full">
           {servicios?.map((s: ServicioDTO) => (
             <div
               key={s.id}
-              className="text-gris mb-2 w-full rounded-lg border p-8"
+              className="mb-2 w-full rounded-lg border p-8 text-gris"
             >
-              <p className="text-negro mb-2 text-left text-base font-semibold">
+              <p className="mb-2 text-left text-base font-semibold text-negro">
                 {s.nombre}
               </p>
               <p className="text-left text-sm">{s.descripcion}</p>

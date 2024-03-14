@@ -6,7 +6,7 @@ interface ContenedorProps {
 
 const ContenedorCentradoConMargenes = (props: ContenedorProps) => {
   return (
-    <div className="flex flex-col items-center justify-center px-12">
+    <div className="flex w-full flex-col items-center justify-center px-12">
       {props.children}
     </div>
   );

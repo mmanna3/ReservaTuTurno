@@ -21,7 +21,10 @@ const Form = <T extends FieldValues>(props: PropsWithChildren<IProps<T>>) => {
   return (
     <FormProvider<T> {...methods}>
       <ContenedorCentradoConMargenes>
-        <form onSubmit={methods.handleSubmit(props.onSubmit)}>
+        <form
+          className="w-full"
+          onSubmit={methods.handleSubmit(props.onSubmit)}
+        >
           {props.children}
         </form>
       </ContenedorCentradoConMargenes>

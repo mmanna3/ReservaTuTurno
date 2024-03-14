@@ -5,6 +5,7 @@ import { api } from "../../api/api";
 import { CategoriaDeServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
+import Titulo from "../../components/Titulo";
 
 const CrearCategoriaDeServicio = () => {
   const navigate = useNavigate();
@@ -33,27 +34,16 @@ const CrearCategoriaDeServicio = () => {
 
   return (
     <>
-      <div className="w-full">
-        <h2 className="mb-4 text-center text-2xl">
-          Nueva categoría de servicio
-        </h2>
-        <Form<CategoriaDeServicioDTO> onSubmit={onSubmit}>
-          <Input<CategoriaDeServicioDTO>
-            name="nombre"
-            label="Nombre"
-            required
-          />
-          <Input<CategoriaDeServicioDTO>
-            name="descripcion"
-            label="Descripción"
-          />
-          <input
-            type="submit"
-            className="bg-rosa mt-8 w-48 rounded py-5 text-slate-50"
-            value="Crear"
-          />
-        </Form>
-      </div>
+      <Form<CategoriaDeServicioDTO> onSubmit={onSubmit}>
+        <Titulo>Nueva categoría de servicio</Titulo>
+        <Input<CategoriaDeServicioDTO> name="nombre" label="Nombre" required />
+        <Input<CategoriaDeServicioDTO> name="descripcion" label="Descripción" />
+        <input
+          type="submit"
+          className="mt-8 w-full rounded-xl bg-rosa py-5 text-slate-50"
+          value="Crear"
+        />
+      </Form>
       <div>
         {mutation.isPending ? (
           "Adding todo..."

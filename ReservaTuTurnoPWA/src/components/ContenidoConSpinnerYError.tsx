@@ -10,7 +10,7 @@ interface ContenidoConSpinnerYErrorProps {
 
 const ContenidoConSpinnerYError = (props: ContenidoConSpinnerYErrorProps) => {
   return (
-    <div>
+    <>
       {props.isLoading ? (
         <Spinner tamanio="meh" />
       ) : props.error ? (
@@ -18,7 +18,7 @@ const ContenidoConSpinnerYError = (props: ContenidoConSpinnerYErrorProps) => {
       ) : props.hasData ? (
         props.children
       ) : null}
-    </div>
+    </>
   );
 };
 
