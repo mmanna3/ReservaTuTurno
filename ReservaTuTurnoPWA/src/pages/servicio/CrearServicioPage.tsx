@@ -63,7 +63,7 @@ const CrearServicio = () => {
     <>
       <div className="w-full">
         <Form<ServicioDTO> onSubmit={onSubmit}>
-          <h2 className="mb-2 mt-8 w-full text-left text-2xl font-medium">
+          <h2 className="mb-2 w-full text-left text-2xl font-medium">
             Nuevo servicio
           </h2>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
