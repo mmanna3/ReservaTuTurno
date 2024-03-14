@@ -6,6 +6,7 @@ import { api } from "../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
+import Titulo from "../../components/Titulo";
 import {
   DuracionDelServicioArray,
   IDuracionDelServicio,
@@ -63,9 +64,7 @@ const CrearServicio = () => {
     <>
       <div className="w-full">
         <Form<ServicioDTO> onSubmit={onSubmit}>
-          <h2 className="mb-2 w-full text-left text-2xl font-medium">
-            Nuevo servicio
-          </h2>
+          <Titulo>Nuevo Servicio</Titulo>
           <Input<ServicioDTO> name="nombre" label="Nombre" required />
           <Dropdown<ServicioDTO>
             name="categoriaDeServicioId"
