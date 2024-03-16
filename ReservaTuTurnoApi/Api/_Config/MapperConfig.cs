@@ -11,5 +11,6 @@ public class MapperConfig : Profile
         CreateMap<Servicio, ServicioDTO>().ReverseMap();           
         CreateMap<Profesional, ProfesionalDTO>().ReverseMap();
         CreateMap<CategoriaDeServicio, CategoriaDeServicioDTO>().ReverseMap();
+        CreateMap<HashSet<Servicio>, List<ServicioDTO>>().ReverseMap();
     }
 }

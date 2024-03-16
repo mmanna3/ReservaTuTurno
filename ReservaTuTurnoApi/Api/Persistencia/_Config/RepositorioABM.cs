@@ -12,9 +12,14 @@ public abstract class RepositorioABM<TModel> : RepositorioBase, IRepositorioABM<
     {
     }
 
+    protected virtual IQueryable<TModel> Set()
+    {
+        return Context.Set<TModel>();
+    }
+    
     public virtual async Task<IEnumerable<TModel>> Listar()
     {
-        return await Context.Set<TModel>().ToListAsync();
+        return await Set().ToListAsync();
     }
 
     public EntityEntry<TModel> Crear(TModel reserva)
