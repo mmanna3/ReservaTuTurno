@@ -4,6 +4,7 @@ import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../api/clients";
+import { Dropdown } from "../../components/Dropdown";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import Titulo from "../../components/Titulo";
@@ -12,7 +13,6 @@ import {
   IDuracionDelServicio,
   convertirEnOptions,
 } from "../../utils";
-import { Dropdown } from "./Dropdown";
 
 const CrearServicio = () => {
   // hay que controlar mejor los errores de los get
