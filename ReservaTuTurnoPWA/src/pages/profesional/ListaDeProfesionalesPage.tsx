@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import { api } from "../../api/api";
 import { ProfesionalDTO } from "../../api/clients";
+import { BotonLink } from "../../components/BotonLink";
 import ContenedorCentradoConMargenes from "../../components/ContenedorCentradoConMargenes";
 import ContenidoConSpinnerYError from "../../components/ContenidoConSpinnerYError";
 import Titulo from "../../components/Titulo";
@@ -20,11 +20,7 @@ const ListaDeProfesionales = () => {
   return (
     <ContenedorCentradoConMargenes>
       <Titulo>Profesionales</Titulo>
-      <button className="my-6 h-16 w-full rounded-xl bg-rosa text-slate-50">
-        <Link className="text-lg text-slate-50" to="/profesionales/crear">
-          Crear
-        </Link>
-      </button>
+      <BotonLink texto="Crear" link="/profesionales/crear" />
 
       <ContenidoConSpinnerYError
         isLoading={isLoading}
