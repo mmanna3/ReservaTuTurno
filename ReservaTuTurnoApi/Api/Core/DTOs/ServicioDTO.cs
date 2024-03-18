@@ -10,4 +10,5 @@ public class ServicioDTO : DTO
     public int? PrecioPorDefecto { get; set; }
     public int? DuracionDelTurnoPorDefectoEnMinutos { get; set; }
     public int CategoriaDeServicioId { get; set; }
+    public List<ServiciosDelProfesionalDTO> ProfesionalesQueLoBrindan { get; set; }
 }
