@@ -8,6 +8,7 @@ import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYE
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
 import CamposBasicos from "../components/CamposBasicos";
+import Equipo from "../components/Equipo";
 
 const EditarServicio = () => {
   // hay que controlar mejor los errores de los get
@@ -42,8 +43,8 @@ const EditarServicio = () => {
   const onSubmit: SubmitHandler<ServicioDTO> = (data) => {
     try {
       console.log(data);
-      mutation.mutate(data);
-      navigate(-1);
+      // mutation.mutate(data);
+      // navigate(-1);
     } catch (error) {
       console.error(error);
     }
@@ -60,8 +61,8 @@ const EditarServicio = () => {
           <Titulo>Editar Servicio</Titulo>
           <CamposBasicos />
 
-          {/* <div className="mb-5 mt-8 border-t border-grisclaro"></div>
-          <Equipo /> */}
+          <div className="mb-5 mt-8 border-t border-grisclaro"></div>
+          <Equipo />
           <input
             type="submit"
             className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
