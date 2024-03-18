@@ -1,6 +1,7 @@
 using Api.Core.DTOs;
 using Api.Core.Servicios.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Api.Controllers;
 
@@ -32,11 +33,6 @@ public abstract class ABMController<TDTO> : ControllerBase
     {
         var dto = await _core.ObtenerPorId(id);
 
-        // if (dto == null)
-        // {
-        //     return NotFound();
-        // }
-
         return dto;
     }
     
@@ -49,4 +45,26 @@ public abstract class ABMController<TDTO> : ControllerBase
 
         return CreatedAtAction("Get", new { id }, dto);
     }
+    
+    // PUT: api/Servicio/5
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, TDTO dto)
+    {
+        if (id != dto.Id)
+            return BadRequest();
+
+        try
+        {
+            await _core.Modificar(id, dto);
+        }
+        catch (Exception e) 
+        {
+            if (e.GetType() == typeof(KeyNotFoundException))
+                return NotFound();
+        }
+
+        return Ok(id);
+    }
+
 }

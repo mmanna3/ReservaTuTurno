@@ -35,36 +35,36 @@ namespace Api.Api.Controllers
         //     return servicio;
         // }
 
-        // PUT: api/Servicio/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutServicio(long id, Servicio servicio)
-        {
-            if (id != servicio.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(servicio).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ServicioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
+        // // PUT: api/Servicio/5
+        // // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> PutServicio(long id, Servicio servicio)
+        // {
+        //     if (id != servicio.Id)
+        //     {
+        //         return BadRequest();
+        //     }
+        //
+        //     _context.Entry(servicio).State = EntityState.Modified;
+        //
+        //     try
+        //     {
+        //         await _context.SaveChangesAsync();
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         if (!ServicioExists(id))
+        //         {
+        //             return NotFound();
+        //         }
+        //         else
+        //         {
+        //             throw;
+        //         }
+        //     }
+        //
+        //     return NoContent();
+        // }
 
         // DELETE: api/Servicio/5
         [HttpDelete("{id}")]

@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import {
-  DefaultValues,
   FieldValues,
   FormProvider,
   SubmitHandler,
@@ -12,14 +11,12 @@ type PropsWithChildren<P> = P & { children?: ReactNode };
 
 interface IProps<T extends FieldValues> {
   onSubmit: SubmitHandler<T>;
-  defaultValues?: DefaultValues<T>;
+  defaultValues?: T;
 }
 
 const Form = <T extends FieldValues>(props: PropsWithChildren<IProps<T>>) => {
-  console.log("Render del form");
-
   const methods = useForm<T>({
-    defaultValues: props.defaultValues,
+    values: props.defaultValues,
   });
   // Pasar defaultValues por props (para edit)
   // Ver qué onda las validaciones con yup

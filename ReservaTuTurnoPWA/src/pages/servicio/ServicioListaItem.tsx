@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { UserPlus } from "solar-icon-set";
+// import { UserPlus } from "solar-icon-set";
 import { ServicioDTO } from "../../api/clients";
 
 interface IProps {
@@ -20,11 +20,11 @@ export function ServicioListaItem(props: IProps) {
           <p>{servicio.precioPorDefecto}$</p>
           <p>{servicio.duracionDelTurnoPorDefectoEnMinutos}min</p>
         </div>
-        <div className="mt-3 flex justify-end">
+        {/* <div className="mt-3 flex justify-end">
           <Link to={`/servicios/${servicio.id}/agregarprofesionales`}>
             <UserPlus size={20} color="#1f2937" />
           </Link>
-        </div>
+        </div> */}
       </div>
     </Link>
   );

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { api } from "../../api/api";
 import { BotonLink } from "../../components/BotonLink";
 import ContenedorCentradoConMargenes from "../../components/ContenedorCentradoConMargenes";
@@ -11,12 +12,20 @@ const ListaDeServicios = () => {
   const {
     data: categorias,
     error,
+    isFetching,
     isLoading,
+    refetch,
   } = useQuery({
+    notifyOnChangeProps: "all",
     queryKey: ["servicios"],
     queryFn: async () => await api.categoriaDeServicioAll(),
     throwOnError: true,
   });
+
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ContenedorCentradoConMargenes>
@@ -25,7 +34,7 @@ const ListaDeServicios = () => {
       <BotonLink link="/servicios/crear" texto="Crear" />
 
       <ContenidoConSpinnerYError
-        isLoading={isLoading}
+        isLoading={isFetching || isLoading}
         error={error}
         hasData={categorias === null ? false : true}
       >

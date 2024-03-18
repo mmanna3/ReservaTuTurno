@@ -18,7 +18,7 @@ const CrearProfesionalPage = () => {
     throwOnError: true,
     mutationFn: async (profesional: ProfesionalDTO) => {
       try {
-        const profesionalCreado = await api.profesional(profesional);
+        const profesionalCreado = await api.profesionalPOST(profesional);
         console.log("profesionalCreado", profesionalCreado);
       } catch (error) {
         console.log(error);

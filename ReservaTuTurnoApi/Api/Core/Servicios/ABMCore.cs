@@ -46,11 +46,15 @@ public abstract class ABMCore<TRepo, TEntidad, TDTO> : ICoreABM<TDTO>
         return dto;
     }
 
-    public async void Modificar(TDTO anterior, TDTO nuevo)
+    public async Task<int> Modificar(int id, TDTO nuevo)
     {
-        var entidadAnterior = Mapper.Map<TEntidad>(anterior);
+        var entidadAnterior = await Repo.ObtenerPorId(id);
+        if (entidadAnterior == null)
+            throw new KeyNotFoundException();
+        
         var entidadNueva = Mapper.Map<TEntidad>(nuevo);
         Repo.Modificar(entidadAnterior, entidadNueva);
         await BDVirtual.GuardarCambios();
+        return id;
     }
 }

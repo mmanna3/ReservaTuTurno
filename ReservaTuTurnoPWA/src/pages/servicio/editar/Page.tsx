@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -20,21 +19,20 @@ const EditarServicio = () => {
   const {
     data: servicio,
     error,
+    isFetching,
     isLoading,
   } = useQuery({
-    queryKey: ["servicio"],
+    queryKey: ["servicio-" + id],
     queryFn: async () => await api.servicioGET(Number(id)),
     throwOnError: true,
   });
-
-  const [_servicio, setServicio] = useState<ServicioDTO | undefined>(undefined);
 
   const mutation = useMutation({
     throwOnError: true,
     mutationFn: async (servicio: ServicioDTO) => {
       try {
-        const servicioCreado = await api.servicioPUT(Number(id), servicio);
-        console.log("servicioEditado", servicioCreado);
+        const servicioEditado = await api.servicioPUT(Number(id), servicio);
+        console.log("servicioEditado", servicioEditado);
       } catch (error) {
         console.log(error);
       }
@@ -51,19 +49,14 @@ const EditarServicio = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(servicio);
-    setServicio(servicio);
-  }, [servicio]);
-
   return (
     <ContenidoConSpinnerYError
-      isLoading={isLoading}
+      isLoading={isFetching || isLoading}
       error={error}
-      hasData={_servicio != undefined}
+      hasData={servicio != undefined}
     >
       <div className="w-full">
-        <Form<ServicioDTO> onSubmit={onSubmit} defaultValues={_servicio}>
+        <Form<ServicioDTO> onSubmit={onSubmit} defaultValues={servicio}>
           <Titulo>Editar Servicio</Titulo>
           <CamposBasicos />
 
