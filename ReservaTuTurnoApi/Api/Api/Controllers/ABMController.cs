@@ -27,6 +27,19 @@ public abstract class ABMController<TDTO> : ControllerBase
         return Ok(dto);
     }
     
+    [HttpGet("{id}")]
+    public async Task<ActionResult<TDTO>> Get(int id)
+    {
+        var dto = await _core.ObtenerPorId(id);
+
+        // if (dto == null)
+        // {
+        //     return NotFound();
+        // }
+
+        return dto;
+    }
+    
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<TDTO>> Crear(TDTO dto)

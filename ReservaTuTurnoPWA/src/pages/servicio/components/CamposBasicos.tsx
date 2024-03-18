@@ -9,12 +9,6 @@ import {
   convertirEnOptions,
 } from "../../../utils";
 
-const OpcionesDuracion = convertirEnOptions<IDuracionDelServicio>(
-  DuracionDelServicioArray,
-  "label",
-  "value",
-);
-
 const CamposBasicos = () => {
   const { data: categorias } = useQuery({
     queryKey: ["categorias"],
@@ -26,6 +20,12 @@ const CamposBasicos = () => {
     categorias || [],
     "nombre",
     "id",
+  );
+
+  const OpcionesDuracion = convertirEnOptions<IDuracionDelServicio>(
+    DuracionDelServicioArray,
+    "label",
+    "value",
   );
 
   return (

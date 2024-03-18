@@ -22,18 +22,18 @@ namespace Api.Api.Controllers
         }
 
         // GET: api/Servicio/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Servicio>> GetServicio(long id)
-        {
-            var servicio = await _context.Servicios.FindAsync(id);
-
-            if (servicio == null)
-            {
-                return NotFound();
-            }
-
-            return servicio;
-        }
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Servicio>> GetServicio(long id)
+        // {
+        //     var servicio = await _context.Servicios.FindAsync(id);
+        //
+        //     if (servicio == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //
+        //     return servicio;
+        // }
 
         // PUT: api/Servicio/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

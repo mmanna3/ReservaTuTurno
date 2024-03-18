@@ -1,26 +1,40 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../../api/api";
 import { ServicioDTO } from "../../../api/clients";
+import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
 import CamposBasicos from "../components/CamposBasicos";
-import Equipo from "../components/Equipo";
 
-const CrearServicio = () => {
+const EditarServicio = () => {
   // hay que controlar mejor los errores de los get
   // (el de categorías por ejemplo.)
 
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const {
+    data: servicio,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["servicio"],
+    queryFn: async () => await api.servicioGET(Number(id)),
+    throwOnError: true,
+  });
+
+  const [_servicio, setServicio] = useState<ServicioDTO | undefined>(undefined);
 
   const mutation = useMutation({
     throwOnError: true,
     mutationFn: async (servicio: ServicioDTO) => {
       try {
-        const servicioCreado = await api.servicioPOST(servicio);
-        console.log("servicioCreado", servicioCreado);
+        const servicioCreado = await api.servicioPUT(Number(id), servicio);
+        console.log("servicioEditado", servicioCreado);
       } catch (error) {
         console.log(error);
       }
@@ -37,19 +51,28 @@ const CrearServicio = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(servicio);
+    setServicio(servicio);
+  }, [servicio]);
+
   return (
-    <>
+    <ContenidoConSpinnerYError
+      isLoading={isLoading}
+      error={error}
+      hasData={_servicio != undefined}
+    >
       <div className="w-full">
-        <Form<ServicioDTO> onSubmit={onSubmit}>
-          <Titulo>Nuevo Servicio</Titulo>
+        <Form<ServicioDTO> onSubmit={onSubmit} defaultValues={_servicio}>
+          <Titulo>Editar Servicio</Titulo>
           <CamposBasicos />
 
-          <div className="mb-5 mt-8 border-t border-grisclaro"></div>
-          <Equipo />
+          {/* <div className="mb-5 mt-8 border-t border-grisclaro"></div>
+          <Equipo /> */}
           <input
             type="submit"
             className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
-            value="Crear nuevo servicio"
+            value="Guardar cambios"
           />
         </Form>
       </div>
@@ -63,13 +86,13 @@ const CrearServicio = () => {
             ) : null}
 
             {mutation.isSuccess ? (
-              <div>Servicio agregado correctamente</div>
+              <div>Servicio editado correctamente</div>
             ) : null}
           </>
         )}
       </div>
-    </>
+    </ContenidoConSpinnerYError>
   );
 };
 
-export default CrearServicio;
+export default EditarServicio;

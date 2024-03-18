@@ -30,7 +30,7 @@ export function Dropdown<T extends FieldValues>({
     <>
       <div className="group -my-[0.3rem] mb-7 w-full">
         <label
-          className={`text-gris relative left-4 top-[1.8rem] z-10 w-auto bg-transparent px-1 text-[12px] peer-[.is-open]:!text-[#32BF8D] ${
+          className={`relative left-4 top-[1.8rem] z-10 w-auto bg-transparent px-1 text-[12px] text-gris peer-[.is-open]:!text-[#32BF8D] ${
             errors[props.name as string] ? "!text-rojo" : ""
           }`}
         >
@@ -40,7 +40,7 @@ export function Dropdown<T extends FieldValues>({
           control={control}
           name={props.name.toString()}
           rules={{ required: required }}
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <ReactDropdown
               className="group peer h-8 w-full"
               controlClassName="w-full h-16 !border-0 !bg-[#F9F9F9] !rounded-xl group-[.is-open]:!border-2 group-[.is-open]:!border-[#32BF8D]"
@@ -50,14 +50,14 @@ export function Dropdown<T extends FieldValues>({
               options={props.options}
               onChange={(e) => onChange(onChangeFunc(e))} // send value to hook form
               // onBlur={onBlur} // notify when input is touched/blur
-              // value={value}
+              value={props.options.find((x) => x.value == value)}
               placeholder={props.placeholder}
             />
           )}
         />
         {errors[props.name as string] &&
           errors[props.name]?.type === "required" && (
-            <div className="text-rojo relative left-3 top-[2rem] text-sm">
+            <div className="relative left-3 top-[2rem] text-sm text-rojo">
               Este campo es requerido
             </div>
           )}
