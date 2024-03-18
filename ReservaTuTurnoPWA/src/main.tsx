@@ -10,8 +10,9 @@ import Root from "./pages/RootPage.tsx";
 import CrearCategoriaDeServicio from "./pages/categoria-de-servicio/CrearCategoriaDeServicio.tsx";
 import CrearProfesionalPage from "./pages/profesional/CrearProfesionalPage.tsx";
 import ListaDeProfesionales from "./pages/profesional/ListaDeProfesionalesPage.tsx";
-import CrearServicio from "./pages/servicio/CrearServicioPage.tsx";
 import ListaDeServicios from "./pages/servicio/ListaDeServiciosPage.tsx";
+import Equipo from "./pages/servicio/crear/Equipo.tsx";
+import CrearServicio from "./pages/servicio/crear/Page.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "servicios/crear",
         element: <CrearServicio />,
+      },
+      {
+        path: "servicios/:id/agregarprofesionales",
+        element: <Equipo />,
       },
       {
         path: "servicios/categoria/crear",
