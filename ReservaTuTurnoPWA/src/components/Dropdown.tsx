@@ -13,7 +13,6 @@ interface IProps<T extends FieldValues> {
 }
 
 interface IArrayProps {
-  key: string;
   index: number;
   parentName: string;
 }

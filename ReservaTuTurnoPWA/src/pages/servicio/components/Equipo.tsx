@@ -44,62 +44,49 @@ const Equipo = () => {
     },
   );
 
-  // useEffect(() => {
-  //   console.log("longitud", fields.length);
-  //   if (fields.length == 0) append({});
-  // }, []);
-
   return (
     <>
       <Subtitulo>Equipo</Subtitulo>
 
       {fields.map((field, index) => (
-        <div key={"equipo-" + index} className="border-b pb-3">
+        <div key={field.id} className="border-b pb-3">
           <FormHiddenInput<ServiciosDelProfesionalDTO>
-            key={"servicioId-" + index}
             name="servicioId"
             value={id != undefined ? id : 0}
             array={{
-              key: field.id,
               index: index,
               parentName: "profesionalesQueLoBrindan",
             }}
           />
           <Dropdown<ServiciosDelProfesionalDTO>
-            key={"profesional-" + index}
             name="profesionalId"
             label="Profesional"
             placeholder="Seleccioná un profesional"
             required
             options={opcionesProfesionales}
             array={{
-              key: field.id,
               index: index,
               parentName: "profesionalesQueLoBrindan",
             }}
           />
           <div className="flex gap-2">
             <Input<ServiciosDelProfesionalDTO>
-              key={"precio-" + index}
               name="precio"
               label="Precio"
               type="number"
               required
               array={{
-                key: field.id,
                 index: index,
                 parentName: "profesionalesQueLoBrindan",
               }}
             />
             <Dropdown<ServiciosDelProfesionalDTO>
-              key={"duracion-" + index}
               name="duracionDelTurnoEnMinutos"
               label="Duración"
               placeholder=""
               options={opcionesDuracion}
               required
               array={{
-                key: field.id,
                 index: index,
                 parentName: "profesionalesQueLoBrindan",
               }}

@@ -1,7 +1,6 @@
 import { FieldValues, useFormContext } from "react-hook-form";
 
 interface IArrayProps {
-  key: string;
   index: number;
   parentName: string;
 }
@@ -21,14 +20,7 @@ const FormHiddenInput = <T extends FieldValues>({
   if (props.array)
     fieldName = `${props.array.parentName}.${props.array.index}.${props.name as string}`;
 
-  return (
-    <input
-      value={props.value}
-      key={props.array?.key}
-      type="hidden"
-      {...register(fieldName)}
-    />
-  );
+  return <input value={props.value} type="hidden" {...register(fieldName)} />;
 };
 
 export default FormHiddenInput;
