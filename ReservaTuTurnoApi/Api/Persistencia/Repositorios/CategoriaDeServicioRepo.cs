@@ -13,6 +13,10 @@ public class CategoriaDeServicioRepo : RepositorioABM<CategoriaDeServicio>, ICat
     
     protected override IQueryable<CategoriaDeServicio> Set()
     {
-        return Context.Set<CategoriaDeServicio>().Include(x => x.Servicios).AsQueryable();
+        return Context
+            .Set<CategoriaDeServicio>()
+            .Include(x => x.Servicios)
+            .ThenInclude(x => x.ProfesionalesQueLoBrindan)
+            .AsQueryable();
     }
 }

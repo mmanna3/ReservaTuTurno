@@ -9,6 +9,13 @@ interface IProps<T extends FieldValues> {
   options: Option[];
   defaultValue?: Option;
   required?: boolean;
+  array?: IArrayProps;
+}
+
+interface IArrayProps {
+  key: string;
+  index: number;
+  parentName: string;
 }
 
 export function Dropdown<T extends FieldValues>({
@@ -26,19 +33,23 @@ export function Dropdown<T extends FieldValues>({
     return e.value;
   };
 
+  let fieldName = props.name as string;
+  if (props.array)
+    fieldName = `${props.array.parentName}.${props.array.index}.${fieldName}`;
+
   return (
     <>
       <div className="group -my-[0.3rem] mb-7 w-full">
         <label
           className={`relative left-4 top-[1.8rem] z-10 w-auto bg-transparent px-1 text-[12px] text-gris peer-[.is-open]:!text-[#32BF8D] ${
-            errors[props.name as string] ? "!text-rojo" : ""
+            errors[fieldName] ? "!text-rojo" : ""
           }`}
         >
           {props.label}
         </label>
         <Controller
           control={control}
-          name={props.name.toString()}
+          name={fieldName.toString()}
           rules={{ required: required }}
           render={({ field: { onChange, value } }) => (
             <ReactDropdown
@@ -55,12 +66,11 @@ export function Dropdown<T extends FieldValues>({
             />
           )}
         />
-        {errors[props.name as string] &&
-          errors[props.name]?.type === "required" && (
-            <div className="relative left-3 top-[2rem] text-sm text-rojo">
-              Este campo es requerido
-            </div>
-          )}
+        {errors[fieldName] && errors[fieldName]?.type === "required" && (
+          <div className="relative left-3 top-[2rem] text-sm text-rojo">
+            Este campo es requerido
+          </div>
+        )}
       </div>
     </>
   );

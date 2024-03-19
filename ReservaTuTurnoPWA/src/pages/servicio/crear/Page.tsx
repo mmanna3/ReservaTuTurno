@@ -3,7 +3,7 @@ import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
-import { ServicioDTO } from "../../../api/clients";
+import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
 import CamposBasicos from "../components/CamposBasicos";
@@ -19,6 +19,13 @@ const CrearServicio = () => {
     throwOnError: true,
     mutationFn: async (servicio: ServicioDTO) => {
       try {
+        if (Array.isArray(servicio.profesionalesQueLoBrindan)) {
+          const instancias = servicio.profesionalesQueLoBrindan.map(
+            (x) => new ServiciosDelProfesionalDTO(x),
+          );
+          servicio.profesionalesQueLoBrindan = instancias;
+        }
+
         const servicioCreado = await api.servicioPOST(servicio);
         console.log("servicioCreado", servicioCreado);
       } catch (error) {
@@ -31,7 +38,7 @@ const CrearServicio = () => {
     try {
       console.log(data);
       mutation.mutate(data);
-      navigate(-1);
+      // navigate(-1);
     } catch (error) {
       console.error(error);
     }

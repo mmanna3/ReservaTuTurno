@@ -51,10 +51,14 @@ public abstract class ABMCore<TRepo, TEntidad, TDTO> : ICoreABM<TDTO>
         var entidadAnterior = await Repo.ObtenerPorId(id);
         if (entidadAnterior == null)
             throw new KeyNotFoundException();
-        
+
         var entidadNueva = Mapper.Map<TEntidad>(nuevo);
+        if (entidadNueva == null)
+            throw new AutoMapperMappingException();
+        
         Repo.Modificar(entidadAnterior, entidadNueva);
         await BDVirtual.GuardarCambios();
-        return id;
+        return id;    
+        
     }
 }

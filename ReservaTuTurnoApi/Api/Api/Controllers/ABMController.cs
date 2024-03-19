@@ -62,6 +62,8 @@ public abstract class ABMController<TDTO> : ControllerBase
         {
             if (e.GetType() == typeof(KeyNotFoundException))
                 return NotFound();
+
+            return StatusCode(500, e.Message);
         }
 
         return Ok(id);
