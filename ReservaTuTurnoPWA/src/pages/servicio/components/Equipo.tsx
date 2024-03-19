@@ -44,14 +44,17 @@ const Equipo = () => {
     },
   );
 
-  if (fields.length == 0) append({});
+  // useEffect(() => {
+  //   console.log("longitud", fields.length);
+  //   if (fields.length == 0) append({});
+  // }, []);
 
   return (
     <>
       <Subtitulo>Equipo</Subtitulo>
 
       {fields.map((field, index) => (
-        <>
+        <div key={"equipo-" + index} className="border-b pb-3">
           <FormHiddenInput<ServiciosDelProfesionalDTO>
             key={"servicioId-" + index}
             name="servicioId"
@@ -66,6 +69,7 @@ const Equipo = () => {
             key={"profesional-" + index}
             name="profesionalId"
             label="Profesional"
+            placeholder="Seleccioná un profesional"
             required
             options={opcionesProfesionales}
             array={{
@@ -101,10 +105,23 @@ const Equipo = () => {
               }}
             ></Dropdown>
           </div>
-        </>
+          <div className="flex justify-end">
+            <button
+              onClick={() => remove(index)}
+              type="button"
+              className="mt-4 rounded-xl border border-gris p-2 text-xs text-gris"
+            >
+              Quitar profesional
+            </button>
+          </div>
+        </div>
       ))}
 
-      <button className="rounded-xl border border-gris p-2 text-sm text-gris">
+      <button
+        onClick={() => append({})}
+        type="button"
+        className="mt-4 rounded-xl border border-gris p-2 text-sm text-gris"
+      >
         Agregar profesional
       </button>
     </>

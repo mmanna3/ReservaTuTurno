@@ -34,6 +34,11 @@ public abstract class RepositorioABM<TModel> : RepositorioBase, IRepositorioABM<
 
     public void Modificar(TModel anterior, TModel nuevo)
     {
+        ActualizarRelaciones(anterior, nuevo);
         Context.Entry(anterior).CurrentValues.SetValues(nuevo);
+    }
+    
+    protected virtual void ActualizarRelaciones(TModel entidadAnterior, TModel entidadNueva)
+    {
     }
 }
