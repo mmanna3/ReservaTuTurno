@@ -1,5 +1,6 @@
 import ReactDropdown, { Option } from "react-dropdown";
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
+import { getProp } from "../utils";
 
 interface IProps<T extends FieldValues> {
   name: keyof T;
@@ -36,12 +37,14 @@ export function Dropdown<T extends FieldValues>({
   if (props.array)
     fieldName = `${props.array.parentName}.${props.array.index}.${fieldName}`;
 
+  const errorMessage = getProp(errors, fieldName);
+
   return (
     <>
-      <div className="group -my-[0.3rem] mb-7 w-full">
+      <div className="group relative -my-[0.3rem] mb-7 w-full">
         <label
           className={`relative left-4 top-[1.8rem] z-10 w-auto bg-transparent px-1 text-[12px] text-gris peer-[.is-open]:!text-[#32BF8D] ${
-            errors[fieldName] ? "!text-rojo" : ""
+            errorMessage ? "!text-rojo" : ""
           }`}
         >
           {props.label} {required ? "*" : null}
@@ -65,9 +68,9 @@ export function Dropdown<T extends FieldValues>({
             />
           )}
         />
-        {errors[fieldName] && errors[fieldName]?.type === "required" && (
-          <div className="relative left-3 top-[2rem] text-sm text-rojo">
-            Este campo es requerido
+        {errorMessage && errorMessage?.type === "required" && (
+          <div className="relative left-3 top-[2.1rem] text-sm text-rojo">
+            Es requerido
           </div>
         )}
       </div>
