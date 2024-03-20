@@ -1,4 +1,10 @@
 import { FieldValues, useFormContext } from "react-hook-form";
+import { getProp } from "../utils";
+
+interface IArrayProps {
+  index: number;
+  parentName: string;
+}
 
 interface InputProps<T extends FieldValues>
   extends Omit<
@@ -11,6 +17,7 @@ interface InputProps<T extends FieldValues>
   name: keyof T;
   label?: string;
   required?: boolean;
+  array?: IArrayProps;
 }
 
 const Input = <T extends FieldValues>({
@@ -22,31 +29,34 @@ const Input = <T extends FieldValues>({
     formState: { errors },
   } = useFormContext();
 
+  let fieldName = props.name as string;
+  if (props.array)
+    fieldName = `${props.array.parentName}.${props.array.index}.${props.name as string}`;
+
+  const errorMessage = getProp(errors, fieldName);
+
   return (
     <div className="group relative z-0 -my-[0.3rem] w-full text-left">
       <label
-        htmlFor={props.name as string}
+        htmlFor={fieldName}
         className={`relative left-4 top-[1.8rem] w-auto bg-transparent px-1 text-[12px] text-gris group-focus-within:font-bold group-focus-within:text-verde group-focus-visible:text-verde ${
-          errors[props.name as string] && "!text-rojo"
+          errorMessage && "!text-rojo"
         }`}
       >
-        {props.label}
+        {props.label} {required ? "*" : null}
       </label>
 
       <input
         {...props}
         className={`text-10 py-55-rem block h-16 w-full rounded-xl bg-grisclarito p-2.5 pl-5 pt-7 text-base text-negro placeholder-grisclaro !shadow-none focus:!border-verde focus:!outline-verde focus:!ring-verde focus-visible:text-verde focus-visible:!outline-verde ${
-          errors[props.name as string] &&
+          errorMessage &&
           "border-rojo focus:border-rojo focus:ring-rojo focus-visible:outline-rojo"
         }`}
-        {...register(props.name as string, { required: required })}
+        {...register(fieldName, { required: required })}
       />
-      {errors[props.name as string] &&
-        errors[props.name]?.type === "required" && (
-          <span className="pl-3 text-sm text-rojo">
-            Este campo es requerido
-          </span>
-        )}
+      {errorMessage && errorMessage?.type === "required" && (
+        <span className="pl-3 text-sm text-rojo">Es requerido</span>
+      )}
     </div>
   );
 };

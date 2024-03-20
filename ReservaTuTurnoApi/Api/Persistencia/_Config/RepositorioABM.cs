@@ -29,11 +29,16 @@ public abstract class RepositorioABM<TModel> : RepositorioBase, IRepositorioABM<
 
     public virtual async Task<TModel?> ObtenerPorId(int id)
     {
-        return await Context.Set<TModel>().SingleOrDefaultAsync(x => x.Id == id);
+        return await Set().SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public void Modificar(TModel anterior, TModel nuevo)
     {
+        ActualizarRelaciones(anterior, nuevo);
         Context.Entry(anterior).CurrentValues.SetValues(nuevo);
+    }
+    
+    protected virtual void ActualizarRelaciones(TModel entidadAnterior, TModel entidadNueva)
+    {
     }
 }

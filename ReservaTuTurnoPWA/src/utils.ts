@@ -30,3 +30,20 @@ export const DuracionDelServicioArray: IDuracionDelServicio[] = [
   { label: "1 hora y 45 minutos", value: 105 },
   { label: "2 horas", value: 120 },
 ];
+
+export function getProp(object: any, path: string, defaultValue?: unknown) {
+  // Convertir la ruta en un array de claves
+  const keys = path.replace(/\[(\d+)\]/g, ".$1").split(".");
+
+  // Iterar sobre las claves para acceder al valor correspondiente en el objeto
+  let value = object;
+  for (const key of keys) {
+    if (value === undefined || value === null) {
+      return defaultValue;
+    }
+    value = value[key];
+  }
+
+  // Devolver el valor encontrado o el valor por defecto si no se encuentra
+  return value === undefined ? defaultValue : value;
+}
