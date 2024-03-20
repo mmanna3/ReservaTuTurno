@@ -40,7 +40,7 @@ const Input = <T extends FieldValues>({
           errors[fieldName] && "!text-rojo"
         }`}
       >
-        {props.label}
+        {props.label} {required ? "*" : null}
       </label>
 
       <input

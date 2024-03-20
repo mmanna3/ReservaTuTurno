@@ -44,7 +44,7 @@ export function Dropdown<T extends FieldValues>({
             errors[fieldName] ? "!text-rojo" : ""
           }`}
         >
-          {props.label}
+          {props.label} {required ? "*" : null}
         </label>
         <Controller
           control={control}
