@@ -7,31 +7,32 @@ namespace Api.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public abstract class ABMController<TDTO> : ControllerBase
+public abstract class ABMController<TDTO, TCore> : ControllerBase
     where TDTO : DTO
+    where TCore : ICoreABM<TDTO>
 {
-    private readonly ICoreABM<TDTO> _core;
+    protected readonly TCore Core;
     
     protected ABMController()
     {
     }
     
-    protected ABMController(ICoreABM<TDTO> core)
+    protected ABMController(TCore core)
     {
-        _core = core;
+        Core = core;
     }
     
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TDTO>>> Get()
     {
-        var dto = await _core.Listar();
+        var dto = await Core.Listar();
         return Ok(dto);
     }
     
     [HttpGet("{id}")]
     public async Task<ActionResult<TDTO>> Get(int id)
     {
-        var dto = await _core.ObtenerPorId(id);
+        var dto = await Core.ObtenerPorId(id);
 
         return dto;
     }
@@ -40,7 +41,7 @@ public abstract class ABMController<TDTO> : ControllerBase
     [HttpPost]
     public async Task<ActionResult<TDTO>> Crear(TDTO dto)
     {
-        var id = await _core.Crear(dto); //Podría devolver el objeto creado en vez de el Id
+        var id = await Core.Crear(dto); //Podría devolver el objeto creado en vez de el Id
         dto.Id = id;
 
         return CreatedAtAction("Get", new { id }, dto);
@@ -56,7 +57,7 @@ public abstract class ABMController<TDTO> : ControllerBase
 
         try
         {
-            await _core.Modificar(id, dto);
+            await Core.Modificar(id, dto);
         }
         catch (Exception e) 
         {

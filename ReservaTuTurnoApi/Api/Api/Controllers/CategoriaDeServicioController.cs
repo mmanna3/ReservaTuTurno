@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Api.Controllers
 {
-    public class CategoriaDeServicioController : ABMController<CategoriaDeServicioDTO>
+    public class CategoriaDeServicioController : ABMController<CategoriaDeServicioDTO, ICategoriaDeServicioCore>
     {
         public CategoriaDeServicioController(ICategoriaDeServicioCore core) : base(core)
         {

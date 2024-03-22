@@ -10,15 +10,13 @@ namespace Api.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicioController : ABMController<ServicioDTO>
+    public class ServicioController : ABMController<ServicioDTO, IServicioCore>
     {
         private readonly AppDbContext _context;
-        private readonly IServicioCore _servicioCore;
 
         public ServicioController(AppDbContext context, IServicioCore servicioCore) : base(servicioCore)
         {
             _context = context;
-            _servicioCore = servicioCore;
         }
 
         // GET: api/Servicio/5

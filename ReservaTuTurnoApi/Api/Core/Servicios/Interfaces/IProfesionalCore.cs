@@ -5,5 +5,5 @@ namespace Api.Core.Servicios.Interfaces;
 
 public interface IProfesionalCore : ICoreABM<ProfesionalDTO>
 {
-    
+    Task<IEnumerable<ServiciosDelProfesionalDTO>> Servicios(int id);
 }
