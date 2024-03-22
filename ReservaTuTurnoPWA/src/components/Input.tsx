@@ -52,7 +52,10 @@ const Input = <T extends FieldValues>({
           errorMessage &&
           "border-rojo focus:border-rojo focus:ring-rojo focus-visible:outline-rojo"
         }`}
-        {...register(fieldName, { required: required })}
+        {...register(fieldName, {
+          valueAsNumber: props.type === "number",
+          required: required,
+        })}
       />
       {errorMessage && errorMessage?.type === "required" && (
         <span className="pl-3 text-sm text-rojo">Es requerido</span>

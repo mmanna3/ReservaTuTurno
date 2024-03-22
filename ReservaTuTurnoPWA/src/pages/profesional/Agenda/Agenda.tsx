@@ -1,12 +1,14 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { api } from "../../api/api";
-import { AgendaDTO } from "../../api/clients";
-import ContenidoConSpinnerYError from "../../components/ContenidoConSpinnerYError";
-import Form from "../../components/Form";
-import FormHiddenInput from "../../components/FormHiddenInput";
-import Titulo from "../../components/Titulo";
+import { api } from "../../../api/api";
+import { AgendaDTO } from "../../../api/clients";
+import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
+import Form from "../../../components/Form";
+import FormHiddenInput from "../../../components/FormHiddenInput";
+import Input from "../../../components/Input";
+import Titulo from "../../../components/Titulo";
+import AgendaServicios from "./AgendaServicios";
 
 const Agenda = () => {
   const navigate = useNavigate();
@@ -58,7 +60,12 @@ const Agenda = () => {
             name="profesionalId"
             value={profesionalId as string}
           />
-
+          <Input<AgendaDTO> label="Días" name="dias" type="number" />
+          <div className="flex gap-2">
+            <Input<AgendaDTO> label="Desde" name="desde" type="time" />
+            <Input<AgendaDTO> label="Hasta" name="hasta" type="time" />
+          </div>
+          <AgendaServicios />
           <input
             type="submit"
             className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
