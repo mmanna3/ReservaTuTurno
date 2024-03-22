@@ -15,7 +15,7 @@ public class AppDbContext : DbContext
         base.OnModelCreating(builder);
 
         builder.Entity<ServiciosDelProfesional>()
-            .HasKey("ProfesionalId", "ServicioId");
+            .HasIndex("ProfesionalId", "ServicioId");
     }
     
     public DbSet<Servicio> Servicios { get; set; } = null!;
