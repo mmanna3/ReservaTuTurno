@@ -37,12 +37,10 @@ const Equipo = () => {
     "value",
   );
 
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      // control, // control props comes from useForm (optional: if you are using FormContext)
-      name: "profesionalesQueLoBrindan", // unique name for your Field Array
-    },
-  );
+  const { fields, append, remove } = useFieldArray({
+    // control, // control props comes from useForm (optional: if you are using FormContext)
+    name: "profesionalesQueLoBrindan", // unique name for your Field Array
+  });
 
   return (
     <>
