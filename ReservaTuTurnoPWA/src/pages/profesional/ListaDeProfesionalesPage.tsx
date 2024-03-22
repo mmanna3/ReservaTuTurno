@@ -1,4 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import { Calendar } from "solar-icon-set";
 import { api } from "../../api/api";
 import { ProfesionalDTO } from "../../api/clients";
 import { BotonLink } from "../../components/BotonLink";
@@ -41,6 +43,11 @@ const ListaDeProfesionales = () => {
               </div>
               <div className="mt-5 flex w-full justify-between text-sm">
                 <p>{s.telefono}</p>
+              </div>
+              <div className="flex justify-end">
+                <Link to={`/profesionales/${s.id}/agenda`}>
+                  <Calendar size={20} color="#1f2937" />
+                </Link>
               </div>
             </div>
           ))}
