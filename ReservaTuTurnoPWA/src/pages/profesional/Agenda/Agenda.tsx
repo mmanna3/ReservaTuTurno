@@ -9,6 +9,7 @@ import FormHiddenInput from "../../../components/FormHiddenInput";
 import Input from "../../../components/Input";
 import Titulo from "../../../components/Titulo";
 import AgendaServicios from "./AgendaServicios";
+import DiasDeLaSemana from "./DiasDeLaSemanaCheckboxs";
 
 const Agenda = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const Agenda = () => {
             name="profesionalId"
             value={profesionalId as string}
           />
-          <Input<AgendaDTO> label="Días" name="dias" type="number" />
+          <DiasDeLaSemana />
           <div className="flex gap-2">
             <Input<AgendaDTO> label="Desde" name="desde" type="time" />
             <Input<AgendaDTO> label="Hasta" name="hasta" type="time" />

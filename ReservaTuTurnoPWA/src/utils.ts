@@ -47,3 +47,13 @@ export function getProp(object: any, path: string, defaultValue?: unknown) {
   // Devolver el valor encontrado o el valor por defecto si no se encuentra
   return value === undefined ? defaultValue : value;
 }
+
+export enum DiaDeLaSemana {
+  Domingo = 1,
+  Lunes = 2,
+  Martes = 4,
+  Miercoles = 8,
+  Jueves = 16,
+  Viernes = 32,
+  Sabado = 64,
+}
