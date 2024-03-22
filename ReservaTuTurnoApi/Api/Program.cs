@@ -24,6 +24,8 @@ try
     builder.Services.AddScoped<IProfesionalCore, ProfesionalCore>();
     builder.Services.AddScoped<ICategoriaDeServicioRepo, CategoriaDeServicioRepo>();
     builder.Services.AddScoped<ICategoriaDeServicioCore, CategoriaDeServicioCore>();
+    builder.Services.AddScoped<IAgendaRepo, AgendaRepo>();
+    builder.Services.AddScoped<IAgendaCore, AgendaCore>();
     
     builder.Services.AddControllers();
     
