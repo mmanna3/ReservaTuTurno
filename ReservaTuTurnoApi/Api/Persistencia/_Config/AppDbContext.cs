@@ -13,7 +13,7 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
+        
         builder.Entity<ServiciosDelProfesional>()
             .HasIndex("ProfesionalId", "ServicioId");
     }
@@ -21,4 +21,5 @@ public class AppDbContext : DbContext
     public DbSet<Servicio> Servicios { get; set; } = null!;
     public DbSet<Profesional> Profesionales { get; set; } = null!;
     public DbSet<ServiciosDelProfesional> ServiciosDelProfesional { get; set; } = null!;
+    public DbSet<Agenda> Agendas { get; set; } = null!;
 }
