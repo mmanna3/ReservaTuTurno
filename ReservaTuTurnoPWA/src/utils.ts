@@ -49,11 +49,11 @@ export function getProp(object: any, path: string, defaultValue?: unknown) {
 }
 
 export enum DiaDeLaSemana {
-  Domingo = 1,
-  Lunes = 2,
-  Martes = 4,
-  Miercoles = 8,
-  Jueves = 16,
-  Viernes = 32,
-  Sabado = 64,
+  Lunes = 1,
+  Martes = 2,
+  Miercoles = 4,
+  Jueves = 8,
+  Viernes = 16,
+  Sabado = 32,
+  Domingo = 64,
 }
