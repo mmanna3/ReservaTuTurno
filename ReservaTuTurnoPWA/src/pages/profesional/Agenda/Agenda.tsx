@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import { TrashBinMinimalistic } from "solar-icon-set";
 import { api } from "../../../api/api";
 import { AgendaDTO } from "../../../api/clients";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
@@ -65,6 +66,11 @@ const Agenda = () => {
           <div className="flex gap-2">
             <Input<AgendaDTO> label="Desde" name="desde" type="time" />
             <Input<AgendaDTO> label="Hasta" name="hasta" type="time" />
+            <div className="ml-2 mr-1 mt-8 flex items-center">
+              <button className="">
+                <TrashBinMinimalistic size={22} color="#1f2937" />
+              </button>
+            </div>
           </div>
           <AgendaServicios />
           <input

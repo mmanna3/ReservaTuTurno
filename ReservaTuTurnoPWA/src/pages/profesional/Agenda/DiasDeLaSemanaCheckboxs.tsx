@@ -54,7 +54,7 @@ const DiasDeLaSemana = () => {
 
   return (
     <>
-      <div className="flex justify-around">
+      <div className="ml-1 flex justify-between">
         {Object.keys(DiaDeLaSemana)
           .filter((v) => isNaN(Number(v)))
           .map((dia, index) => {
