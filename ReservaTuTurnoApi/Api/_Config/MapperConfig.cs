@@ -15,6 +15,7 @@ public class MapperConfig : Profile
         CreateMap<ServiciosDelProfesional, ServiciosDelProfesionalDTO>().ReverseMap();
         CreateMap<HashSet<ServiciosDelProfesional>, List<ServiciosDelProfesionalDTO>>().ReverseMap();
         CreateMap<Agenda, AgendaDTO>().ReverseMap();
+        CreateMap<HashSet<FranjaHoraria>, List<FranjaHorariaDTO>>().ReverseMap();
         CreateMap<string, TimeOnly>().ConvertUsing(s => TimeOnly.Parse(s));
     }
 }
