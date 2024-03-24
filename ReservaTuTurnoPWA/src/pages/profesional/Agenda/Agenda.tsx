@@ -42,7 +42,7 @@ const Agenda = () => {
     try {
       console.log(data);
       mutation.mutate(data);
-      // navigate(-1);
+      navigate(-1);
     } catch (error) {
       console.error(error);
     }
