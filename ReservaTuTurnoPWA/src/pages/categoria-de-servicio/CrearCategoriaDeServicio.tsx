@@ -14,7 +14,7 @@ const CrearCategoriaDeServicio = () => {
     throwOnError: true,
     mutationFn: async (categoria: CategoriaDeServicioDTO) => {
       try {
-        const servicioCreado = await api.categoriaDeServicio(categoria);
+        const servicioCreado = await api.categoriaDeServicioPOST(categoria);
         console.log("servicioCreado", servicioCreado);
       } catch (error) {
         console.log(error);
