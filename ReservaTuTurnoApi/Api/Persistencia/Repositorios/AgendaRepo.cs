@@ -15,4 +15,16 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
     {
         return Context.Set<Agenda>().Include(x => x.FranjasHorarias).AsQueryable();
     }
+    
+    protected override void AntesDeCrear(Agenda entidad)
+    {
+        var servicios = entidad.Servicios;
+        entidad.Servicios = new List<ServiciosDelProfesional>();
+        foreach (var servicio in servicios)
+        {
+            var servicioDelProfesional = Context.ServiciosDelProfesional.Find(servicio.Id);
+            if (servicioDelProfesional != null) 
+                entidad.Servicios.Add(servicioDelProfesional);
+        }
+    }
 }

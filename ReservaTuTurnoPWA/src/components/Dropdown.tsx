@@ -11,6 +11,7 @@ interface IProps<T extends FieldValues> {
   defaultValue?: Option;
   required?: boolean;
   array?: IArrayProps;
+  onValueChange?: (arg: Option) => void;
 }
 
 interface IArrayProps {
@@ -61,7 +62,10 @@ export function Dropdown<T extends FieldValues>({
               menuClassName="absolute !top-[4rem] !bg-[#F9F9F9] rounded-xl"
               arrowClassName="absolute !top-[1.9rem] !right-4"
               options={props.options}
-              onChange={(e) => onChange(onChangeFunc(e))} // send value to hook form
+              onChange={(e) => {
+                if (props.onValueChange) props.onValueChange(e);
+                onChange(onChangeFunc(e));
+              }} // send value to hook form
               // onBlur={onBlur} // notify when input is touched/blur
               value={props.options.find((x) => x.value == value)}
               placeholder={props.placeholder}

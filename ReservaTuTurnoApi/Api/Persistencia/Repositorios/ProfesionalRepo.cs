@@ -13,6 +13,6 @@ public class ProfesionalRepo : RepositorioABM<Profesional>, IProfesionalRepo
 
     public async Task<List<ServiciosDelProfesional>> ListarServicios(int id)
     {
-        return await Context.ServiciosDelProfesional.Where(x => x.ProfesionalId == id).ToListAsync();
+        return await Context.ServiciosDelProfesional.Where(x => x.ProfesionalId == id).Include(x => x.Servicio).ToListAsync();
     }
 }

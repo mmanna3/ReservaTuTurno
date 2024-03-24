@@ -16,7 +16,7 @@ public class ServicioRepo : RepositorioABM<Servicio>, IServicioRepo
         return Context.Set<Servicio>().Include(x => x.ProfesionalesQueLoBrindan).AsQueryable();
     }
     
-    protected override void ActualizarRelaciones(Servicio entidadAnterior, Servicio entidadNueva)
+    protected override void AntesDeModificar(Servicio entidadAnterior, Servicio entidadNueva)
     {
         EliminarRelacionesBorradas(entidadAnterior, entidadNueva);
         AgregarRelacionesCreadas(entidadAnterior, entidadNueva);

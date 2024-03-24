@@ -24,6 +24,7 @@ public abstract class RepositorioABM<TModel> : RepositorioBase, IRepositorioABM<
 
     public EntityEntry<TModel> Crear(TModel reserva)
     {
+        AntesDeCrear(reserva);
         return Context.Set<TModel>().Add(reserva);
     }
 
@@ -34,11 +35,15 @@ public abstract class RepositorioABM<TModel> : RepositorioBase, IRepositorioABM<
 
     public void Modificar(TModel anterior, TModel nuevo)
     {
-        ActualizarRelaciones(anterior, nuevo);
+        AntesDeModificar(anterior, nuevo);
         Context.Entry(anterior).CurrentValues.SetValues(nuevo);
     }
     
-    protected virtual void ActualizarRelaciones(TModel entidadAnterior, TModel entidadNueva)
+    protected virtual void AntesDeModificar(TModel entidadAnterior, TModel entidadNueva)
+    {
+    }
+    
+    protected virtual void AntesDeCrear(TModel entidad)
     {
     }
 }

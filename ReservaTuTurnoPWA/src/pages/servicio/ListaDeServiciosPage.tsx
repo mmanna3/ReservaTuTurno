@@ -17,7 +17,7 @@ const ListaDeServicios = () => {
     refetch,
   } = useQuery({
     notifyOnChangeProps: "all",
-    queryKey: ["servicios"],
+    queryKey: ["servicios-por-categoria"],
     queryFn: async () => await api.categoriaDeServicioAll(),
     throwOnError: true,
   });
