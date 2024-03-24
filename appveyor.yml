@@ -30,7 +30,7 @@ before_build:
   - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
   # Para generar migraciones después
   - dotnet tool install dotnet-ef --global --version 8.0.0
-  # Intenta generar cliente ts
+  # Genera dtos a partir del backend
   - dotnet tool install swashbuckle.aspnetcore.cli -g
   - dotnet tool install nswag.consolecore -g
   - cd ReservaTuTurnoApi/Api
@@ -38,11 +38,6 @@ before_build:
   - swagger tofile --output swagger.json bin/Debug/net8.0/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
   - cd ../..
-  # Genera dtos a partir del back
-  - dotnet tool install --global CSharpToTypeScript.CLITool  
-  - cd Scripts
-  - dotnet cs2ts
-  - cd ..
   # Compila la PWA
   - npm install --global yarn
   - cd ReservaTuTurnoPWA
