@@ -10,6 +10,16 @@ public class ProfesionalRepo : RepositorioABM<Profesional>, IProfesionalRepo
     public ProfesionalRepo(AppDbContext context) : base(context)
     {
     }
+    
+    protected override IQueryable<Profesional> Set()
+    {
+        return Context.Set<Profesional>()
+            .Include(x => x.Agendas)
+                .ThenInclude(x => x.FranjasHorarias)
+            .Include(x => x.Agendas)
+                .ThenInclude(x => x.Servicios)
+            .AsQueryable();
+    }
 
     public async Task<List<ServiciosDelProfesional>> ListarServicios(int id)
     {

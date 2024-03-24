@@ -7,4 +7,5 @@ public class Profesional : Entidad
     public string? Email { get; set; }
     public int Telefono { get; set; }
     public virtual ICollection<ServiciosDelProfesional> ServiciosDelProfesional { get; set; }
+    public virtual ICollection<Agenda> Agendas { get; set; }
 }
