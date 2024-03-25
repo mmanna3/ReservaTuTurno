@@ -30,7 +30,7 @@ const AgendaServicios = () => {
     if (!isLoading && !isError && servicios) {
       const a = convertirEnOptions<ServiciosDelProfesionalDTO>(
         servicios || [],
-        "servicio",
+        "servicioNombre",
         "id",
       );
 
@@ -87,7 +87,7 @@ const AgendaServicios = () => {
       hasData={servicios === null ? false : true}
     >
       <Dropdown<ServiciosDelProfesionalDTO>
-        name="servicio"
+        name="servicioNombre"
         label="Servicios"
         placeholder="Seleccioná un servicio"
         options={serviciosDisponibles}
