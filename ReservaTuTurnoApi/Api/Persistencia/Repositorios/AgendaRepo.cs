@@ -13,7 +13,11 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
     
     protected override IQueryable<Agenda> Set()
     {
-        return Context.Set<Agenda>().Include(x => x.FranjasHorarias).AsQueryable();
+        return Context.Set<Agenda>()
+            .Include(x => x.FranjasHorarias)
+            .Include(x => x.Servicios)
+                .ThenInclude(x => x.Servicio)
+            .AsQueryable();
     }
     
     protected override void AntesDeCrear(Agenda entidad)

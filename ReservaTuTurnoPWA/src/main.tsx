@@ -8,7 +8,7 @@ import ErrorPage from "./pages/ErrorPage.tsx";
 import Home from "./pages/HomePage.tsx";
 import Root from "./pages/RootPage.tsx";
 import CrearCategoriaDeServicio from "./pages/categoria-de-servicio/CrearCategoriaDeServicio.tsx";
-import Agenda from "./pages/profesional/Agenda/Agenda.tsx";
+import Agendas from "./pages/profesional/Agenda/Agendas.tsx";
 import CrearProfesionalPage from "./pages/profesional/CrearProfesionalPage.tsx";
 import ListaDeProfesionales from "./pages/profesional/ListaDeProfesionalesPage.tsx";
 import ListaDeServicios from "./pages/servicio/ListaDeServiciosPage.tsx";
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: "profesionales/:id/agenda",
-        element: <Agenda />,
+        element: <Agendas />,
       },
     ],
   },

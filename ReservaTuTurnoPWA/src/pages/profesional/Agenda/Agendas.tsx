@@ -1,32 +1,34 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SubmitHandler } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
-import { AgendaDTO } from "../../../api/clients";
+import { ProfesionalDTO } from "../../../api/clients";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
+import AgendasDelProfesional from "./AgendasDelProfesional";
 
-const Agenda = () => {
-  const navigate = useNavigate();
-  const { id: profesionalId } = useParams();
-
+const Agendas = () => {
+  const { id: profesionalId, navigate } = useParams();
   const {
-    data: serviciosDelProfesional,
+    data: profesional,
     error,
-    isFetching,
     isLoading,
+    isFetching,
   } = useQuery({
-    queryKey: ["profesional-servicio-" + profesionalId],
-    queryFn: async () => await api.servicios(Number(profesionalId)),
+    queryKey: ["profesional-" + profesionalId],
+    queryFn: async () => await api.profesionalGET(Number(profesionalId)),
     throwOnError: true,
   });
 
   const mutation = useMutation({
     throwOnError: true,
-    mutationFn: async (agenda: AgendaDTO) => {
+    mutationFn: async (profesional: ProfesionalDTO) => {
       try {
-        const response = await api.agendaPOST(agenda);
+        const response = await api.profesionalPUT(
+          Number(profesionalId),
+          profesional,
+        );
         console.log("agendaCreada", response);
       } catch (error) {
         console.log(error);
@@ -34,11 +36,11 @@ const Agenda = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<AgendaDTO> = (data) => {
+  const onSubmit: SubmitHandler<ProfesionalDTO> = (data) => {
     try {
       console.log(data);
       mutation.mutate(data);
-      navigate(-1);
+      // navigate(-1);
     } catch (error) {
       console.error(error);
     }
@@ -48,12 +50,14 @@ const Agenda = () => {
     <ContenidoConSpinnerYError
       isLoading={isFetching || isLoading}
       error={error}
-      hasData={serviciosDelProfesional != undefined}
+      hasData={profesional != undefined}
     >
       <div className="w-full">
-        <Form<AgendaDTO> onSubmit={onSubmit}>
+        <Form<ProfesionalDTO> onSubmit={onSubmit} defaultValues={profesional}>
           <Titulo>Agenda</Titulo>
-          {/* <UnaAgenda agenda={undefined} /> */}
+          <AgendasDelProfesional />
+          {/* {profesional?.agendas?.map((agenda) => <UnaAgenda agenda={agenda} />)} */}
+
           <input
             type="submit"
             className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
@@ -80,4 +84,4 @@ const Agenda = () => {
   );
 };
 
-export default Agenda;
+export default Agendas;

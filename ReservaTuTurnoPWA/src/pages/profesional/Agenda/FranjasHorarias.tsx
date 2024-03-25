@@ -5,10 +5,13 @@ import { FranjaHorariaDTO } from "../../../api/clients";
 import FormHiddenInput from "../../../components/FormHiddenInput";
 import Input from "../../../components/Input";
 
-export function FranjasHorarias() {
+interface IProps {
+  parentName: string;
+}
+
+export function FranjasHorarias(props: IProps) {
   const { fields, append, remove } = useFieldArray({
-    // control, // control props comes from useForm (optional: if you are using FormContext)
-    name: "franjasHorarias", // unique name for your Field Array
+    name: `${props.parentName}.franjasHorarias`,
   });
 
   const { agendaid } = useParams();
@@ -22,7 +25,7 @@ export function FranjasHorarias() {
             value={agendaid != undefined ? agendaid : 0}
             array={{
               index: index,
-              parentName: "franjasHorarias",
+              parentName: `${props.parentName}.franjasHorarias`,
             }}
           />
           <Input<FranjaHorariaDTO>
@@ -31,7 +34,7 @@ export function FranjasHorarias() {
             type="time"
             array={{
               index: index,
-              parentName: "franjasHorarias",
+              parentName: `${props.parentName}.franjasHorarias`,
             }}
           />
           <Input<FranjaHorariaDTO>
@@ -40,7 +43,7 @@ export function FranjasHorarias() {
             type="time"
             array={{
               index: index,
-              parentName: "franjasHorarias",
+              parentName: `${props.parentName}.franjasHorarias`,
             }}
           />
           <div className="ml-2 mr-1 mt-8 flex items-center">

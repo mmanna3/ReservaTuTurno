@@ -10,7 +10,11 @@ import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYE
 import { Dropdown } from "../../../components/Dropdown";
 import { convertirEnOptions } from "../../../utils";
 
-const AgendaServicios = () => {
+interface IProps {
+  parentName: string;
+}
+
+const AgendaServicios = (props: IProps) => {
   const { id: profesionalId } = useParams();
 
   const {
@@ -35,7 +39,6 @@ const AgendaServicios = () => {
       );
 
       setTodosLosServiciosDelProfesional(a);
-      setServiciosDisponibles(a);
     }
   }, [servicios, isLoading, isError]);
 
@@ -46,36 +49,33 @@ const AgendaServicios = () => {
   );
 
   const { fields, append, remove } = useFieldArray({
-    name: "servicios",
+    name: `${props.parentName}.servicios`,
   });
 
-  const onAgregarServicio = (servicio: Option) => {
-    const serviciosFiltrados = serviciosDisponibles.filter(
-      (x) => x.value !== servicio.value,
+  useEffect(() => {
+    const nombresDeServciosYaAgregados = fields.map(
+      (x) => (x as any).servicioNombre,
     );
-    setServiciosDisponibles(serviciosFiltrados);
+    const todos = todosLosServiciosDelProfesional.filter(
+      (x) => !nombresDeServciosYaAgregados.includes(x.label),
+    );
+    setServiciosDisponibles(todos);
+  }, [fields, todosLosServiciosDelProfesional]);
+
+  const onAgregarServicio = (servicio: Option) => {
     append({
       id: Number(servicio.value),
-      nombre: servicio.label,
+      servicioNombre: servicio.label,
     });
   };
 
   const quitarServicio = ({
-    label,
     index,
   }: {
     label: string;
     index: number;
   }): void => {
-    console.log(label);
-    const servicio = todosLosServiciosDelProfesional?.find(
-      (x) => x.label === label,
-    );
-    if (servicio) {
-      const nuevosServiciosDisponibles = [...serviciosDisponibles, servicio];
-      setServiciosDisponibles(nuevosServiciosDisponibles);
-      remove(index);
-    }
+    remove(index);
   };
 
   const { register } = useFormContext();
@@ -94,29 +94,34 @@ const AgendaServicios = () => {
         onValueChange={onAgregarServicio}
       />
       <div className="ml-2 mt-10 flex flex-wrap gap-2">
-        {fields.map((field, index) => (
-          <div key={field.id}>
-            <button
-              className="flex rounded-xl border p-1 text-sm text-grisclaro"
-              type="button"
-              onClick={() =>
-                quitarServicio({ label: (field as any).nombre, index })
-              }
-            >
-              <p className="">{(field as any).nombre}</p>
-              <div className="ml-1 mt-[0.1rem]">
-                <CloseCircle size={18} />
-              </div>
-            </button>
-            <input
-              hidden
-              key={field.id}
-              {...register(`servicios.${index}.id`, {
-                valueAsNumber: true,
-              })}
-            />
-          </div>
-        ))}
+        {fields.map((field, index) => {
+          return (
+            <div key={field.id}>
+              <button
+                className="flex rounded-xl border p-1 text-sm text-grisclaro"
+                type="button"
+                onClick={() =>
+                  quitarServicio({
+                    label: (field as any).servicioNombre,
+                    index,
+                  })
+                }
+              >
+                <p className="">{(field as any).servicioNombre}</p>
+                <div className="ml-1 mt-[0.1rem]">
+                  <CloseCircle size={18} />
+                </div>
+              </button>
+              <input
+                hidden
+                key={field.id}
+                {...register(`${props.parentName}.servicios.${index}.id`, {
+                  valueAsNumber: true,
+                })}
+              />
+            </div>
+          );
+        })}
       </div>
     </ContenidoConSpinnerYError>
   );
