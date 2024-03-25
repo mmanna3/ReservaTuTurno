@@ -26,10 +26,26 @@ const AgendasDelProfesional = () => {
               <DiasDeLaSemana parentName={`agendas.${index}`} />
               <FranjasHorarias parentName={`agendas.${index}`} />
               <AgendaServicios parentName={`agendas.${index}`} />
+              <div className="flex justify-end">
+                <button
+                  onClick={() => remove(index)}
+                  type="button"
+                  className="mt-4 rounded-xl border border-gris p-2 text-xs text-gris"
+                >
+                  Borrar agenda
+                </button>
+              </div>
             </>
           }
         </div>
       ))}
+      <button
+        onClick={() => append({})}
+        type="button"
+        className="mt-4 rounded-xl border border-gris p-2 text-sm text-gris"
+      >
+        Agregar agenda
+      </button>
     </>
   );
 };

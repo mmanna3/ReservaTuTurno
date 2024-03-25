@@ -1,5 +1,4 @@
-import { useFieldArray } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { TrashBinMinimalistic } from "solar-icon-set";
 import { FranjaHorariaDTO } from "../../../api/clients";
 import FormHiddenInput from "../../../components/FormHiddenInput";
@@ -14,7 +13,7 @@ export function FranjasHorarias(props: IProps) {
     name: `${props.parentName}.franjasHorarias`,
   });
 
-  const { agendaid } = useParams();
+  const { getValues } = useFormContext();
 
   return (
     <>
@@ -22,7 +21,11 @@ export function FranjasHorarias(props: IProps) {
         <div key={field.id} className="flex gap-2">
           <FormHiddenInput<FranjaHorariaDTO>
             name="agendaId"
-            value={agendaid != undefined ? agendaid : 0}
+            value={
+              getValues(`${props.parentName}.id`) != undefined
+                ? getValues(`${props.parentName}.id`)
+                : 0
+            }
             array={{
               index: index,
               parentName: `${props.parentName}.franjasHorarias`,

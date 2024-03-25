@@ -2,7 +2,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { SubmitHandler } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
-import { ProfesionalDTO } from "../../../api/clients";
+import {
+  AgendaDTO,
+  FranjaHorariaDTO,
+  ProfesionalDTO,
+} from "../../../api/clients";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
@@ -36,10 +40,35 @@ const Agendas = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<ProfesionalDTO> = (data) => {
+  const onSubmit: SubmitHandler<ProfesionalDTO> = (profesional) => {
     try {
-      console.log(data);
-      mutation.mutate(data);
+      console.log(profesional);
+
+      // Está todo un poco mal esto. Cómo hacerlo más prolijo?
+
+      profesional.agendas = profesional.agendas?.map((a) => {
+        if (Array.isArray(a.franjasHorarias)) {
+          const franjas = a.franjasHorarias.map((x) => new FranjaHorariaDTO(x));
+          a.franjasHorarias = franjas;
+        }
+        return new AgendaDTO(a);
+      });
+
+      // if (Array.isArray(profesional.agendas)) {
+      //   const instancias = profesional.agendas.map((x) => new AgendaDTO(x));
+      //   profesional.agendas = instancias;
+
+      //   profesional.agendas.forEach((a) => {
+      //     if (Array.isArray(a.franjasHorarias)) {
+      //       const instancias = a.franjasHorarias.map(
+      //         (x) => new FranjaHorariaDTO(x),
+      //       );
+      //       a.franjasHorarias = instancias;
+      //     }
+      //   });
+      // }
+
+      mutation.mutate(profesional);
       // navigate(-1);
     } catch (error) {
       console.error(error);
@@ -56,7 +85,6 @@ const Agendas = () => {
         <Form<ProfesionalDTO> onSubmit={onSubmit} defaultValues={profesional}>
           <Titulo>Agenda</Titulo>
           <AgendasDelProfesional />
-          {/* {profesional?.agendas?.map((agenda) => <UnaAgenda agenda={agenda} />)} */}
 
           <input
             type="submit"
