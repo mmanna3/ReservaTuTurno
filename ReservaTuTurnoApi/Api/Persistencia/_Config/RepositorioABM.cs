@@ -35,8 +35,9 @@ public abstract class RepositorioABM<TModel> : RepositorioBase, IRepositorioABM<
 
     public void Modificar(TModel anterior, TModel nuevo)
     {
+        // Context.Entry(anterior).CurrentValues.SetValues(nuevo);
+        Context.Update(nuevo);
         AntesDeModificar(anterior, nuevo);
-        Context.Entry(anterior).CurrentValues.SetValues(nuevo);
     }
     
     protected virtual void AntesDeModificar(TModel entidadAnterior, TModel entidadNueva)

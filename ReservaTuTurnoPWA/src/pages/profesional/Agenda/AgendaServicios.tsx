@@ -114,10 +114,27 @@ const AgendaServicios = (props: IProps) => {
               </button>
               <input
                 hidden
-                key={field.id}
                 {...register(`${props.parentName}.servicios.${index}.id`, {
                   valueAsNumber: true,
                 })}
+              />
+              <input
+                hidden
+                {...register(
+                  `${props.parentName}.servicios.${index}.agendaId`,
+                  {
+                    valueAsNumber: true,
+                  },
+                )}
+              />
+              <input
+                hidden
+                {...register(
+                  `${props.parentName}.servicios.${index}.servicioDelProfesionalId`,
+                  {
+                    valueAsNumber: true,
+                  },
+                )}
               />
             </div>
           );

@@ -16,6 +16,7 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
         return Context.Set<Agenda>()
             .Include(x => x.FranjasHorarias)
             .Include(x => x.Servicios)
+                .ThenInclude(x => x.ServicioDelProfesional)
                 .ThenInclude(x => x.Servicio)
             .AsQueryable();
     }
@@ -23,12 +24,12 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
     protected override void AntesDeCrear(Agenda entidad)
     {
         var servicios = entidad.Servicios;
-        entidad.Servicios = new List<ServiciosDelProfesional>();
+        entidad.Servicios = new List<AgendaServiciosDelProfesional>();
         foreach (var servicio in servicios)
         {
-            var servicioDelProfesional = Context.ServiciosDelProfesional.Find(servicio.Id);
-            if (servicioDelProfesional != null) 
-                entidad.Servicios.Add(servicioDelProfesional);
+            // var servicioDelProfesional = Context.AgendaServiciosDelProfesional.Where(x => xservicio.Id);
+            // if (servicioDelProfesional != null) 
+            //     entidad.Servicios.Add(servicioDelProfesional);
         }
     }
 }
