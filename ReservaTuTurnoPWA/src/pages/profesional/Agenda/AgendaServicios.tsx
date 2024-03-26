@@ -15,6 +15,7 @@ import { convertirEnOptions } from "../../../utils";
 
 interface IProps {
   parentName: string;
+  agendaId: number | null;
 }
 
 const AgendaServicios = (props: IProps) => {
@@ -35,18 +36,18 @@ const AgendaServicios = (props: IProps) => {
 
   useEffect(() => {
     if (!isLoading && !isError && servicios) {
-      const a = convertirEnOptions<ServiciosDelProfesionalDTO>(
-        servicios || [],
-        "servicioNombre",
-        "id",
-      );
+      // const a = convertirEnOptions<ServiciosDelProfesionalDTO>(
+      //   servicios || [],
+      //   "servicioNombre",
+      //   "id",
+      // );
 
-      setTodosLosServiciosDelProfesional(a);
+      setTodosLosServiciosDelProfesional(servicios);
     }
   }, [servicios, isLoading, isError]);
 
   const [todosLosServiciosDelProfesional, setTodosLosServiciosDelProfesional] =
-    useState<Option[]>([]);
+    useState<ServiciosDelProfesionalDTO[]>([]);
   const [serviciosDisponibles, setServiciosDisponibles] = useState<Option[]>(
     [],
   );
@@ -64,20 +65,32 @@ const AgendaServicios = (props: IProps) => {
         (x as unknown as AgendaServiciosDelProfesionalDTO)
           .servicioDelProfesional?.servicioNombre,
     );
-    console.log("nombresDeServciosYaAgregados", nombresDeServciosYaAgregados);
 
-    const todos = todosLosServiciosDelProfesional.filter(
-      (x) => !nombresDeServciosYaAgregados.includes(x.label),
+    const todosSinLosYaAgregados = todosLosServiciosDelProfesional.filter(
+      (x) => !nombresDeServciosYaAgregados.includes(x.servicioNombre),
     );
-    setServiciosDisponibles(todos);
+
+    const options = convertirEnOptions<ServiciosDelProfesionalDTO>(
+      todosSinLosYaAgregados || [],
+      "servicioNombre",
+      "id",
+    );
+
+    setServiciosDisponibles(options);
   }, [fields, todosLosServiciosDelProfesional]);
 
-  const onAgregarServicio = (servicio: Option) => {
-    console.log(servicio);
+  const onAgregarServicio = (servicioOption: Option) => {
+    const servicio = todosLosServiciosDelProfesional.find(
+      (x) => x.servicioNombre === servicioOption.label,
+    );
+
     append({
-      id: Number(servicio.value),
+      id: 0,
+      agendaId: props.agendaId,
+      servicioDelProfesionalId: servicio?.id,
       servicioDelProfesional: {
-        servicioNombre: servicio.label,
+        id: servicio?.id,
+        servicioNombre: servicio?.servicioNombre,
       },
     });
   };

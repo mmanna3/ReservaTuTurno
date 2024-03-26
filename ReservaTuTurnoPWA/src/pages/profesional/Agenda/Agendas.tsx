@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
 import {
   AgendaDTO,
+  AgendaServiciosDelProfesionalDTO,
   FranjaHorariaDTO,
   ProfesionalDTO,
+  ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
@@ -51,22 +53,23 @@ const Agendas = () => {
           const franjas = a.franjasHorarias.map((x) => new FranjaHorariaDTO(x));
           a.franjasHorarias = franjas;
         }
+
+        if (Array.isArray(a.servicios)) {
+          const servicios = a.servicios.map((s) => {
+            s.servicioDelProfesional = new ServiciosDelProfesionalDTO(
+              s.servicioDelProfesional,
+            );
+
+            delete s.servicioDelProfesional;
+
+            return new AgendaServiciosDelProfesionalDTO(s);
+          });
+
+          a.servicios = servicios;
+        }
+
         return new AgendaDTO(a);
       });
-
-      // if (Array.isArray(profesional.agendas)) {
-      //   const instancias = profesional.agendas.map((x) => new AgendaDTO(x));
-      //   profesional.agendas = instancias;
-
-      //   profesional.agendas.forEach((a) => {
-      //     if (Array.isArray(a.franjasHorarias)) {
-      //       const instancias = a.franjasHorarias.map(
-      //         (x) => new FranjaHorariaDTO(x),
-      //       );
-      //       a.franjasHorarias = instancias;
-      //     }
-      //   });
-      // }
 
       mutation.mutate(profesional);
       // navigate(-1);

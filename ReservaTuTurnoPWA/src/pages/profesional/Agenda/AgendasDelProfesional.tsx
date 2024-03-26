@@ -1,4 +1,4 @@
-import { useFieldArray } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { AgendaDTO } from "../../../api/clients";
 import FormHiddenInput from "../../../components/FormHiddenInput";
@@ -12,33 +12,41 @@ const AgendasDelProfesional = () => {
     name: "agendas",
   });
 
+  const { getValues } = useFormContext();
+
   return (
     <>
-      {fields.map((field, index) => (
-        <div key={field.id} className="border-b pb-3">
-          {
-            <>
-              <FormHiddenInput<AgendaDTO>
-                name="profesionalId"
-                value={profesionalId as string}
-                array={{ index: index, parentName: "agendas" }}
-              />
-              <DiasDeLaSemana parentName={`agendas.${index}`} />
-              <FranjasHorarias parentName={`agendas.${index}`} />
-              <AgendaServicios parentName={`agendas.${index}`} />
-              <div className="flex justify-end">
-                <button
-                  onClick={() => remove(index)}
-                  type="button"
-                  className="mt-4 rounded-xl border border-gris p-2 text-xs text-gris"
-                >
-                  Borrar agenda
-                </button>
-              </div>
-            </>
-          }
-        </div>
-      ))}
+      {fields.map((field, index) => {
+        console.log("field", field);
+        return (
+          <div key={field.id} className="border-b pb-3">
+            {
+              <>
+                <FormHiddenInput<AgendaDTO>
+                  name="profesionalId"
+                  value={profesionalId as string}
+                  array={{ index: index, parentName: "agendas" }}
+                />
+                <DiasDeLaSemana parentName={`agendas.${index}`} />
+                <FranjasHorarias parentName={`agendas.${index}`} />
+                <AgendaServicios
+                  parentName={`agendas.${index}`}
+                  agendaId={getValues(`agendas.${index}.id`)}
+                />
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => remove(index)}
+                    type="button"
+                    className="mt-4 rounded-xl border border-gris p-2 text-xs text-gris"
+                  >
+                    Borrar agenda
+                  </button>
+                </div>
+              </>
+            }
+          </div>
+        );
+      })}
       <button
         onClick={() => append({})}
         type="button"
