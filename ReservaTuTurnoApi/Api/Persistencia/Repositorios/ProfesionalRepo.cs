@@ -22,8 +22,8 @@ public class ProfesionalRepo : RepositorioABM<Profesional>, IProfesionalRepo
             .ThenInclude(x => x.Servicios)
             .ThenInclude(x => x.ServicioDelProfesional)
             .ThenInclude(x => x.Servicio)
-            .AsQueryable()
-            .AsNoTracking();
+            .AsQueryable();
+
     }
     
     public async Task<List<ServiciosDelProfesional>> ListarServicios(int id)
