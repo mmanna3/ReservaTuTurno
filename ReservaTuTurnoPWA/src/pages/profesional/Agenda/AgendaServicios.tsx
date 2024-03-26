@@ -5,7 +5,10 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { CloseCircle } from "solar-icon-set";
 import { api } from "../../../api/api";
-import { ServiciosDelProfesionalDTO } from "../../../api/clients";
+import {
+  AgendaServiciosDelProfesionalDTO,
+  ServiciosDelProfesionalDTO,
+} from "../../../api/clients";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import { Dropdown } from "../../../components/Dropdown";
 import { convertirEnOptions } from "../../../utils";
@@ -53,9 +56,16 @@ const AgendaServicios = (props: IProps) => {
   });
 
   useEffect(() => {
+    console.log(fields);
+    console.log(todosLosServiciosDelProfesional);
+
     const nombresDeServciosYaAgregados = fields.map(
-      (x) => (x as any).servicioNombre,
+      (x) =>
+        (x as unknown as AgendaServiciosDelProfesionalDTO)
+          .servicioDelProfesional?.servicioNombre,
     );
+    console.log("nombresDeServciosYaAgregados", nombresDeServciosYaAgregados);
+
     const todos = todosLosServiciosDelProfesional.filter(
       (x) => !nombresDeServciosYaAgregados.includes(x.label),
     );
@@ -63,9 +73,12 @@ const AgendaServicios = (props: IProps) => {
   }, [fields, todosLosServiciosDelProfesional]);
 
   const onAgregarServicio = (servicio: Option) => {
+    console.log(servicio);
     append({
       id: Number(servicio.value),
-      servicioNombre: servicio.label,
+      servicioDelProfesional: {
+        servicioNombre: servicio.label,
+      },
     });
   };
 
@@ -102,12 +115,19 @@ const AgendaServicios = (props: IProps) => {
                 type="button"
                 onClick={() =>
                   quitarServicio({
-                    label: (field as any).servicioNombre,
+                    label:
+                      (field as unknown as AgendaServiciosDelProfesionalDTO)
+                        .servicioDelProfesional?.servicioNombre || "",
                     index,
                   })
                 }
               >
-                <p className="">{(field as any).servicioNombre}</p>
+                <p className="">
+                  {
+                    (field as unknown as AgendaServiciosDelProfesionalDTO)
+                      .servicioDelProfesional?.servicioNombre
+                  }
+                </p>
                 <div className="ml-1 mt-[0.1rem]">
                   <CloseCircle size={18} />
                 </div>
