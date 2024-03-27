@@ -7,11 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      injectRegister: "script",
       registerType: "autoUpdate",
-      devOptions: {
-        enabled: true,
-      },
       includeAssets: ["favicon.ico", "mask-icon.svg"],
       manifest: {
         name: "Frambuesa",
