@@ -20,6 +20,10 @@ public class MapperConfig : Profile
         CreateMap<ServiciosDelProfesionalDTO, ServiciosDelProfesional>();
         CreateMap<Agenda, AgendaDTO>().PreserveReferences().ReverseMap();
         CreateMap<FranjaHoraria, FranjaHorariaDTO>().ReverseMap();
+        
+        CreateMap<Turno, TurnoDTO>().ReverseMap();
+        
         CreateMap<string, TimeOnly>().ConvertUsing(s => TimeOnly.Parse(s));
+        CreateMap<string, DateOnly>().ConvertUsing(s => DateOnly.Parse(s));
     }
 }

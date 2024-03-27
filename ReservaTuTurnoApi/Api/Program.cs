@@ -26,6 +26,8 @@ try
     builder.Services.AddScoped<ICategoriaDeServicioCore, CategoriaDeServicioCore>();
     builder.Services.AddScoped<IAgendaRepo, AgendaRepo>();
     builder.Services.AddScoped<IAgendaCore, AgendaCore>();
+    builder.Services.AddScoped<ITurnoRepo, TurnoRepo>();
+    builder.Services.AddScoped<ITurnoCore, TurnoCore>();
     
     builder.Services.AddControllers();
     
@@ -46,11 +48,6 @@ try
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-    // builder.Services.AddSwaggerGen(options =>
-    // {
-    //     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger", Version = "v1" });
-    // });
-    
 
     var app = builder.Build();
 
