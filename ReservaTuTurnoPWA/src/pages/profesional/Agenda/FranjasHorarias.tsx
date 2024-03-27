@@ -31,24 +31,28 @@ export function FranjasHorarias(props: IProps) {
               parentName: `${props.parentName}.franjasHorarias`,
             }}
           />
-          <Input<FranjaHorariaDTO>
-            label="Desde"
-            name="desde"
-            type="time"
-            array={{
-              index: index,
-              parentName: `${props.parentName}.franjasHorarias`,
-            }}
-          />
-          <Input<FranjaHorariaDTO>
-            label="Hasta"
-            name="hasta"
-            type="time"
-            array={{
-              index: index,
-              parentName: `${props.parentName}.franjasHorarias`,
-            }}
-          />
+          <div className="w-full">
+            <Input<FranjaHorariaDTO>
+              label="Desde"
+              name="desde"
+              type="time"
+              array={{
+                index: index,
+                parentName: `${props.parentName}.franjasHorarias`,
+              }}
+            />
+          </div>
+          <div className="w-full">
+            <Input<FranjaHorariaDTO>
+              label="Hasta"
+              name="hasta"
+              type="time"
+              array={{
+                index: index,
+                parentName: `${props.parentName}.franjasHorarias`,
+              }}
+            />
+          </div>
           <div className="ml-2 mr-1 mt-8 flex items-center">
             <button onClick={() => remove(index)} type="button">
               <TrashBinMinimalistic size={22} color="#1f2937" />
