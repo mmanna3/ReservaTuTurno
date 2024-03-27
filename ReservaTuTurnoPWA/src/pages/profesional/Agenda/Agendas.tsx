@@ -15,7 +15,7 @@ import Titulo from "../../../components/Titulo";
 import AgendasDelProfesional from "./AgendasDelProfesional";
 
 const Agendas = () => {
-  const { id: profesionalId, navigate } = useParams();
+  const { id: profesionalId } = useParams();
   const {
     data: profesional,
     error,

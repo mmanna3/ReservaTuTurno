@@ -36,12 +36,6 @@ const AgendaServicios = (props: IProps) => {
 
   useEffect(() => {
     if (!isLoading && !isError && servicios) {
-      // const a = convertirEnOptions<ServiciosDelProfesionalDTO>(
-      //   servicios || [],
-      //   "servicioNombre",
-      //   "id",
-      // );
-
       setTodosLosServiciosDelProfesional(servicios);
     }
   }, [servicios, isLoading, isError]);
