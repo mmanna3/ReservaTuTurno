@@ -12,15 +12,15 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+      includeAssets: ["favicon.ico", "mask-icon.svg"],
       manifest: {
-        name: "Reservá tu turno",
-        short_name: "ReservaTuTurno",
-        description: "App para reserva de turnos",
+        name: "Frambuesa",
+        short_name: "Frambuesa",
+        description: "Gestioná tus turnos.",
         theme_color: "#ffffff",
         icons: [
           {
-            src: "apple-touch-icon.png",
+            src: "pwa-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
