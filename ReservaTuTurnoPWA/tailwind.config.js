@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         rosa: "#DA7DA3",
+        rosaoscuro: "#BC6484",
         verde: "#32BF8D",
         grisclarito: "#F9F9F9",
         grisclaro: "#9ca3af",

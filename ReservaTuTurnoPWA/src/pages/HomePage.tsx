@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
 import ContenedorCentradoConMargenes from "../components/ContenedorCentradoConMargenes";
+import FrambuesaIcono from "./../../public/icono-frambuesa.svg";
 
 const Home = () => {
   return (
     <ContenedorCentradoConMargenes>
-      <h1 className="mb-8 text-3xl font-bold">Reservá tu turno</h1>
-      <div>
+      <div className="mt-40 flex h-full flex-col items-center justify-center">
+        <img src={FrambuesaIcono} alt="Frambuesa" width="60" height="60" />
+        <h1 className="text-rosaoscuro mb-2 mt-4 text-3xl font-bold">
+          Frambuesa
+        </h1>
+        <p className="text-sm">Gestioná tus turnos</p>
+      </div>
+      {/* <div>
         <Link className="text-lg text-slate-50" to="/servicios">
           <button className="mt-2 h-24 w-64 rounded-xl bg-rosa text-slate-50">
             Servicios
@@ -25,7 +31,7 @@ const Home = () => {
             Crear categoría de servicio
           </button>
         </Link>
-      </div>
+      </div> */}
     </ContenedorCentradoConMargenes>
   );
 };
