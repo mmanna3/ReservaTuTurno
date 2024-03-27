@@ -18,7 +18,7 @@ export function FranjasHorarias(props: IProps) {
   return (
     <>
       {fields.map((field, index) => (
-        <div key={field.id} className="flex gap-2">
+        <div key={field.id} className="flex w-full gap-2">
           <FormHiddenInput<FranjaHorariaDTO>
             name="agendaId"
             value={
