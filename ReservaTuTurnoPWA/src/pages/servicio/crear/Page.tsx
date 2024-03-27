@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
 import Form from "../../../components/Form";
+import { Separador } from "../../../components/Separador";
 import Titulo from "../../../components/Titulo";
 import CamposBasicos from "../components/CamposBasicos";
 import Equipo from "../components/Equipo";
@@ -69,7 +70,7 @@ const CrearServicio = () => {
           <Titulo>Nuevo Servicio</Titulo>
           <CamposBasicos />
 
-          <div className="mb-5 mt-8 border-t border-grisclaro"></div>
+          <Separador />
           <Equipo />
           {hayProfesionalesDuplicados !== "" ? (
             <div className="mt-6 rounded-xl border-2 border-red-200 bg-red-100 p-3 ">

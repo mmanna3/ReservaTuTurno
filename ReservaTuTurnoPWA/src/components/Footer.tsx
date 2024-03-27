@@ -9,7 +9,7 @@ const Footer = () => {
       </Link>
       <Calendar size={24} color="#1f2937" iconStyle="Outline" />
       <UserCircle size={24} color="#1f2937" />
-      <Link to="/servicios">
+      <Link to="/configuracion">
         <Settings size={24} color="#1f2937" />
       </Link>
     </div>

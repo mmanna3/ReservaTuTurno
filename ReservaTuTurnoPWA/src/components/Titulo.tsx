@@ -6,7 +6,7 @@ interface TituloProps {
 
 const Titulo = (props: TituloProps) => {
   return (
-    <h2 className="text-negro mb-2 w-full pl-1 text-left text-2xl font-medium">
+    <h2 className="mb-2 w-full pl-1 text-left text-2xl font-medium text-negro">
       {props.children}
     </h2>
   );
