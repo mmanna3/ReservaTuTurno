@@ -1,5 +1,5 @@
 import ContenedorCentradoConMargenes from "../components/ContenedorCentradoConMargenes";
-import FrambuesaIcono from "./../../public/icono-frambuesa.svg";
+import FrambuesaIcono from "./../assets/icono-frambuesa.svg";
 
 const Home = () => {
   return (
