@@ -1,11 +1,6 @@
 using Api._Config;
-using Api.Core.Repositorios;
-using Api.Core.Servicios;
-using Api.Core.Servicios.Interfaces;
 using Api.Persistencia._Config;
-using Api.Persistencia.Repositorios;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using NLog;
 using NLog.Web;
 
@@ -15,23 +10,11 @@ logger.Debug("Inició el servidor");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
-
-
-    builder.Services.AddScoped<IBDVirtual, BDVirtual>();
-    builder.Services.AddScoped<IServicioRepo, ServicioRepo>();
-    builder.Services.AddScoped<IServicioCore, ServicioCore>();
-    builder.Services.AddScoped<IProfesionalRepo, ProfesionalRepo>();
-    builder.Services.AddScoped<IProfesionalCore, ProfesionalCore>();
-    builder.Services.AddScoped<ICategoriaDeServicioRepo, CategoriaDeServicioRepo>();
-    builder.Services.AddScoped<ICategoriaDeServicioCore, CategoriaDeServicioCore>();
-    builder.Services.AddScoped<IAgendaRepo, AgendaRepo>();
-    builder.Services.AddScoped<IAgendaCore, AgendaCore>();
-    builder.Services.AddScoped<ITurnoRepo, TurnoRepo>();
-    builder.Services.AddScoped<ITurnoCore, TurnoCore>();
     
+    builder = InyeccionDeDependenciasConfig.Configurar(builder);
+
     builder.Services.AddControllers();
     
-    // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
     
@@ -39,8 +22,6 @@ try
     builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
     
     builder.Services.AddAutoMapper(typeof(MapperConfig));
-
-// builder = DependencyInjectionConfig.Configurar(builder);
 
     builder.Services.AddOpenApiDocument();
 
@@ -50,8 +31,7 @@ try
     builder.Services.AddSwaggerGen();
 
     var app = builder.Build();
-
-// Configure the HTTP request pipeline.
+    
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
@@ -64,15 +44,14 @@ try
     
     app.UseDefaultFiles();
     app.UseStaticFiles();
-
-    // app.UseMiddleware<MiddlewareDeExcepciones>();
-
+    
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
 
     app.MapControllers();
     
+    // Esto es por si hay problema ejecutando las migraciones en una nueva instancia
     // using (var scope = app.Services.CreateScope())
     // {
     //     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
