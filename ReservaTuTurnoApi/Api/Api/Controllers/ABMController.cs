@@ -44,7 +44,7 @@ public abstract class ABMController<TDTO, TCore> : ControllerBase
         var id = await Core.Crear(dto); //Podría devolver el objeto creado en vez de el Id
         dto.Id = id;
 
-        return CreatedAtAction("Get", new { id }, dto);
+        return Ok(dto);
     }
     
     // PUT: api/Servicio/5

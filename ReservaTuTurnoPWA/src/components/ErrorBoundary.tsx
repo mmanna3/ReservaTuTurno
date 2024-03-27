@@ -1,5 +1,5 @@
-import React, { Component, ErrorInfo } from 'react';
-import ErrorPage from '../pages/ErrorPage';
+import React, { Component, ErrorInfo } from "react";
+import ErrorPage from "../pages/ErrorPage";
 
 interface Props {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('ErrorBoundary atrapó un error: ', error, errorInfo);
+    console.error("ErrorBoundary atrapó un error: ", error, errorInfo);
     this.setState({ hasError: true });
   }
 

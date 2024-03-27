@@ -52,9 +52,10 @@ const EditarServicio = () => {
     fn: async () => await api.servicioGET(Number(id)),
   });
 
-  const { mutation } = useApiMutation<ServicioDTO>({
+  const mutation = useApiMutation<ServicioDTO>({
     fn: (servicio: ServicioDTO) =>
       api.servicioPUT(Number(servicio.id), servicio),
+    antesDeMensajeExito: () => navigate(-1),
   });
 
   const onSubmit: SubmitHandler<ServicioDTO> = (servicio) => {
