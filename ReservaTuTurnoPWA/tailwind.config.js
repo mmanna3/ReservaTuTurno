@@ -7,7 +7,7 @@ export default {
     },
     extend: {
       colors: {
-        rosa: "#FC97DB",
+        rosa: "#EF7EDE",
         verde: "#32BF8D",
         grisclarito: "#F9F9F9",
         grisclaro: "#9ca3af",
