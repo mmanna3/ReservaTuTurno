@@ -52,12 +52,14 @@ const EditarServicio = () => {
           );
           servicio.profesionalesQueLoBrindan = instancias;
         }
-        const servicioEditado = await api.servicioPUT(Number(id), servicio);
-        console.log("servicioEditado", servicioEditado);
+        await api.servicioPUT(Number(id), servicio);
       } catch (error) {
-        console.log(error);
+        console.log("Error en Request", error);
+        throw new Error("Error en el servidor");
       }
     },
+    onError: (error) => console.log("Error mutation:", error.message),
+    onSuccess: () => console.log("Guardado"),
   });
 
   const onSubmit: SubmitHandler<ServicioDTO> = (data) => {
@@ -66,10 +68,7 @@ const EditarServicio = () => {
         setErrorDosProfesionales("Hay profesionales repetidos.");
         return;
       }
-
-      console.log(data);
       mutation.mutate(data);
-      navigate(-1);
     } catch (error) {
       console.error(error);
     }
@@ -109,10 +108,6 @@ const EditarServicio = () => {
           "Adding todo..."
         ) : (
           <>
-            {mutation.isError ? (
-              <div>Hubo un error: {mutation.error.message}</div>
-            ) : null}
-
             {mutation.isSuccess ? (
               <div>Servicio editado correctamente</div>
             ) : null}
