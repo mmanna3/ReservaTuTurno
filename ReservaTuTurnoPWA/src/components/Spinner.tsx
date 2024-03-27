@@ -10,11 +10,11 @@ const tamanio = {
 
 const Spinner = (props: SpinnerProps) => {
   return (
-    <div className="flex items-center justify-center pt-8 pb-8">
+    <div className="flex items-center justify-center pb-8 pt-8">
       <svg
-        className={`animate-spin -ml-1 mr-3 ${
+        className={`-ml-1 mr-3 animate-spin ${
           tamanio[props.tamanio]
-        } text-black`}
+        } text-rosa`}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
