@@ -33,7 +33,7 @@ const ListaDeProfesionales = () => {
           {profesionales?.map((s: ProfesionalDTO) => (
             <div
               key={s.id}
-              className="mb-2 w-full rounded-lg border p-8 text-gris"
+              className="mb-2 w-full rounded-lg border border-gray-300 p-8 text-gris"
             >
               <p className="mb-2 text-left text-base font-semibold text-negro">
                 {s.nombre} {s.apellido}
