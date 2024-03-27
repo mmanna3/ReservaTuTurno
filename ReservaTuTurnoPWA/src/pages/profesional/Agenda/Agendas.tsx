@@ -40,14 +40,11 @@ const Agendas = () => {
         console.log(error);
       }
     },
+    onError: (error) => console.log(error.message),
   });
 
   const onSubmit: SubmitHandler<ProfesionalDTO> = (profesional) => {
     try {
-      console.log(profesional);
-
-      // Está todo un poco mal esto. Cómo hacerlo más prolijo?
-
       profesional.agendas = profesional.agendas?.map((a) => {
         if (Array.isArray(a.franjasHorarias)) {
           const franjas = a.franjasHorarias.map((x) => new FranjaHorariaDTO(x));

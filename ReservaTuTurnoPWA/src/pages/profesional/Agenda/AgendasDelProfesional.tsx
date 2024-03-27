@@ -31,7 +31,7 @@ const AgendasDelProfesional = () => {
                 <FranjasHorarias parentName={`agendas.${index}`} />
                 <AgendaServicios
                   parentName={`agendas.${index}`}
-                  agendaId={getValues(`agendas.${index}.id`)}
+                  agendaId={getValues(`agendas.${index}.id`) || 0}
                 />
                 <div className="flex justify-end">
                   <button
