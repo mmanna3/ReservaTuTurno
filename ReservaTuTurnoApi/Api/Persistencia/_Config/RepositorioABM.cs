@@ -30,16 +30,21 @@ public abstract class RepositorioABM<TModel> : RepositorioBase, IRepositorioABM<
 
     public virtual async Task<TModel?> ObtenerPorId(int id)
     {
-        return await Set().SingleOrDefaultAsync(x => x.Id == id);
+        return await Set().AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public void Modificar(TModel anterior, TModel nuevo)
     {
         AntesDeModificar(anterior, nuevo);
-        Context.Entry(anterior).CurrentValues.SetValues(nuevo);
+        Context.Update(nuevo);
+        DespuesDeModificar(anterior, nuevo);
     }
     
     protected virtual void AntesDeModificar(TModel entidadAnterior, TModel entidadNueva)
+    {
+    }
+    
+    protected virtual void DespuesDeModificar(TModel entidadAnterior, TModel entidadNueva)
     {
     }
     

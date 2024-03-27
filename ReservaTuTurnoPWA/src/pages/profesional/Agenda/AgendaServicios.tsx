@@ -5,12 +5,20 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { CloseCircle } from "solar-icon-set";
 import { api } from "../../../api/api";
-import { ServiciosDelProfesionalDTO } from "../../../api/clients";
+import {
+  AgendaServiciosDelProfesionalDTO,
+  ServiciosDelProfesionalDTO,
+} from "../../../api/clients";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import { Dropdown } from "../../../components/Dropdown";
 import { convertirEnOptions } from "../../../utils";
 
-const AgendaServicios = () => {
+interface IProps {
+  parentName: string;
+  agendaId: number | null;
+}
+
+const AgendaServicios = (props: IProps) => {
   const { id: profesionalId } = useParams();
 
   const {
@@ -28,54 +36,72 @@ const AgendaServicios = () => {
 
   useEffect(() => {
     if (!isLoading && !isError && servicios) {
-      const a = convertirEnOptions<ServiciosDelProfesionalDTO>(
-        servicios || [],
-        "servicioNombre",
-        "id",
-      );
+      // const a = convertirEnOptions<ServiciosDelProfesionalDTO>(
+      //   servicios || [],
+      //   "servicioNombre",
+      //   "id",
+      // );
 
-      setTodosLosServiciosDelProfesional(a);
-      setServiciosDisponibles(a);
+      setTodosLosServiciosDelProfesional(servicios);
     }
   }, [servicios, isLoading, isError]);
 
   const [todosLosServiciosDelProfesional, setTodosLosServiciosDelProfesional] =
-    useState<Option[]>([]);
+    useState<ServiciosDelProfesionalDTO[]>([]);
   const [serviciosDisponibles, setServiciosDisponibles] = useState<Option[]>(
     [],
   );
 
   const { fields, append, remove } = useFieldArray({
-    name: "servicios",
+    name: `${props.parentName}.servicios`,
   });
 
-  const onAgregarServicio = (servicio: Option) => {
-    const serviciosFiltrados = serviciosDisponibles.filter(
-      (x) => x.value !== servicio.value,
+  useEffect(() => {
+    console.log(fields);
+    console.log(todosLosServiciosDelProfesional);
+
+    const nombresDeServciosYaAgregados = fields.map(
+      (x) =>
+        (x as unknown as AgendaServiciosDelProfesionalDTO)
+          .servicioDelProfesional?.servicioNombre,
     );
-    setServiciosDisponibles(serviciosFiltrados);
+
+    const todosSinLosYaAgregados = todosLosServiciosDelProfesional.filter(
+      (x) => !nombresDeServciosYaAgregados.includes(x.servicioNombre),
+    );
+
+    const options = convertirEnOptions<ServiciosDelProfesionalDTO>(
+      todosSinLosYaAgregados || [],
+      "servicioNombre",
+      "id",
+    );
+
+    setServiciosDisponibles(options);
+  }, [fields, todosLosServiciosDelProfesional]);
+
+  const onAgregarServicio = (servicioOption: Option) => {
+    const servicio = todosLosServiciosDelProfesional.find(
+      (x) => x.servicioNombre === servicioOption.label,
+    );
+
     append({
-      id: Number(servicio.value),
-      nombre: servicio.label,
+      id: 0,
+      agendaId: props.agendaId,
+      servicioDelProfesionalId: servicio?.id,
+      servicioDelProfesional: {
+        id: servicio?.id,
+        servicioNombre: servicio?.servicioNombre,
+      },
     });
   };
 
   const quitarServicio = ({
-    label,
     index,
   }: {
     label: string;
     index: number;
   }): void => {
-    console.log(label);
-    const servicio = todosLosServiciosDelProfesional?.find(
-      (x) => x.label === label,
-    );
-    if (servicio) {
-      const nuevosServiciosDisponibles = [...serviciosDisponibles, servicio];
-      setServiciosDisponibles(nuevosServiciosDisponibles);
-      remove(index);
-    }
+    remove(index);
   };
 
   const { register } = useFormContext();
@@ -94,29 +120,58 @@ const AgendaServicios = () => {
         onValueChange={onAgregarServicio}
       />
       <div className="ml-2 mt-10 flex flex-wrap gap-2">
-        {fields.map((field, index) => (
-          <div key={field.id}>
-            <button
-              className="flex rounded-xl border p-1 text-sm text-grisclaro"
-              type="button"
-              onClick={() =>
-                quitarServicio({ label: (field as any).nombre, index })
-              }
-            >
-              <p className="">{(field as any).nombre}</p>
-              <div className="ml-1 mt-[0.1rem]">
-                <CloseCircle size={18} />
-              </div>
-            </button>
-            <input
-              hidden
-              key={field.id}
-              {...register(`servicios.${index}.id`, {
-                valueAsNumber: true,
-              })}
-            />
-          </div>
-        ))}
+        {fields.map((field, index) => {
+          return (
+            <div key={field.id}>
+              <button
+                className="flex rounded-xl border p-1 text-sm text-grisclaro"
+                type="button"
+                onClick={() =>
+                  quitarServicio({
+                    label:
+                      (field as unknown as AgendaServiciosDelProfesionalDTO)
+                        .servicioDelProfesional?.servicioNombre || "",
+                    index,
+                  })
+                }
+              >
+                <p className="">
+                  {
+                    (field as unknown as AgendaServiciosDelProfesionalDTO)
+                      .servicioDelProfesional?.servicioNombre
+                  }
+                </p>
+                <div className="ml-1 mt-[0.1rem]">
+                  <CloseCircle size={18} />
+                </div>
+              </button>
+              <input
+                hidden
+                {...register(`${props.parentName}.servicios.${index}.id`, {
+                  valueAsNumber: true,
+                })}
+              />
+              <input
+                hidden
+                {...register(
+                  `${props.parentName}.servicios.${index}.agendaId`,
+                  {
+                    valueAsNumber: true,
+                  },
+                )}
+              />
+              <input
+                hidden
+                {...register(
+                  `${props.parentName}.servicios.${index}.servicioDelProfesionalId`,
+                  {
+                    valueAsNumber: true,
+                  },
+                )}
+              />
+            </div>
+          );
+        })}
       </div>
     </ContenidoConSpinnerYError>
   );

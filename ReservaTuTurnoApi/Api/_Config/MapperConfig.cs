@@ -15,6 +15,8 @@ public class MapperConfig : Profile
         CreateMap<ServiciosDelProfesional, ServiciosDelProfesionalDTO>()
             .ForMember(x => x.ServicioNombre, o => o.MapFrom(x => x.Servicio.Nombre));
 
+        CreateMap<AgendaServiciosDelProfesional, AgendaServiciosDelProfesionalDTO>().ReverseMap();
+        
         CreateMap<ServiciosDelProfesionalDTO, ServiciosDelProfesional>();
         CreateMap<Agenda, AgendaDTO>().PreserveReferences().ReverseMap();
         CreateMap<FranjaHoraria, FranjaHorariaDTO>().ReverseMap();

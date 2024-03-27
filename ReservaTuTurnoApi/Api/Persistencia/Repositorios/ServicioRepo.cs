@@ -16,10 +16,10 @@ public class ServicioRepo : RepositorioABM<Servicio>, IServicioRepo
         return Context.Set<Servicio>().Include(x => x.ProfesionalesQueLoBrindan).AsQueryable();
     }
     
-    protected override void AntesDeModificar(Servicio entidadAnterior, Servicio entidadNueva)
+    protected override void DespuesDeModificar(Servicio entidadAnterior, Servicio entidadNueva)
     {
         EliminarRelacionesBorradas(entidadAnterior, entidadNueva);
-        AgregarRelacionesCreadas(entidadAnterior, entidadNueva);
+        // AgregarRelacionesCreadas(entidadAnterior, entidadNueva);
     }
 
     private void EliminarRelacionesBorradas(Servicio entidadAnterior, Servicio entidadNueva)
@@ -28,8 +28,9 @@ public class ServicioRepo : RepositorioABM<Servicio>, IServicioRepo
         
         var serviciosDelProfesionalAEliminar = entidadAnterior.ProfesionalesQueLoBrindan
             .Where(n => !idsEntidadNueva.Contains(n.ProfesionalId));
-        
-        Context.ServiciosDelProfesional.RemoveRange(serviciosDelProfesionalAEliminar);
+
+        foreach (var servicio in serviciosDelProfesionalAEliminar) 
+            Context.Entry(servicio).State = EntityState.Deleted;
     }
     
     private void AgregarRelacionesCreadas(Servicio entidadAnterior,Servicio entidadNueva)

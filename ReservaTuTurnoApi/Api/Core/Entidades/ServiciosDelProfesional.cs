@@ -10,5 +10,5 @@ public class ServiciosDelProfesional : Entidad
     
     public int? Precio { get; set; }
     public int? DuracionDelTurnoEnMinutos { get; set; }
-    public virtual ICollection<Agenda> Agendas { get; set; }
+    public virtual ICollection<AgendaServiciosDelProfesional> Agendas { get; set; }
 }

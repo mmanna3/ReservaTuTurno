@@ -10,6 +10,10 @@ interface IDiaCheckbox {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
+interface IProps {
+  parentName: string;
+}
+
 function DiaCheckbox(props: IDiaCheckbox) {
   return (
     <div className="mb-[0.125rem] flex min-h-[1.5rem] flex-col">
@@ -27,19 +31,44 @@ function DiaCheckbox(props: IDiaCheckbox) {
   );
 }
 
-const DiasDeLaSemana = () => {
-  const { setValue } = useFormContext();
+function getDiasSeleccionadosFromBitwise(
+  bitwiseValue: number,
+): DiaDeLaSemana[] {
+  const selectedDias: DiaDeLaSemana[] = [];
+
+  // Loop through each day in the enum, checking for bitwise match
+  for (const dia in DiaDeLaSemana) {
+    if (Object.prototype.hasOwnProperty.call(DiaDeLaSemana, dia)) {
+      const diaValue = (DiaDeLaSemana as any)[dia]; // Access enum value
+      if ((bitwiseValue & diaValue) !== 0) {
+        // Check for bitwise presence
+        selectedDias.push(diaValue); // Add matching day to array
+      }
+    }
+  }
+
+  return selectedDias;
+}
+
+const DiasDeLaSemana = (props: IProps) => {
+  const { setValue, getValues } = useFormContext();
 
   const [diasSeleccionados, setDiasSeleccionados] = useState<DiaDeLaSemana[]>(
     [],
   );
 
   useEffect(() => {
-    setValue(
-      "dias",
-      diasSeleccionados.reduce((acc, dia) => acc | dia, 0),
-    );
-  }, [diasSeleccionados, setValue]);
+    const a = getValues(`${props.parentName}.dias`);
+    setDiasSeleccionados(getDiasSeleccionadosFromBitwise(a));
+  }, []);
+
+  useEffect(() => {
+    if (diasSeleccionados.length > 0)
+      setValue(
+        `${props.parentName}.dias`,
+        diasSeleccionados.reduce((acc, dia) => acc | dia, 0),
+      );
+  }, [diasSeleccionados, props.parentName, setValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const diaSeleccionado =

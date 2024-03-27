@@ -5,11 +5,7 @@ import { api } from "../../../api/api";
 import { AgendaDTO } from "../../../api/clients";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
-import FormHiddenInput from "../../../components/FormHiddenInput";
 import Titulo from "../../../components/Titulo";
-import AgendaServicios from "./AgendaServicios";
-import DiasDeLaSemana from "./DiasDeLaSemanaCheckboxs";
-import { FranjasHorarias } from "./FranjasHorarias";
 
 const Agenda = () => {
   const navigate = useNavigate();
@@ -57,13 +53,7 @@ const Agenda = () => {
       <div className="w-full">
         <Form<AgendaDTO> onSubmit={onSubmit}>
           <Titulo>Agenda</Titulo>
-          <FormHiddenInput<AgendaDTO>
-            name="profesionalId"
-            value={profesionalId as string}
-          />
-          <DiasDeLaSemana />
-          <FranjasHorarias />
-          <AgendaServicios />
+          {/* <UnaAgenda agenda={undefined} /> */}
           <input
             type="submit"
             className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
