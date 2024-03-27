@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
@@ -6,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
+import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
@@ -47,10 +47,9 @@ const EditarServicio = () => {
     error,
     isFetching,
     isLoading,
-  } = useQuery({
-    queryKey: ["servicio-" + id],
-    queryFn: async () => await api.servicioGET(Number(id)),
-    throwOnError: true,
+  } = useApiQuery({
+    key: "servicio-" + id,
+    fn: async () => await api.servicioGET(Number(id)),
   });
 
   const { mutation } = useApiMutation<ServicioDTO>({
