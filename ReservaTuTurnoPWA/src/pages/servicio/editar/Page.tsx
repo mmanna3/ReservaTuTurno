@@ -1,10 +1,11 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
+import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
@@ -21,6 +22,16 @@ function seRepitenProfesionales(
   );
   return profesionalesQueLoBrindan.length !== duplicadosEliminados.size;
 }
+
+const arreglarInstanciasDTOs = (servicio: ServicioDTO) => {
+  if (Array.isArray(servicio.profesionalesQueLoBrindan)) {
+    const instancias = servicio.profesionalesQueLoBrindan.map(
+      (x) => new ServiciosDelProfesionalDTO(x),
+    );
+    servicio.profesionalesQueLoBrindan = instancias;
+  }
+  return servicio;
+};
 
 const EditarServicio = () => {
   // hay que controlar mejor los errores de los get
@@ -42,36 +53,19 @@ const EditarServicio = () => {
     throwOnError: true,
   });
 
-  const mutation = useMutation({
-    throwOnError: true,
-    mutationFn: async (servicio: ServicioDTO) => {
-      try {
-        if (Array.isArray(servicio.profesionalesQueLoBrindan)) {
-          const instancias = servicio.profesionalesQueLoBrindan.map(
-            (x) => new ServiciosDelProfesionalDTO(x),
-          );
-          servicio.profesionalesQueLoBrindan = instancias;
-        }
-        await api.servicioPUT(Number(id), servicio);
-      } catch (error) {
-        console.log("Error en Request", error);
-        throw new Error("Error en el servidor");
-      }
-    },
-    onError: (error) => console.log("Error mutation:", error.message),
-    onSuccess: () => console.log("Guardado"),
+  const { mutation } = useApiMutation<ServicioDTO>({
+    fn: (servicio: ServicioDTO) =>
+      api.servicioPUT(Number(servicio.id), servicio),
   });
 
-  const onSubmit: SubmitHandler<ServicioDTO> = (data) => {
-    try {
-      if (seRepitenProfesionales(data.profesionalesQueLoBrindan)) {
-        setErrorDosProfesionales("Hay profesionales repetidos.");
-        return;
-      }
-      mutation.mutate(data);
-    } catch (error) {
-      console.error(error);
+  const onSubmit: SubmitHandler<ServicioDTO> = (servicio) => {
+    if (seRepitenProfesionales(servicio.profesionalesQueLoBrindan)) {
+      setErrorDosProfesionales("Hay profesionales repetidos.");
+      return;
     }
+    servicio = arreglarInstanciasDTOs(servicio);
+
+    mutation.mutate(servicio);
   };
 
   return (
@@ -100,19 +94,9 @@ const EditarServicio = () => {
             type="submit"
             className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
             value="Guardar cambios"
+            disabled={mutation.isPending}
           />
         </Form>
-      </div>
-      <div>
-        {mutation.isPending ? (
-          "Adding todo..."
-        ) : (
-          <>
-            {mutation.isSuccess ? (
-              <div>Servicio editado correctamente</div>
-            ) : null}
-          </>
-        )}
       </div>
     </ContenidoConSpinnerYError>
   );
