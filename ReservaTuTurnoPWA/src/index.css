@@ -23,6 +23,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+input[type="date"] {
+  display: block;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+}
+
 /* a {
   font-weight: 500;
   color: #646cff;
