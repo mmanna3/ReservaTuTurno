@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-// import { UserPlus } from "solar-icon-set";
 import { ServicioDTO } from "../../api/clients";
 
 interface IProps {

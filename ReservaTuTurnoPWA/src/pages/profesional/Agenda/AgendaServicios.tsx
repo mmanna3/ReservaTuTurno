@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Option } from "react-dropdown";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { CloseCircle } from "solar-icon-set";
+import { XCircleIcon } from "@heroicons/react/24/outline";
 import { api } from "../../../api/api";
 import {
   AgendaServiciosDelProfesionalDTO,
@@ -136,7 +136,7 @@ const AgendaServicios = (props: IProps) => {
                   }
                 </p>
                 <div className="ml-1 mt-[0.1rem]">
-                  <CloseCircle size={18} />
+                  <XCircleIcon className="text-grisclaro h-4 w-4" />
                 </div>
               </button>
               <input

@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { AltArrowLeft } from "solar-icon-set";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 export function Header() {
   const navigate = useNavigate();
 
   return (
     <div className="mb-1 grid h-16 content-center pl-10">
-      <AltArrowLeft size={24} color="black" onClick={() => navigate(-1)} />
+      <ChevronLeftIcon className="h-6 w-6 text-gris" onClick={() => navigate(-1)} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { TrashBinMinimalistic } from "solar-icon-set";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { FranjaHorariaDTO } from "../../../api/clients";
 import FormHiddenInput from "../../../components/FormHiddenInput";
 import Input from "../../../components/Input";
@@ -55,7 +55,7 @@ export function FranjasHorarias(props: IProps) {
           </div>
           <div className="ml-2 mr-1 mt-8 flex items-center">
             <button onClick={() => remove(index)} type="button">
-              <TrashBinMinimalistic size={22} color="#1f2937" />
+              <TrashIcon className="w-5 h-5 text-negro" />
             </button>
           </div>
         </div>
