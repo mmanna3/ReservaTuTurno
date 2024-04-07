@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="TestsDeIntegracion" />
     <Folder Include="Api\" />
   </ItemGroup>
 
