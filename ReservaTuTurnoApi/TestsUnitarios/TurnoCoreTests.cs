@@ -13,6 +13,7 @@ public class TurnoCoreTests
     private Mock<IBDVirtual> _bdVirtual = null!;
     private Mock<ITurnoRepo> _repo = null!;
     private Mock<IMapper> _mapper = null!;
+    private Mock<IAgendaCore> _agendaCore = null!;
     
     [SetUp]
     public void Setup()
@@ -20,8 +21,9 @@ public class TurnoCoreTests
         _bdVirtual = new Mock<IBDVirtual>();
         _repo = new Mock<ITurnoRepo>();
         _mapper = new Mock<IMapper>();
+        _agendaCore = new Mock<IAgendaCore>();
 
-        _core = new TurnoCore(_bdVirtual.Object, _repo.Object, _mapper.Object);
+        _core = new TurnoCore(_bdVirtual.Object, _repo.Object, _mapper.Object, _agendaCore.Object);
     }
 
     [Test]

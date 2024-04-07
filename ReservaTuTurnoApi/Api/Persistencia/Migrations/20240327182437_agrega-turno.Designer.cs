@@ -13,7 +13,7 @@ namespace Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20240327182437_agrega-turno")]
-    partial class agregaturno
+    partial class AgregaTurno
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
