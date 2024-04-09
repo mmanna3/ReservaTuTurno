@@ -17,7 +17,16 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
 
     public IList<TurnosPorDia> ObtenerTurnosLibres(Profesional? profesional, Servicio? servicio, DateOnly fechaDesde, DateOnly fechaHasta)
     {
-        _agendaCore.Obtener(profesional, servicio);
+        // recibir los ids, no las entidades
+        // Validar que fechaDesde y fechaHasta sean futuras
+        // Validar que fechaHasta sea mayor a fechaDesde
+        
+        // Get profesional, si no existe, excepción
+        // Get servicio, si no existe, excepción
+        _agendaCore.Obtener(profesional, servicio); // esto devuelve las agendas pertinentes
+        // Obtener los turnos para el rango de fechas
+        // ObtenerTurnosPosiblesParaElRango(agendas, desde, hasta) // devuelve IList<TurnosPorDia>
+        // QuitarTurnosOcupados(turnosPosibles, turnosOcupados) // devuelve IList<TurnosPorDia>
         
         return new List<TurnosPorDia>();
     }
