@@ -1,5 +1,6 @@
 using System.Collections;
 using Api.Core.Entidades;
+using Api.Core.Otros;
 using Api.Core.Repositorios;
 using Api.Persistencia._Config;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
     public async Task<List<Agenda>> Obtener(Profesional? profesional, Servicio? servicio)
     {
         if (servicio == null && profesional == null)
-            throw new Exception("Tiene que haber profesional o servicio");
+            throw new ExcepcionControlada("Tiene que haber profesional o servicio");
         
         if (servicio == null)
             return await Context.Agendas.Where(x => x.ProfesionalId == profesional!.Id).ToListAsync();

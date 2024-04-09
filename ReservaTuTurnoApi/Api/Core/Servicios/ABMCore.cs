@@ -1,5 +1,6 @@
 using Api.Core.DTOs;
 using Api.Core.Entidades;
+using Api.Core.Otros;
 using Api.Core.Repositorios;
 using Api.Core.Servicios.Interfaces;
 using AutoMapper;
@@ -50,11 +51,11 @@ public abstract class ABMCore<TRepo, TEntidad, TDTO> : ICoreABM<TDTO>
     {
         var entidadAnterior = await Repo.ObtenerPorId(id);
         if (entidadAnterior == null)
-            throw new KeyNotFoundException();
+            throw new ExcepcionControlada("No existe la entidad a modificar");
 
         var entidadNueva = Mapper.Map<TEntidad>(nuevo);
         if (entidadNueva == null)
-            throw new AutoMapperMappingException();
+            throw new ExcepcionControlada("Hubo un problema mapeando la entidad");
         
         Repo.Modificar(entidadAnterior, entidadNueva);
         await BDVirtual.GuardarCambios();
