@@ -25,8 +25,10 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
         if (profesional == null)
             return await Context.Agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio.Id)).ToListAsync();
         
-        var servicioDelProfesional = Context.Set<ServiciosDelProfesional>().Where(x => x.ProfesionalId == profesional.Id && x.ServicioId == servicio.Id);
-        return await servicioDelProfesional.SelectMany(x => x.Agendas.Select(a => a.Agenda)).ToListAsync();
+        var agendasDelProfesional = Context.Agendas.Where(x => x.ProfesionalId == profesional.Id);
+        var agendasDelProfesionalConElServicio = agendasDelProfesional.Where(x =>
+            x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio.Id));
+        return await agendasDelProfesionalConElServicio.ToListAsync();
     }
     
     protected override IQueryable<Agenda> Set()
