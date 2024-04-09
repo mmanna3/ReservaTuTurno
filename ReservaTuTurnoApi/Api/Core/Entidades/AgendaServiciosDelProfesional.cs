@@ -3,8 +3,8 @@ namespace Api.Core.Entidades;
 public class AgendaServiciosDelProfesional : Entidad
 {
     public ServiciosDelProfesional ServicioDelProfesional { get; set; }
-    public int ServicioDelProfesionalId { get; set; }
+    public required int ServicioDelProfesionalId { get; set; }
     
-    public Agenda Agenda { get; set; } 
-    public int AgendaId { get; set; }
+    public virtual Agenda Agenda { get; set; } 
+    public required int AgendaId { get; set; }
 }

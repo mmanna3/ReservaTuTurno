@@ -37,16 +37,4 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
                 .ThenInclude(x => x.Servicio)
             .AsQueryable();
     }
-    
-    protected override void AntesDeCrear(Agenda entidad)
-    {
-        var servicios = entidad.Servicios;
-        entidad.Servicios = new List<AgendaServiciosDelProfesional>();
-        foreach (var servicio in servicios)
-        {
-            // var servicioDelProfesional = Context.AgendaServiciosDelProfesional.Where(x => xservicio.Id);
-            // if (servicioDelProfesional != null) 
-            //     entidad.Servicios.Add(servicioDelProfesional);
-        }
-    }
 }
