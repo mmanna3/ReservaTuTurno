@@ -30,6 +30,9 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+    builder.Services.AddProblemDetails();
+    
     var app = builder.Build();
     
     if (app.Environment.IsDevelopment())
@@ -50,6 +53,8 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
+    
+    app.UseExceptionHandler();
     
     // Esto es por si hay problema ejecutando las migraciones en una nueva instancia
     // using (var scope = app.Services.CreateScope())
