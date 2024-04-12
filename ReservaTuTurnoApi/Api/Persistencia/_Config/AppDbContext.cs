@@ -19,6 +19,7 @@ public class AppDbContext : DbContext
     }
     
     public DbSet<Servicio> Servicios { get; set; } = null!;
+    public DbSet<CategoriaDeServicio> CategoriasDeServicios { get; set; } = null!;
     public DbSet<Profesional> Profesionales { get; set; } = null!;
     public DbSet<ServiciosDelProfesional> ServiciosDelProfesional { get; set; } = null!;
     public DbSet<Agenda> Agendas { get; set; } = null!;

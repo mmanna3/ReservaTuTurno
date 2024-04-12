@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Api.TestsDeIntegracion;
+namespace Api.TestsDeIntegracion._Config;
 
 public class CustomWebApplicationFactory<TProgram>
     : WebApplicationFactory<TProgram> where TProgram : class
