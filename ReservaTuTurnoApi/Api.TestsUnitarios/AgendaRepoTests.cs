@@ -1,6 +1,7 @@
 using Api.Core.Enums;
 using Api.Core.Otros;
 using Api.Persistencia.Repositorios;
+using Api.TestsUtilidades;
 
 namespace Api.TestsUnitarios;
 
@@ -13,28 +14,6 @@ public class AgendaRepoTests : BaseRepoTests
     {
         _repo = new AgendaRepo(Context);
         _utilidades = new Utilidades(Context);
-    }
-
-    // Este está raro, está testeando la utilidad, no el repo
-    [Fact]
-    public async Task Crea_Correctamente_ConTodasLasRelaciones()
-    {
-        var profesional = _utilidades.DadoQueExisteUnProfesional();
-        var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
-        var servicio = _utilidades.DadoQueExisteElServicio(categoria.Id, profesional.Id);
-        var agenda = _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "18:00");
-        
-        await Context.SaveChangesAsync();
-        
-        var agendaRecuperadaDeLaBase = await _repo.ObtenerPorId(agenda.Id);
-
-        if (agendaRecuperadaDeLaBase != null)
-        {
-            Assert.Equal(agenda.Id, agendaRecuperadaDeLaBase.Id);
-            Assert.Equal(agenda.Dias, agendaRecuperadaDeLaBase.Dias);
-            Assert.Equal(agenda.FranjasHorarias.Count, agendaRecuperadaDeLaBase.FranjasHorarias.Count);
-            Assert.Equal(agenda.Servicios.Count, agendaRecuperadaDeLaBase.Servicios.Count);
-        }
     }
 
     [Fact]

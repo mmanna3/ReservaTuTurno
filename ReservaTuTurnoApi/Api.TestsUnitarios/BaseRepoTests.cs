@@ -5,7 +5,7 @@ namespace Api.TestsUnitarios;
 
 public abstract class BaseRepoTests 
 {
-    protected AppDbContext Context;
+    protected readonly AppDbContext Context;
 
     protected BaseRepoTests()
     {

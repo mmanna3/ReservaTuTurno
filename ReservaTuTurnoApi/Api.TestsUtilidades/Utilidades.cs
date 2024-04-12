@@ -2,7 +2,7 @@ using Api.Core.Entidades;
 using Api.Core.Enums;
 using Api.Persistencia._Config;
 
-namespace Api.TestsUnitarios;
+namespace Api.TestsUtilidades;
 
 public class Utilidades
 {
