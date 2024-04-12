@@ -20,12 +20,12 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
             throw new ExcepcionControlada("Tiene que haber profesional o servicio");
         
         if (servicio == null)
-            return await Context.Agendas.Where(x => x.ProfesionalId == profesional!.Id).ToListAsync();
+            return await Context.Agendas.Where(x => x.ProfesionalId == profesional!.Id).Include(x => x.FranjasHorarias).ToListAsync();
         
         if (profesional == null)
-            return await Context.Agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio.Id)).ToListAsync();
+            return await Context.Agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio.Id)).Include(x => x.FranjasHorarias).ToListAsync();
         
-        var agendasDelProfesional = Context.Agendas.Where(x => x.ProfesionalId == profesional.Id);
+        var agendasDelProfesional = Context.Agendas.Where(x => x.ProfesionalId == profesional.Id).Include(x => x.FranjasHorarias);
         var agendasDelProfesionalConElServicio = agendasDelProfesional.Where(x =>
             x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio.Id));
         return await agendasDelProfesionalConElServicio.ToListAsync();

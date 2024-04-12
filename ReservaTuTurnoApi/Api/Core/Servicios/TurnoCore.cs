@@ -5,6 +5,7 @@ using Api.Core.Otros;
 using Api.Core.Repositorios;
 using Api.Core.Servicios.Interfaces;
 using AutoMapper;
+using NuGet.Packaging;
 
 namespace Api.Core.Servicios;
 
@@ -42,20 +43,48 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
 
     private List<TurnosPorDia> GenerarTurnosPosibles(IList<Agenda> agendas, Servicio servicio, DateOnly fechaDesde, DateOnly fechaHasta)
     {
+        var result = new List<TurnosPorDia>();
         foreach (var dia in DiasEntre(fechaDesde, fechaHasta))
         {
             var diaDeLaSemana = dia.DayOfWeek.ToDiaDeLaSemana();
-            var agendasQueIncluyenElDia = agendas.Where(x => x.Dias.HasFlag(diaDeLaSemana))
-                                            .OrderByDescending(x => x.FranjasHorarias.Select(f => f.Desde));
+            var agendasQueIncluyenElDia = agendas.Where(x => x.Dias.HasFlag(diaDeLaSemana));
+            // .OrderByDescending(x => x.FranjasHorarias.Select(f => f.Desde));
 
-            foreach (var agenda in agendasQueIncluyenElDia)
-            {
-                
-            }
+            var turnosDelDia = new TurnosPorDia{Dia = dia, Horarios = new List<TimeOnly>()};
             
+            foreach (var agenda in agendasQueIncluyenElDia) // Tengo que estar muy seguro que las agendas no se pisan
+            {
+                foreach (var franja in agenda.FranjasHorarias)
+                {
+                    // Duración sí o sí tiene que tener valor en alguno
+                    // var duracion = (int)(agenda.Servicios.First(x => x.Id == servicio.Id).ServicioDelProfesional.Servicio.DuracionDelTurnoPorDefectoEnMinutos ??
+                    //                  servicio.DuracionDelTurnoPorDefectoEnMinutos)!;
+                    
+                    var duracion = 30;
+                    
+                    var horariosPosibles = GenerarHorariosPosibles(franja.Desde, franja.Hasta, duracion);
+                    turnosDelDia.Horarios.AddRange(horariosPosibles); 
+                }
+            }
+
+            result.Add(turnosDelDia);
         }
+
+        return result;
+    }
+
+    private List<TimeOnly> GenerarHorariosPosibles(TimeOnly desde, TimeOnly hasta, int duracion)
+    {
+        var result = new List<TimeOnly>();
         
-        throw new NotImplementedException();
+        var proximoHorario = desde;
+        while (proximoHorario < hasta)
+        {
+            result.Add(proximoHorario);
+            proximoHorario = proximoHorario.AddMinutes(duracion);
+        }
+
+        return result;
     }
 
     private static IEnumerable<DateOnly> DiasEntre(DateOnly desde, DateOnly hasta)

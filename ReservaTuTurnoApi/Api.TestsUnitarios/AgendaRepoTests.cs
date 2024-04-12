@@ -30,8 +30,8 @@ public class AgendaRepoTests : BaseRepoTests
         var profesional = _utilidades.DadoQueExisteUnProfesional();
         var profesional2 = _utilidades.DadoQueExisteUnProfesional();
         var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
-        var servicio = _utilidades.DadoQueExisteElServicio(categoria.Id, profesional.Id);
-        var servicio2 = _utilidades.DadoQueExisteElServicio(categoria.Id, profesional.Id);
+        var servicio = _utilidades.DadoQueExisteElServicio(categoria, profesional);
+        var servicio2 = _utilidades.DadoQueExisteElServicio(categoria, profesional);
         
         var agenda1 = _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "18:00");
         var agenda2 = _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Marte | DiaDeLaSemana.Jueves, "10:00", "13:00");
@@ -54,8 +54,8 @@ public class AgendaRepoTests : BaseRepoTests
         var profesional = _utilidades.DadoQueExisteUnProfesional();
         var profesional2 = _utilidades.DadoQueExisteUnProfesional();
         var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
-        var servicio1 = _utilidades.DadoQueExisteElServicio(categoria.Id, profesional.Id);
-        var servicio2 = _utilidades.DadoQueExisteElServicio(categoria.Id, profesional.Id);
+        var servicio1 = _utilidades.DadoQueExisteElServicio(categoria, profesional);
+        var servicio2 = _utilidades.DadoQueExisteElServicio(categoria, profesional);
         
         var agenda1 = _utilidades.DadoQueExisteLaAgenda(profesional, servicio1, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "18:00");
         _utilidades.DadoQueExisteLaAgenda(profesional, servicio2, DiaDeLaSemana.Marte | DiaDeLaSemana.Jueves, "10:00", "13:00");
@@ -76,8 +76,8 @@ public class AgendaRepoTests : BaseRepoTests
         var profesional1 = _utilidades.DadoQueExisteUnProfesional();
         var profesional2 = _utilidades.DadoQueExisteUnProfesional();
         var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
-        var servicio1 = _utilidades.DadoQueExisteElServicio(categoria.Id, profesional1.Id);
-        var servicio2 = _utilidades.DadoQueExisteElServicio(categoria.Id, profesional1.Id);
+        var servicio1 = _utilidades.DadoQueExisteElServicio(categoria, profesional1);
+        var servicio2 = _utilidades.DadoQueExisteElServicio(categoria, profesional1);
         
         var agenda1 = _utilidades.DadoQueExisteLaAgenda(profesional1, servicio1, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "18:00");
         _utilidades.DadoQueExisteLaAgenda(profesional1, servicio2, DiaDeLaSemana.Marte | DiaDeLaSemana.Jueves, "10:00", "13:00");

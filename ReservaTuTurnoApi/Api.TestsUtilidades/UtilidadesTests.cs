@@ -29,7 +29,7 @@ public class UtilidadesTests
     {
         var profesional = _utilidades.DadoQueExisteUnProfesional();
         var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
-        var servicio = _utilidades.DadoQueExisteElServicio(categoria.Id, profesional.Id);
+        var servicio = _utilidades.DadoQueExisteElServicio(categoria, profesional);
         var agenda = _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "18:00");
         
         await _context.SaveChangesAsync();

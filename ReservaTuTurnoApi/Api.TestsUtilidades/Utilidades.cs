@@ -25,7 +25,7 @@ public class Utilidades
         return categoriaDeServicio;
     }
     
-    public Servicio DadoQueExisteElServicio(int categoriaId, int profesionalId)
+    public Servicio DadoQueExisteElServicio(CategoriaDeServicio categoria, Profesional profesional)
     {
         var servicio = new Servicio
         {
@@ -33,10 +33,11 @@ public class Utilidades
             Nombre = "Recorte simple",
             ProfesionalesQueLoBrindan = new List<ServiciosDelProfesional>{new()
                 {
-                    Id = 0, ProfesionalId = profesionalId
+                    Id = 0, ProfesionalId = 0, Profesional = profesional, DuracionDelTurnoEnMinutos = 30
                 }
             },
-            CategoriaDeServicioId = categoriaId
+            CategoriaDeServicio = categoria,
+            CategoriaDeServicioId = categoria.Id
         };
         
         _context.Add(servicio);
