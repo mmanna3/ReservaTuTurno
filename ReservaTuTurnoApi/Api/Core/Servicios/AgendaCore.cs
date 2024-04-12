@@ -14,8 +14,8 @@ public class AgendaCore : ABMCore<IAgendaRepo, Agenda, AgendaDTO>, IAgendaCore
         _repo = repo;
     }
 
-    public async Task<IList<Agenda>> Obtener(Profesional? profesional, Servicio? servicio)
+    public async Task<IList<Agenda>> Listar(Profesional? profesional, Servicio? servicio)
     {
-        return await _repo.Obtener(profesional, servicio);
+        return await _repo.Listar(profesional, servicio);
     }
 }

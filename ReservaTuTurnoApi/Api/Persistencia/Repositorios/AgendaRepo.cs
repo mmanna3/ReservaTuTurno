@@ -14,7 +14,7 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
     }
 
     // ReSharper disable once ConvertIfStatementToSwitchStatement
-    public async Task<List<Agenda>> Obtener(Profesional? profesional, Servicio? servicio)
+    public async Task<List<Agenda>> Listar(Profesional? profesional, Servicio? servicio)
     {
         if (servicio == null && profesional == null)
             throw new ExcepcionControlada("Tiene que haber profesional o servicio");

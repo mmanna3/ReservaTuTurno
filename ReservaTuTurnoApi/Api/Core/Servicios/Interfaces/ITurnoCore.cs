@@ -5,6 +5,6 @@ namespace Api.Core.Servicios.Interfaces;
 
 public interface ITurnoCore : ICoreABM<TurnoDTO>
 {
-    IList<TurnosPorDia> ObtenerTurnosLibres(Profesional? profesional, Servicio? servicio, DateOnly fechaDesde,
+    public Task<IList<TurnosPorDia>> ListarTurnosLibres(int profesionalId, int servicioId, DateOnly fechaDesde,
         DateOnly fechaHasta);
 }

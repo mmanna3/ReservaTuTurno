@@ -39,7 +39,7 @@ public class AgendaRepoTests : BaseRepoTests
     [Fact]
     public async Task Obtener_SinServicioNiProfesional_TiraExcepcion()
     {
-        Func<Task> act = () => _repo.Obtener(null, null);
+        Func<Task> act = () => _repo.Listar(null, null);
         
         await Assert.ThrowsAsync<ExcepcionControlada>(act);
     }
@@ -59,7 +59,7 @@ public class AgendaRepoTests : BaseRepoTests
         
         await CrearUnaAgenda(profesional2, servicio, DiaDeLaSemana.Marte | DiaDeLaSemana.Jueves, "10:00", "13:00");
 
-        var agendas = await _repo.Obtener(profesional, null);
+        var agendas = await _repo.Listar(profesional, null);
         var agendasIds = agendas.Select(x => x.Id).ToList();
         
         Assert.Equal(3, agendas.Count);
@@ -82,7 +82,7 @@ public class AgendaRepoTests : BaseRepoTests
         await CrearUnaAgenda(profesional, servicio2, DiaDeLaSemana.Sabado, "10:00", "13:00");
         var agendaEntity4 = await CrearUnaAgenda(profesional2, servicio1, DiaDeLaSemana.Marte | DiaDeLaSemana.Jueves, "10:00", "13:00");
 
-        var agendas = await _repo.Obtener(null, servicio1);
+        var agendas = await _repo.Listar(null, servicio1);
         var agendasIds = agendas.Select(x => x.Id).ToList();
         
         Assert.Equal(2, agendas.Count);
@@ -107,7 +107,7 @@ public class AgendaRepoTests : BaseRepoTests
         await CrearUnaAgenda(profesional2, servicio1, DiaDeLaSemana.Marte | DiaDeLaSemana.Jueves, "10:00", "13:00");
         var agendaEntity5 = await CrearUnaAgenda(profesional1, servicio1, DiaDeLaSemana.Domingo, "09:00", "18:00");
 
-        var agendas = await _repo.Obtener(profesional1, servicio1);
+        var agendas = await _repo.Listar(profesional1, servicio1);
         var agendasIds = agendas.Select(x => x.Id).ToList();
         
         Assert.Equal(2, agendas.Count);
