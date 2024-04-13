@@ -20,9 +20,9 @@ namespace Api.Api.Controllers
         // }
         
         [HttpGet, Route("ListarTurnosLibres")]
-        public async Task<ActionResult<IEnumerable<TurnosPorDia>>> ListarTurnosLibres(int? profesionalId, int? servicioId,
-            string? fechaDesde,
-            string? fechaHasta)
+        public async Task<ActionResult<IEnumerable<TurnosPorDia>>> ListarTurnosLibres(int? profesionalId, int servicioId,
+            string fechaDesde,
+            string fechaHasta)
         {
             DateOnly desdeDate;
             DateOnly hastaDate;
@@ -38,7 +38,7 @@ namespace Api.Api.Controllers
             }
             
             
-            var result = await Core.ListarTurnosLibres((int)profesionalId, (int)servicioId, desdeDate, hastaDate);
+            var result = await Core.ListarTurnosLibres(profesionalId, servicioId, desdeDate, hastaDate);
         
             return Ok(result);
         }
