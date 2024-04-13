@@ -4,6 +4,7 @@ using Api.Persistencia._Config;
 using Api.TestsDeIntegracion._Config;
 using Api.TestsUtilidades;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Api.TestsDeIntegracion;
 public class TurnoApiTests : TestBase
@@ -36,12 +37,12 @@ public class TurnoApiTests : TestBase
     [Fact]
     public async Task ListarTurnosLibres_Funciona()
     {
-        
-        
         var client = Factory.CreateClient();
         
         var response = await client.GetAsync($"/api/turno/ListarTurnosLibres?profesionalId=1&servicioId=1&fechaDesde=2024-01-01&fechaHasta=2024-01-15");
         // var response = await client.GetAsync($"/api/turno/ListarTurnosLibres");
+        
+        var contentString = JsonConvert.DeserializeObject<List<TurnosPorDia>>(await response.Content.ReadAsStringAsync());
         
         response.EnsureSuccessStatusCode();
     }

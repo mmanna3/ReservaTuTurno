@@ -14,21 +14,28 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
     }
 
     // ReSharper disable once ConvertIfStatementToSwitchStatement
-    public async Task<List<Agenda>> Listar(Profesional? profesional, Servicio? servicio)
+    public async Task<List<Agenda>> Listar(Profesional? profesional, Servicio servicio)
     {
+        IQueryable<Agenda> agendas;
         if (servicio == null && profesional == null)
             throw new ExcepcionControlada("Tiene que haber profesional o servicio");
         
         if (servicio == null)
-            return await Context.Agendas.Where(x => x.ProfesionalId == profesional!.Id).Include(x => x.FranjasHorarias).ToListAsync();
+            agendas = Context.Agendas.Where(x => x.ProfesionalId == profesional!.Id);
+        else if (profesional == null)
+            agendas = Context.Agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio!.Id));
+        else
+        {
+            agendas = Context.Agendas.Where(x => x.ProfesionalId == profesional.Id);
+            agendas = agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio!.Id));    
+        }
         
-        if (profesional == null)
-            return await Context.Agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio.Id)).Include(x => x.FranjasHorarias).ToListAsync();
-        
-        var agendasDelProfesional = Context.Agendas.Where(x => x.ProfesionalId == profesional.Id).Include(x => x.FranjasHorarias);
-        var agendasDelProfesionalConElServicio = agendasDelProfesional.Where(x =>
-            x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio.Id));
-        return await agendasDelProfesionalConElServicio.ToListAsync();
+        return await agendas
+            .Include(x => x.FranjasHorarias)
+            .Include(x => x.Servicios)
+                .ThenInclude(x => x.ServicioDelProfesional)
+                .ThenInclude(x => x.Servicio)
+            .ToListAsync();
     }
     
     protected override IQueryable<Agenda> Set()
