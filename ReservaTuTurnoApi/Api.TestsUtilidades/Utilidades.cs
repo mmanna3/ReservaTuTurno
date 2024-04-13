@@ -26,7 +26,7 @@ public class Utilidades
         return categoriaDeServicio;
     }
     
-    public Servicio DadoQueExisteElServicio(CategoriaDeServicio categoria, Profesional profesional)
+    public Servicio DadoQueExisteElServicio(CategoriaDeServicio categoria, Profesional profesional, int duracion)
     {
         var servicio = new Servicio
         {
@@ -34,7 +34,7 @@ public class Utilidades
             Nombre = "Recorte simple",
             ProfesionalesQueLoBrindan = new List<ServiciosDelProfesional>{new()
                 {
-                    Id = 0, ProfesionalId = 0, Profesional = profesional, DuracionDelTurnoEnMinutos = 30
+                    Id = 0, ProfesionalId = 0, Profesional = profesional, DuracionDelTurnoEnMinutos = duracion
                 }
             },
             CategoriaDeServicio = categoria,

@@ -5,11 +5,16 @@ using Api.TestsDeIntegracion._Config;
 using Api.TestsUtilidades;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+// ReSharper disable InconsistentNaming
 
 namespace Api.TestsDeIntegracion;
 public class TurnoApiTests : TestBase
 {
     private readonly Utilidades _utilidades;
+    
+    private readonly DateOnly DIA_DEL_TURNO_1 = new(2024, 01, 02);
+    private readonly TimeOnly HORA_DEL_TURNO_1 = new(9, 0);
+    private const int DURACION_DEL_TURNO = 30;
 
     public TurnoApiTests(CustomWebApplicationFactory<Program> factory) : base(factory)
     {
@@ -19,20 +24,15 @@ public class TurnoApiTests : TestBase
         _utilidades = new Utilidades(context);
         var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
         var profesional = _utilidades.DadoQueExisteUnProfesional();
-        var servicio = _utilidades.DadoQueExisteElServicio(categoria, profesional);
+        var servicio = _utilidades.DadoQueExisteElServicio(categoria, profesional, DURACION_DEL_TURNO);
         context.SaveChanges();
         
-        _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "18:00");
-        _utilidades.DadoQueExisteUnTurno(profesional.Id, servicio.Id, new DateOnly(2024, 01, 02), new TimeOnly(9, 0));
+        _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "13:00");
+        _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Lunes | DiaDeLaSemana.Jueves, "15:00", "20:00");
         
-        // SeedData();
+        _utilidades.DadoQueExisteUnTurno(profesional.Id, servicio.Id, DIA_DEL_TURNO_1, HORA_DEL_TURNO_1);
         
         context.SaveChanges();
-    }
-
-    private void SeedData()
-    {
-
     }
 
     [Fact]
@@ -45,5 +45,10 @@ public class TurnoApiTests : TestBase
         var content = JsonConvert.DeserializeObject<List<TurnosPorDia>>(await response.Content.ReadAsStringAsync());
         
         response.EnsureSuccessStatusCode();
+        
+        Assert.Equal(15, content!.Count);
+        var diaDelTurno = content.Single(x => x.Dia.Equals(DIA_DEL_TURNO_1));
+        Assert.DoesNotContain(HORA_DEL_TURNO_1, diaDelTurno.Horarios);
+        Assert.Contains(HORA_DEL_TURNO_1.AddMinutes(DURACION_DEL_TURNO), diaDelTurno.Horarios);
     }
 }
