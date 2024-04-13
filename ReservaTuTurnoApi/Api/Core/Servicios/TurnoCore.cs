@@ -41,7 +41,7 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
         return resultado;
     }
 
-    private List<TurnosPorDia> GenerarTurnosPosibles(IList<Agenda> agendas, Servicio servicio, DateOnly fechaDesde, DateOnly fechaHasta)
+    private static List<TurnosPorDia> GenerarTurnosPosibles(IList<Agenda> agendas, Servicio servicio, DateOnly fechaDesde, DateOnly fechaHasta)
     {
         var result = new List<TurnosPorDia>();
         foreach (var dia in DiasEntre(fechaDesde, fechaHasta))
@@ -70,7 +70,8 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
         return result;
     }
 
-    private List<TimeOnly> GenerarHorariosPosibles(TimeOnly desde, TimeOnly hasta, int duracion)
+    // ReSharper disable once ReturnTypeCanBeEnumerable.Local
+    private static List<TimeOnly> GenerarHorariosPosibles(TimeOnly desde, TimeOnly hasta, int duracion)
     {
         var result = new List<TimeOnly>();
         
@@ -90,8 +91,14 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
             yield return dia;
     }
     
-    private List<TurnosPorDia> QuitarTurnosOcupados(List<TurnosPorDia> turnosPosibles, List<Turno> turnosTomados)
+    private static List<TurnosPorDia> QuitarTurnosOcupados(List<TurnosPorDia> turnosPosibles, List<Turno> turnosTomados)
     {
+        foreach (var turnoTomado in turnosTomados)
+        {
+            var dia = turnosPosibles.Single(x => x.Dia == turnoTomado.Fecha);
+            dia.Horarios.Remove(turnoTomado.Hora);
+        }
+
         return turnosPosibles;
     }
 }

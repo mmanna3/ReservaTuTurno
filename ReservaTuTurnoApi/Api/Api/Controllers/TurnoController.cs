@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
 using Api.Core.DTOs;
 using Api.Core.Otros;
 using Api.Core.Servicios.Interfaces;
@@ -11,13 +10,6 @@ namespace Api.Api.Controllers
         public TurnoController(ITurnoCore core) : base(core)
         {
         }
-
-        // [HttpGet, Route("ListarTurnosLibres")]
-        // public async Task<ActionResult<IEnumerable<TurnosPorDia>>> ListarTurnosLibres()
-        // {
-        //
-        //     return Ok();
-        // }
         
         [HttpGet, Route("ListarTurnosLibres")]
         public async Task<ActionResult<IEnumerable<TurnosPorDia>>> ListarTurnosLibres(int? profesionalId, int servicioId,
@@ -36,7 +28,6 @@ namespace Api.Api.Controllers
             {
                 throw new ExcepcionControlada("Error en las fechas");
             }
-            
             
             var result = await Core.ListarTurnosLibres(profesionalId, servicioId, desdeDate, hastaDate);
         
