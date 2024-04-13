@@ -17,35 +17,13 @@ public class AgendaRepoTests : BaseRepoTests
     }
 
     [Fact]
-    public async Task Listar_SinServicioNiProfesional_TiraExcepcion()
-    {
-        Func<Task> act = () => _repo.Listar(null, null);
-        
-        await Assert.ThrowsAsync<ExcepcionControlada>(act);
-    }
-    
-    [Fact]
-    public async Task Listar_ConProfesionalYSinServicio_DevuelveTodasLasAgendasDelProfesional()
+    public async Task Listar_SinServicio_TiraExcepcion()
     {
         var profesional = _utilidades.DadoQueExisteUnProfesional();
-        var profesional2 = _utilidades.DadoQueExisteUnProfesional();
-        var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
-        var servicio = _utilidades.DadoQueExisteElServicio(categoria, profesional);
-        var servicio2 = _utilidades.DadoQueExisteElServicio(categoria, profesional);
         
-        var agenda1 = _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "18:00");
-        var agenda2 = _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Marte | DiaDeLaSemana.Jueves, "10:00", "13:00");
-        var agenda3 = _utilidades.DadoQueExisteLaAgenda(profesional, servicio2, DiaDeLaSemana.Sabado, "10:00", "13:00");
-        _utilidades.DadoQueExisteLaAgenda(profesional2, servicio, DiaDeLaSemana.Marte | DiaDeLaSemana.Jueves, "10:00", "13:00");
-        await Context.SaveChangesAsync();
+        Func<Task> act = () => _repo.Listar(profesional, null!);
         
-        var agendas = await _repo.Listar(profesional, null);
-        var agendasIds = agendas.Select(x => x.Id).ToList();
-        
-        Assert.Equal(3, agendas.Count);
-        Assert.Contains(agenda1.Id, agendasIds);
-        Assert.Contains(agenda2.Id, agendasIds);
-        Assert.Contains(agenda3.Id, agendasIds);
+        await Assert.ThrowsAsync<ExcepcionControlada>(act);
     }
     
     [Fact]
