@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace Api.TestsDeIntegracion;
 public class TurnoApiTests : TestBase
 {
-    private readonly Utilidades _utilidades;
+    private Utilidades _utilidades;
     
     private readonly DateOnly DIA_DEL_TURNO_1 = new(2024, 01, 02);
     private readonly TimeOnly HORA_DEL_TURNO_1 = new(9, 0);
@@ -21,6 +21,11 @@ public class TurnoApiTests : TestBase
         using var scope = Factory.Services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         
+        SeedData(context);
+    }
+
+    private void SeedData(AppDbContext context)
+    {
         _utilidades = new Utilidades(context);
         var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
         var profesional = _utilidades.DadoQueExisteUnProfesional();
