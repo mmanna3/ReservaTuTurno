@@ -13,7 +13,7 @@ environment:
   deploy_website:
     secure: RjlovvhfNwCqtGz5G8sg1vIF6BAY7ICmuiGmTtFjV/Y=
   db_server:
-    secure: K3tw1JJQqsF0zSckjLdOJg==
+    secure: GENtSiIHJlcMVdOs9CjeQw==
   db_name:
     secure: t+vaJXx7FxW8zs+EoSWKiX2FAp/4kl8Alb7m7n+oVP8=
   db_username:
