@@ -29,11 +29,11 @@ before_build:
   - dotnet --version
   - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
   # Ejecuta tests
-  # - cd ReservaTuTurnoApi
-  # - dotnet test -c Release
-  # # Lo limpia porque choca con el que va a publicar
-  # - dotnet clean 
-  # - cd ..
+  - cd ReservaTuTurnoApi
+  - dotnet test -c Release
+  # Lo limpia porque choca con el que va a publicar
+  - dotnet clean 
+  - cd ..
   # Para generar migraciones después
   - dotnet tool install dotnet-ef --global --version 8.0.0
   # Genera dtos a partir del backend
@@ -52,11 +52,11 @@ before_build:
   - cd ..
   - ps: >-
       Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
-build:
-  project: ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln
-  publish_wap: true
-  parallel: true
-  verbosity: minimal
+# build:
+#   project: ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln
+#   publish_wap: true
+#   parallel: true
+#   verbosity: minimal
 after_build:
   # Aplica migraciones pendientes
   - cd ReservaTuTurnoApi/Api
