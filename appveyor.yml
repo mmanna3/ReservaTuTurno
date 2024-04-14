@@ -41,7 +41,7 @@ before_build:
   - dotnet tool install nswag.consolecore -g
   - cd ReservaTuTurnoApi/Api
   - dotnet build --configuration Release --runtime win-x64
-  - swagger tofile --output swagger.json bin/Debug/net8.0/Api.dll v1
+  - swagger tofile --output swagger.json bin/Debug/net8.0/win-x64/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
   - cd ../..
   # Compila la PWA
