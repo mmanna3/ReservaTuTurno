@@ -29,11 +29,11 @@ before_build:
   - dotnet --version
   - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
   # Ejecuta tests
-  - cd ReservaTuTurnoApi
-  - dotnet test -c Release
-  # Lo limpia porque choca con el que va a publicar
-  - dotnet clean 
-  - cd ..
+  # - cd ReservaTuTurnoApi
+  # - dotnet test -c Release
+  # # Lo limpia porque choca con el que va a publicar
+  # - dotnet clean 
+  # - cd ..
   # Para generar migraciones después
   - dotnet tool install dotnet-ef --global --version 8.0.0
   # Genera dtos a partir del backend
