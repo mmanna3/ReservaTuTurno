@@ -28,6 +28,10 @@ before_build:
   # Restaura paquetes del back
   - dotnet --version
   - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
+  # Ejecuta tests
+  - cd ReservaTuTurnoApi
+  - dotnet test -c Release
+  - cd ..
   # Para generar migraciones después
   - dotnet tool install dotnet-ef --global --version 8.0.0
   # Genera dtos a partir del backend
