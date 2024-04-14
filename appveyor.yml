@@ -31,6 +31,8 @@ before_build:
   # Ejecuta tests
   - cd ReservaTuTurnoApi
   - dotnet test -c Release
+  # Lo limpia porque choca con el que va a publicar
+  - dotnet clean 
   - cd ..
   # Para generar migraciones después
   - dotnet tool install dotnet-ef --global --version 8.0.0
