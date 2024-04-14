@@ -1,4 +1,6 @@
+using System.Collections;
 using Api.Core.Entidades;
+using Api.Core.Otros;
 using Api.Core.Repositorios;
 using Api.Persistencia._Config;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,29 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
     public AgendaRepo(AppDbContext context) : base(context)
     {
     }
+
+    // ReSharper disable once ConvertIfStatementToSwitchStatement
+    public async Task<List<Agenda>> Listar(Profesional? profesional, Servicio servicio)
+    {
+        IQueryable<Agenda> agendas;
+        if (servicio == null)
+            throw new ExcepcionControlada("El servicio no puede ser null");
+
+        if (profesional == null)
+            agendas = Context.Agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio!.Id));
+        else
+        {
+            agendas = Context.Agendas.Where(x => x.ProfesionalId == profesional.Id);
+            agendas = agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio!.Id));    
+        }
+        
+        return await agendas
+            .Include(x => x.FranjasHorarias)
+            .Include(x => x.Servicios)
+                .ThenInclude(x => x.ServicioDelProfesional)
+                .ThenInclude(x => x.Servicio)
+            .ToListAsync();
+    }
     
     protected override IQueryable<Agenda> Set()
     {
@@ -19,17 +44,5 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
                 .ThenInclude(x => x.ServicioDelProfesional)
                 .ThenInclude(x => x.Servicio)
             .AsQueryable();
-    }
-    
-    protected override void AntesDeCrear(Agenda entidad)
-    {
-        var servicios = entidad.Servicios;
-        entidad.Servicios = new List<AgendaServiciosDelProfesional>();
-        foreach (var servicio in servicios)
-        {
-            // var servicioDelProfesional = Context.AgendaServiciosDelProfesional.Where(x => xservicio.Id);
-            // if (servicioDelProfesional != null) 
-            //     entidad.Servicios.Add(servicioDelProfesional);
-        }
     }
 }

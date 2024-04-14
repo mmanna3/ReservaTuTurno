@@ -8,5 +8,5 @@ public class Servicio : Entidad
     public int? DuracionDelTurnoPorDefectoEnMinutos { get; set; }
     public virtual ICollection<ServiciosDelProfesional> ProfesionalesQueLoBrindan { get; set; }
     public virtual CategoriaDeServicio CategoriaDeServicio { get; set; }
-    public int CategoriaDeServicioId { get; set; }
+    public required int CategoriaDeServicioId { get; set; }
 }

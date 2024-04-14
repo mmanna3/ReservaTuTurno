@@ -25,7 +25,7 @@ public abstract class RepositorioABM<TModel> : RepositorioBase, IRepositorioABM<
     public EntityEntry<TModel> Crear(TModel reserva)
     {
         AntesDeCrear(reserva);
-        return Context.Set<TModel>().Add(reserva);
+        return Context.Add(reserva);
     }
 
     public virtual async Task<TModel?> ObtenerPorId(int id)

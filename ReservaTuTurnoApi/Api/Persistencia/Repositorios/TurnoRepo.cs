@@ -17,5 +17,10 @@ public class TurnoRepo : RepositorioABM<Turno>, ITurnoRepo
             .Include(x => x.ServicioProfesional)
             .AsQueryable();
     }
-    
+
+    public Task<List<Turno>> Listar(Profesional profesional, DateOnly fechaDesde, DateOnly fechaHasta)
+    {
+        return Context.Turnos.Where(x =>
+            x.ServicioProfesional.ProfesionalId == profesional.Id && fechaDesde <= x.Fecha && x.Fecha <= fechaHasta).ToListAsync();
+    }
 }

@@ -26,10 +26,13 @@ try
     builder.Services.AddOpenApiDocument();
 
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+    builder.Services.AddProblemDetails();
+    
     var app = builder.Build();
     
     if (app.Environment.IsDevelopment())
@@ -51,6 +54,8 @@ try
 
     app.MapControllers();
     
+    app.UseExceptionHandler();
+    
     // Esto es por si hay problema ejecutando las migraciones en una nueva instancia
     // using (var scope = app.Services.CreateScope())
     // {
@@ -68,4 +73,8 @@ catch (Exception exception)
 finally
 {
     LogManager.Shutdown();
+}
+
+public partial class Program
+{
 }
