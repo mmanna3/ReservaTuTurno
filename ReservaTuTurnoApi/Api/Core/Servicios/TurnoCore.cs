@@ -28,8 +28,14 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
     public async Task<IList<TurnosPorDia>> ListarTurnosLibres(int? profesionalId, int servicioId, DateOnly fechaDesde,
         DateOnly fechaHasta)
     {
-        var profesional = await _profesionalRepo.ObtenerPorId((int)profesionalId); // ObtenerPorId debería tirar excepción?
+        Profesional? profesional = null;
+        if (profesionalId != null)
+            profesional = await _profesionalRepo.ObtenerPorId((int)profesionalId); // ObtenerPorId debería tirar excepción?
+        
         var servicio = await _servicioRepo.ObtenerPorId(servicioId);
+        if (servicio == null)
+            throw new ExcepcionControlada("El servicioId es incorrecto");
+        
         // Validar que fechaDesde y fechaHasta sean futuras
         // Validar que fechaHasta sea mayor a fechaDesde
         

@@ -1,5 +1,6 @@
 using Api.Core.DTOs;
 using Api.Core.Entidades;
+using Api.Core.Otros;
 
 namespace Api.Core.Servicios.Interfaces;
 

@@ -1,7 +1,6 @@
 using Api.Core.Entidades;
 using Api.Core.Repositorios;
 using Api.Persistencia._Config;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Persistencia.Repositorios;

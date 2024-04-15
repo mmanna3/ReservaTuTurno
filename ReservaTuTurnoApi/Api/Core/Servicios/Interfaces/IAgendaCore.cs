@@ -5,5 +5,5 @@ namespace Api.Core.Servicios.Interfaces;
 
 public interface IAgendaCore : ICoreABM<AgendaDTO>
 {
-    Task<IList<Agenda>> Listar(Profesional? profesional, Servicio? servicio);
+    Task<IList<Agenda>> Listar(Profesional? profesional, Servicio servicio);
 }

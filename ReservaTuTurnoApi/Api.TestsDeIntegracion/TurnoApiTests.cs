@@ -1,4 +1,5 @@
 using Api.Core.Enums;
+using Api.Core.Otros;
 using Api.Persistencia._Config;
 using Api.TestsDeIntegracion._Config;
 using Api.TestsUtilidades;
@@ -9,7 +10,7 @@ using Newtonsoft.Json;
 namespace Api.TestsDeIntegracion;
 public class TurnoApiTests : TestBase
 {
-    private Utilidades _utilidades;
+    private Utilidades? _utilidades;
     
     private readonly DateOnly DIA_DEL_TURNO_1 = new(2024, 01, 02);
     private readonly TimeOnly HORA_DEL_TURNO_1 = new(9, 0);
@@ -28,7 +29,7 @@ public class TurnoApiTests : TestBase
         _utilidades = new Utilidades(context);
         var categoria = _utilidades.DadoQueExisteUnaCategoriaDeServicio();
         var profesional = _utilidades.DadoQueExisteUnProfesional();
-        var servicio = _utilidades.DadoQueExisteElServicio(categoria, profesional, DURACION_DEL_TURNO);
+        var servicio = _utilidades.DadoQueExisteElServicio(categoria, profesional);
         context.SaveChanges();
         
         _utilidades.DadoQueExisteLaAgenda(profesional, servicio, DiaDeLaSemana.Lunes | DiaDeLaSemana.Miercoles, "09:00", "13:00");
