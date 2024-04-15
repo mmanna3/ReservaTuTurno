@@ -27,20 +27,15 @@ install:
 before_build:
   # Restaura paquetes del back
   - dotnet --version
-  - dotnet restore ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln --verbosity m
   # Ejecuta tests
   - cd ReservaTuTurnoApi
   - dotnet test --configuration Release --runtime win-x64
-  # Lo limpia porque choca con el que va a publicar
-  - dotnet clean 
-  - cd ..
-  # Para generar migraciones después
-  - dotnet tool install dotnet-ef --global --version 8.0.0
-  # Genera dtos a partir del backend
+  # Instala para generar dtos a partir del backend
   - dotnet tool install swashbuckle.aspnetcore.cli -g
   - dotnet tool install nswag.consolecore -g
-  - cd ReservaTuTurnoApi/Api
-  - dotnet build --configuration Release --runtime win-x64
+  # Publish
+  - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi/Api --output %appveyor_build_folder%\dist
+  # Genera dtos a partir del backend
   - swagger tofile --output swagger.json bin/Release/net8.0/win-x64/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
   - cd ../..
@@ -52,20 +47,13 @@ before_build:
   - cd ..
   - ps: >-
       Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
-# build:
-#   project: ./ReservaTuTurnoApi/ReservaTuTurnoApi.sln
-#   publish_wap: true
-#   parallel: true
-#   verbosity: minimal
 after_build:
   # Aplica migraciones pendientes
+  - dotnet tool install dotnet-ef --global --version 8.0.0
   - cd ReservaTuTurnoApi/Api
   - ps: $DefaultConnectionString = (Get-Content appsettings.Production.json | ConvertFrom-Json).ConnectionStrings.Default
   - ps: $DefaultConnectionString
   - ps: dotnet ef database update --connection $DefaultConnectionString
-  - cd ../..
-  # Deploya
-  - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi/Api --output %appveyor_build_folder%\dist
 artifacts:
   - path: dist
 deploy:
