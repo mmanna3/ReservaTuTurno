@@ -34,11 +34,11 @@ before_build:
   - dotnet tool install swashbuckle.aspnetcore.cli -g
   - dotnet tool install nswag.consolecore -g
   # Publish
-  - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi/Api --output %appveyor_build_folder%\dist
+  - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 Api --output %appveyor_build_folder%\dist
   # Genera dtos a partir del backend
   - swagger tofile --output swagger.json bin/Release/net8.0/win-x64/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
-  - cd ../..
+  - cd ..
   # Compila la PWA
   - npm install --global yarn
   - cd ReservaTuTurnoPWA
