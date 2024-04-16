@@ -91,7 +91,7 @@ public class Utilidades
     
     public Turno DadoQueExisteUnTurno(int profesionalId, int servicioId, DateOnly fecha, TimeOnly hora)
     {
-        var servicioDelProfesional = _context.ServiciosDelProfesional.Single(x => x.ProfesionalId == profesionalId && x.ServicioId == servicioId);
+        var servicioDelProfesional = _context.ServiciosProfesionales.Single(x => x.ProfesionalId == profesionalId && x.ServicioId == servicioId);
         
         var turno = new Turno
         {

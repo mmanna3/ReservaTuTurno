@@ -27,7 +27,7 @@ public class ProfesionalRepo : RepositorioABM<Profesional>, IProfesionalRepo
     
     public async Task<List<ServiciosDelProfesional>> ListarServicios(int id)
     {
-        return await Context.ServiciosDelProfesional.Where(x => x.ProfesionalId == id).Include(x => x.Servicio).ToListAsync();
+        return await Context.ServiciosProfesionales.Where(x => x.ProfesionalId == id).Include(x => x.Servicio).ToListAsync();
     }
 
     protected override void DespuesDeModificar(Profesional entidadAnterior, Profesional entidadNueva)

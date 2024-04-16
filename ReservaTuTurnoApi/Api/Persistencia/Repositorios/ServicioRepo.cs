@@ -35,14 +35,14 @@ public class ServicioRepo : RepositorioABM<Servicio>, IServicioRepo
     
     private void AgregarRelacionesCreadas(Servicio entidadAnterior,Servicio entidadNueva)
     {
-        var profesionalIds = Context.ServiciosDelProfesional.Where(x => x.ServicioId == entidadNueva.Id).Select(x => x.ProfesionalId);
+        var profesionalIds = Context.ServiciosProfesionales.Where(x => x.ServicioId == entidadNueva.Id).Select(x => x.ProfesionalId);
         
         foreach (var profesionalQueBrindaElServicio in entidadNueva.ProfesionalesQueLoBrindan)
         {
             if (profesionalIds.Contains(profesionalQueBrindaElServicio.ProfesionalId))
                 Context.Entry(entidadAnterior.ProfesionalesQueLoBrindan.First(x => x.ProfesionalId == profesionalQueBrindaElServicio.ProfesionalId)).CurrentValues.SetValues(profesionalQueBrindaElServicio);
             else
-                Context.ServiciosDelProfesional.Add(profesionalQueBrindaElServicio);
+                Context.ServiciosProfesionales.Add(profesionalQueBrindaElServicio);
         }
         
         
