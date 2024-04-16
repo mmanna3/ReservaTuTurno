@@ -36,6 +36,7 @@ before_build:
   # Publish
   - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 Api --output %appveyor_build_folder%\dist
   # Genera dtos a partir del backend
+  - cd Api
   - swagger tofile --output swagger.json bin/Release/net8.0/win-x64/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
   - cd ..
