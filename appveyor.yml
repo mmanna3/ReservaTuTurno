@@ -39,13 +39,13 @@ before_build:
   - cd Api
   - swagger tofile --output swagger.json bin/Release/net8.0/win-x64/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
-  - cd ..
+  - cd ../..
   # Compila la PWA
   - npm install --global yarn
   - cd ReservaTuTurnoPWA
   - yarn install
   - yarn build
-  - cd ../..
+  - cd ..
   - ps: >-
       Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
 after_build:
