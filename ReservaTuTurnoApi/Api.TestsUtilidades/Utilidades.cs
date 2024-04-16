@@ -34,7 +34,11 @@ public class Utilidades
             Nombre = "Recorte simple",
             ProfesionalesQueLoBrindan = new List<ServiciosDelProfesional>{new()
                 {
-                    Id = 0, ProfesionalId = 0, Profesional = profesional, DuracionDelTurnoEnMinutos = duracion
+                    Id = 0,
+                    ProfesionalId = 0,
+                    Profesional = profesional,
+                    DuracionDelTurnoEnMinutos = duracion,
+                    ServicioId = 0
                 }
             },
             CategoriaDeServicio = categoria,

@@ -5,7 +5,7 @@ namespace Api.Core.Entidades;
 public class FranjaHoraria : Entidad
 {
     public required int AgendaId { get; set; }
-    public virtual Agenda Agenda { get; set; }
+    public virtual Agenda Agenda { get; set; } = null!;
     public required TimeOnly Desde { get; set; }
     public required TimeOnly Hasta { get; set; }
 }

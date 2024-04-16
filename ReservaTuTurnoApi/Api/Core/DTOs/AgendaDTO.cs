@@ -7,6 +7,6 @@ public class AgendaDTO : DTO
 {
     public required int ProfesionalId { get; set; }
     public required DiaDeLaSemana Dias { get; set; }
-    public List<FranjaHorariaDTO> FranjasHorarias { get; set; }
-    public List<AgendaServiciosDelProfesionalDTO> Servicios { get; set; }
+    public required List<FranjaHorariaDTO> FranjasHorarias { get; set; }
+    public required List<AgendaServiciosDelProfesionalDTO> Servicios { get; set; }
 }

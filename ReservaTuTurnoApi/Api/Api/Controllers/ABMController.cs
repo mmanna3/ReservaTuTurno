@@ -11,7 +11,7 @@ public abstract class ABMController<TDTO, TCore> : ControllerBase
     where TDTO : DTO
     where TCore : ICoreABM<TDTO>
 {
-    protected readonly TCore Core;
+    protected readonly TCore Core = default!;
     
     protected ABMController()
     {
