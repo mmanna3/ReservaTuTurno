@@ -19,13 +19,13 @@ public class ProfesionalRepo : RepositorioABM<Profesional>, IProfesionalRepo
             .ThenInclude(x => x.FranjasHorarias)
             .Include(x => x.Agendas)
             .ThenInclude(x => x.Servicios)
-            .ThenInclude(x => x.ServicioDelProfesional)
+            .ThenInclude(x => x.ServicioProfesional)
             .ThenInclude(x => x.Servicio)
             .AsQueryable();
 
     }
     
-    public async Task<List<ServiciosDelProfesional>> ListarServicios(int id)
+    public async Task<List<ServicioProfesional>> ListarServicios(int id)
     {
         return await Context.ServiciosProfesionales.Where(x => x.ProfesionalId == id).Include(x => x.Servicio).ToListAsync();
     }
@@ -52,7 +52,7 @@ public class ProfesionalRepo : RepositorioABM<Profesional>, IProfesionalRepo
 
     private void EliminarAgenda(Agenda agenda)
     {
-        agenda.Servicios = new List<AgendaServiciosDelProfesional>(); // No quiero que borre estas entidades, sí las de la franja horaria
+        agenda.Servicios = new List<AgendaServicioProfesional>(); // No quiero que borre estas entidades, sí las de la franja horaria
         Context.Agendas.Remove(agenda);
     }
 }

@@ -62,7 +62,7 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
             {
                 foreach (var franja in agenda.FranjasHorarias)
                 {
-                    var duracion = (int)(agenda.Servicios.Single(x => x.ServicioDelProfesional.ServicioId == servicio.Id).ServicioDelProfesional.DuracionDelTurnoEnMinutos ??
+                    var duracion = (int)(agenda.Servicios.Single(x => x.ServicioProfesional.ServicioId == servicio.Id).ServicioProfesional.DuracionDelTurnoEnMinutos ??
                                      servicio.DuracionDelTurnoPorDefectoEnMinutos)!;
                     
                     var horariosPosibles = GenerarHorariosPosibles(franja.Desde, franja.Hasta, duracion);

@@ -32,7 +32,7 @@ public class Utilidades
         {
             Id = 0,
             Nombre = "Recorte simple",
-            ProfesionalesQueLoBrindan = new List<ServiciosDelProfesional>{new()
+            ProfesionalesQueLoBrindan = new List<ServicioProfesional>{new()
                 {
                     Id = 0,
                     ProfesionalId = 0,
@@ -77,7 +77,7 @@ public class Utilidades
             Dias = dias,
             Id = 0,
             FranjasHorarias = new List<FranjaHoraria>{franjaHoraria},
-            Servicios = new List<AgendaServiciosDelProfesional>{new()
+            Servicios = new List<AgendaServicioProfesional>{new()
             {
                 Id = 0,
                 AgendaId = 0,

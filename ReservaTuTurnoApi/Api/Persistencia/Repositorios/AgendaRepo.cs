@@ -21,17 +21,17 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
             throw new ExcepcionControlada("El servicio no puede ser null");
 
         if (profesional == null)
-            agendas = Context.Agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio!.Id));
+            agendas = Context.Agendas.Where(x => x.Servicios.Select(s => s.ServicioProfesional.ServicioId).Contains(servicio!.Id));
         else
         {
             agendas = Context.Agendas.Where(x => x.ProfesionalId == profesional.Id);
-            agendas = agendas.Where(x => x.Servicios.Select(s => s.ServicioDelProfesional.ServicioId).Contains(servicio!.Id));    
+            agendas = agendas.Where(x => x.Servicios.Select(s => s.ServicioProfesional.ServicioId).Contains(servicio!.Id));    
         }
         
         return await agendas
             .Include(x => x.FranjasHorarias)
             .Include(x => x.Servicios)
-                .ThenInclude(x => x.ServicioDelProfesional)
+                .ThenInclude(x => x.ServicioProfesional)
                 .ThenInclude(x => x.Servicio)
             .ToListAsync();
     }
@@ -41,7 +41,7 @@ public class AgendaRepo : RepositorioABM<Agenda>, IAgendaRepo
         return Context.Set<Agenda>()
             .Include(x => x.FranjasHorarias)
             .Include(x => x.Servicios)
-                .ThenInclude(x => x.ServicioDelProfesional)
+                .ThenInclude(x => x.ServicioProfesional)
                 .ThenInclude(x => x.Servicio)
             .AsQueryable();
     }

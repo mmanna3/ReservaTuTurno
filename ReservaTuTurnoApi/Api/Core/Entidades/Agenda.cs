@@ -8,5 +8,5 @@ public class Agenda : Entidad
     public virtual Profesional Profesional { get; set; } = null!;
     public required DiaDeLaSemana Dias { get; set; }
     public virtual required ICollection<FranjaHoraria> FranjasHorarias { get; set; }
-    public virtual required ICollection<AgendaServiciosDelProfesional> Servicios { get; set; }
+    public virtual required ICollection<AgendaServicioProfesional> Servicios { get; set; }
 }
