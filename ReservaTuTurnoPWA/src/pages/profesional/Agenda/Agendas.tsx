@@ -34,6 +34,7 @@ const Agendas = () => {
       await api.profesionalPUT(Number(profesionalId), profesional);
     },
     antesDeMensajeExito: () => navigate(-1),
+    mensajeDeExito: "Agendas modificadas",
   });
 
   const onSubmit: SubmitHandler<ProfesionalDTO> = (profesional) => {
