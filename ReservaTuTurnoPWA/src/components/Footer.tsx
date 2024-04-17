@@ -1,5 +1,4 @@
 import { HomeIcon, CalendarIcon, UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
-import { SVGAttributes } from "react";
 import { Link } from "react-router-dom";
 
 interface FooterItemProps {
