@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { SubmitHandler } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../../api/api";
 import {
   AgendaDTO,
@@ -9,6 +8,8 @@ import {
   ProfesionalDTO,
   ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
+import useApiMutation from "../../../api/custom-hooks/useApiMutation";
+import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
@@ -16,63 +17,29 @@ import AgendasDelProfesional from "./AgendasDelProfesional";
 
 const Agendas = () => {
   const { id: profesionalId } = useParams();
+  const navigate = useNavigate();
+
   const {
     data: profesional,
     error,
     isLoading,
     isFetching,
-  } = useQuery({
-    queryKey: ["profesional-" + profesionalId],
-    queryFn: async () => await api.profesionalGET(Number(profesionalId)),
-    throwOnError: true,
+  } = useApiQuery({
+    key: "profesional-" + profesionalId,
+    fn: async () => await api.profesionalGET(Number(profesionalId)),
   });
 
-  const mutation = useMutation({
-    throwOnError: true,
-    mutationFn: async (profesional: ProfesionalDTO) => {
-      try {
-        const response = await api.profesionalPUT(
-          Number(profesionalId),
-          profesional,
-        );
-        console.log("agendaCreada", response);
-      } catch (error) {
-        console.log(error);
-      }
+  const mutation = useApiMutation({
+    fn: async (profesional: ProfesionalDTO) => {
+      await api.profesionalPUT(Number(profesionalId), profesional);
     },
-    onError: (error) => console.log(error.message),
+    antesDeMensajeExito: () => navigate(-1),
   });
 
   const onSubmit: SubmitHandler<ProfesionalDTO> = (profesional) => {
-    try {
-      profesional.agendas = profesional.agendas?.map((a) => {
-        if (Array.isArray(a.franjasHorarias)) {
-          const franjas = a.franjasHorarias.map((x) => new FranjaHorariaDTO(x));
-          a.franjasHorarias = franjas;
-        }
+    profesional.agendas = mapearAgendaConSubrelaciones(profesional);
 
-        if (Array.isArray(a.servicios)) {
-          const servicios = a.servicios.map((s) => {
-            s.servicioProfesional = new ServiciosDelProfesionalDTO(
-              s.servicioProfesional,
-            );
-
-            delete s.servicioProfesional;
-
-            return new AgendaServicioProfesionalDTO(s);
-          });
-
-          a.servicios = servicios;
-        }
-
-        return new AgendaDTO(a);
-      });
-
-      mutation.mutate(profesional);
-      // navigate(-1);
-    } catch (error) {
-      console.error(error);
-    }
+    mutation.mutate(profesional);
   };
 
   return (
@@ -93,23 +60,35 @@ const Agendas = () => {
           />
         </Form>
       </div>
-      <div>
-        {mutation.isPending ? (
-          "Adding todo..."
-        ) : (
-          <>
-            {mutation.isError ? (
-              <div>Hubo un error: {mutation.error.message}</div>
-            ) : null}
-
-            {mutation.isSuccess ? (
-              <div>Servicio editado correctamente</div>
-            ) : null}
-          </>
-        )}
-      </div>
     </ContenidoConSpinnerYError>
   );
 };
 
 export default Agendas;
+
+function mapearAgendaConSubrelaciones(
+  profesional: ProfesionalDTO,
+): AgendaDTO[] | undefined {
+  return profesional.agendas?.map((a) => {
+    if (Array.isArray(a.franjasHorarias)) {
+      const franjas = a.franjasHorarias.map((x) => new FranjaHorariaDTO(x));
+      a.franjasHorarias = franjas;
+    }
+
+    if (Array.isArray(a.servicios)) {
+      const servicios = a.servicios.map((s) => {
+        s.servicioProfesional = new ServiciosDelProfesionalDTO(
+          s.servicioProfesional,
+        );
+
+        delete s.servicioProfesional;
+
+        return new AgendaServicioProfesionalDTO(s);
+      });
+
+      a.servicios = servicios;
+    }
+
+    return new AgendaDTO(a);
+  });
+}
