@@ -81,7 +81,7 @@ public class Utilidades
             {
                 Id = 0,
                 AgendaId = 0,
-                ServicioDelProfesionalId = servicio.ProfesionalesQueLoBrindan.First().Id,
+                ServicioProfesionalId = servicio.ProfesionalesQueLoBrindan.First().Id
             }}
         };
         
