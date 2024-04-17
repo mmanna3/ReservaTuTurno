@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
 import {
   AgendaDTO,
-  AgendaServiciosDelProfesionalDTO,
+  AgendaServicioProfesionalDTO,
   FranjaHorariaDTO,
   ProfesionalDTO,
   ServiciosDelProfesionalDTO,
@@ -53,13 +53,13 @@ const Agendas = () => {
 
         if (Array.isArray(a.servicios)) {
           const servicios = a.servicios.map((s) => {
-            s.servicioDelProfesional = new ServiciosDelProfesionalDTO(
-              s.servicioDelProfesional,
+            s.servicioProfesional = new ServiciosDelProfesionalDTO(
+              s.servicioProfesional,
             );
 
-            delete s.servicioDelProfesional;
+            delete s.servicioProfesional;
 
-            return new AgendaServiciosDelProfesionalDTO(s);
+            return new AgendaServicioProfesionalDTO(s);
           });
 
           a.servicios = servicios;

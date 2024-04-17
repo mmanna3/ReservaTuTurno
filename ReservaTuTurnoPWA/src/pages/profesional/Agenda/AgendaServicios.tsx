@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { api } from "../../../api/api";
 import {
-  AgendaServiciosDelProfesionalDTO,
+  AgendaServicioProfesionalDTO,
   ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
@@ -56,8 +56,8 @@ const AgendaServicios = (props: IProps) => {
 
     const nombresDeServciosYaAgregados = fields.map(
       (x) =>
-        (x as unknown as AgendaServiciosDelProfesionalDTO)
-          .servicioDelProfesional?.servicioNombre,
+        (x as unknown as AgendaServicioProfesionalDTO)
+          .servicioProfesional?.servicioNombre,
     );
 
     const todosSinLosYaAgregados = todosLosServiciosDelProfesional.filter(
@@ -81,12 +81,12 @@ const AgendaServicios = (props: IProps) => {
     append({
       id: 0,
       agendaId: props.agendaId,
-      servicioDelProfesionalId: servicio?.id,
-      servicioDelProfesional: {
+      servicioProfesionalId: servicio?.id,
+      servicioProfesional: {
         id: servicio?.id,
         servicioNombre: servicio?.servicioNombre,
       },
-    });
+    } as AgendaServicioProfesionalDTO);
   };
 
   const quitarServicio = ({
@@ -123,16 +123,16 @@ const AgendaServicios = (props: IProps) => {
                 onClick={() =>
                   quitarServicio({
                     label:
-                      (field as unknown as AgendaServiciosDelProfesionalDTO)
-                        .servicioDelProfesional?.servicioNombre || "",
+                      (field as unknown as AgendaServicioProfesionalDTO)
+                        .servicioProfesional?.servicioNombre || "",
                     index,
                   })
                 }
               >
                 <p className="">
                   {
-                    (field as unknown as AgendaServiciosDelProfesionalDTO)
-                      .servicioDelProfesional?.servicioNombre
+                    (field as unknown as AgendaServicioProfesionalDTO)
+                      .servicioProfesional?.servicioNombre
                   }
                 </p>
                 <div className="ml-1 mt-[0.1rem]">
@@ -157,7 +157,7 @@ const AgendaServicios = (props: IProps) => {
               <input
                 hidden
                 {...register(
-                  `${props.parentName}.servicios.${index}.servicioDelProfesionalId`,
+                  `${props.parentName}.servicios.${index}.servicioProfesionalId`,
                   {
                     valueAsNumber: true,
                   },
