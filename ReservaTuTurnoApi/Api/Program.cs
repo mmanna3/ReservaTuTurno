@@ -44,17 +44,17 @@ try
     }
 
     app.UseOpenApi();
+    app.UseExceptionHandler();
+        
+    // app.UseHttpsRedirection();
     
     app.UseDefaultFiles();
     app.UseStaticFiles();
-    
-    app.UseHttpsRedirection();
 
     app.UseAuthorization();
 
     app.MapControllers();
     
-    app.UseExceptionHandler();
     
     // Esto es por si hay problema ejecutando las migraciones en una nueva instancia
     // using (var scope = app.Services.CreateScope())
