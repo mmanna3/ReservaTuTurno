@@ -49,6 +49,7 @@ test_script:
   # Ejecuta tests
   - cd ReservaTuTurnoApi
   - dotnet test --configuration Release --runtime win-x64
+  - cd ..
 before_deploy:
   # Aplica migraciones pendientes
   - dotnet tool install dotnet-ef --global --version 8.0.0
