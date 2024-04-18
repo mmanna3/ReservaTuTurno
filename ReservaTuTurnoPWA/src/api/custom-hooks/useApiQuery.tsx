@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 
 interface IProps<T> {
   fn: () => Promise<T>;
-  key: string;
+  key: Array<string | undefined>;
 }
 
 const useApiQuery = <T,>(props: IProps<T>) => {
   const query = useQuery({
-    queryKey: [props.key],
+    queryKey: props.key,
     throwOnError: true,
     queryFn: async () => {
       try {

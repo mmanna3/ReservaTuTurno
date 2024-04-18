@@ -48,7 +48,7 @@ const EditarServicio = () => {
     isFetching,
     isLoading,
   } = useApiQuery({
-    key: "servicio-" + id,
+    key: ["servicio", id],
     fn: async () => await api.servicioGET(Number(id)),
   });
 

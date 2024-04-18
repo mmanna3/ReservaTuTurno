@@ -25,7 +25,7 @@ const Agendas = () => {
     isLoading,
     isFetching,
   } = useApiQuery({
-    key: "profesional-" + profesionalId,
+    key: ["profesional", profesionalId],
     fn: async () => await api.profesionalGET(Number(profesionalId)),
   });
 
