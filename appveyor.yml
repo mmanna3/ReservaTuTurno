@@ -44,7 +44,7 @@ before_build:
   - ps: >-
       Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
 build_script:
-  - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 Api --output %appveyor_build_folder%\dist
+  - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi/Api --output %appveyor_build_folder%\dist
 test_script:  
   # Ejecuta tests
   - cd ReservaTuTurnoApi
