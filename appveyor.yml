@@ -30,7 +30,7 @@ install:
   - dotnet --version
 before_build:
   # Genera dtos en PWA a partir del backend (buildeado antes para los tests)
-  - cd Api
+  - cd ReservaTuTurnoApi/Api
   - dotnet build --configuration Release --runtime win-x64
   - swagger tofile --output swagger.json bin/Release/net8.0/win-x64/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
