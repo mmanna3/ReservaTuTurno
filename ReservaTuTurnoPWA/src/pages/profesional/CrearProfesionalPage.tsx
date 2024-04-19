@@ -3,10 +3,10 @@ import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import { ProfesionalDTO } from "../../api/clients";
+import useApiMutation from "../../api/custom-hooks/useApiMutation";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import Titulo from "../../components/Titulo";
-import useApiMutation from "../../api/custom-hooks/useApiMutation";
 import { generarRandom } from "../../utils";
 
 const CrearProfesionalPage = () => {
@@ -16,14 +16,16 @@ const CrearProfesionalPage = () => {
   const navigate = useNavigate();
 
   const mutation = useApiMutation({
+    mensajeDeExito: "Profesional dado de alta",
     fn: async (profesional: ProfesionalDTO) => {
-        return await api.profesionalPOST(profesional);
+      return await api.profesionalPOST(profesional);
     },
-    antesDeMensajeExito: () => navigate(`/profesionales?refreshToken=${generarRandom()}`)
+    antesDeMensajeExito: () =>
+      navigate(`/profesionales?refreshToken=${generarRandom()}`),
   });
 
   const onSubmit: SubmitHandler<ProfesionalDTO> = (data) => {
-      mutation.mutate(data);
+    mutation.mutate(data);
   };
 
   return (

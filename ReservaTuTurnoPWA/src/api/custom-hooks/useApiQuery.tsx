@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 interface IProps<T> {
   fn: () => Promise<T>;
-  key: Array<string | undefined>;
+  key: Array<string | null>;
 }
 
 const useApiQuery = <T,>(props: IProps<T>) => {
