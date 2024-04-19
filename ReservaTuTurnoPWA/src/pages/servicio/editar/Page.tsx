@@ -6,6 +6,7 @@ import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
+import { BotonSubmit } from "../../../components/BotonSubmit";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
@@ -90,11 +91,9 @@ const EditarServicio = () => {
               </span>
             </div>
           ) : null}
-          <input
-            type="submit"
-            className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
-            value="Guardar cambios"
-            disabled={mutation.isPending}
+          <BotonSubmit
+            texto="Guardar cambios"
+            estaDeshabilitado={mutation.isPending}
           />
         </Form>
       </div>

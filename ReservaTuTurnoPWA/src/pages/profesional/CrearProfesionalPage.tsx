@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import { ProfesionalDTO } from "../../api/clients";
 import useApiMutation from "../../api/custom-hooks/useApiMutation";
+import { BotonSubmit } from "../../components/BotonSubmit";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import Titulo from "../../components/Titulo";
@@ -37,11 +38,7 @@ const CrearProfesionalPage = () => {
           <Input<ProfesionalDTO> name="apellido" label="Apellido" required />
           <Input<ProfesionalDTO> name="email" label="Email" required />
           <Input<ProfesionalDTO> name="telefono" label="Teléfono" required />
-          <input
-            type="submit"
-            className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
-            value="Agregar"
-          />
+          <BotonSubmit texto="Agregar" estaDeshabilitado={mutation.isPending} />
         </Form>
       </div>
     </>

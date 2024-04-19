@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
+import { BotonSubmit } from "../../../components/BotonSubmit";
 import Form from "../../../components/Form";
 import { Separador } from "../../../components/Separador";
 import Titulo from "../../../components/Titulo";
@@ -68,10 +69,9 @@ const CrearServicio = () => {
               </span>
             </div>
           ) : null}
-          <input
-            type="submit"
-            className="mt-8 h-16 w-full rounded-xl bg-rosa text-lg font-medium text-blanco"
-            value="Crear nuevo servicio"
+          <BotonSubmit
+            estaDeshabilitado={mutation.isPending}
+            texto="Crear nuevo servicio"
           />
         </Form>
       </div>
