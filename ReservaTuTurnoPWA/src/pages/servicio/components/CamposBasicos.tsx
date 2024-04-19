@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
 import { api } from "../../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../../api/clients";
+import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import { Dropdown } from "../../../components/Dropdown";
 import Input from "../../../components/Input";
 import {
@@ -10,10 +10,9 @@ import {
 } from "../../../utils";
 
 const CamposBasicos = () => {
-  const { data: categorias } = useQuery({
-    queryKey: ["categorias"],
-    queryFn: async () => await api.categoriaDeServicioAll(),
-    throwOnError: true,
+  const { data: categorias } = useApiQuery({
+    key: ["categorias"],
+    fn: async () => await api.categoriaDeServicioAll(),
   });
 
   const OpcionesCategorias = convertirEnOptions<CategoriaDeServicioDTO>(

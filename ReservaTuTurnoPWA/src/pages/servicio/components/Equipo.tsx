@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useFieldArray } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
@@ -6,6 +5,7 @@ import {
   ProfesionalDTO,
   ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
+import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import { Dropdown } from "../../../components/Dropdown";
 import FormHiddenInput from "../../../components/FormHiddenInput";
 import Input from "../../../components/Input";
@@ -17,10 +17,9 @@ import {
 } from "../../../utils";
 
 const Equipo = () => {
-  const { data: profesionales } = useQuery({
-    queryKey: ["profesionales"],
-    queryFn: async () => await api.profesionalAll(),
-    throwOnError: true,
+  const { data: profesionales } = useApiQuery({
+    key: ["profesionales"],
+    fn: async () => await api.profesionalAll(),
   });
 
   const { id } = useParams();
@@ -38,8 +37,7 @@ const Equipo = () => {
   );
 
   const { fields, append, remove } = useFieldArray({
-    // control, // control props comes from useForm (optional: if you are using FormContext)
-    name: "profesionalesQueLoBrindan", // unique name for your Field Array
+    name: "profesionalesQueLoBrindan",
   });
 
   return (
