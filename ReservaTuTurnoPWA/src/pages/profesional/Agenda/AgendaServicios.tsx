@@ -100,6 +100,7 @@ const AgendaServicios = (props: IProps) => {
       isLoading={isFetching || isLoading}
       error={error}
       hasData={servicios === null ? false : true}
+      mensajeSpinner="Cargando agendas 🗓️"
     >
       <Dropdown<ServiciosDelProfesionalDTO>
         name="servicioNombre"
