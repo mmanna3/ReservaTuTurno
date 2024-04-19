@@ -23,13 +23,14 @@ const ListaDeProfesionales = () => {
   return (
     <ContenedorCentradoConMargenes>
       <Titulo>Profesionales</Titulo>
-      <BotonLink texto="Crear" link="/profesionales/crear" />
 
       <ContenidoConSpinnerYError
         isLoading={isLoading}
         error={error}
         hasData={profesionales === null ? false : true}
+        mensajeSpinner="Buscando tus profesionales 🕵🏻"
       >
+        <BotonLink texto="Crear" link="/profesionales/crear" />
         <div className="h-screen w-full overflow-auto">
           {profesionales?.map((s: ProfesionalDTO) => (
             <div
