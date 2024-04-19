@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { CalendarIcon } from "@heroicons/react/24/outline";
 import { api } from "../../api/api";
 import { ProfesionalDTO } from "../../api/clients";
@@ -9,12 +9,14 @@ import ContenidoConSpinnerYError from "../../components/ContenidoConSpinnerYErro
 import Titulo from "../../components/Titulo";
 
 const ListaDeProfesionales = () => {
+  const [searchParams] = useSearchParams();
+  
   const {
     data: profesionales,
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["profesionales"],
+    queryKey: ["profesionales", searchParams.get('refreshToken')],
     queryFn: async () => await api.profesionalAll(),
     throwOnError: true,
   });

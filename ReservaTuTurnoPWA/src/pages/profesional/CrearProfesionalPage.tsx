@@ -1,4 +1,3 @@
-import { useMutation } from "@tanstack/react-query";
 import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +6,8 @@ import { ProfesionalDTO } from "../../api/clients";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import Titulo from "../../components/Titulo";
+import useApiMutation from "../../api/custom-hooks/useApiMutation";
+import { generarRandom } from "../../utils";
 
 const CrearProfesionalPage = () => {
   // hay que controlar mejor los errores de los get
@@ -14,26 +15,15 @@ const CrearProfesionalPage = () => {
 
   const navigate = useNavigate();
 
-  const mutation = useMutation({
-    throwOnError: true,
-    mutationFn: async (profesional: ProfesionalDTO) => {
-      try {
-        const profesionalCreado = await api.profesionalPOST(profesional);
-        console.log("profesionalCreado", profesionalCreado);
-      } catch (error) {
-        console.log(error);
-      }
+  const mutation = useApiMutation({
+    fn: async (profesional: ProfesionalDTO) => {
+        return await api.profesionalPOST(profesional);
     },
+    antesDeMensajeExito: () => navigate(`/profesionales?refreshToken=${generarRandom()}`)
   });
 
   const onSubmit: SubmitHandler<ProfesionalDTO> = (data) => {
-    try {
-      console.log(data);
       mutation.mutate(data);
-      navigate(-1);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (
@@ -51,21 +41,6 @@ const CrearProfesionalPage = () => {
             value="Agregar"
           />
         </Form>
-      </div>
-      <div>
-        {mutation.isPending ? (
-          "Adding todo..."
-        ) : (
-          <>
-            {mutation.isError ? (
-              <div>Hubo un error: {mutation.error.message}</div>
-            ) : null}
-
-            {mutation.isSuccess ? (
-              <div>Profesional agregado correctamente</div>
-            ) : null}
-          </>
-        )}
       </div>
     </>
   );

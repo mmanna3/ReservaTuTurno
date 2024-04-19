@@ -57,3 +57,7 @@ export enum DiaDeLaSemana {
   Sabado = 32,
   Domingo = 64,
 }
+
+export const generarRandom = () => {
+  return (Math.random() + 1).toString(36).substring(7);
+}

@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 interface IProps<T> {
-  fn: (args: T) => void;
+  fn: (args: T) => Promise<unknown>;
   mensajeDeExito?: string;
   antesDeMensajeExito?: () => void;
 }
@@ -16,7 +16,6 @@ const useApiMutation = <T,>({
     throwOnError: true,
     mutationFn: async (args: T) => {
       try {
-        // No quitar el await por mas que al VSCode no le guste (no pasa por el catch si no)
         await fn(args);
       } catch (error) {
         console.log("Error en Request", error);
