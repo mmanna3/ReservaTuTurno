@@ -31,13 +31,13 @@ const ListaDeServicios = () => {
     <ContenedorCentradoConMargenes>
       <Titulo>Servicios</Titulo>
 
-      <BotonLink link="/servicios/crear" texto="Crear" />
-
       <ContenidoConSpinnerYError
         isLoading={isFetching || isLoading}
         error={error}
         hasData={categorias === null ? false : true}
+        mensajeSpinner="Buscando tus servicios 🕵🏻"
       >
+        <BotonLink link="/servicios/crear" texto="Crear" />
         <div className="overflow-autom h-screen w-full">
           {categorias?.map((x) => (
             <div className="mt-8" key={x.id}>
