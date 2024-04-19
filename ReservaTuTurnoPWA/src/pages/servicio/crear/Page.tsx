@@ -1,10 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
+import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import Form from "../../../components/Form";
 import { Separador } from "../../../components/Separador";
 import Titulo from "../../../components/Titulo";
@@ -30,37 +29,28 @@ const CrearServicio = () => {
 
   const [hayProfesionalesDuplicados, setErrorDosProfesionales] = useState("");
 
-  const mutation = useMutation({
-    throwOnError: true,
-    mutationFn: async (servicio: ServicioDTO) => {
-      try {
-        if (Array.isArray(servicio.profesionalesQueLoBrindan)) {
-          const instancias = servicio.profesionalesQueLoBrindan.map(
-            (x) => new ServiciosDelProfesionalDTO(x),
-          );
-          servicio.profesionalesQueLoBrindan = instancias;
-        }
-
-        const servicioCreado = await api.servicioPOST(servicio);
-        console.log("servicioCreado", servicioCreado);
-      } catch (error) {
-        console.log(error);
+  const mutation = useApiMutation({
+    mensajeDeExito: "Servicio creado",
+    antesDeMensajeExito: () => navigate(-1),
+    fn: async (servicio: ServicioDTO) => {
+      if (Array.isArray(servicio.profesionalesQueLoBrindan)) {
+        const instancias = servicio.profesionalesQueLoBrindan.map(
+          (x) => new ServiciosDelProfesionalDTO(x),
+        );
+        servicio.profesionalesQueLoBrindan = instancias;
       }
+
+      await api.servicioPOST(servicio);
     },
   });
 
   const onSubmit: SubmitHandler<ServicioDTO> = (data) => {
-    try {
-      if (seRepitenProfesionales(data.profesionalesQueLoBrindan)) {
-        setErrorDosProfesionales("Hay profesionales repetidos.");
-        return;
-      }
-      console.log(data);
-      mutation.mutate(data);
-      navigate(-1);
-    } catch (error) {
-      console.error(error);
+    // Manejarlo con el react-hook-form
+    if (seRepitenProfesionales(data.profesionalesQueLoBrindan)) {
+      setErrorDosProfesionales("Hay profesionales repetidos.");
+      return;
     }
+    mutation.mutate(data);
   };
 
   return (
@@ -69,7 +59,6 @@ const CrearServicio = () => {
         <Form<ServicioDTO> onSubmit={onSubmit}>
           <Titulo>Nuevo Servicio</Titulo>
           <CamposBasicos />
-
           <Separador />
           <Equipo />
           {hayProfesionalesDuplicados !== "" ? (
@@ -85,21 +74,6 @@ const CrearServicio = () => {
             value="Crear nuevo servicio"
           />
         </Form>
-      </div>
-      <div>
-        {mutation.isPending ? (
-          "Adding todo..."
-        ) : (
-          <>
-            {mutation.isError ? (
-              <div>Hubo un error: {mutation.error.message}</div>
-            ) : null}
-
-            {mutation.isSuccess ? (
-              <div>Servicio agregado correctamente</div>
-            ) : null}
-          </>
-        )}
       </div>
     </>
   );
