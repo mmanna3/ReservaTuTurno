@@ -1,15 +1,56 @@
+import { useSearchParams } from "react-router-dom";
+import { api } from "../../api/api";
+import { TurnoDTO } from "../../api/clients";
+import useApiQuery from "../../api/custom-hooks/useApiQuery";
+import { BotonLink } from "../../components/BotonLink";
 import ContenedorCentradoConMargenes from "../../components/ContenedorCentradoConMargenes";
+import ContenidoConSpinnerYError from "../../components/ContenidoConSpinnerYError";
 import Titulo from "../../components/Titulo";
 
-const TurnosPage = () => {
+const ListaDeTurnosPage = () => {
+  const [searchParams] = useSearchParams();
+
+  const {
+    data: turnos,
+    error,
+    isLoading,
+  } = useApiQuery({
+    key: ["turnos", searchParams.get("refreshToken")],
+    fn: async () => await api.turnoAll(),
+  });
+
   return (
     <ContenedorCentradoConMargenes>
       <Titulo>Turnos</Titulo>
-      <div className="w-full">
-        <p className="mt-2 pl-1 text-base">Acá van a estar los turnos.</p>
-      </div>
+
+      <ContenidoConSpinnerYError
+        isLoading={isLoading}
+        error={error}
+        hasData={turnos === null ? false : true}
+        mensajeSpinner="Buscando próximos turnos 🕵🏻"
+      >
+        <BotonLink texto="Crear" link="/turnos/crear" />
+        <div className="h-screen w-full overflow-auto">
+          {turnos?.map((s: TurnoDTO) => (
+            <div
+              key={s.id}
+              className="mb-2 w-full rounded-lg border border-gray-300 p-8 text-gris"
+            >
+              <p className="mb-2 text-left text-base font-semibold text-negro">
+                {s.fecha} {s.hora}
+              </p>
+              <div className="mt-5 flex w-full justify-between text-sm">
+                <p>{s.servicioProfesional?.servicioNombre}</p>
+              </div>
+              <div className="mt-5 flex w-full justify-between text-sm">
+                <p>El profesional</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </ContenidoConSpinnerYError>
     </ContenedorCentradoConMargenes>
   );
 };
 
-export default TurnosPage;
+export default ListaDeTurnosPage;
