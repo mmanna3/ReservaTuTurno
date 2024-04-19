@@ -47,6 +47,37 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
         return resultado;
     }
 
+    public async Task<List<ServicioConProfesionalesDTO>> ServiciosConProfesionales()
+    {
+        var result = new List<ServicioConProfesionalesDTO>();
+        var servicios = await _servicioRepo.Listar();
+        foreach (var servicio in servicios)
+        {
+            var servicioConProfesionales = new ServicioConProfesionalesDTO
+            {
+                ServicioId = servicio.Id,
+                Servicio = servicio.Nombre,
+            };
+
+            var profesionales = new List<ProfesionalBaseDTO>();
+            foreach (var profesional in servicio.ProfesionalesQueLoBrindan)
+            {
+                var profesionalBaseDTO = new ProfesionalBaseDTO
+                {
+                    Id = profesional.ProfesionalId,
+                    Nombre = profesional.Profesional.Nombre,
+                    Apellido = profesional.Profesional.Apellido,
+                };
+                profesionales.Add(profesionalBaseDTO);
+            }
+
+            servicioConProfesionales.Profesionales = profesionales;
+            result.Add(servicioConProfesionales);
+        }
+
+        return result;
+    }
+
     private static List<TurnosPorDia> GenerarTurnosPosibles(IList<Agenda> agendas, Servicio servicio, DateOnly fechaDesde, DateOnly fechaHasta)
     {
         var result = new List<TurnosPorDia>();

@@ -11,6 +11,13 @@ namespace Api.Api.Controllers
         {
         }
         
+        [HttpGet, Route("ServiciosConProfesionales")]
+        public async Task<ActionResult<List<ServicioConProfesionalesDTO>>> ServiciosConProfesionales()
+        {
+            var result = await Core.ServiciosConProfesionales();
+            return Ok(result);
+        }
+        
         [HttpGet, Route("ListarTurnosLibres")]
         public async Task<ActionResult<IEnumerable<TurnosPorDia>>> ListarTurnosLibres(int? profesionalId, int servicioId,
             string fechaDesde,

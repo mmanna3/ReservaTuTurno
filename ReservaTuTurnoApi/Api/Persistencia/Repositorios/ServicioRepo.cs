@@ -13,7 +13,10 @@ public class ServicioRepo : RepositorioABM<Servicio>, IServicioRepo
     
     protected override IQueryable<Servicio> Set()
     {
-        return Context.Set<Servicio>().Include(x => x.ProfesionalesQueLoBrindan).AsQueryable();
+        return Context.Set<Servicio>()
+                .Include(x => x.ProfesionalesQueLoBrindan)
+                    .ThenInclude(x => x.Profesional)
+                .AsQueryable();
     }
     
     protected override void DespuesDeModificar(Servicio entidadAnterior, Servicio entidadNueva)
