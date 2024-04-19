@@ -1,14 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+import { XCircleIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { Option } from "react-dropdown";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { XCircleIcon } from "@heroicons/react/24/outline";
 import { api } from "../../../api/api";
 import {
   AgendaServicioProfesionalDTO,
   ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
+import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
 import { Dropdown } from "../../../components/Dropdown";
 import { convertirEnOptions } from "../../../utils";
@@ -27,11 +27,9 @@ const AgendaServicios = (props: IProps) => {
     isFetching,
     isLoading,
     isError,
-  } = useQuery({
-    notifyOnChangeProps: "all",
-    queryKey: ["servicios-del-profesional"],
-    queryFn: async () => await api.servicios(Number(profesionalId)),
-    throwOnError: true,
+  } = useApiQuery({
+    key: ["servicios-del-profesional"],
+    fn: async () => await api.servicios(Number(profesionalId)),
   });
 
   useEffect(() => {
@@ -51,13 +49,10 @@ const AgendaServicios = (props: IProps) => {
   });
 
   useEffect(() => {
-    console.log(fields);
-    console.log(todosLosServiciosDelProfesional);
-
     const nombresDeServciosYaAgregados = fields.map(
       (x) =>
-        (x as unknown as AgendaServicioProfesionalDTO)
-          .servicioProfesional?.servicioNombre,
+        (x as unknown as AgendaServicioProfesionalDTO).servicioProfesional
+          ?.servicioNombre,
     );
 
     const todosSinLosYaAgregados = todosLosServiciosDelProfesional.filter(
@@ -136,7 +131,7 @@ const AgendaServicios = (props: IProps) => {
                   }
                 </p>
                 <div className="ml-1 mt-[0.1rem]">
-                  <XCircleIcon className="text-grisclaro h-4 w-4" />
+                  <XCircleIcon className="h-4 w-4 text-grisclaro" />
                 </div>
               </button>
               <input

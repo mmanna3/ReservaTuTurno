@@ -1,6 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { api } from "../../api/api";
+import useApiQuery from "../../api/custom-hooks/useApiQuery";
 import { BotonLink } from "../../components/BotonLink";
 import ContenedorCentradoConMargenes from "../../components/ContenedorCentradoConMargenes";
 import ContenidoConSpinnerYError from "../../components/ContenidoConSpinnerYError";
@@ -14,18 +13,15 @@ const ListaDeServicios = () => {
     error,
     isFetching,
     isLoading,
-    refetch,
-  } = useQuery({
-    notifyOnChangeProps: "all",
-    queryKey: ["servicios-por-categoria"],
-    queryFn: async () => await api.categoriaDeServicioAll(),
-    throwOnError: true,
+  } = useApiQuery({
+    key: ["servicios-por-categoria"],
+    fn: async () => await api.categoriaDeServicioAll(),
   });
 
-  useEffect(() => {
-    refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   refetch();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <ContenedorCentradoConMargenes>
