@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Option } from "react-dropdown";
-import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
@@ -12,6 +11,7 @@ import {
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import { BotonSubmit } from "../../../components/BotonSubmit";
+import SelectorDia from "../../../components/DayPicker";
 import { Dropdown } from "../../../components/Dropdown";
 import Form from "../../../components/Form";
 import Titulo from "../../../components/Titulo";
@@ -109,6 +109,8 @@ const CrearTurnosPage = () => {
             }
             required
           />
+
+          <SelectorDia />
 
           <BotonSubmit texto="Agregar" estaDeshabilitado={mutation.isPending} />
         </Form>

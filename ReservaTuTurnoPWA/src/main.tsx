@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
+import "react-day-picker/dist/style.css";
 import ReactDOM from "react-dom/client";
+import "react-dropdown/style.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary.tsx";
 import "./index.css";
