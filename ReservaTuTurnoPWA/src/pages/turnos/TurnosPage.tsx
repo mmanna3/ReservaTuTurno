@@ -31,19 +31,21 @@ const ListaDeTurnosPage = () => {
       >
         <BotonLink texto="Crear" link="/turnos/crear" />
         <div className="h-screen w-full overflow-auto">
-          {turnos?.map((s: TurnoDTO) => (
+          {turnos?.map((t: TurnoDTO) => (
             <div
-              key={s.id}
+              key={t.id}
               className="mb-2 w-full rounded-lg border border-gray-300 p-8 text-gris"
             >
               <p className="mb-2 text-left text-base font-semibold text-negro">
-                {s.fecha} {s.hora}
+                {t.fecha} {t.hora}
               </p>
               <div className="mt-5 flex w-full justify-between text-sm">
-                <p>{s.servicioProfesional?.servicioNombre}</p>
+                <p>{t.servicio}</p>
               </div>
               <div className="mt-5 flex w-full justify-between text-sm">
-                <p>El profesional</p>
+                <p>
+                  <p>{t.profesional}</p>
+                </p>
               </div>
             </div>
           ))}

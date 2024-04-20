@@ -8,7 +8,7 @@ interface IProps {
 export function BotonLink(props: IProps) {
   return (
     <Link
-      className="my-6 flex h-16 w-full items-center justify-center rounded-xl bg-rosa text-lg text-blanco"
+      className="my-6 flex w-full items-center justify-center rounded-xl bg-rosa py-5 text-lg text-blanco"
       to={props.link}
     >
       {props.texto}
