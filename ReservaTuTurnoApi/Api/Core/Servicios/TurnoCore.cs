@@ -25,6 +25,20 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
         _agendaRepo = agendaRepo;
     }
 
+    protected override async void AntesDeCrear(TurnoDTO dto, Turno entidad)
+    {
+        var servicio = await _servicioRepo.ObtenerPorId(dto.ServicioId);
+
+        if (servicio == null)
+            throw new ExcepcionControlada("El servicio no existe");
+        
+        var servicioProfesional = servicio.ProfesionalesQueLoBrindan.SingleOrDefault(x => x.ProfesionalId == dto.ProfesionalId);    
+        if (servicioProfesional == null)
+            throw new ExcepcionControlada("El profesional no brinda el servicio");
+
+        entidad.ServicioProfesional = servicioProfesional;
+    }
+    
     public async Task<IList<TurnosPorDia>> ListarTurnosLibres(int? profesionalId, int servicioId, DateOnly fechaDesde,
         DateOnly fechaHasta)
     {
