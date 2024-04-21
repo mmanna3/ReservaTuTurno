@@ -1,8 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { ClockIcon } from "@heroicons/react/24/outline";
 import { Fragment, useCallback, useState } from "react";
 import Picker, { PickerValue } from "react-mobile-picker";
 
-export default function ModalPicker() {
+interface IModalPicker {
+  label: string;
+}
+
+export default function ModalPicker(props: IModalPicker) {
   const [isOpen, setIsOpen] = useState(false);
   const [pickerValue, setPickerValue] = useState<PickerValue>({
     hora: "08",
@@ -13,16 +18,28 @@ export default function ModalPicker() {
     setPickerValue(newValue);
   }, []);
 
+  const errorMessage = null;
+  const required = null;
+
   return (
     <>
-      <button
-        type="button"
+      <div
+        className="group relative mt-5 w-full rounded-xl bg-[#F9F9F9] p-2"
         onClick={() => setIsOpen(true)}
-        className="ml-4 rounded-md bg-black/40 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
-        {pickerValue.hora} : {pickerValue.minutos}
-      </button>
-
+        <label
+          className={`relative ml-1 w-auto bg-transparent px-1 text-[12px] text-gris peer-[.is-open]:!text-[#32BF8D] ${
+            errorMessage ? "!text-rojo" : ""
+          }`}
+        >
+          {props.label} {required ? "*" : null}
+        </label>
+        <div className="ml-2 flex">
+          <span className="mr-[2px]">{pickerValue.hora}</span> :
+          <span className="ml-[2px]">{pickerValue.minutos}</span>
+          <ClockIcon className="ml-2 mt-1 h-4 w-4 text-negro" />
+        </div>
+      </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"

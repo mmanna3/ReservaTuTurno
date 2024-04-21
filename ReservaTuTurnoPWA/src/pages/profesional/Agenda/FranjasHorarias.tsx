@@ -1,5 +1,5 @@
-import { useFieldArray, useFormContext } from "react-hook-form";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { FranjaHorariaDTO } from "../../../api/clients";
 import FormHiddenInput from "../../../components/FormHiddenInput";
 import Input from "../../../components/Input";
@@ -41,6 +41,7 @@ export function FranjasHorarias(props: IProps) {
                 parentName: `${props.parentName}.franjasHorarias`,
               }}
             />
+            {/* <TimePicker label="Desde" /> */}
           </div>
           <div className="w-full">
             <Input<FranjaHorariaDTO>
@@ -55,7 +56,7 @@ export function FranjasHorarias(props: IProps) {
           </div>
           <div className="ml-2 mr-1 mt-8 flex items-center">
             <button onClick={() => remove(index)} type="button">
-              <TrashIcon className="w-5 h-5 text-negro" />
+              <TrashIcon className="h-5 w-5 text-negro" />
             </button>
           </div>
         </div>
