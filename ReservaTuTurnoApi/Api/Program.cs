@@ -1,3 +1,5 @@
+using System.Net;
+using System.Net.Sockets;
 using Api._Config;
 using Api.Persistencia._Config;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +43,10 @@ try
         app.UseSwaggerUI();
         app.UseDeveloperExceptionPage();
         app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+        
+        var localIp = LocalIpAddress();
+        app.Urls.Add($"http://{localIp}:5072");
+        // app.Urls.Add("https://" + localIp + ":7072");
     }
 
     app.UseOpenApi();
@@ -62,7 +68,7 @@ try
     //     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     //     db.Database.Migrate();
     // }
-
+    
     app.Run();
 }
 catch (Exception exception)
@@ -73,6 +79,14 @@ catch (Exception exception)
 finally
 {
     LogManager.Shutdown();
+}
+
+static string LocalIpAddress()
+{
+    using var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0);
+    socket.Connect("8.8.8.8", 65530);
+    var endPoint = socket.LocalEndPoint as IPEndPoint;
+    return endPoint != null ? endPoint.Address.ToString() : "127.0.0.1";
 }
 
 public partial class Program
