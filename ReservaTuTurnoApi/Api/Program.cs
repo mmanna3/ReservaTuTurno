@@ -45,6 +45,7 @@ try
         app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
         
         var localIp = LocalIpAddress();
+        app.Urls.Add($"http://0.0.0.0:5072");
         app.Urls.Add($"http://{localIp}:5072");
         // app.Urls.Add("https://" + localIp + ":7072");
     }
