@@ -101,7 +101,7 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
             var agendasQueIncluyenElDia = agendas.Where(x => x.Dias.HasFlag(diaDeLaSemana));
             // .OrderByDescending(x => x.FranjasHorarias.Select(f => f.Desde));
 
-            var turnosDelDia = new TurnosPorDia{Dia = dia, Horarios = new List<TimeOnly>()};
+            var turnosDelDia = new TurnosPorDia(dia);
             
             foreach (var agenda in agendasQueIncluyenElDia) // Tengo que estar muy seguro que las agendas no se pisan
             {
@@ -114,8 +114,8 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
                     turnosDelDia.Horarios.AddRange(horariosPosibles); 
                 }
             }
-
-            result.Add(turnosDelDia);
+            if (turnosDelDia.Horarios.Count > 0)
+                result.Add(turnosDelDia);
         }
 
         return result;

@@ -2,25 +2,36 @@ import { es } from "date-fns/locale";
 import { useState } from "react";
 import { DayPicker, DayPickerDefaultProps } from "react-day-picker";
 
-function SelectorDia() {
-  const [selected, setSelected] = useState<Date | undefined>();
+interface IProps {
+  diasDisponibles: Date[];
+}
 
-  const bookedDays = [new Date(2024, 3, 19), new Date(2024, 3, 20)];
+function SelectorDia(props: IProps) {
+  const [selected, setSelected] = useState<Date | undefined>();
   const bookedStyle = { border: "1px solid currentColor" };
 
+  const handleSelect = (diaSeleccionado: Date) => {
+    if (
+      props.diasDisponibles.find(
+        (x) => x.getTime() === diaSeleccionado.getTime(),
+      )
+    )
+      setSelected(diaSeleccionado);
+  };
+
   return (
-    <div className="mt-14 rounded-xl border">
+    <div className="mt-14">
       <DayPicker
+        classNames={classNames}
         mode="single"
         locale={es}
         selected={selected}
-        onSelect={setSelected}
-        modifiers={{ booked: bookedDays }}
+        onSelect={handleSelect}
+        modifiers={{ booked: props.diasDisponibles }}
         modifiersStyles={{
           selected: { background: "#DA7DA3" },
           booked: bookedStyle,
         }}
-        classNames={classNames}
         // ESTO
         // FUNCIONA
         //   modifiersClassNames={{

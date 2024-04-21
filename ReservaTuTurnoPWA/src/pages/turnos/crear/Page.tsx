@@ -1,3 +1,4 @@
+import { endOfMonth, formatDate } from "date-fns";
 import { useState } from "react";
 import { Option } from "react-dropdown";
 import { SubmitHandler } from "react-hook-form";
@@ -46,16 +47,17 @@ const CrearTurnosPage = () => {
   const { data: turnosDisponibles } = useApiQuery({
     key: ["turnosDisponibles", servicioId, profesionalId],
     activado: !!servicioId && !!profesionalId,
-    fn: async () =>
-      await api.listarTurnosLibres(
+    fn: async () => {
+      const hoy = new Date();
+      const mesQueViene = new Date(hoy.getFullYear(), hoy.getMonth() + 2, 0);
+      return await api.listarTurnosLibres(
         profesionalId,
         servicioId,
-        "20-04-2024",
-        "20-05-2024",
-      ),
+        formatDate(hoy, "dd-MM-yyyy"),
+        formatDate(endOfMonth(mesQueViene), "dd-MM-yyyy"),
+      );
+    },
   });
-
-  console.log(turnosDisponibles);
 
   const [profesionalesDisponibles, setProfesionalesDisponibles] = useState<
     Option[]
@@ -110,7 +112,13 @@ const CrearTurnosPage = () => {
             required
           />
 
-          <SelectorDia />
+          <SelectorDia
+            diasDisponibles={
+              turnosDisponibles?.map(
+                (x) => new Date(x.anio, x.mesIndex, x.diaDelMes),
+              ) || []
+            }
+          />
 
           <BotonSubmit texto="Agregar" estaDeshabilitado={mutation.isPending} />
         </Form>
