@@ -1,19 +1,7 @@
-// const selections = {
-//   title: ["Mr.", "Mrs.", "Ms.", "Dr."],
-//   firstName: ["John", "Micheal", "Elizabeth"],
-//   lastName: ["Lennon", "Jackson", "Jordan", "Legend", "Taylor"],
-// };
-
 import ContenedorCentradoConMargenes from "../components/ContenedorCentradoConMargenes";
-import ModalPicker from "./ModalPicker";
+import ModalPicker from "../components/TimePicker";
 
 const Home = () => {
-  //   const [pickerValue, setPickerValue] = useState({
-  //     title: "Mr.",
-  //     firstName: "Micheal",
-  //     lastName: "Jordan",
-  //   });
-
   return (
     <ContenedorCentradoConMargenes>
       <ModalPicker />

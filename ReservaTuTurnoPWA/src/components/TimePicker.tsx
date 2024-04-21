@@ -2,37 +2,16 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useCallback, useState } from "react";
 import Picker, { PickerValue } from "react-mobile-picker";
 
-function getDayArray(year: number, month: number) {
-  const dayCount = new Date(year, month, 0).getDate();
-  return Array.from({ length: dayCount }, (_, i) =>
-    String(i + 1).padStart(2, "0"),
-  );
-}
-
 export default function ModalPicker() {
   const [isOpen, setIsOpen] = useState(false);
   const [pickerValue, setPickerValue] = useState<PickerValue>({
-    year: "1989",
-    month: "08",
-    day: "12",
+    hora: "08",
+    minutos: "00",
   });
 
-  const handlePickerChange = useCallback(
-    (newValue: PickerValue, key: string) => {
-      if (key === "day") {
-        setPickerValue(newValue);
-        return;
-      }
-
-      const { year, month } = newValue;
-      const newDayArray = getDayArray(Number(year), Number(month));
-      const newDay = newDayArray.includes(newValue.day)
-        ? newValue.day
-        : newDayArray[newDayArray.length - 1];
-      setPickerValue({ ...newValue, day: newDay });
-    },
-    [],
-  );
+  const handlePickerChange = useCallback((newValue: PickerValue) => {
+    setPickerValue(newValue);
+  }, []);
 
   return (
     <>
@@ -41,7 +20,7 @@ export default function ModalPicker() {
         onClick={() => setIsOpen(true)}
         className="ml-4 rounded-md bg-black/40 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
-        Click to set: {pickerValue.year}-{pickerValue.month}-{pickerValue.day}
+        {pickerValue.hora} : {pickerValue.minutos}
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -78,7 +57,7 @@ export default function ModalPicker() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Choose your birthday
+                    Seleccioná la hora
                   </Dialog.Title>
                   <div className="mt-2">
                     <Picker
@@ -86,12 +65,11 @@ export default function ModalPicker() {
                       onChange={handlePickerChange}
                       wheelMode="natural"
                     >
-                      <Picker.Column name="year">
-                        {Array.from(
-                          { length: 100 },
-                          (_, i) => `${1923 + i}`,
-                        ).map((year) => (
-                          <Picker.Item key={year} value={year}>
+                      <Picker.Column name="hora">
+                        {Array.from({ length: 24 }, (_, i) =>
+                          String(i).padStart(2, "0"),
+                        ).map((hora) => (
+                          <Picker.Item key={hora} value={hora}>
                             {({ selected }) => (
                               <div
                                 className={
@@ -100,17 +78,17 @@ export default function ModalPicker() {
                                     : "text-neutral-400"
                                 }
                               >
-                                {year}
+                                {hora}
                               </div>
                             )}
                           </Picker.Item>
                         ))}
                       </Picker.Column>
-                      <Picker.Column name="month">
-                        {Array.from({ length: 12 }, (_, i) =>
-                          String(i + 1).padStart(2, "0"),
-                        ).map((month) => (
-                          <Picker.Item key={month} value={month}>
+                      <Picker.Column name="minutos">
+                        {Array.from({ length: 4 }, (_, i) =>
+                          String(15 * i).padStart(2, "0"),
+                        ).map((minutos) => (
+                          <Picker.Item key={minutos} value={minutos}>
                             {({ selected }) => (
                               <div
                                 className={
@@ -119,27 +97,7 @@ export default function ModalPicker() {
                                     : "text-neutral-400"
                                 }
                               >
-                                {month}
-                              </div>
-                            )}
-                          </Picker.Item>
-                        ))}
-                      </Picker.Column>
-                      <Picker.Column name="day">
-                        {getDayArray(
-                          Number(pickerValue.year),
-                          Number(pickerValue.month),
-                        ).map((day) => (
-                          <Picker.Item key={day} value={day}>
-                            {({ selected }) => (
-                              <div
-                                className={
-                                  selected
-                                    ? "font-semibold text-neutral-900"
-                                    : "text-neutral-400"
-                                }
-                              >
-                                {day}
+                                {minutos}
                               </div>
                             )}
                           </Picker.Item>
