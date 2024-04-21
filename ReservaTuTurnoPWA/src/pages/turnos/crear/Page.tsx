@@ -132,10 +132,13 @@ const CrearTurnosPage = () => {
             diasDisponibles={diasDisponibles}
             alSeleccionarDia={alSeleccionarDia}
           />
-          {horariosDisponibles.map((x) => (
-            <div key={x}>{x}</div>
-          ))}
-
+          <div className="flex flex-wrap gap-x-2 gap-y-2">
+            {horariosDisponibles.map((x) => (
+              <div key={x} className="rounded-xl border border-grisclaro p-2">
+                {x.slice(0, -3)}
+              </div>
+            ))}
+          </div>
           <BotonSubmit texto="Agregar" estaDeshabilitado={mutation.isPending} />
         </Form>
       </div>
