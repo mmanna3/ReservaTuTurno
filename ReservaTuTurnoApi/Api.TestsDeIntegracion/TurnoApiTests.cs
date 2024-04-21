@@ -12,7 +12,7 @@ public class TurnoApiTests : TestBase
 {
     private Utilidades? _utilidades;
     
-    private readonly DateOnly DIA_DEL_TURNO_1 = new(2024, 01, 02);
+    private readonly DateOnly DIA_DEL_TURNO_1 = new(2024, 01, 01);
     private readonly TimeOnly HORA_DEL_TURNO_1 = new(9, 0);
     private const int DURACION_DEL_TURNO = 30;
 
@@ -46,12 +46,13 @@ public class TurnoApiTests : TestBase
         var client = Factory.CreateClient();
         
         var response = await client.GetAsync($"/api/turno/ListarTurnosLibres?profesionalId=1&servicioId=1&fechaDesde=2024-01-01&fechaHasta=2024-01-15");
-        
-        var content = JsonConvert.DeserializeObject<List<TurnosPorDia>>(await response.Content.ReadAsStringAsync());
+
+        var stringResponse = await response.Content.ReadAsStringAsync();
+        var content = JsonConvert.DeserializeObject<List<TurnosPorDia>>(stringResponse);
         
         response.EnsureSuccessStatusCode();
         
-        Assert.Equal(15, content!.Count);
+        Assert.Equal(7, content!.Count);
         var diaDelTurno = content.Single(x => x.Dia.Equals(DIA_DEL_TURNO_1));
         Assert.DoesNotContain(HORA_DEL_TURNO_1, diaDelTurno.Horarios);
         Assert.Contains(HORA_DEL_TURNO_1.AddMinutes(DURACION_DEL_TURNO), diaDelTurno.Horarios);

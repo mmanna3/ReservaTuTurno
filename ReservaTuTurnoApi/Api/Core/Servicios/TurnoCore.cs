@@ -146,8 +146,8 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
     {
         foreach (var turnoTomado in turnosTomados)
         {
-            var dia = turnosPosibles.Single(x => x.Dia == turnoTomado.Fecha);
-            dia.Horarios.Remove(turnoTomado.Hora);
+            var dia = turnosPosibles.SingleOrDefault(x => x.Dia == turnoTomado.Fecha);
+            dia?.Horarios.Remove(turnoTomado.Hora);
         }
 
         return turnosPosibles;
