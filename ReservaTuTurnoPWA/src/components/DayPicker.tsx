@@ -4,19 +4,23 @@ import { DayPicker, DayPickerDefaultProps } from "react-day-picker";
 
 interface IProps {
   diasDisponibles: Date[];
+  alSeleccionarDia: (arg: Date) => void;
 }
 
 function SelectorDia(props: IProps) {
   const [selected, setSelected] = useState<Date | undefined>();
   const bookedStyle = { border: "1px solid currentColor" };
 
-  const handleSelect = (diaSeleccionado: Date) => {
+  const handleSelect = (diaSeleccionado: Date | undefined) => {
     if (
+      diaSeleccionado &&
       props.diasDisponibles.find(
         (x) => x.getTime() === diaSeleccionado.getTime(),
       )
-    )
+    ) {
       setSelected(diaSeleccionado);
+      props.alSeleccionarDia(diaSeleccionado);
+    }
   };
 
   return (

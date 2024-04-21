@@ -22,6 +22,7 @@ const CrearTurnosPage = () => {
   const navigate = useNavigate();
 
   const [servicioId, setServicioId] = useState<number | undefined>(undefined);
+  const [horariosDisponibles, setHorariosDisponibles] = useState<string[]>([]);
   const [profesionalId, setProfesionalId] = useState<number | undefined>(
     undefined,
   );
@@ -83,6 +84,21 @@ const CrearTurnosPage = () => {
     setProfesionalesDisponibles(opcionesProfesionales);
   };
 
+  const diasDisponibles =
+    turnosDisponibles?.map((x) => new Date(x.anio, x.mesIndex, x.diaDelMes)) ||
+    [];
+
+  const alSeleccionarDia = (dia: Date) => {
+    const diaEnElArray = diasDisponibles.find(
+      (x) => x.getTime() === dia.getTime(),
+    );
+    if (diaEnElArray) {
+      const index = diasDisponibles.indexOf(diaEnElArray);
+      if (turnosDisponibles)
+        setHorariosDisponibles(turnosDisponibles[index].horarios || []);
+    }
+  };
+
   return (
     <>
       <div className="w-full">
@@ -113,12 +129,12 @@ const CrearTurnosPage = () => {
           />
 
           <SelectorDia
-            diasDisponibles={
-              turnosDisponibles?.map(
-                (x) => new Date(x.anio, x.mesIndex, x.diaDelMes),
-              ) || []
-            }
+            diasDisponibles={diasDisponibles}
+            alSeleccionarDia={alSeleccionarDia}
           />
+          {horariosDisponibles.map((x) => (
+            <div key={x}>{x}</div>
+          ))}
 
           <BotonSubmit texto="Agregar" estaDeshabilitado={mutation.isPending} />
         </Form>
