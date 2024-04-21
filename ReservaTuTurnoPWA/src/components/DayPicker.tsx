@@ -16,16 +16,16 @@ function SelectorDia() {
         selected={selected}
         onSelect={setSelected}
         modifiers={{ booked: bookedDays }}
-        modifiersStyles={{ booked: bookedStyle }}
-        //   classNames={classNames}
-        //   modifiersStyles={{
-        //     selected: { background: "red" },
-        //   }} ESTO FUNCIONA
-
+        modifiersStyles={{
+          selected: { background: "#DA7DA3" },
+          booked: bookedStyle,
+        }}
+        classNames={classNames}
+        // ESTO
+        // FUNCIONA
         //   modifiersClassNames={{
         //     selected: "bg-rosa",
         //   }}
-        classNames={classNames}
       />
     </div>
   );
