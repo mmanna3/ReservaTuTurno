@@ -3,23 +3,28 @@ import { ClockIcon } from "@heroicons/react/24/outline";
 import { Fragment, useCallback, useState } from "react";
 import Picker, { PickerValue } from "react-mobile-picker";
 
-interface IModalPicker {
+export interface ITimePicker {
+  valor: unknown;
   label: string;
+  required?: boolean;
+  hayError: boolean;
+  horaDefault?: string;
+  minutosDefault?: string;
+  onChange?: (x: string) => void;
 }
 
-export default function ModalPicker(props: IModalPicker) {
+export default function TimePicker(props: ITimePicker) {
   const [isOpen, setIsOpen] = useState(false);
+
   const [pickerValue, setPickerValue] = useState<PickerValue>({
-    hora: "08",
-    minutos: "00",
+    hora: (props.valor as string)?.slice(0, 2) || props.horaDefault || "00",
+    minutos: (props.valor as string)?.slice(-2) || props.minutosDefault || "00",
   });
 
   const handlePickerChange = useCallback((newValue: PickerValue) => {
     setPickerValue(newValue);
+    props.onChange && props.onChange(`${newValue.hora}:${newValue.minutos}`);
   }, []);
-
-  const errorMessage = null;
-  const required = null;
 
   return (
     <>
@@ -29,10 +34,10 @@ export default function ModalPicker(props: IModalPicker) {
       >
         <label
           className={`relative ml-1 w-auto bg-transparent px-1 text-[12px] text-gris peer-[.is-open]:!text-[#32BF8D] ${
-            errorMessage ? "!text-rojo" : ""
+            props.hayError ? "!text-rojo" : ""
           }`}
         >
-          {props.label} {required ? "*" : null}
+          {props.label} {props.required ? "*" : null}
         </label>
         <div className="ml-2 flex">
           <span className="mr-[2px]">{pickerValue.hora}</span> :
