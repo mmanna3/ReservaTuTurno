@@ -20,6 +20,7 @@
 
 /* React-day-picker centrado */
 .rdp {
+  --rdp-background-color: #fce8f1;
   margin: auto;
 }
 

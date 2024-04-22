@@ -24,7 +24,7 @@ function SelectorDia(props: IProps) {
   };
 
   return (
-    <div className="mt-14 flex justify-center rounded-2xl border p-3">
+    <div className="mt-14 flex justify-center rounded-2xl border p-5">
       <DayPicker
         classNames={classNames}
         mode="single"
