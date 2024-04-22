@@ -31,7 +31,7 @@ const Input = <T extends FieldValues>({
 
   let fieldName = props.name as string;
   if (props.array)
-    fieldName = `${props.array.parentName}.${props.array.index}.${props.name as string}`;
+    fieldName = `${props.array.parentName}.${props.array.index}.${fieldName}`;
 
   const errorMessage = getProp(errors, fieldName);
 
