@@ -75,17 +75,18 @@ export default function TimePicker(props: ITimePicker) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
+                  {/* <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Seleccioná la hora
-                  </Dialog.Title>
+                    Elegí el horario
+                  </Dialog.Title> */}
                   <div className="mt-2">
                     <Picker
                       value={pickerValue}
                       onChange={handlePickerChange}
                       wheelMode="natural"
+                      itemHeight={50}
                     >
                       <Picker.Column name="hora">
                         {Array.from({ length: 24 }, (_, i) =>
@@ -96,7 +97,7 @@ export default function TimePicker(props: ITimePicker) {
                               <div
                                 className={
                                   selected
-                                    ? "font-semibold text-neutral-900"
+                                    ? "font-semibold text-negro"
                                     : "text-neutral-400"
                                 }
                               >
@@ -115,7 +116,7 @@ export default function TimePicker(props: ITimePicker) {
                               <div
                                 className={
                                   selected
-                                    ? "font-semibold text-neutral-900"
+                                    ? "font-semibold text-negro"
                                     : "text-neutral-400"
                                 }
                               >
