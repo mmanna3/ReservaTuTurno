@@ -132,7 +132,7 @@ const CrearTurnosPage = () => {
             diasDisponibles={diasDisponibles}
             alSeleccionarDia={alSeleccionarDia}
           />
-          <div className="mt-8 flex flex-wrap justify-center gap-x-2 gap-y-2">
+          <div className="mt-6 flex flex-wrap justify-center gap-x-2 gap-y-2">
             {horariosDisponibles.map((x) => (
               <div key={x} className="rounded-xl border border-grisclaro p-2">
                 {x.slice(0, -3)}
