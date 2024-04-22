@@ -24,7 +24,7 @@ function SelectorDia(props: IProps) {
   };
 
   return (
-    <div className="mt-14">
+    <div className="mt-14 flex justify-center">
       <DayPicker
         classNames={classNames}
         mode="single"
@@ -36,11 +36,6 @@ function SelectorDia(props: IProps) {
           selected: { background: "#DA7DA3" },
           booked: bookedStyle,
         }}
-        // ESTO
-        // FUNCIONA
-        //   modifiersClassNames={{
-        //     selected: "bg-rosa",
-        //   }}
       />
     </div>
   );
