@@ -42,7 +42,7 @@ export default function TimePicker(props: ITimePicker) {
         <div className="ml-2 flex">
           <span className="mr-[2px]">{pickerValue.hora}</span> :
           <span className="ml-[2px]">{pickerValue.minutos}</span>
-          <ClockIcon className="ml-2 mt-1 h-4 w-4 text-negro" />
+          <ClockIcon className="ml-auto mr-1 mt-[1.5px] h-5 w-5 text-negro" />
         </div>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
