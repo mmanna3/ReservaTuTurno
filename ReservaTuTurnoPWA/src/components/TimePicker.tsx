@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { ClockIcon } from "@heroicons/react/24/outline";
-import { Fragment, useCallback, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import Picker, { PickerValue } from "react-mobile-picker";
 
 export interface ITimePicker {
@@ -16,10 +16,16 @@ export interface ITimePicker {
 export default function TimePicker(props: ITimePicker) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [pickerValue, setPickerValue] = useState<PickerValue>({
+  const valorDefault = {
     hora: (props.valor as string)?.slice(0, 2) || props.horaDefault || "00",
     minutos: (props.valor as string)?.slice(-2) || props.minutosDefault || "00",
-  });
+  };
+
+  const [pickerValue, setPickerValue] = useState<PickerValue>(valorDefault);
+
+  useEffect(() => {
+    handlePickerChange(valorDefault);
+  }, []);
 
   const handlePickerChange = useCallback((newValue: PickerValue) => {
     setPickerValue(newValue);
