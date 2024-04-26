@@ -1,8 +1,9 @@
-import { useLocation, useRouteError } from "react-router-dom";
+import { useLocation, useNavigate, useRouteError } from "react-router-dom";
 
 const ErrorPage: React.FC = () => {
   const error: unknown = useRouteError();
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <div className="max-w-7xl text-negro">
@@ -21,6 +22,13 @@ const ErrorPage: React.FC = () => {
                 (error as { statusText?: string })?.statusText}
             </i>
           </p>
+          <button
+            onClick={() => navigate(-1)}
+            type="button"
+            className="mt-4 rounded-xl border border-gris px-6 py-2 text-sm text-gris"
+          >
+            Volver
+          </button>
         </div>
       </div>
     </div>
