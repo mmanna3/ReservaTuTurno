@@ -41,3 +41,7 @@ alias remove-migration="dotnet ef migrations remove"
 - Borar la última (sin aplicar): `remove-migration`
 - Actualizar la BD: `update-database`
 - Revertir migraciones aplicadas: `update-database NombreUltimaMigracionBuena`
+
+# Hosting
+
+- Web application firewall: Detection only (si no, no permite PUT y DELETE)
