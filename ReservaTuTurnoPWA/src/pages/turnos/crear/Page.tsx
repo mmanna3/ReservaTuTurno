@@ -12,9 +12,9 @@ import {
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import { BotonSubmit } from "../../../components/BotonSubmit";
-import SelectorDia from "../../../components/DayPicker";
 import { Dropdown } from "../../../components/Dropdown";
 import Form from "../../../components/Form";
+import FormDayPicker from "../../../components/FormDayPicker";
 import Titulo from "../../../components/Titulo";
 import { convertirEnOptions, generarRandom } from "../../../utils";
 
@@ -128,9 +128,11 @@ const CrearTurnosPage = () => {
             required
           />
 
-          <SelectorDia
+          <FormDayPicker<TurnoDTO>
             diasDisponibles={diasDisponibles}
-            alSeleccionarDia={alSeleccionarDia}
+            onChange={alSeleccionarDia}
+            name="fecha"
+            required
           />
           <div className="mt-6 flex flex-wrap justify-center gap-x-2 gap-y-2">
             {horariosDisponibles.map((x) => (

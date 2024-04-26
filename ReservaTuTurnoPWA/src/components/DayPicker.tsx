@@ -2,12 +2,16 @@ import { es } from "date-fns/locale";
 import { useState } from "react";
 import { DayPicker, DayPickerDefaultProps } from "react-day-picker";
 
-interface IProps {
+export interface IDayPicker {
+  valor: unknown;
+  label?: string;
+  required?: boolean;
+  hayError: boolean;
   diasDisponibles: Date[];
-  alSeleccionarDia: (arg: Date) => void;
+  onChange?: (arg: Date) => void;
 }
 
-function SelectorDia(props: IProps) {
+function SelectorDia(props: IDayPicker) {
   const [selected, setSelected] = useState<Date | undefined>();
   const bookedStyle = { border: "1px solid currentColor" };
 
@@ -19,7 +23,7 @@ function SelectorDia(props: IProps) {
       )
     ) {
       setSelected(diaSeleccionado);
-      props.alSeleccionarDia(diaSeleccionado);
+      props.onChange && props.onChange(diaSeleccionado);
     }
   };
 
