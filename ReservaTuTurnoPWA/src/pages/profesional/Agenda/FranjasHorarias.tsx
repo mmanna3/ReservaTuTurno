@@ -15,6 +15,8 @@ export function FranjasHorarias(props: IProps) {
 
   const { getValues } = useFormContext();
 
+  if (fields.length == 0) append({});
+
   return (
     <>
       {fields.map((field, index) => (
