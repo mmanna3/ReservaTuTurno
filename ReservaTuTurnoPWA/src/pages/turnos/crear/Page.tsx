@@ -15,6 +15,7 @@ import { BotonSubmit } from "../../../components/BotonSubmit";
 import { Dropdown } from "../../../components/Dropdown";
 import Form from "../../../components/Form";
 import FormDayPicker from "../../../components/FormDayPicker";
+import FormHiddenInput from "../../../components/FormHiddenInput";
 import Titulo from "../../../components/Titulo";
 import { convertirEnOptions, generarRandom } from "../../../utils";
 
@@ -26,6 +27,7 @@ const CrearTurnosPage = () => {
   const [profesionalId, setProfesionalId] = useState<number | undefined>(
     undefined,
   );
+  const [horaSeleccionada, setHoraSeleccionada] = useState<string>("");
 
   const mutation = useApiMutation({
     mensajeDeExito: "Turno registrado",
@@ -37,7 +39,8 @@ const CrearTurnosPage = () => {
   });
 
   const onSubmit: SubmitHandler<TurnoDTO> = (data) => {
-    mutation.mutate(data);
+    console.log(data);
+    // mutation.mutate(data);
   };
 
   const { data: serviciosConProfesionales } = useApiQuery({
@@ -59,6 +62,10 @@ const CrearTurnosPage = () => {
       );
     },
   });
+
+  const onHoraClick = (hora: string) => {
+    setHoraSeleccionada(hora);
+  };
 
   const [profesionalesDisponibles, setProfesionalesDisponibles] = useState<
     Option[]
@@ -136,11 +143,21 @@ const CrearTurnosPage = () => {
           />
           <div className="mt-6 flex flex-wrap justify-center gap-x-2 gap-y-2">
             {horariosDisponibles.map((x) => (
-              <div key={x} className="rounded-xl border border-grisclaro p-2">
+              <button
+                type="button"
+                key={x}
+                onClick={() => onHoraClick(x)}
+                className={
+                  horaSeleccionada === x
+                    ? "rounded-xl bg-rosa p-2 text-blanco"
+                    : "rounded-xl border border-grisclaro p-2"
+                }
+              >
                 {x.slice(0, -3)}
-              </div>
+              </button>
             ))}
           </div>
+          <FormHiddenInput<TurnoDTO> name="hora" value={horaSeleccionada} />
           <BotonSubmit texto="Agregar" estaDeshabilitado={mutation.isPending} />
         </Form>
       </div>
