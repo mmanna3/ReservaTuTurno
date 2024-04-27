@@ -15,6 +15,9 @@ public class TurnoRepo : RepositorioABM<Turno>, ITurnoRepo
     {
         return Context.Set<Turno>()
             .Include(x => x.ServicioProfesional)
+                .ThenInclude(t => t.Profesional)
+            .Include(x => x.ServicioProfesional)
+                .ThenInclude(t => t.Servicio)
             .AsQueryable();
     }
 
