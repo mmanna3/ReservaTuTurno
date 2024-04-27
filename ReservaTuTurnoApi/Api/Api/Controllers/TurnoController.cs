@@ -1,3 +1,4 @@
+using System.Globalization;
 using Api.Core.DTOs;
 using Api.Core.Otros;
 using Api.Core.Servicios.Interfaces;
@@ -28,8 +29,8 @@ namespace Api.Api.Controllers
             
             try
             {
-                desdeDate = DateOnly.Parse(fechaDesde);
-                hastaDate = DateOnly.Parse(fechaHasta);
+                desdeDate = DateOnly.Parse(fechaDesde, new CultureInfo("es-AR"));
+                hastaDate = DateOnly.Parse(fechaHasta, new CultureInfo("es-AR"));
             }
             catch (Exception)
             {
