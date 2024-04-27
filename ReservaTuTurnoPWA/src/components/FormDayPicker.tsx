@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../utils";
 import DayPicker, { IDayPicker } from "./DayPicker";
@@ -26,7 +27,6 @@ const FormDayPicker = <T extends FieldValues>(props: IFormDayPicker<T>) => {
   const errorMessage = getProp(errors, fieldName);
 
   const customOnChange = (x: Date) => {
-    // ¿Transformar fecha para el back? Usar una constante para el formato en los dos lugares
     props.onChange && props.onChange(x);
   };
 
@@ -44,7 +44,7 @@ const FormDayPicker = <T extends FieldValues>(props: IFormDayPicker<T>) => {
             hayError={!!errorMessage}
             onChange={(e) => {
               customOnChange(e);
-              onChange(e);
+              onChange(format(e, "dd-MM-yyyy"));
             }}
           />
         )}

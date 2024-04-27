@@ -25,7 +25,7 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
         _agendaRepo = agendaRepo;
     }
 
-    protected override async void AntesDeCrear(TurnoDTO dto, Turno entidad)
+    protected override async Task<Turno> AntesDeCrear(TurnoDTO dto, Turno entidad)
     {
         var servicio = await _servicioRepo.ObtenerPorId(dto.ServicioId);
 
@@ -36,7 +36,8 @@ public class TurnoCore : ABMCore<ITurnoRepo, Turno, TurnoDTO>, ITurnoCore
         if (servicioProfesional == null)
             throw new ExcepcionControlada("El profesional no brinda el servicio");
 
-        entidad.ServicioProfesional = servicioProfesional;
+        entidad.ServicioProfesionalId = servicioProfesional.Id;
+        return entidad;
     }
     
     public async Task<IList<TurnosPorDia>> ListarTurnosLibres(int? profesionalId, int servicioId, DateOnly fechaDesde,

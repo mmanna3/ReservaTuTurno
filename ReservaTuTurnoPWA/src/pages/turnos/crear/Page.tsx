@@ -39,8 +39,8 @@ const CrearTurnosPage = () => {
   });
 
   const onSubmit: SubmitHandler<TurnoDTO> = (data) => {
-    console.log(data);
-    // mutation.mutate(data);
+    // console.log(data);
+    mutation.mutate(data);
   };
 
   const { data: serviciosConProfesionales } = useApiQuery({
