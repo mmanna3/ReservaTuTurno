@@ -32,7 +32,7 @@ public class MapperConfig : Profile
         CreateMap<TurnoDTO, Turno>();
         
         CreateMap<string, TimeOnly>().ConvertUsing(s => TimeOnly.Parse(s));
-        CreateMap<TimeOnly, string>().ConvertUsing(t => t.ToString("HH:mm"));
-        CreateMap<string, DateOnly>().ConvertUsing(s => DateOnly.Parse(s));
+        CreateMap<TimeOnly, string>().ConvertUsing(t => t.ToString(Utilidades.FormatoHora));
+        CreateMap<string, DateOnly>().ConvertUsing(s => DateOnly.Parse(s, Utilidades.CultureInfoAr));
     }
 }
