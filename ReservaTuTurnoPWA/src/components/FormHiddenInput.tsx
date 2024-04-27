@@ -14,13 +14,16 @@ interface InputProps<T extends FieldValues> {
 const FormHiddenInput = <T extends FieldValues>({
   ...props
 }: InputProps<T>) => {
-  const { register } = useFormContext();
+  const { register, setValue } = useFormContext();
 
   let fieldName = props.name as string;
   if (props.array)
     fieldName = `${props.array.parentName}.${props.array.index}.${props.name as string}`;
 
-  return <input value={props.value} type="hidden" {...register(fieldName)} />;
+  console.log("aaaa");
+  setValue(fieldName, props.value);
+
+  return <input type="hidden" {...register(fieldName)} />;
 };
 
 export default FormHiddenInput;
