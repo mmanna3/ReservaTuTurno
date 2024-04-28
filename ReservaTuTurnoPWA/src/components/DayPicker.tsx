@@ -1,6 +1,6 @@
 import { es } from "date-fns/locale";
 import { useState } from "react";
-import { DayPicker, DayPickerDefaultProps } from "react-day-picker";
+import { DayPicker, DayPickerDefaultProps, Matcher } from "react-day-picker";
 
 export interface IDayPicker {
   valor: unknown;
@@ -13,7 +13,6 @@ export interface IDayPicker {
 
 function SelectorDia(props: IDayPicker) {
   const [selected, setSelected] = useState<Date | undefined>();
-  const bookedStyle = { border: "1px solid currentColor" };
 
   const handleSelect = (diaSeleccionado: Date | undefined) => {
     if (
@@ -27,6 +26,11 @@ function SelectorDia(props: IDayPicker) {
     }
   };
 
+  const functionMatcher: Matcher = (day: Date) => {
+    const dateSet = new Set(props.diasDisponibles.map((d) => d.getTime()));
+    return !dateSet.has(day.getTime());
+  };
+
   return (
     <div className="mt-14 flex justify-center">
       <DayPicker
@@ -35,10 +39,9 @@ function SelectorDia(props: IDayPicker) {
         locale={es}
         selected={selected}
         onSelect={handleSelect}
-        modifiers={{ booked: props.diasDisponibles }}
+        modifiers={{ disabled: functionMatcher }}
         modifiersStyles={{
           selected: { background: "#DA7DA3" },
-          booked: bookedStyle,
         }}
       />
     </div>
