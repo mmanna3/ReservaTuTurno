@@ -8,7 +8,7 @@ import {
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import { Dropdown } from "../../../components/Dropdown";
 import FormHiddenInput from "../../../components/FormHiddenInput";
-import Input from "../../../components/Input";
+import FormInput from "../../../components/FormInput";
 import { Subtitulo } from "../../../components/Subtitulo";
 import {
   DuracionDelServicioArray,
@@ -66,7 +66,7 @@ const Equipo = () => {
             }}
           />
           <div className="flex gap-2">
-            <Input<ServiciosDelProfesionalDTO>
+            <FormInput<ServiciosDelProfesionalDTO>
               name="precio"
               label="Precio"
               type="number"

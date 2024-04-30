@@ -6,7 +6,7 @@ import { ProfesionalDTO } from "../../api/clients";
 import useApiMutation from "../../api/custom-hooks/useApiMutation";
 import { BotonSubmit } from "../../components/BotonSubmit";
 import Form from "../../components/Form";
-import Input from "../../components/Input";
+import FormInput from "../../components/FormInput";
 import Titulo from "../../components/Titulo";
 import { generarRandom } from "../../utils";
 
@@ -34,10 +34,18 @@ const CrearProfesionalPage = () => {
       <div className="w-full">
         <Form<ProfesionalDTO> onSubmit={onSubmit}>
           <Titulo>Nuevo profesional</Titulo>
-          <Input<ProfesionalDTO> name="nombre" label="Nombre" required />
-          <Input<ProfesionalDTO> name="apellido" label="Apellido" required />
-          <Input<ProfesionalDTO> name="email" label="Email" required />
-          <Input<ProfesionalDTO> name="telefono" label="Teléfono" required />
+          <FormInput<ProfesionalDTO> name="nombre" label="Nombre" required />
+          <FormInput<ProfesionalDTO>
+            name="apellido"
+            label="Apellido"
+            required
+          />
+          <FormInput<ProfesionalDTO> name="email" label="Email" required />
+          <FormInput<ProfesionalDTO>
+            name="telefono"
+            label="Teléfono"
+            required
+          />
           <BotonSubmit texto="Agregar" estaDeshabilitado={mutation.isPending} />
         </Form>
       </div>

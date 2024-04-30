@@ -20,7 +20,7 @@ interface InputProps<T extends FieldValues>
   array?: IArrayProps;
 }
 
-const Input = <T extends FieldValues>({
+const FormInput = <T extends FieldValues>({
   required = false,
   ...props
 }: InputProps<T>) => {
@@ -64,4 +64,4 @@ const Input = <T extends FieldValues>({
   );
 };
 
-export default Input;
+export default FormInput;

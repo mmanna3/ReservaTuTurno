@@ -5,7 +5,7 @@ import { CategoriaDeServicioDTO } from "../../api/clients";
 import useApiMutation from "../../api/custom-hooks/useApiMutation";
 import { BotonSubmit } from "../../components/BotonSubmit";
 import Form from "../../components/Form";
-import Input from "../../components/Input";
+import FormInput from "../../components/FormInput";
 import Titulo from "../../components/Titulo";
 
 const CrearCategoriaDeServicio = () => {
@@ -27,8 +27,15 @@ const CrearCategoriaDeServicio = () => {
     <>
       <Form<CategoriaDeServicioDTO> onSubmit={onSubmit}>
         <Titulo>Nueva categoría de servicio</Titulo>
-        <Input<CategoriaDeServicioDTO> name="nombre" label="Nombre" required />
-        <Input<CategoriaDeServicioDTO> name="descripcion" label="Descripción" />
+        <FormInput<CategoriaDeServicioDTO>
+          name="nombre"
+          label="Nombre"
+          required
+        />
+        <FormInput<CategoriaDeServicioDTO>
+          name="descripcion"
+          label="Descripción"
+        />
         <BotonSubmit estaDeshabilitado={mutation.isPending} />
       </Form>
     </>
