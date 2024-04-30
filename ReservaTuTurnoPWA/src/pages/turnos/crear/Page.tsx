@@ -11,6 +11,7 @@ import {
 } from "../../../api/clients";
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
+import Autocomplete, { Opcion } from "../../../components/Autocomplete";
 import { BotonSubmit } from "../../../components/BotonSubmit";
 import { Dropdown } from "../../../components/Dropdown";
 import Form from "../../../components/Form";
@@ -106,11 +107,18 @@ const CrearTurnosPage = () => {
     }
   };
 
+  const books: Opcion[] = [
+    { id: "book-1", valor: "To Kill a Mockingbird" },
+    { id: "book-2", valor: "War and Peace" },
+    { id: "book-3", valor: "The Idiot" },
+  ];
+
   return (
     <>
       <div className="w-full">
         <Form<TurnoDTO> onSubmit={onSubmit}>
           <Titulo>Nuevo turno</Titulo>
+          <Autocomplete label="libros" opciones={books} />
           <Dropdown<TurnoDTO>
             name="servicioId"
             label="Servicio"
