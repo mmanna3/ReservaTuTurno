@@ -1,4 +1,5 @@
 import cx from "classnames";
+
 interface InputProps
   extends Omit<
     React.DetailedHTMLProps<
@@ -7,7 +8,7 @@ interface InputProps
     >,
     "name"
   > {
-  name: string;
+  name?: string;
   label?: string;
   esRequerido?: boolean;
   hayError: boolean;
@@ -31,6 +32,7 @@ const Input = (props: InputProps) => {
       <input
         // Acá filtrar solo las que son props del input
         {...rest}
+        onChange={props.onChange}
         data-testid={`input-${name}`}
         className={cx(
           hayError
