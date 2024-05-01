@@ -1,8 +1,8 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { FranjaHorariaDTO } from "../../../api/clients";
-import FormHiddenInput from "../../../components/FormHiddenInput";
-import FormTimePicker from "../../../components/FormTimePicker";
+import FormHiddenInput from "../../../ui/FormHiddenInput";
+import FormTimePicker from "../../../ui/FormTimePicker";
 
 interface IProps {
   parentName: string;

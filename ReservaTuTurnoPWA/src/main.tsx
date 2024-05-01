@@ -4,7 +4,6 @@ import "react-day-picker/dist/style.css";
 import ReactDOM from "react-dom/client";
 import "react-dropdown/style.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import ErrorBoundary from "./components/ErrorBoundary.tsx";
 import "./index.css";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Home from "./pages/HomePage.tsx";
@@ -21,6 +20,7 @@ import CrearServicio from "./pages/servicio/crear/Page.tsx";
 import EditarServicio from "./pages/servicio/editar/Page.tsx";
 import Turnos from "./pages/turnos/TurnosPage.tsx";
 import CrearTurno from "./pages/turnos/crear/Page.tsx";
+import ErrorBoundary from "./ui/ErrorBoundary.tsx";
 
 const router = createBrowserRouter([
   {

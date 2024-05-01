@@ -1,10 +1,10 @@
 import { api } from "../../api/api";
 import useApiQuery from "../../api/custom-hooks/useApiQuery";
-import { BotonLink } from "../../components/BotonLink";
-import ContenedorCentradoConMargenes from "../../components/ContenedorCentradoConMargenes";
-import ContenidoConSpinnerYError from "../../components/ContenidoConSpinnerYError";
-import { Subtitulo } from "../../components/Subtitulo";
-import Titulo from "../../components/Titulo";
+import { BotonLink } from "../../ui/BotonLink";
+import ContenedorCentradoConMargenes from "../../ui/ContenedorCentradoConMargenes";
+import ContenidoConSpinnerYError from "../../ui/ContenidoConSpinnerYError";
+import { Subtitulo } from "../../ui/Subtitulo";
+import Titulo from "../../ui/Titulo";
 import { ServicioListaItem } from "./ServicioListaItem";
 
 const ListaDeServicios = () => {

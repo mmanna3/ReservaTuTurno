@@ -1,5 +1,5 @@
-import ContenedorCentradoConMargenes from "../../components/ContenedorCentradoConMargenes";
-import Titulo from "../../components/Titulo";
+import ContenedorCentradoConMargenes from "../../ui/ContenedorCentradoConMargenes";
+import Titulo from "../../ui/Titulo";
 
 const ClientesPage = () => {
   return (

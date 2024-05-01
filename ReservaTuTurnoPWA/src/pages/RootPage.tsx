@@ -1,7 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router-dom";
-import Footer from "../components/Footer";
-import { Header } from "../components/Header";
+import Footer from "../ui/Footer";
+import { Header } from "../ui/Header";
 
 const Root = () => {
   return (

@@ -1,4 +1,4 @@
-import ContenedorCentradoConMargenes from "../components/ContenedorCentradoConMargenes";
+import ContenedorCentradoConMargenes from "../ui/ContenedorCentradoConMargenes";
 import FrambuesaIcono from "./../assets/icono-frambuesa.svg";
 
 const Home = () => {

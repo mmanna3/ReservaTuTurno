@@ -3,10 +3,10 @@ import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../../api/api";
 import { ProfesionalDTO } from "../../api/clients";
 import useApiQuery from "../../api/custom-hooks/useApiQuery";
-import { BotonLink } from "../../components/BotonLink";
-import ContenedorCentradoConMargenes from "../../components/ContenedorCentradoConMargenes";
-import ContenidoConSpinnerYError from "../../components/ContenidoConSpinnerYError";
-import Titulo from "../../components/Titulo";
+import { BotonLink } from "../../ui/BotonLink";
+import ContenedorCentradoConMargenes from "../../ui/ContenedorCentradoConMargenes";
+import ContenidoConSpinnerYError from "../../ui/ContenidoConSpinnerYError";
+import Titulo from "../../ui/Titulo";
 
 const ListaDeProfesionales = () => {
   const [searchParams] = useSearchParams();

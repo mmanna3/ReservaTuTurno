@@ -6,10 +6,10 @@ import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
-import { BotonSubmit } from "../../../components/BotonSubmit";
-import ContenidoConSpinnerYError from "../../../components/ContenidoConSpinnerYError";
-import Form from "../../../components/Form";
-import Titulo from "../../../components/Titulo";
+import { BotonSubmit } from "../../../ui/BotonSubmit";
+import ContenidoConSpinnerYError from "../../../ui/ContenidoConSpinnerYError";
+import Form from "../../../ui/Form";
+import Titulo from "../../../ui/Titulo";
 import CamposBasicos from "../components/CamposBasicos";
 import Equipo from "../components/Equipo";
 
