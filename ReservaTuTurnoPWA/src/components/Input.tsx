@@ -25,6 +25,7 @@ const Input = (props: InputProps) => {
       </label>
 
       <input
+        // Acá filtrar solo las que son props del input
         {...props}
         className={`text-10 py-55-rem block h-16 w-full rounded-xl bg-grisclarito p-2.5 pl-5 pt-7 text-base text-negro placeholder-grisclaro !shadow-none focus:!border-verde focus:!outline-verde focus:!ring-verde focus-visible:text-verde focus-visible:!outline-verde ${
           props.hayError &&

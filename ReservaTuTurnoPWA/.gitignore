@@ -24,3 +24,5 @@ dist-ssr
 # Es de vite-pwa
 dev-dist
 src/api/dtos
+
+*storybook.log
