@@ -31,7 +31,7 @@ export const ConFoco: Story = {
   args: {
     name: "nombre",
     label: "Nombre",
-    esRequerido: true,
+    esRequerido: false,
     hayError: false,
   },
   play: async ({ canvasElement }) => {
@@ -48,7 +48,7 @@ export const ConError: Story = {
   args: {
     name: "nombre",
     label: "Nombre",
-    esRequerido: true,
+    esRequerido: false,
     hayError: true,
   },
   play: async ({ canvasElement }) => {

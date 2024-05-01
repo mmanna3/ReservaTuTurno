@@ -1,3 +1,4 @@
+import cx from "classnames";
 interface InputProps
   extends Omit<
     React.DetailedHTMLProps<
@@ -17,9 +18,10 @@ const Input = (props: InputProps) => {
     <div className="group relative z-0 -my-[0.3rem] w-full text-left">
       <label
         htmlFor={props.name}
-        className={`relative left-4 top-[1.8rem] w-auto bg-transparent px-1 text-[12px] text-gris group-focus-within:font-bold group-focus-within:text-verde group-focus-visible:text-verde ${
-          props.hayError && "!text-rojo"
-        }`}
+        className={cx(
+          props.hayError && "!text-rojo",
+          "relative left-4 top-[1.8rem] w-auto bg-transparent px-1 text-[12px] text-gris group-focus-within:font-bold group-focus-within:text-verde group-focus-visible:text-verde",
+        )}
       >
         {props.label} {props.esRequerido ? "*" : null}
       </label>
@@ -28,10 +30,12 @@ const Input = (props: InputProps) => {
         // Acá filtrar solo las que son props del input
         {...props}
         data-testid={`input-${props.name}`}
-        className={`text-10 py-55-rem block h-16 w-full rounded-xl bg-grisclarito p-2.5 pl-5 pt-7 text-base text-negro placeholder-grisclaro !shadow-none focus:!border-verde focus:!outline-verde focus:!ring-verde focus-visible:text-verde focus-visible:!outline-verde ${
-          props.hayError &&
-          "border-rojo focus:border-rojo focus:ring-rojo focus-visible:outline-rojo"
-        }`}
+        className={cx(
+          props.hayError
+            ? "border-rojo focus:border-rojo focus:ring-rojo focus-visible:text-rojo focus-visible:outline-rojo"
+            : "focus:border-verde focus:outline-verde focus:ring-verde focus-visible:text-verde focus-visible:outline-verde",
+          "text-10 py-55-rem block h-16 w-full rounded-xl bg-grisclarito p-2.5 pl-5 pt-7 text-base text-negro placeholder-grisclaro !shadow-none",
+        )}
       />
     </div>
   );
