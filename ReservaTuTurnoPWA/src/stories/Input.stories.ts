@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
+import { userEvent, within } from "@storybook/test";
 import Input from "../components/Input";
 
 const meta = {
@@ -12,7 +12,7 @@ const meta = {
   //   argTypes: {
   //     backgroundColor: { control: "color" },
   //   },
-  args: { onClick: fn() },
+  //   args: { onClick: fn() },
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -27,11 +27,36 @@ export const Requerido: Story = {
   },
 };
 
-export const RequeridoConError: Story = {
+export const ConFoco: Story = {
   args: {
-    name: "",
+    name: "nombre",
+    label: "Nombre",
+    esRequerido: true,
+    hayError: false,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const nombreInput = canvas.getByTestId("input-nombre");
+    await userEvent.type(nombreInput, "Friedrich", {
+      delay: 100,
+    });
+    await userEvent.click(nombreInput);
+  },
+};
+
+export const ConError: Story = {
+  args: {
+    name: "nombre",
     label: "Nombre",
     esRequerido: true,
     hayError: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const nombreInput = canvas.getByTestId("input-nombre");
+    await userEvent.type(nombreInput, "Friedrich", {
+      delay: 100,
+    });
+    await userEvent.click(nombreInput);
   },
 };
