@@ -1,7 +1,9 @@
+import Modal from "@ui/modal";
 import cx from "classnames";
 import { useCombobox } from "downshift";
 import { useState } from "react";
 import Input from "./input";
+import InputDisplay from "./input-display";
 
 function filtrar(loEscrito: string) {
   const enMinuscula = loEscrito.toLowerCase();
@@ -29,7 +31,7 @@ export default function ComboBox(props: IProps) {
   const [items, setItems] = useState(props.opciones);
   const [selectedItem, setSelectedItem] = useState<Opcion | null>(null);
   const {
-    isOpen,
+    // isOpen,
     // getToggleButtonProps,
     // getLabelProps,
     getMenuProps,
@@ -48,6 +50,9 @@ export default function ComboBox(props: IProps) {
     onSelectedItemChange: ({ selectedItem: newSelectedItem }) =>
       setSelectedItem(newSelectedItem),
   });
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
       {/* <div className="flex w-72 flex-col gap-1"> */}
@@ -57,12 +62,15 @@ export default function ComboBox(props: IProps) {
         </label> */}
         {/* <div className="flex gap-0.5 bg-white shadow-sm"> */}
         <div>
-          <Input
-            label="El nombre del campo"
-            placeholder="Best book ever"
+          <InputDisplay
             // className="w-full p-1.5"
-            {...getInputProps()}
-          />
+            // {...getInputProps()}
+            onClick={() => setIsOpen(true)}
+            label="El nombre del campo"
+            hayError={false}
+          >
+            <>{selectedItem ? selectedItem.valor : "Best book ever"}</>
+          </InputDisplay>
           {/* <button
             aria-label="toggle menu"
             className="px-2"
@@ -73,28 +81,27 @@ export default function ComboBox(props: IProps) {
           </button> */}
         </div>
       </div>
-      <ul
-        className={`absolute z-10 mt-1 max-h-80 w-72 overflow-scroll bg-white p-0 shadow-md ${
-          !(isOpen && items.length) && "hidden"
-        }`}
-        {...getMenuProps()}
-      >
-        {isOpen &&
-          items.map((item, index) => (
-            <li
-              className={cx(
-                highlightedIndex === index && "bg-blue-300",
-                selectedItem === item && "font-bold",
-                "flex flex-col px-3 py-2 shadow-sm",
-              )}
-              key={item.id}
-              {...getItemProps({ item, index })}
-            >
-              <span>{item.valor}</span>
-              {/* <span className="text-sm text-gray-700">{item.author}</span> */}
-            </li>
-          ))}
-      </ul>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+        <div>
+          <Input label="Seleccioná" {...getInputProps()} />
+          <ul {...getMenuProps()}>
+            {items.map((item, index) => (
+              <li
+                className={cx(
+                  highlightedIndex === index && "bg-blue-300",
+                  selectedItem === item && "font-bold",
+                  "flex flex-col px-3 py-2 shadow-sm",
+                )}
+                key={item.id}
+                {...getItemProps({ item, index })}
+              >
+                <span>{item.valor}</span>
+                {/* <span className="text-sm text-gray-700">{item.author}</span> */}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Modal>
       {/* <p>{selectedItem && `Seleccionaste ${selectedItem.valor}.`}</p> */}
     </div>
   );
