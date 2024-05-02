@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/test";
-import Input from "../ui/Input";
+import Input from "../ui/user-input/input";
 
 const meta = {
   title: "Input",

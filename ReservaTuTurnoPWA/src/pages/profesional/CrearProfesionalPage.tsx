@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import { ProfesionalDTO } from "../../api/clients";
 import useApiMutation from "../../api/custom-hooks/useApiMutation";
-import { BotonSubmit } from "../../ui/BotonSubmit";
-import Form from "../../ui/Form";
-import FormInput from "../../ui/FormInput";
-import Titulo from "../../ui/Titulo";
+import Titulo from "../../ui/titulo";
+import Form from "../../ui/user-input/form/form";
+import { BotonSubmit } from "../../ui/user-input/form/form-boton-submit";
+import FormInput from "../../ui/user-input/form/form-input";
 import { generarRandom } from "../../utils";
 
 const CrearProfesionalPage = () => {

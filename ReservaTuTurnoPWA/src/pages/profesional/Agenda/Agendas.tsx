@@ -10,10 +10,10 @@ import {
 } from "../../../api/clients";
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
-import { BotonSubmit } from "../../../ui/BotonSubmit";
-import ContenidoConSpinnerYError from "../../../ui/ContenidoConSpinnerYError";
-import Form from "../../../ui/Form";
-import Titulo from "../../../ui/Titulo";
+import ContenidoConSpinnerYError from "../../../ui/contenido-con-spinner-y-error";
+import Titulo from "../../../ui/titulo";
+import Form from "../../../ui/user-input/form/form";
+import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";
 import AgendasDelProfesional from "./AgendasDelProfesional";
 
 const Agendas = () => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { AgendaDTO } from "../../../api/clients";
-import FormHiddenInput from "../../../ui/FormHiddenInput";
+import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
 import { DiaDeLaSemana } from "../../../utils";
 
 interface IDiaCheckbox {

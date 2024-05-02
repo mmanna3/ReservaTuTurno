@@ -5,7 +5,7 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-import ContenedorCentradoConMargenes from "./ContenedorCentradoConMargenes";
+import ContenedorCentradoConMargenes from "../../contenedor-centrado-con-imagenes";
 
 type PropsWithChildren<P> = P & { children?: ReactNode };
 

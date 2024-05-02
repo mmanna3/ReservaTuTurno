@@ -1,6 +1,6 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { getProp } from "../utils";
-import TimePicker, { ITimePicker } from "./TimePicker";
+import { getProp } from "../../../utils";
+import TimePicker, { ITimePicker } from "../time-picker";
 
 interface IArrayProps {
   index: number;

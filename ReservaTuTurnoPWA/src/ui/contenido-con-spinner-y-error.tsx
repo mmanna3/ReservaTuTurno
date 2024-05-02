@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Spinner from "./Spinner";
+import Spinner from "./spinner";
 
 interface ContenidoConSpinnerYErrorProps {
   isLoading: boolean;

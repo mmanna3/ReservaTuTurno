@@ -11,13 +11,13 @@ import {
 } from "../../../api/clients";
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
-import Autocomplete, { Opcion } from "../../../ui/Autocomplete";
-import { BotonSubmit } from "../../../ui/BotonSubmit";
-import { Dropdown } from "../../../ui/Dropdown";
-import Form from "../../../ui/Form";
-import FormDayPicker from "../../../ui/FormDayPicker";
-import FormHiddenInput from "../../../ui/FormHiddenInput";
-import Titulo from "../../../ui/Titulo";
+import Titulo from "../../../ui/titulo";
+import Autocomplete, { Opcion } from "../../../ui/user-input/autocomplete";
+import { Dropdown } from "../../../ui/user-input/dropdown";
+import Form from "../../../ui/user-input/form/form";
+import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";
+import FormDayPicker from "../../../ui/user-input/form/form-day-picker";
+import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
 import { convertirEnOptions, generarRandom } from "../../../utils";
 
 const CrearTurnosPage = () => {

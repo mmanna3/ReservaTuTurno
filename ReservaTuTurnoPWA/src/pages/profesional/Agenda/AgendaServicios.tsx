@@ -9,8 +9,8 @@ import {
   ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
-import ContenidoConSpinnerYError from "../../../ui/ContenidoConSpinnerYError";
-import { Dropdown } from "../../../ui/Dropdown";
+import ContenidoConSpinnerYError from "../../../ui/contenido-con-spinner-y-error";
+import { Dropdown } from "../../../ui/user-input/dropdown";
 import { convertirEnOptions } from "../../../utils";
 
 interface IProps {

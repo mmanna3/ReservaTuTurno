@@ -20,7 +20,7 @@ import CrearServicio from "./pages/servicio/crear/Page.tsx";
 import EditarServicio from "./pages/servicio/editar/Page.tsx";
 import Turnos from "./pages/turnos/TurnosPage.tsx";
 import CrearTurno from "./pages/turnos/crear/Page.tsx";
-import ErrorBoundary from "./ui/ErrorBoundary.tsx";
+import ErrorBoundary from "./ui/error-boundary.tsx";
 
 const router = createBrowserRouter([
   {

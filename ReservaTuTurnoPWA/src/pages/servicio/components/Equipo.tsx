@@ -6,10 +6,10 @@ import {
   ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
-import { Dropdown } from "../../../ui/Dropdown";
-import FormHiddenInput from "../../../ui/FormHiddenInput";
-import FormInput from "../../../ui/FormInput";
-import { Subtitulo } from "../../../ui/Subtitulo";
+import { Subtitulo } from "../../../ui/subtitulo";
+import { Dropdown } from "../../../ui/user-input/dropdown";
+import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
+import FormInput from "../../../ui/user-input/form/form-input";
 import {
   DuracionDelServicioArray,
   IDuracionDelServicio,

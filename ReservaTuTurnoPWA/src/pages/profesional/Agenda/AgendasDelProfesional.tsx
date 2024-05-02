@@ -1,7 +1,7 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { AgendaDTO } from "../../../api/clients";
-import FormHiddenInput from "../../../ui/FormHiddenInput";
+import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
 import AgendaServicios from "./AgendaServicios";
 import DiasDeLaSemana from "./DiasDeLaSemanaCheckboxs";
 import { FranjasHorarias } from "./FranjasHorarias";

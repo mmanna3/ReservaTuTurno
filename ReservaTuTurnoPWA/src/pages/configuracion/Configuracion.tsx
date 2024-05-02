@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import ContenedorCentradoConMargenes from "../../ui/ContenedorCentradoConMargenes";
-import { Separador } from "../../ui/Separador";
-import { Subtitulo } from "../../ui/Subtitulo";
-import Titulo from "../../ui/Titulo";
+import ContenedorCentradoConMargenes from "../../ui/contenedor-centrado-con-imagenes";
+import { Separador } from "../../ui/separator";
+import { Subtitulo } from "../../ui/subtitulo";
+import Titulo from "../../ui/titulo";
 
 interface IOpcionesProps {
   link: string;

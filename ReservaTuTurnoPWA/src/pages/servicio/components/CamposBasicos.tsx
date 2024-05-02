@@ -1,8 +1,8 @@
 import { api } from "../../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../../api/clients";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
-import { Dropdown } from "../../../ui/Dropdown";
-import FormInput from "../../../ui/FormInput";
+import { Dropdown } from "../../../ui/user-input/dropdown";
+import FormInput from "../../../ui/user-input/form/form-input";
 import {
   DuracionDelServicioArray,
   IDuracionDelServicio,

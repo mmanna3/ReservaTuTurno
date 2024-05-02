@@ -1,6 +1,6 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { getProp } from "../utils";
-import Input from "./Input";
+import { getProp } from "../../../utils";
+import Input from "../input";
 
 interface IArrayProps {
   index: number;

@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
-import { BotonSubmit } from "../../../ui/BotonSubmit";
-import Form from "../../../ui/Form";
-import { Separador } from "../../../ui/Separador";
-import Titulo from "../../../ui/Titulo";
+import { Separador } from "../../../ui/separator";
+import Titulo from "../../../ui/titulo";
+import Form from "../../../ui/user-input/form/form";
+import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";
 import CamposBasicos from "../components/CamposBasicos";
 import Equipo from "../components/Equipo";
 
