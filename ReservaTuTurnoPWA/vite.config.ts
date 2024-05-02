@@ -4,6 +4,11 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      src: "/src",
+    },
+  },
   plugins: [
     react(),
     VitePWA({

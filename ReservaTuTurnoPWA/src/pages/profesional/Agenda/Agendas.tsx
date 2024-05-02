@@ -1,19 +1,19 @@
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { api } from "../../../api/api";
+import { api } from "src/api/api";
 import {
   AgendaDTO,
   AgendaServicioProfesionalDTO,
   FranjaHorariaDTO,
   ProfesionalDTO,
   ServiciosDelProfesionalDTO,
-} from "../../../api/clients";
-import useApiMutation from "../../../api/custom-hooks/useApiMutation";
-import useApiQuery from "../../../api/custom-hooks/useApiQuery";
-import ContenidoConSpinnerYError from "../../../ui/contenido-con-spinner-y-error";
-import Titulo from "../../../ui/titulo";
-import Form from "../../../ui/user-input/form/form";
-import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";
+} from "src/api/clients";
+import useApiMutation from "src/api/custom-hooks/useApiMutation";
+import useApiQuery from "src/api/custom-hooks/useApiQuery";
+import ContenidoConSpinnerYError from "src/ui/contenido-con-spinner-y-error";
+import Titulo from "src/ui/titulo";
+import Form from "src/ui/user-input/form/form";
+import { BotonSubmit } from "src/ui/user-input/form/form-boton-submit";
 import AgendasDelProfesional from "./AgendasDelProfesional";
 
 const Agendas = () => {
