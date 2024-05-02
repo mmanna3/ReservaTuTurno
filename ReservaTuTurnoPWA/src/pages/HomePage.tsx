@@ -1,5 +1,5 @@
-import ContenedorCentradoConMargenes from "../ui/contenedor-centrado-con-imagenes";
-import FrambuesaIcono from "./../assets/icono-frambuesa.svg";
+import FrambuesaIcono from "@assets/icono-frambuesa.svg";
+import ContenedorCentradoConMargenes from "@ui/contenedor-centrado-con-imagenes";
 
 const Home = () => {
   return (

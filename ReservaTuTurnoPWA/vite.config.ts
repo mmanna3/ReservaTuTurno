@@ -6,7 +6,9 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   resolve: {
     alias: {
-      src: "/src",
+      "@api": "/src/api",
+      "@ui": "/src/ui",
+      "@assets": "/src/assets",
     },
   },
   plugins: [

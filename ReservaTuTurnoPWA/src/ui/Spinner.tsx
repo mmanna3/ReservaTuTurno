@@ -1,4 +1,4 @@
-import Cargando from "./../assets/cargando.svg";
+import Cargando from "@assets/cargando.svg";
 
 interface SpinnerProps {
   mensaje: string;

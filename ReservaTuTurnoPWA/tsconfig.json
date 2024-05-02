@@ -21,7 +21,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "src": ["./src"]
+      "@ui/*": ["./src/ui/*"],
+      "@api/*": ["./src/api/*"],
+      "@assets/*": ["./src/assets/*"]
     },
     "types": ["node"] // This is needed to resolve the "path" module issue
   },
