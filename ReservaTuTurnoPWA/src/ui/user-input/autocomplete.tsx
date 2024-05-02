@@ -1,6 +1,7 @@
 import cx from "classnames";
 import { useCombobox } from "downshift";
 import { useState } from "react";
+import Input from "./input";
 
 function filtrar(loEscrito: string) {
   const enMinuscula = loEscrito.toLowerCase();
@@ -49,24 +50,27 @@ export default function ComboBox(props: IProps) {
   });
   return (
     <div>
-      <div className="flex w-72 flex-col gap-1">
-        <label className="w-fit" {...getLabelProps()}>
+      {/* <div className="flex w-72 flex-col gap-1"> */}
+      <div>
+        {/* <label className="w-fit" {...getLabelProps()}>
           Choose your favorite book:
-        </label>
-        <div className="flex gap-0.5 bg-white shadow-sm">
-          <input
+        </label> */}
+        {/* <div className="flex gap-0.5 bg-white shadow-sm"> */}
+        <div>
+          <Input
+            label="El nombre del campo"
             placeholder="Best book ever"
-            className="w-full p-1.5"
+            // className="w-full p-1.5"
             {...getInputProps()}
           />
-          <button
+          {/* <button
             aria-label="toggle menu"
             className="px-2"
             type="button"
             {...getToggleButtonProps()}
           >
             {isOpen ? <>&#8593;</> : <>&#8595;</>}
-          </button>
+          </button> */}
         </div>
       </div>
       <ul
@@ -91,7 +95,7 @@ export default function ComboBox(props: IProps) {
             </li>
           ))}
       </ul>
-      <p>{selectedItem && `Seleccionaste ${selectedItem.valor}.`}</p>
+      {/* <p>{selectedItem && `Seleccionaste ${selectedItem.valor}.`}</p> */}
     </div>
   );
 }
