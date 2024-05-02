@@ -2,6 +2,7 @@ import { ClockIcon } from "@heroicons/react/24/outline";
 import Modal from "@ui/modal";
 import { useCallback, useEffect, useState } from "react";
 import Picker, { PickerValue } from "react-mobile-picker";
+import InputDisplay from "./input-display";
 
 export interface ITimePicker {
   valor: unknown;
@@ -34,23 +35,16 @@ export default function TimePicker(props: ITimePicker) {
 
   return (
     <>
-      <div
-        className="group relative mt-5 w-full rounded-xl bg-[#F9F9F9] p-2"
+      <InputDisplay
+        hayError={props.hayError}
+        label={props.label}
+        esRequerido={props.required}
         onClick={() => setIsOpen(true)}
       >
-        <label
-          className={`relative ml-1 w-auto bg-transparent px-1 text-[12px] text-gris peer-[.is-open]:!text-[#32BF8D] ${
-            props.hayError ? "!text-rojo" : ""
-          }`}
-        >
-          {props.label} {props.required ? "*" : null}
-        </label>
-        <div className="ml-2 flex">
-          <span className="mr-[2px]">{pickerValue.hora}</span> :
-          <span className="ml-[2px]">{pickerValue.minutos}</span>
-          <ClockIcon className="ml-auto mr-1 mt-[1.5px] h-5 w-5 text-negro" />
-        </div>
-      </div>
+        <span className="mr-[2px]">{pickerValue.hora}</span> :
+        <span className="ml-[2px]">{pickerValue.minutos}</span>
+        <ClockIcon className="ml-auto mr-1 mt-[1.5px] h-5 w-5 text-negro" />
+      </InputDisplay>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="mt-2">
           {/* <Dialog.Title

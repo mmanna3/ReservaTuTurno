@@ -30,8 +30,8 @@ export default function ComboBox(props: IProps) {
   const [selectedItem, setSelectedItem] = useState<Opcion | null>(null);
   const {
     isOpen,
-    getToggleButtonProps,
-    getLabelProps,
+    // getToggleButtonProps,
+    // getLabelProps,
     getMenuProps,
     getInputProps,
     highlightedIndex,
