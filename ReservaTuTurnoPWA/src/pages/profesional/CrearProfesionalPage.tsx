@@ -1,3 +1,9 @@
+import {
+  DevicePhoneMobileIcon,
+  EnvelopeIcon,
+  UserGroupIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -34,16 +40,28 @@ const CrearProfesionalPage = () => {
       <div className="w-full">
         <Form<ProfesionalDTO> onSubmit={onSubmit}>
           <Titulo>Nuevo profesional</Titulo>
-          <FormInput<ProfesionalDTO> name="nombre" label="Nombre" required />
+          <FormInput<ProfesionalDTO>
+            name="nombre"
+            label="Nombre"
+            Icono={UserIcon}
+            required
+          />
           <FormInput<ProfesionalDTO>
             name="apellido"
             label="Apellido"
+            Icono={UserGroupIcon}
             required
           />
-          <FormInput<ProfesionalDTO> name="email" label="Email" required />
+          <FormInput<ProfesionalDTO>
+            name="email"
+            label="Email"
+            required
+            Icono={EnvelopeIcon}
+          />
           <FormInput<ProfesionalDTO>
             name="telefono"
             label="Teléfono"
+            Icono={DevicePhoneMobileIcon}
             required
           />
           <BotonSubmit texto="Agregar" estaDeshabilitado={mutation.isPending} />

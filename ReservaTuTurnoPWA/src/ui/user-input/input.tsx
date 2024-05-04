@@ -1,7 +1,7 @@
 import cx from "classnames";
 import { Icono } from "src/utilidades";
 
-interface InputProps
+export interface InputProps
   extends Omit<
     React.DetailedHTMLProps<
       React.InputHTMLAttributes<HTMLInputElement>,
@@ -32,7 +32,12 @@ const Input = (props: InputProps) => {
       </label>
 
       {Icono && (
-        <Icono className="absolute right-4 top-11 h-6 w-6 text-gris group-focus-within:text-verde" />
+        <Icono
+          className={cx(
+            hayError && "!text-rojo",
+            "absolute right-5 top-11 h-6 w-6 text-gris opacity-90 group-focus-within:text-verde",
+          )}
+        />
       )}
       <input
         // Acá filtrar solo las que son props del input
