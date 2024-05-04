@@ -46,7 +46,7 @@ export default function TimePicker(props: ITimePicker) {
         <ClockIcon className="ml-auto mr-1 mt-[1.5px] h-5 w-5 text-negro" />
       </InputDisplay>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <div className="mt-2">
+        <div className="mt-2 w-48">
           {/* <Dialog.Title
               as="h3"
               className="text-lg font-medium leading-6 text-gray-900"
@@ -99,15 +99,15 @@ export default function TimePicker(props: ITimePicker) {
               ))}
             </Picker.Column>
           </Picker>
-          {/* <div className="">
+          <div className="flex w-full justify-end">
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              className="focus-visible:ring-rosa-500 inline-flex rounded-xl border bg-grisclarito px-4 py-2 text-sm font-medium text-gris shadow-sm hover:border-blanco hover:bg-rosaclaro focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
             >
-              OK
+              Guardar
             </button>
-          </div> */}
+          </div>
         </div>
       </Modal>
     </>
