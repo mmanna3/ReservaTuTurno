@@ -1,3 +1,4 @@
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Modal from "@ui/modal";
 import cx from "classnames";
 import { useState } from "react";
@@ -60,7 +61,11 @@ export default function ComboBox(props: IProps) {
       </div>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="h-80 w-80">
-          <Input label="Buscar" onChange={onInputFiltroChange} />
+          <Input
+            label="Buscar"
+            onChange={onInputFiltroChange}
+            Icono={MagnifyingGlassIcon}
+          />
           <ul className="mt-6">
             {items.map((item) => (
               <li

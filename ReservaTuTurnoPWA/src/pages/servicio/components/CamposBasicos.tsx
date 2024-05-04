@@ -7,7 +7,7 @@ import {
   DuracionDelServicioArray,
   IDuracionDelServicio,
   convertirEnOptions,
-} from "../../../utils";
+} from "../../../utilidades";
 
 const CamposBasicos = () => {
   const { data: categorias } = useApiQuery({

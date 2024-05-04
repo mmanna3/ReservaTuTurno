@@ -11,7 +11,7 @@ import {
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import ContenidoConSpinnerYError from "../../../ui/contenido-con-spinner-y-error";
 import { Dropdown } from "../../../ui/user-input/dropdown";
-import { convertirEnOptions } from "../../../utils";
+import { convertirEnOptions } from "../../../utilidades";
 
 interface IProps {
   parentName: string;

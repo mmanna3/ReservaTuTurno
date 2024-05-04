@@ -8,7 +8,7 @@ import Titulo from "../../ui/titulo";
 import Form from "../../ui/user-input/form/form";
 import { BotonSubmit } from "../../ui/user-input/form/form-boton-submit";
 import FormInput from "../../ui/user-input/form/form-input";
-import { generarRandom } from "../../utils";
+import { generarRandom } from "../../utilidades";
 
 const CrearProfesionalPage = () => {
   // hay que controlar mejor los errores de los get

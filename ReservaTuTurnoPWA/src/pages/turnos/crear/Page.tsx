@@ -18,7 +18,7 @@ import Form from "../../../ui/user-input/form/form";
 import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";
 import FormDayPicker from "../../../ui/user-input/form/form-day-picker";
 import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
-import { convertirEnOptions, generarRandom } from "../../../utils";
+import { convertirEnOptions, generarRandom } from "../../../utilidades";
 
 const CrearTurnosPage = () => {
   const navigate = useNavigate();

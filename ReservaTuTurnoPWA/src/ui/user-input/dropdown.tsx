@@ -1,6 +1,6 @@
 import ReactDropdown, { Option } from "react-dropdown";
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { getProp } from "../../utils";
+import { getProp } from "../../utilidades";
 
 interface IProps<T extends FieldValues> {
   name: keyof T;

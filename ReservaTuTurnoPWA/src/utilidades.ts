@@ -60,4 +60,13 @@ export enum DiaDeLaSemana {
 
 export const generarRandom = () => {
   return (Math.random() + 1).toString(36).substring(7);
-}
+};
+
+type IconSVGProps = React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> &
+  React.RefAttributes<SVGSVGElement>;
+type IconProps = IconSVGProps & {
+  title?: string;
+  titleId?: string;
+};
+
+export type Icono = React.FC<IconProps>;

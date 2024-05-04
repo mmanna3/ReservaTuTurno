@@ -1,5 +1,5 @@
-// import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import cx from "classnames";
+import { Icono } from "src/utilidades";
 
 interface InputProps
   extends Omit<
@@ -13,10 +13,11 @@ interface InputProps
   label?: string;
   esRequerido?: boolean;
   hayError?: boolean;
+  Icono?: Icono;
 }
 
 const Input = (props: InputProps) => {
-  const { label, esRequerido, hayError = false, name, ...rest } = props;
+  const { label, Icono, esRequerido, hayError = false, name, ...rest } = props;
 
   return (
     <div className="group relative z-0 -my-[0.3rem] w-full text-left">
@@ -30,7 +31,9 @@ const Input = (props: InputProps) => {
         {label} {esRequerido ? "*" : null}
       </label>
 
-      {/* <MagnifyingGlassIcon className="absolute right-4 top-11 h-6 w-6 text-gris group-focus-within:text-verde" /> */}
+      {Icono && (
+        <Icono className="absolute right-4 top-11 h-6 w-6 text-gris group-focus-within:text-verde" />
+      )}
       <input
         // Acá filtrar solo las que son props del input
         {...rest}

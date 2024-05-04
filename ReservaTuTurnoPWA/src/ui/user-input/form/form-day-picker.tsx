@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { getProp } from "../../../utils";
+import { getProp } from "../../../utilidades";
 import DayPicker, { IDayPicker } from "../day-picker";
 
 interface IArrayProps {

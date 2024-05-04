@@ -14,7 +14,7 @@ import {
   DuracionDelServicioArray,
   IDuracionDelServicio,
   convertirEnOptions,
-} from "../../../utils";
+} from "../../../utilidades";
 
 const Equipo = () => {
   const { data: profesionales } = useApiQuery({
