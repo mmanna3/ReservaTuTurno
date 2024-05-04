@@ -38,7 +38,7 @@ export default function Modal(props: IProps) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-64 transform overflow-hidden rounded-2xl bg-blanco p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="transform overflow-hidden rounded-2xl bg-blanco p-6 text-left align-middle shadow-xl transition-all">
                 {props.children}
               </Dialog.Panel>
             </Transition.Child>
