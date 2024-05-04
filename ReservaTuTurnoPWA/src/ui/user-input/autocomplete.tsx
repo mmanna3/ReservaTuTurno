@@ -82,15 +82,15 @@ export default function ComboBox(props: IProps) {
         </div>
       </div>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <div>
+        <div className="h-80 w-80">
           <Input label="Seleccioná" {...getInputProps()} />
-          <ul {...getMenuProps()}>
+          <ul {...getMenuProps()} className="mt-6">
             {items.map((item, index) => (
               <li
                 className={cx(
-                  highlightedIndex === index && "bg-blue-300",
+                  highlightedIndex === index && "bg-rosa text-blanco",
                   selectedItem === item && "font-bold",
-                  "flex flex-col px-3 py-2 shadow-sm",
+                  "flex flex-col border-b px-4 py-4",
                 )}
                 key={item.id}
                 {...getItemProps({ item, index })}
