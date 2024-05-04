@@ -11,11 +11,11 @@ interface InputProps
   name?: string;
   label?: string;
   esRequerido?: boolean;
-  hayError: boolean;
+  hayError?: boolean;
 }
 
 const Input = (props: InputProps) => {
-  const { label, esRequerido, hayError, name, ...rest } = props;
+  const { label, esRequerido, hayError = false, name, ...rest } = props;
 
   return (
     <div className="group relative z-0 -my-[0.3rem] w-full text-left">
