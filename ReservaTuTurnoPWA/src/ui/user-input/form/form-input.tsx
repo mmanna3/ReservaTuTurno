@@ -40,8 +40,9 @@ const FormInput = <T extends FieldValues>({
         control={control}
         name={fieldName}
         rules={{ required: required }}
-        render={({ field: { onChange: hookFormOnChange } }) => (
+        render={({ field: { onChange: hookFormOnChange, value } }) => (
           <Input
+            defaultValue={value}
             name={fieldName}
             hayError={!!errorMessage}
             esRequerido={required}

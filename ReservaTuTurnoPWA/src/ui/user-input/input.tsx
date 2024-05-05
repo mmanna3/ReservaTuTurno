@@ -42,6 +42,7 @@ const Input = (props: InputProps) => {
       <input
         // Acá filtrar solo las que son props del input
         {...rest}
+        name={name}
         onChange={props.onChange}
         data-testid={`input-${name}`}
         className={cx(
