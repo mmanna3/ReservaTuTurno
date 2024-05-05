@@ -2,6 +2,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Modal from "@ui/modal";
 import cx from "classnames";
 import { useState } from "react";
+import { Icono } from "src/utilidades";
 import Input from "./input";
 import InputDisplay from "./input-display";
 
@@ -22,7 +23,9 @@ interface IProps {
   opciones: Opcion[];
   defaultValue?: Opcion;
   required?: boolean;
+  Icono?: Icono;
   onValueChange?: (arg: Opcion) => void;
+  hayError?: boolean;
 }
 
 export default function ComboBox(props: IProps) {
@@ -55,7 +58,10 @@ export default function ComboBox(props: IProps) {
             label="El nombre del campo"
             hayError={false}
           >
-            <>{selectedItem ? selectedItem.valor : "."}</>
+            <span className="h-7">{selectedItem && selectedItem.valor}</span>
+            {props.Icono && (
+              <props.Icono className="absolute right-5 top-6 h-5 w-5 text-negro" />
+            )}
           </InputDisplay>
         </div>
       </div>

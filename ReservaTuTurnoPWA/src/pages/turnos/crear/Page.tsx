@@ -1,3 +1,5 @@
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
+
 import { endOfMonth, formatDate } from "date-fns";
 import { useState } from "react";
 import { Option } from "react-dropdown";
@@ -118,7 +120,7 @@ const CrearTurnosPage = () => {
       <div className="w-full">
         <Form<TurnoDTO> onSubmit={onSubmit}>
           <Titulo>Nuevo turno</Titulo>
-          <Autocomplete label="libros" opciones={books} />
+          <Autocomplete label="libros" opciones={books} Icono={EnvelopeIcon} />
           <Dropdown<TurnoDTO>
             name="servicioId"
             label="Servicio"
