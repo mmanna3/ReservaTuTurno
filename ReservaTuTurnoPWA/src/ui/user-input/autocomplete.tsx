@@ -88,21 +88,27 @@ export default function Autocomplete(props: IAutocompleteProps) {
             onChange={onInputFiltroChange}
             Icono={MagnifyingGlassIcon}
           />
-          <ul className="mt-6 h-48 overflow-y-auto">
-            {items.map((item) => (
-              <li
-                className={cx(
-                  selectedItem === item &&
-                    "rounded-xl bg-rosa font-medium tracking-wide text-blanco",
-                  "flex cursor-pointer flex-col border-b px-4 py-4 last:border-0",
-                )}
-                key={item.id}
-                onClick={() => onOpcionClick(item)}
-              >
-                <span>{item.valor}</span>
-              </li>
-            ))}
-          </ul>
+          {items.length ? (
+            <ul className="mt-6 h-48 overflow-y-auto">
+              {items.map((item) => (
+                <li
+                  className={cx(
+                    selectedItem === item &&
+                      "rounded-xl bg-rosa font-medium tracking-wide text-blanco",
+                    "flex cursor-pointer flex-col border-b px-4 py-4 last:border-0",
+                  )}
+                  key={item.id}
+                  onClick={() => onOpcionClick(item)}
+                >
+                  <span>{item.valor}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="ml-3 mt-6 text-gris">
+              No hay opciones disponibles
+            </div>
+          )}
         </div>
       </Modal>
     </div>
