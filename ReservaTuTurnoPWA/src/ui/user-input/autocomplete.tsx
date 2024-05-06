@@ -78,6 +78,7 @@ export default function Autocomplete(props: IAutocompleteProps) {
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="h-80 w-64">
           <Input
+            tabIndex={-1}
             label="Buscar"
             onChange={onInputFiltroChange}
             Icono={MagnifyingGlassIcon}
@@ -86,7 +87,8 @@ export default function Autocomplete(props: IAutocompleteProps) {
             {items.map((item) => (
               <li
                 className={cx(
-                  selectedItem === item && "bg-rosa font-medium text-blanco",
+                  selectedItem === item &&
+                    "rounded-xl bg-rosa font-medium tracking-wide text-blanco",
                   "flex cursor-pointer flex-col border-b px-4 py-4 last:border-0",
                 )}
                 key={item.id}
