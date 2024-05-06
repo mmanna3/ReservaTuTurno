@@ -1,6 +1,7 @@
 import { XCircleIcon } from "@heroicons/react/24/outline";
+import { Opcion } from "@ui/user-input/autocomplete";
+import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { useEffect, useState } from "react";
-import { Option } from "react-dropdown";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
@@ -10,8 +11,7 @@ import {
 } from "../../../api/clients";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import ContenidoConSpinnerYError from "../../../ui/contenido-con-spinner-y-error";
-import { Dropdown } from "../../../ui/user-input/dropdown";
-import { convertirEnOptions } from "../../../utilidades";
+import { convertirEnOpciones } from "../../../utilidades";
 
 interface IProps {
   parentName: string;
@@ -40,7 +40,7 @@ const AgendaServicios = (props: IProps) => {
 
   const [todosLosServiciosDelProfesional, setTodosLosServiciosDelProfesional] =
     useState<ServiciosDelProfesionalDTO[]>([]);
-  const [serviciosDisponibles, setServiciosDisponibles] = useState<Option[]>(
+  const [serviciosDisponibles, setServiciosDisponibles] = useState<Opcion[]>(
     [],
   );
 
@@ -59,18 +59,18 @@ const AgendaServicios = (props: IProps) => {
       (x) => !nombresDeServciosYaAgregados.includes(x.servicioNombre),
     );
 
-    const options = convertirEnOptions<ServiciosDelProfesionalDTO>(
+    const opciones = convertirEnOpciones<ServiciosDelProfesionalDTO>(
       todosSinLosYaAgregados || [],
       "servicioNombre",
       "id",
     );
 
-    setServiciosDisponibles(options);
+    setServiciosDisponibles(opciones);
   }, [fields, todosLosServiciosDelProfesional]);
 
-  const onAgregarServicio = (servicioOption: Option) => {
+  const onAgregarServicio = (servicioOption: Opcion) => {
     const servicio = todosLosServiciosDelProfesional.find(
-      (x) => x.servicioNombre === servicioOption.label,
+      (x) => x.servicioNombre === servicioOption.valor,
     );
 
     append({
@@ -102,14 +102,14 @@ const AgendaServicios = (props: IProps) => {
       hasData={servicios === null ? false : true}
       mensajeSpinner="Cargando agendas 🗓️"
     >
-      <Dropdown<ServiciosDelProfesionalDTO>
+      <FormAutocomplete<ServiciosDelProfesionalDTO>
         name="servicioNombre"
         label="Servicios"
         placeholder="Seleccioná un servicio"
-        options={serviciosDisponibles}
-        onValueChange={onAgregarServicio}
+        opciones={serviciosDisponibles}
+        onChange={onAgregarServicio}
       />
-      <div className="ml-2 mt-10 flex flex-wrap gap-2">
+      <div className="ml-2 mt-3 flex flex-wrap gap-2">
         {fields.map((field, index) => {
           return (
             <div key={field.id}>
