@@ -20,7 +20,6 @@ const FormHiddenInput = <T extends FieldValues>({
   if (props.array)
     fieldName = `${props.array.parentName}.${props.array.index}.${props.name as string}`;
 
-  console.log("aaaa");
   setValue(fieldName, props.value);
 
   return <input type="hidden" {...register(fieldName)} />;

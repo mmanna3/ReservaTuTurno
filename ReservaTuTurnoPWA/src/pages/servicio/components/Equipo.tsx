@@ -1,3 +1,4 @@
+import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { useFieldArray } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
@@ -13,6 +14,7 @@ import FormInput from "../../../ui/user-input/form/form-input";
 import {
   DuracionDelServicioArray,
   IDuracionDelServicio,
+  convertirEnOpciones,
   convertirEnOptions,
 } from "../../../utilidades";
 
@@ -24,7 +26,7 @@ const Equipo = () => {
 
   const { id } = useParams();
 
-  const opcionesProfesionales = convertirEnOptions<ProfesionalDTO>(
+  const opcionesProfesionales = convertirEnOpciones<ProfesionalDTO>(
     profesionales || [],
     "apellido",
     "id",
@@ -54,12 +56,12 @@ const Equipo = () => {
               parentName: "profesionalesQueLoBrindan",
             }}
           />
-          <Dropdown<ServiciosDelProfesionalDTO>
+          <FormAutocomplete<ServiciosDelProfesionalDTO>
             name="profesionalId"
             label="Profesional"
             placeholder="Seleccioná un profesional"
             required
-            options={opcionesProfesionales}
+            opciones={opcionesProfesionales}
             array={{
               index: index,
               parentName: "profesionalesQueLoBrindan",

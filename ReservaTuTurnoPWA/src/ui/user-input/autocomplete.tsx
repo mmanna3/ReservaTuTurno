@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Modal from "@ui/modal";
 import cx from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icono } from "src/utilidades";
 import Input from "./input";
 import InputDisplay from "./input-display";
@@ -17,21 +17,30 @@ export interface Opcion {
   valor: string;
 }
 
-interface IProps {
+export interface IAutocompleteProps {
   label: string;
   placeholder?: string;
   opciones: Opcion[];
   defaultValue?: Opcion;
   required?: boolean;
   Icono?: Icono;
-  onValueChange?: (arg: Opcion) => void;
+  onChange?: (arg: Opcion) => void;
   hayError?: boolean;
+  valorDefault?: Opcion;
 }
 
-export default function ComboBox(props: IProps) {
+export default function Autocomplete(props: IAutocompleteProps) {
+  const { valorDefault } = props;
+
   const [items, setItems] = useState(props.opciones);
-  const [selectedItem, setSelectedItem] = useState<Opcion | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Opcion | null>(
+    valorDefault || null,
+  );
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setSelectedItem(valorDefault || null);
+  }, [valorDefault]);
 
   const onInputFiltroChange = (e: React.FormEvent<HTMLInputElement>) => {
     const textoIngresado = e.currentTarget.value;
@@ -40,6 +49,7 @@ export default function ComboBox(props: IProps) {
   };
 
   const onOpcionClick = (opcion: Opcion) => {
+    props.onChange && props.onChange(opcion);
     setSelectedItem(opcion);
     setIsOpen(false);
   };
@@ -55,7 +65,7 @@ export default function ComboBox(props: IProps) {
         <div>
           <InputDisplay
             onClick={onInputClick}
-            label="El nombre del campo"
+            label={props.label}
             hayError={false}
           >
             <span className="h-7">{selectedItem && selectedItem.valor}</span>
