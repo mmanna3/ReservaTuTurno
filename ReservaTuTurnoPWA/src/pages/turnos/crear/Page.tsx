@@ -1,8 +1,7 @@
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
-
+import { Opcion } from "@ui/user-input/autocomplete";
+import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { endOfMonth, formatDate } from "date-fns";
 import { useState } from "react";
-import { Option } from "react-dropdown";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
@@ -14,13 +13,11 @@ import {
 import useApiMutation from "../../../api/custom-hooks/useApiMutation";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import Titulo from "../../../ui/titulo";
-import Autocomplete, { Opcion } from "../../../ui/user-input/autocomplete";
-import { Dropdown } from "../../../ui/user-input/dropdown";
 import Form from "../../../ui/user-input/form/form";
 import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";
 import FormDayPicker from "../../../ui/user-input/form/form-day-picker";
 import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
-import { convertirEnOptions, generarRandom } from "../../../utilidades";
+import { convertirEnOpciones, generarRandom } from "../../../utilidades";
 
 const CrearTurnosPage = () => {
   const navigate = useNavigate();
@@ -71,21 +68,21 @@ const CrearTurnosPage = () => {
   };
 
   const [profesionalesDisponibles, setProfesionalesDisponibles] = useState<
-    Option[]
+    Opcion[]
   >([]);
 
-  const OpcionesServicios = convertirEnOptions<ServicioConProfesionalesDTO>(
+  const OpcionesServicios = convertirEnOpciones<ServicioConProfesionalesDTO>(
     serviciosConProfesionales || [],
     "servicio",
     "servicioId",
   );
 
-  const actualizarProfesionalesDisponibles = (servicio: Option) => {
+  const actualizarProfesionalesDisponibles = (servicio: Opcion) => {
     const profesionales = serviciosConProfesionales?.find(
-      (x) => x.servicioId === Number(servicio.value),
+      (x) => x.servicioId === Number(servicio.id),
     )?.profesionales;
 
-    const opcionesProfesionales = convertirEnOptions<ProfesionalBaseDTO>(
+    const opcionesProfesionales = convertirEnOpciones<ProfesionalBaseDTO>(
       profesionales || [],
       "nombre",
       "id",
@@ -109,39 +106,30 @@ const CrearTurnosPage = () => {
     }
   };
 
-  const books: Opcion[] = [
-    { id: "book-1", valor: "To Kill a Mockingbird" },
-    { id: "book-2", valor: "War and Peace" },
-    { id: "book-3", valor: "The Idiot" },
-  ];
-
   return (
     <>
       <div className="w-full">
         <Form<TurnoDTO> onSubmit={onSubmit}>
           <Titulo>Nuevo turno</Titulo>
-          <Autocomplete label="libros" opciones={books} Icono={EnvelopeIcon} />
-          <Dropdown<TurnoDTO>
+          <FormAutocomplete<TurnoDTO>
             name="servicioId"
             label="Servicio"
             placeholder="Seleccioná el servicio"
-            options={OpcionesServicios}
-            onValueChange={(servicio) => {
+            opciones={OpcionesServicios}
+            onChange={(servicio) => {
               actualizarProfesionalesDisponibles(servicio);
               setProfesionalId(undefined);
-              setServicioId(Number(servicio.value));
+              setServicioId(Number(servicio.id));
             }}
             required
           />
 
-          <Dropdown<TurnoDTO>
+          <FormAutocomplete<TurnoDTO>
             name="profesionalId"
             label="Profesional"
             placeholder="Seleccioná el profesional"
-            options={profesionalesDisponibles}
-            onValueChange={(profesional) =>
-              setProfesionalId(Number(profesional.value))
-            }
+            opciones={profesionalesDisponibles}
+            onChange={(profesional) => setProfesionalId(Number(profesional.id))}
             required
           />
 
