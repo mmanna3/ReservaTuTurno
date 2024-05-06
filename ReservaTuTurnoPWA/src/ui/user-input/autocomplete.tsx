@@ -76,7 +76,7 @@ export default function Autocomplete(props: IAutocompleteProps) {
         </div>
       </div>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <div className="h-80 w-80">
+        <div className="h-80 w-64">
           <Input
             label="Buscar"
             onChange={onInputFiltroChange}
