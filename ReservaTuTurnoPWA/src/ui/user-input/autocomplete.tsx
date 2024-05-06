@@ -68,7 +68,12 @@ export default function Autocomplete(props: IAutocompleteProps) {
             label={props.label}
             hayError={false}
           >
-            <span className="h-7">{selectedItem && selectedItem.valor}</span>
+            {selectedItem ? (
+              <span className="h-7">{selectedItem.valor}</span>
+            ) : (
+              <span className="h-7 text-grisclaro">{props.placeholder}</span>
+            )}
+
             {props.Icono && (
               <props.Icono className="absolute right-5 top-6 h-5 w-5 text-negro" />
             )}

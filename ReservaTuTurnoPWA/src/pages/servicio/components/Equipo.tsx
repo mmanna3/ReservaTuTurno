@@ -1,3 +1,4 @@
+import { UserIcon } from "@heroicons/react/24/outline";
 import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { useFieldArray } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -57,6 +58,7 @@ const Equipo = () => {
             }}
           />
           <FormAutocomplete<ServiciosDelProfesionalDTO>
+            Icono={UserIcon}
             name="profesionalId"
             label="Profesional"
             placeholder="Seleccioná un profesional"
