@@ -1,12 +1,12 @@
+import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { api } from "../../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../../api/clients";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
-import { Dropdown } from "../../../ui/user-input/dropdown";
 import FormInput from "../../../ui/user-input/form/form-input";
 import {
   DuracionDelServicioArray,
   IDuracionDelServicio,
-  convertirEnOptions,
+  convertirEnOpciones,
 } from "../../../utilidades";
 
 const CamposBasicos = () => {
@@ -15,13 +15,13 @@ const CamposBasicos = () => {
     fn: async () => await api.categoriaDeServicioAll(),
   });
 
-  const OpcionesCategorias = convertirEnOptions<CategoriaDeServicioDTO>(
+  const OpcionesCategorias = convertirEnOpciones<CategoriaDeServicioDTO>(
     categorias || [],
     "nombre",
     "id",
   );
 
-  const OpcionesDuracion = convertirEnOptions<IDuracionDelServicio>(
+  const OpcionesDuracion = convertirEnOpciones<IDuracionDelServicio>(
     DuracionDelServicioArray,
     "label",
     "value",
@@ -30,28 +30,32 @@ const CamposBasicos = () => {
   return (
     <div>
       <FormInput<ServicioDTO> name="nombre" label="Nombre" required />
-      <Dropdown<ServicioDTO>
+      <FormAutocomplete<ServicioDTO>
         name="categoriaDeServicioId"
         label="Categoría"
         placeholder="Seleccioná una categoría"
-        options={OpcionesCategorias}
+        opciones={OpcionesCategorias}
         required
-      ></Dropdown>
+      />
       <FormInput<ServicioDTO> name="descripcion" label="Descripción" />
-      <div className="flex gap-2">
-        <FormInput<ServicioDTO>
-          type="number"
-          name="precioPorDefecto"
-          label="Precio"
-          required
-        />
-        <Dropdown<ServicioDTO>
-          name="duracionDelTurnoPorDefectoEnMinutos"
-          label="Duración"
-          placeholder=""
-          options={OpcionesDuracion}
-          required
-        ></Dropdown>
+      <div className="flex w-full gap-2">
+        <div className="w-full">
+          <FormInput<ServicioDTO>
+            type="number"
+            name="precioPorDefecto"
+            label="Precio"
+            required
+          />
+        </div>
+        <div className="w-full">
+          <FormAutocomplete<ServicioDTO>
+            name="duracionDelTurnoPorDefectoEnMinutos"
+            label="Duración"
+            placeholder=""
+            opciones={OpcionesDuracion}
+            required
+          />
+        </div>
       </div>
     </div>
   );
