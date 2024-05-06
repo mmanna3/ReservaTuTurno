@@ -9,14 +9,12 @@ import {
 } from "../../../api/clients";
 import useApiQuery from "../../../api/custom-hooks/useApiQuery";
 import { Subtitulo } from "../../../ui/subtitulo";
-import { Dropdown } from "../../../ui/user-input/dropdown";
 import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
 import FormInput from "../../../ui/user-input/form/form-input";
 import {
   DuracionDelServicioArray,
   IDuracionDelServicio,
   convertirEnOpciones,
-  convertirEnOptions,
 } from "../../../utilidades";
 
 const Equipo = () => {
@@ -33,7 +31,7 @@ const Equipo = () => {
     "id",
   );
 
-  const opcionesDuracion = convertirEnOptions<IDuracionDelServicio>(
+  const opcionesDuracion = convertirEnOpciones<IDuracionDelServicio>(
     DuracionDelServicioArray,
     "label",
     "value",
@@ -69,28 +67,32 @@ const Equipo = () => {
               parentName: "profesionalesQueLoBrindan",
             }}
           />
-          <div className="flex gap-2">
-            <FormInput<ServiciosDelProfesionalDTO>
-              name="precio"
-              label="Precio"
-              type="number"
-              required
-              array={{
-                index: index,
-                parentName: "profesionalesQueLoBrindan",
-              }}
-            />
-            <Dropdown<ServiciosDelProfesionalDTO>
-              name="duracionDelTurnoEnMinutos"
-              label="Duración"
-              placeholder=""
-              options={opcionesDuracion}
-              required
-              array={{
-                index: index,
-                parentName: "profesionalesQueLoBrindan",
-              }}
-            ></Dropdown>
+          <div className="flex w-full gap-2">
+            <div className="w-full">
+              <FormInput<ServiciosDelProfesionalDTO>
+                name="precio"
+                label="Precio"
+                type="number"
+                required
+                array={{
+                  index: index,
+                  parentName: "profesionalesQueLoBrindan",
+                }}
+              />
+            </div>
+            <div className="w-full">
+              <FormAutocomplete<ServiciosDelProfesionalDTO>
+                name="duracionDelTurnoEnMinutos"
+                label="Duración"
+                placeholder=""
+                opciones={opcionesDuracion}
+                required
+                array={{
+                  index: index,
+                  parentName: "profesionalesQueLoBrindan",
+                }}
+              ></FormAutocomplete>
+            </div>
           </div>
           <div className="flex justify-end">
             <button
