@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "react-dropdown/style.css";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../../api/api";
