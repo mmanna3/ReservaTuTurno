@@ -1,17 +1,11 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../../../utilidades";
 import TimePicker, { ITimePicker } from "../time-picker";
-
-interface IArrayProps {
-  index: number;
-  parentName: string;
-}
+import { IFormComponent } from "./form.utils";
 
 interface IFormTimePicker<T extends FieldValues>
-  extends Omit<ITimePicker, "name" | "hayError" | "valor"> {
-  name: keyof T;
-  array?: IArrayProps;
-}
+  extends IFormComponent<T>,
+    Omit<ITimePicker, "name" | "hayError" | "valor"> {}
 
 const FormTimePicker = <T extends FieldValues>(props: IFormTimePicker<T>) => {
   const {

@@ -1,17 +1,12 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../../../utilidades";
 import Input, { InputProps } from "../input";
-
-interface IArrayProps {
-  index: number;
-  parentName: string;
-}
+import { IFormComponent } from "./form.utils";
 
 interface FormInputProps<T extends FieldValues>
-  extends Omit<InputProps, "name"> {
-  name: keyof T;
+  extends IFormComponent<T>,
+    Omit<InputProps, "name"> {
   required?: boolean;
-  array?: IArrayProps;
 }
 
 const FormInput = <T extends FieldValues>({

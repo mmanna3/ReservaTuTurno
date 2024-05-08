@@ -1,14 +1,8 @@
 import { FieldValues, useFormContext } from "react-hook-form";
+import { IFormComponent } from "./form.utils";
 
-interface IArrayProps {
-  index: number;
-  parentName: string;
-}
-
-interface InputProps<T extends FieldValues> {
-  name: keyof T;
+interface InputProps<T extends FieldValues> extends IFormComponent<T> {
   value: string | number;
-  array?: IArrayProps;
 }
 
 const FormHiddenInput = <T extends FieldValues>({

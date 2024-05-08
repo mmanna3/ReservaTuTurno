@@ -1,17 +1,11 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../../../utilidades";
 import Autocomplete, { IAutocompleteProps, Opcion } from "../autocomplete";
-
-interface IArrayProps {
-  index: number;
-  parentName: string;
-}
+import { IFormComponent } from "./form.utils";
 
 interface IFormAutocomplete<T extends FieldValues>
-  extends Omit<IAutocompleteProps, "name" | "hayError" | "valor"> {
-  name: keyof T;
-  array?: IArrayProps;
-}
+  extends IFormComponent<T>,
+    Omit<IAutocompleteProps, "name" | "hayError" | "valor"> {}
 
 const FormAutocomplete = <T extends FieldValues>(
   props: IFormAutocomplete<T>,

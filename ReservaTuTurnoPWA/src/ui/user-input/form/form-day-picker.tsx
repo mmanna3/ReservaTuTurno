@@ -2,17 +2,11 @@ import { format } from "date-fns";
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../../../utilidades";
 import DayPicker, { IDayPicker } from "../day-picker";
-
-interface IArrayProps {
-  index: number;
-  parentName: string;
-}
+import { IFormComponent } from "./form.utils";
 
 interface IFormDayPicker<T extends FieldValues>
-  extends Omit<IDayPicker, "name" | "hayError" | "valor"> {
-  name: keyof T;
-  array?: IArrayProps;
-}
+  extends IFormComponent<T>,
+    Omit<IDayPicker, "name" | "hayError" | "valor"> {}
 
 const FormDayPicker = <T extends FieldValues>(props: IFormDayPicker<T>) => {
   const {
