@@ -1,7 +1,7 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../../../utilidades";
 import Autocomplete, { IAutocompleteProps, Opcion } from "../autocomplete";
-import { IFormComponent } from "./form.utils";
+import { IFormComponent, obtenerNombreDelCampo } from "./form.utils";
 
 interface IFormAutocomplete<T extends FieldValues>
   extends IFormComponent<T>,
@@ -15,31 +15,18 @@ const FormAutocomplete = <T extends FieldValues>(
     formState: { errors },
   } = useFormContext();
 
-  let fieldName = props.name as string;
-  if (props.array)
-    fieldName = `${props.array.parentName}.${props.array.index}.${fieldName}`;
-
+  const fieldName = obtenerNombreDelCampo<T>(props.name, props.array);
   const errorMessage = getProp(errors, fieldName);
 
   const customOnChange = (x: Opcion) => {
     props.onChange && props.onChange(x);
   };
 
-  // En useCallback porque como las opciones se levanta de forma asíncrona,
-  // renderiza el componente Autocomplete con valorDefault en undefined
-  // const getValorDefault = useCallback(
-  //   (value: string) => {
-  //     console.log("usecallback");
-  //     return;
-  //   },
-  //   [props.opciones],
-  // );
-
   return (
     <>
       <Controller
         control={control}
-        name={fieldName.toString()}
+        name={fieldName}
         rules={{ required: props.required }}
         render={({ field: { onChange: ReactHookFormOnChange, value } }) => (
           <Autocomplete
@@ -47,7 +34,6 @@ const FormAutocomplete = <T extends FieldValues>(
             valorDefault={props.opciones.find((x) => x.id == value)}
             hayError={!!errorMessage}
             onChange={(opcion) => {
-              console.log("opcion onchange", opcion);
               customOnChange(opcion);
               ReactHookFormOnChange(opcion.id);
             }}

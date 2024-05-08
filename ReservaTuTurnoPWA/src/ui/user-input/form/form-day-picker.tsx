@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../../../utilidades";
 import DayPicker, { IDayPicker } from "../day-picker";
-import { IFormComponent } from "./form.utils";
+import { IFormComponent, obtenerNombreDelCampo } from "./form.utils";
 
 interface IFormDayPicker<T extends FieldValues>
   extends IFormComponent<T>,
@@ -14,10 +14,7 @@ const FormDayPicker = <T extends FieldValues>(props: IFormDayPicker<T>) => {
     formState: { errors },
   } = useFormContext();
 
-  let fieldName = props.name as string;
-  if (props.array)
-    fieldName = `${props.array.parentName}.${props.array.index}.${fieldName}`;
-
+  const fieldName = obtenerNombreDelCampo<T>(props.name, props.array);
   const errorMessage = getProp(errors, fieldName);
 
   const customOnChange = (x: Date) => {
@@ -28,7 +25,7 @@ const FormDayPicker = <T extends FieldValues>(props: IFormDayPicker<T>) => {
     <>
       <Controller
         control={control}
-        name={fieldName.toString()}
+        name={fieldName}
         rules={{ required: props.required }}
         render={({ field: { onChange, value } }) => (
           <DayPicker

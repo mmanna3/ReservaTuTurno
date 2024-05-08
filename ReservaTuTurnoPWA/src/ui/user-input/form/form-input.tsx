@@ -1,7 +1,7 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../../../utilidades";
 import Input, { InputProps } from "../input";
-import { IFormComponent } from "./form.utils";
+import { IFormComponent, obtenerNombreDelCampo } from "./form.utils";
 
 interface FormInputProps<T extends FieldValues>
   extends IFormComponent<T>,
@@ -19,13 +19,10 @@ const FormInput = <T extends FieldValues>({
     formState: { errors },
   } = useFormContext();
 
-  let fieldName = name as string;
-  if (props.array)
-    fieldName = `${props.array.parentName}.${props.array.index}.${fieldName}`;
-
+  const fieldName = obtenerNombreDelCampo<T>(name, props.array);
   const errorMessage = getProp(errors, fieldName);
 
-  const customOnChange = (x: any) => {
+  const customOnChange = (x: React.ChangeEvent<HTMLInputElement>) => {
     props.onChange && props.onChange(x);
   };
 
