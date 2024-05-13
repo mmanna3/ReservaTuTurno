@@ -49,7 +49,7 @@ const Input = (props: InputProps) => {
           hayError
             ? "border-rojo focus:border-rojo focus:ring-rojo focus-visible:text-rojo focus-visible:outline-rojo"
             : "focus:border-verde focus:outline-verde focus:ring-verde focus-visible:text-verde focus-visible:outline-verde",
-          "text-10 py-55-rem block h-16 w-full rounded-xl bg-grisclarito p-2.5 pl-5 pr-11 pt-7 text-base text-negro placeholder-grisclaro !shadow-none",
+          "text-10 py-55-rem block h-16 w-full rounded-xl bg-grisclarito p-2.5 pl-5 pr-11 pt-7 text-base text-negro placeholder-grisclaro !shadow-none outline-none",
         )}
       />
     </div>
