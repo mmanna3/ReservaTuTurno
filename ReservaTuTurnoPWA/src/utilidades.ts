@@ -20,14 +20,14 @@ export interface IDuracionDelServicio {
 }
 
 export const DuracionDelServicioArray: IDuracionDelServicio[] = [
-  { label: "15 minutos", value: 15 },
-  { label: "30 minutos", value: 30 },
-  { label: "45 minutos", value: 45 },
-  { label: "1 hora", value: 60 },
-  { label: "1:15", value: 75 },
-  { label: "1:30", value: 90 },
-  { label: "1:45", value: 105 },
-  { label: "2 horas", value: 120 },
+  { label: "00:15", value: 15 },
+  { label: "00:30", value: 30 },
+  { label: "00:45", value: 45 },
+  { label: "01:00", value: 60 },
+  { label: "01:15", value: 75 },
+  { label: "01:30", value: 90 },
+  { label: "01:45", value: 105 },
+  { label: "02:00", value: 120 },
 ];
 
 export function getProp(object: any, path: string, defaultValue?: unknown) {

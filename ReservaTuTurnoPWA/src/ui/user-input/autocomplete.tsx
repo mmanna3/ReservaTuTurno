@@ -79,9 +79,13 @@ export default function Autocomplete(props: IAutocompleteProps) {
             )}
 
             {props.Icono ? (
-              <props.Icono className="absolute right-5 top-8 size-5 stroke-[1.8px] text-rosa" />
+              <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
+                <props.Icono className="size-5 stroke-[1.8px] text-rosa" />
+              </div>
             ) : (
-              <ChevronDownIcon className="absolute right-5 top-8 size-5 stroke-[1.8px] text-rosa" />
+              <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
+                <ChevronDownIcon className="size-5 stroke-[1.8px] text-rosa" />
+              </div>
             )}
           </InputDisplay>
         </div>
