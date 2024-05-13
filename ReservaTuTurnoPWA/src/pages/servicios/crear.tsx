@@ -63,8 +63,8 @@ const CrearServicio = () => {
           <Separador />
           <Equipo />
           {hayProfesionalesDuplicados !== "" ? (
-            <div className="mt-6 rounded-xl border-2 border-red-200 bg-red-100 p-3 ">
-              <span className="text-sm text-rojo">
+            <div className="mt-6 rounded-xl border-2 border-red-200 bg-red-100 p-3 shadow-sm ">
+              <span className="text-sm text-red-100">
                 {hayProfesionalesDuplicados}
               </span>
             </div>

@@ -1,4 +1,7 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronDownIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 import Modal from "@ui/modal";
 import cx from "classnames";
 import { useEffect, useState } from "react";
@@ -70,15 +73,15 @@ export default function Autocomplete(props: IAutocompleteProps) {
             esRequerido={props.required}
           >
             {selectedItem ? (
-              <span className="h-7">{selectedItem.valor}</span>
+              <span className="h-6">{selectedItem.valor}</span>
             ) : (
-              <span className="h-7 text-grisclaro">{props.placeholder}</span>
+              <span className="h-6 text-grisclaro">{props.placeholder}</span>
             )}
 
             {props.Icono ? (
               <props.Icono className="absolute right-5 top-8 size-5 stroke-[1.8px] text-rosa" />
             ) : (
-              <MagnifyingGlassIcon className="absolute right-5 top-8 size-5 stroke-[1.8px] text-rosa" />
+              <ChevronDownIcon className="absolute right-5 top-8 size-5 stroke-[1.8px] text-rosa" />
             )}
           </InputDisplay>
         </div>

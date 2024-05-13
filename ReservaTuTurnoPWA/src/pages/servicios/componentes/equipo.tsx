@@ -1,4 +1,4 @@
-import { TrashIcon, UserIcon } from "@heroicons/react/24/outline";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import BotonSecundario from "@ui/boton-secundario";
 import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { useFieldArray } from "react-hook-form";
@@ -57,7 +57,6 @@ const Equipo = () => {
           />
           <div className="flex-grow">
             <FormAutocomplete<ServiciosDelProfesionalDTO>
-              Icono={UserIcon}
               name="profesionalId"
               label="Profesional"
               placeholder="Seleccioná un profesional"

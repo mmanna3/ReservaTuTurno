@@ -84,8 +84,8 @@ const EditarServicio = () => {
           <Equipo />
 
           {hayProfesionalesDuplicados !== "" ? (
-            <div className="mt-6 rounded-xl border-2 border-red-200 bg-red-100 p-3 ">
-              <span className="text-sm text-rojo">
+            <div className="mt-6 rounded-xl border border-red-200 bg-red-100 p-4 shadow-lg">
+              <span className="text-sm font-medium text-red-400">
                 {hayProfesionalesDuplicados}
               </span>
             </div>
