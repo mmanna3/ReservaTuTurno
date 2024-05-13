@@ -1,5 +1,6 @@
 import { AgendaDTO } from "@api/clients";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import BotonSecundario from "@ui/boton-secundario";
 import FormHiddenInput from "@ui/user-input/form/form-hidden-input";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -51,14 +52,8 @@ const AgendasDelProfesional = () => {
           </div>
         );
       })}
-      {/* TODO: Sacar este otro botón a un componente propio */}
-      <button
-        onClick={() => append({})}
-        type="button"
-        className="mt-3 flex rounded-lg bg-grisclarito/20 p-3 px-4 text-base font-medium text-rosa shadow-sm"
-      >
-        Agregar agenda
-      </button>
+
+      <BotonSecundario onClick={() => append({})} texto="Agregar agenda" />
     </>
   );
 };

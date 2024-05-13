@@ -1,4 +1,5 @@
 import { UserIcon } from "@heroicons/react/24/outline";
+import BotonSecundario from "@ui/boton-secundario";
 import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { useFieldArray } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -105,14 +106,7 @@ const Equipo = () => {
           </div>
         </div>
       ))}
-
-      <button
-        onClick={() => append({})}
-        type="button"
-        className="mt-4 rounded-xl border border-gris p-2 text-sm text-gris"
-      >
-        Agregar profesional
-      </button>
+      <BotonSecundario texto="Agregar profesional" onClick={() => append({})} />
     </>
   );
 };
