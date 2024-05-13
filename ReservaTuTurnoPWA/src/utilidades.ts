@@ -26,7 +26,7 @@ export const DuracionDelServicioArray: IDuracionDelServicio[] = [
   { label: "1 hora", value: 60 },
   { label: "1 hora y cuarto", value: 75 },
   { label: "1 hora y media", value: 90 },
-  { label: "1 hora y 45 minutos", value: 105 },
+  { label: "1 hora y 45 min", value: 105 },
   { label: "2 horas", value: 120 },
 ];
 
