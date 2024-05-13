@@ -7,7 +7,7 @@ import {
   ProfesionalDTO,
   ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
-import useApiQuery from "../../../api/custom-hooks/useApiQuery";
+import useApiQuery from "../../../api/custom-hooks/use-api-query";
 import { Subtitulo } from "../../../ui/subtitulo";
 import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
 import FormInput from "../../../ui/user-input/form/form-input";

@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { api } from "../../api/api";
 import { TurnoDTO } from "../../api/clients";
-import useApiQuery from "../../api/custom-hooks/useApiQuery";
+import useApiQuery from "../../api/custom-hooks/use-api-query";
 import { BotonLink } from "../../ui/boton-link";
 import ContenedorCentradoConMargenes from "../../ui/contenedor-centrado-con-imagenes";
 import ContenidoConSpinnerYError from "../../ui/contenido-con-spinner-y-error";

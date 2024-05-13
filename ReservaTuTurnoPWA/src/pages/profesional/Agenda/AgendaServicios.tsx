@@ -9,7 +9,7 @@ import {
   AgendaServicioProfesionalDTO,
   ServiciosDelProfesionalDTO,
 } from "../../../api/clients";
-import useApiQuery from "../../../api/custom-hooks/useApiQuery";
+import useApiQuery from "../../../api/custom-hooks/use-api-query";
 import ContenidoConSpinnerYError from "../../../ui/contenido-con-spinner-y-error";
 import { convertirEnOpciones } from "../../../utilidades";
 

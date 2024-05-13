@@ -6,8 +6,8 @@ import {
   ProfesionalDTO,
   ServiciosDelProfesionalDTO,
 } from "@api/clients";
-import useApiMutation from "@api/custom-hooks/useApiMutation";
-import useApiQuery from "@api/custom-hooks/useApiQuery";
+import useApiMutation from "@api/custom-hooks/use-api-mutation";
+import useApiQuery from "@api/custom-hooks/use-api-query";
 import ContenidoConSpinnerYError from "@ui/contenido-con-spinner-y-error";
 import Titulo from "@ui/titulo";
 import Form from "@ui/user-input/form/form";

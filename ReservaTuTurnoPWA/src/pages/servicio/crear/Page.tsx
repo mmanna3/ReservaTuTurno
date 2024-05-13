@@ -3,7 +3,7 @@ import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
 import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
-import useApiMutation from "../../../api/custom-hooks/useApiMutation";
+import useApiMutation from "../../../api/custom-hooks/use-api-mutation";
 import { Separador } from "../../../ui/separator";
 import Titulo from "../../../ui/titulo";
 import Form from "../../../ui/user-input/form/form";

@@ -1,7 +1,7 @@
 import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { api } from "../../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../../api/clients";
-import useApiQuery from "../../../api/custom-hooks/useApiQuery";
+import useApiQuery from "../../../api/custom-hooks/use-api-query";
 import FormInput from "../../../ui/user-input/form/form-input";
 import {
   DuracionDelServicioArray,

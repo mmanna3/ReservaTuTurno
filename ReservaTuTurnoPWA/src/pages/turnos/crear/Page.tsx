@@ -10,8 +10,8 @@ import {
   ServicioConProfesionalesDTO,
   TurnoDTO,
 } from "../../../api/clients";
-import useApiMutation from "../../../api/custom-hooks/useApiMutation";
-import useApiQuery from "../../../api/custom-hooks/useApiQuery";
+import useApiMutation from "../../../api/custom-hooks/use-api-mutation";
+import useApiQuery from "../../../api/custom-hooks/use-api-query";
 import Titulo from "../../../ui/titulo";
 import Form from "../../../ui/user-input/form/form";
 import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";

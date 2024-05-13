@@ -1,5 +1,5 @@
 import { api } from "../../api/api";
-import useApiQuery from "../../api/custom-hooks/useApiQuery";
+import useApiQuery from "../../api/custom-hooks/use-api-query";
 import { BotonLink } from "../../ui/boton-link";
 import ContenedorCentradoConMargenes from "../../ui/contenedor-centrado-con-imagenes";
 import ContenidoConSpinnerYError from "../../ui/contenido-con-spinner-y-error";
@@ -17,11 +17,6 @@ const ListaDeServicios = () => {
     key: ["servicios-por-categoria"],
     fn: async () => await api.categoriaDeServicioAll(),
   });
-
-  // useEffect(() => {
-  //   refetch();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   return (
     <ContenedorCentradoConMargenes>
