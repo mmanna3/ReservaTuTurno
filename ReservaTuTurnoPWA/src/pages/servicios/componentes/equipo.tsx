@@ -1,4 +1,4 @@
-import { UserIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, UserIcon } from "@heroicons/react/24/outline";
 import BotonSecundario from "@ui/boton-secundario";
 import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { useFieldArray } from "react-hook-form";
@@ -11,7 +11,6 @@ import {
 import useApiQuery from "../../../api/custom-hooks/use-api-query";
 import { Subtitulo } from "../../../ui/subtitulo";
 import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
-import FormInput from "../../../ui/user-input/form/form-input";
 import {
   DuracionDelServicioArray,
   IDuracionDelServicio,
@@ -47,7 +46,7 @@ const Equipo = () => {
       <Subtitulo>Equipo</Subtitulo>
 
       {fields.map((field, index) => (
-        <div key={field.id} className="border-b pb-3">
+        <div key={field.id} className="flex w-full gap-2">
           <FormHiddenInput<ServiciosDelProfesionalDTO>
             name="servicioId"
             value={id != undefined ? id : 0}
@@ -56,19 +55,21 @@ const Equipo = () => {
               parentName: "profesionalesQueLoBrindan",
             }}
           />
-          <FormAutocomplete<ServiciosDelProfesionalDTO>
-            Icono={UserIcon}
-            name="profesionalId"
-            label="Profesional"
-            placeholder="Seleccioná un profesional"
-            required
-            opciones={opcionesProfesionales}
-            array={{
-              index: index,
-              parentName: "profesionalesQueLoBrindan",
-            }}
-          />
-          <div className="flex w-full gap-2">
+          <div className="flex-grow">
+            <FormAutocomplete<ServiciosDelProfesionalDTO>
+              Icono={UserIcon}
+              name="profesionalId"
+              label="Profesional"
+              placeholder="Seleccioná un profesional"
+              required
+              opciones={opcionesProfesionales}
+              array={{
+                index: index,
+                parentName: "profesionalesQueLoBrindan",
+              }}
+            />
+          </div>
+          {/* <div className="flex w-full gap-2">
             <div className="w-full">
               <FormInput<ServiciosDelProfesionalDTO>
                 name="precio"
@@ -94,14 +95,14 @@ const Equipo = () => {
                 }}
               ></FormAutocomplete>
             </div>
-          </div>
-          <div className="flex justify-end">
+          </div> */}
+          <div className="mt-6 flex items-center">
             <button
               onClick={() => remove(index)}
               type="button"
-              className="mt-4 rounded-xl border border-gris p-2 text-xs text-gris"
+              className="rounded-lg bg-grisclarito/10 p-3 shadow-sm"
             >
-              Quitar profesional
+              <TrashIcon className="size-5 stroke-[1.8px] text-grisclaro" />
             </button>
           </div>
         </div>
