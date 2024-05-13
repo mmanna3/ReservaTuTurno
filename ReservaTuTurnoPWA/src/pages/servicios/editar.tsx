@@ -1,16 +1,16 @@
+import { api } from "@api/api";
+import { ServicioDTO, ServiciosDelProfesionalDTO } from "@api/clients";
+import useApiMutation from "@api/custom-hooks/use-api-mutation";
+import useApiQuery from "@api/custom-hooks/use-api-query";
+import ContenidoConSpinnerYError from "@ui/contenido-con-spinner-y-error";
+import Titulo from "@ui/titulo";
+import Form from "@ui/user-input/form/form";
+import { BotonSubmit } from "@ui/user-input/form/form-boton-submit";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { api } from "../../../api/api";
-import { ServicioDTO, ServiciosDelProfesionalDTO } from "../../../api/clients";
-import useApiMutation from "../../../api/custom-hooks/use-api-mutation";
-import useApiQuery from "../../../api/custom-hooks/use-api-query";
-import ContenidoConSpinnerYError from "../../../ui/contenido-con-spinner-y-error";
-import Titulo from "../../../ui/titulo";
-import Form from "../../../ui/user-input/form/form";
-import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";
-import CamposBasicos from "../components/CamposBasicos";
-import Equipo from "../components/Equipo";
+import CamposBasicos from "./componentes/campos-basicos";
+import Equipo from "./componentes/equipo";
 
 function seRepitenProfesionales(
   profesionalesQueLoBrindan: ServiciosDelProfesionalDTO[] | undefined,

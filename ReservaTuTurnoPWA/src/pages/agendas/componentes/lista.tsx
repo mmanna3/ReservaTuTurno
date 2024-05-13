@@ -3,9 +3,9 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import FormHiddenInput from "@ui/user-input/form/form-hidden-input";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import AgendaServicios from "./AgendaServicios";
-import DiasDeLaSemana from "./DiasDeLaSemanaCheckboxs";
-import { FranjasHorarias } from "./FranjasHorarias";
+import DiasDeLaSemana from "./dias-de-la-semana";
+import { FranjasHorarias } from "./franjas-horarias";
+import AgendaServicios from "./servicios";
 
 const AgendasDelProfesional = () => {
   const { id: profesionalId } = useParams();

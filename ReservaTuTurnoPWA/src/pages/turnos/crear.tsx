@@ -4,20 +4,20 @@ import { endOfMonth, formatDate } from "date-fns";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../api/api";
+import { api } from "../../api/api";
 import {
   ProfesionalBaseDTO,
   ServicioConProfesionalesDTO,
   TurnoDTO,
-} from "../../../api/clients";
-import useApiMutation from "../../../api/custom-hooks/use-api-mutation";
-import useApiQuery from "../../../api/custom-hooks/use-api-query";
-import Titulo from "../../../ui/titulo";
-import Form from "../../../ui/user-input/form/form";
-import { BotonSubmit } from "../../../ui/user-input/form/form-boton-submit";
-import FormDayPicker from "../../../ui/user-input/form/form-day-picker";
-import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
-import { convertirEnOpciones, generarRandom } from "../../../utilidades";
+} from "../../api/clients";
+import useApiMutation from "../../api/custom-hooks/use-api-mutation";
+import useApiQuery from "../../api/custom-hooks/use-api-query";
+import Titulo from "../../ui/titulo";
+import Form from "../../ui/user-input/form/form";
+import { BotonSubmit } from "../../ui/user-input/form/form-boton-submit";
+import FormDayPicker from "../../ui/user-input/form/form-day-picker";
+import FormHiddenInput from "../../ui/user-input/form/form-hidden-input";
+import { convertirEnOpciones, generarRandom } from "../../utilidades";
 
 const CrearTurnosPage = () => {
   const navigate = useNavigate();

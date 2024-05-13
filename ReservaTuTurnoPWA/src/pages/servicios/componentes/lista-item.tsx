@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ServicioDTO } from "../../api/clients";
+import { ServicioDTO } from "../../../api/clients";
 
 interface IProps {
   servicio: ServicioDTO;

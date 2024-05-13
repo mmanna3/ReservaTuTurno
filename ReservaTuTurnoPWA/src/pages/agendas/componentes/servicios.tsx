@@ -11,7 +11,7 @@ import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { convertirEnOpciones } from "../../utilidades";
+import { convertirEnOpciones } from "../../../utilidades";
 
 interface IProps {
   parentName: string;

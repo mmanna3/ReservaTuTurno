@@ -5,7 +5,7 @@ import ContenedorCentradoConMargenes from "../../ui/contenedor-centrado-con-imag
 import ContenidoConSpinnerYError from "../../ui/contenido-con-spinner-y-error";
 import { Subtitulo } from "../../ui/subtitulo";
 import Titulo from "../../ui/titulo";
-import { ServicioListaItem } from "./ServicioListaItem";
+import { ServicioListaItem } from "./componentes/lista-item";
 
 const ListaDeServicios = () => {
   const {
