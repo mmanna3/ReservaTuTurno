@@ -35,7 +35,7 @@ const Input = (props: InputProps) => {
         <Icono
           className={cx(
             hayError && "!text-rojo",
-            "absolute right-5 top-11 h-6 w-6 text-gris opacity-90 group-focus-within:text-verde",
+            "absolute right-5 top-11 h-6 w-6 stroke-[1.8px] text-rosa opacity-90 group-focus-within:text-verde",
           )}
         />
       )}

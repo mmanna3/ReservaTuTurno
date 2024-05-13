@@ -75,7 +75,7 @@ export default function Autocomplete(props: IAutocompleteProps) {
             )}
 
             {props.Icono && (
-              <props.Icono className="absolute right-5 top-6 h-5 w-5 text-negro" />
+              <props.Icono className="absolute right-5 top-6 size-5 stroke-[1.8px] text-rosa" />
             )}
           </InputDisplay>
         </div>
