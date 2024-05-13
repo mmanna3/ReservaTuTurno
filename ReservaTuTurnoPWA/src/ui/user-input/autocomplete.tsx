@@ -67,6 +67,7 @@ export default function Autocomplete(props: IAutocompleteProps) {
             onClick={onInputClick}
             label={props.label}
             hayError={false}
+            esRequerido={props.required}
           >
             {selectedItem ? (
               <span className="h-7">{selectedItem.valor}</span>
