@@ -1,3 +1,4 @@
+import { ClockIcon } from "@heroicons/react/24/outline";
 import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { api } from "../../../api/api";
 import { CategoriaDeServicioDTO, ServicioDTO } from "../../../api/clients";
@@ -43,7 +44,7 @@ const CamposBasicos = () => {
           <FormInput<ServicioDTO>
             type="number"
             name="precioPorDefecto"
-            label="Precio"
+            label="Precio desde"
             required
           />
         </div>
@@ -54,6 +55,7 @@ const CamposBasicos = () => {
             placeholder=""
             opciones={OpcionesDuracion}
             required
+            Icono={ClockIcon}
           />
         </div>
       </div>

@@ -74,8 +74,10 @@ export default function Autocomplete(props: IAutocompleteProps) {
               <span className="h-7 text-grisclaro">{props.placeholder}</span>
             )}
 
-            {props.Icono && (
-              <props.Icono className="absolute right-5 top-6 size-5 stroke-[1.8px] text-rosa" />
+            {props.Icono ? (
+              <props.Icono className="absolute right-5 top-8 size-5 stroke-[1.8px] text-rosa" />
+            ) : (
+              <MagnifyingGlassIcon className="absolute right-5 top-8 size-5 stroke-[1.8px] text-rosa" />
             )}
           </InputDisplay>
         </div>
