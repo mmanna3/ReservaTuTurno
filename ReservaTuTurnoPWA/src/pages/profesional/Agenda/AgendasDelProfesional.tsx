@@ -1,3 +1,4 @@
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { AgendaDTO } from "../../../api/clients";
@@ -37,9 +38,12 @@ const AgendasDelProfesional = () => {
                   <button
                     onClick={() => remove(index)}
                     type="button"
-                    className="mt-4 rounded-xl border border-gris p-2 text-xs text-gris"
+                    className="mt-4 flex p-2 text-xs text-rosaoscuro underline"
                   >
                     Borrar agenda
+                    <span>
+                      <TrashIcon className="ml-[3.5px] size-4 stroke-[1.5px] text-rosaoscuro opacity-90 group-focus-within:text-verde" />
+                    </span>
                   </button>
                 </div>
               </>
@@ -47,10 +51,11 @@ const AgendasDelProfesional = () => {
           </div>
         );
       })}
+      {/* TODO: Sacar este otro botón a un componente propio */}
       <button
         onClick={() => append({})}
         type="button"
-        className="mt-4 rounded-xl border border-gris p-2 text-sm text-gris"
+        className="mt-3 flex rounded-lg bg-grisclarito/20 p-3 px-4 text-base font-medium text-rosa shadow-sm"
       >
         Agregar agenda
       </button>

@@ -57,9 +57,13 @@ export function FranjasHorarias(props: IProps) {
               }}
             />
           </div>
-          <div className="ml-2 mr-1 mt-8 flex items-center">
-            <button onClick={() => remove(index)} type="button">
-              <TrashIcon className="h-5 w-5 text-negro" />
+          <div className="mt-6 flex items-center ">
+            <button
+              onClick={() => remove(index)}
+              type="button"
+              className="rounded-lg bg-grisclarito/10 p-3 shadow-sm"
+            >
+              <TrashIcon className="size-5 stroke-[1.8px] text-grisclaro" />
             </button>
           </div>
         </div>
@@ -67,9 +71,9 @@ export function FranjasHorarias(props: IProps) {
       <button
         onClick={() => append({})}
         type="button"
-        className="mt-4 rounded-xl border border-gris p-2 text-sm text-gris"
+        className="mt-3 p-2 text-sm text-rosaoscuro underline"
       >
-        Agregar franja
+        Agregar franja horaria
       </button>
     </>
   );

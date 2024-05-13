@@ -52,7 +52,7 @@ const Agendas = () => {
     >
       <div className="w-full">
         <Form<ProfesionalDTO> onSubmit={onSubmit} defaultValues={profesional}>
-          <Titulo>Agenda</Titulo>
+          <Titulo>Agendas</Titulo>
           <AgendasDelProfesional />
           <BotonSubmit texto="Guardar cambios" />
         </Form>

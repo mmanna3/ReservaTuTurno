@@ -105,7 +105,7 @@ const AgendaServicios = (props: IProps) => {
       <FormAutocomplete<ServiciosDelProfesionalDTO>
         name="servicioNombre"
         label="Servicios"
-        placeholder="Seleccioná un servicio"
+        placeholder="Elegí un servicio"
         opciones={serviciosDisponibles}
         onChange={onAgregarServicio}
       />

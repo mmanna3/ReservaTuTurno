@@ -1,4 +1,3 @@
-import { ClockIcon } from "@heroicons/react/24/outline";
 import Modal from "@ui/modal";
 import { useCallback, useEffect, useState } from "react";
 import Picker, { PickerValue } from "react-mobile-picker";
@@ -43,7 +42,7 @@ export default function TimePicker(props: ITimePicker) {
       >
         <span className="mr-[2px]">{pickerValue.hora}</span> :
         <span className="ml-[2px]">{pickerValue.minutos}</span>
-        <ClockIcon className="ml-auto mr-1 mt-[1.5px] h-5 w-5 text-negro" />
+        {/* <ClockIcon className="ml-auto mr-1 mt-[1.5px] size-5 stroke-[1.7px] text-rosa" /> */}
       </InputDisplay>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="mt-2 w-48">
