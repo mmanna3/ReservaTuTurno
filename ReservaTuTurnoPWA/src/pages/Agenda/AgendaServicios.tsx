@@ -1,17 +1,17 @@
+import { api } from "@api/api";
+import {
+  AgendaServicioProfesionalDTO,
+  ServiciosDelProfesionalDTO,
+} from "@api/clients";
+import useApiQuery from "@api/custom-hooks/use-api-query";
 import { XCircleIcon } from "@heroicons/react/24/outline";
+import ContenidoConSpinnerYError from "@ui/contenido-con-spinner-y-error";
 import { Opcion } from "@ui/user-input/autocomplete";
 import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
 import { useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { api } from "../../../api/api";
-import {
-  AgendaServicioProfesionalDTO,
-  ServiciosDelProfesionalDTO,
-} from "../../../api/clients";
-import useApiQuery from "../../../api/custom-hooks/use-api-query";
-import ContenidoConSpinnerYError from "../../../ui/contenido-con-spinner-y-error";
-import { convertirEnOpciones } from "../../../utilidades";
+import { convertirEnOpciones } from "../../utilidades";
 
 interface IProps {
   parentName: string;
