@@ -28,13 +28,13 @@ install:
   - dotnet tool install swashbuckle.aspnetcore.cli -g
   - dotnet tool install nswag.consolecore -g
   - dotnet --version
+  - dotnet tool list -g
+  - sh: which swagger
 before_build:
   # Genera dtos en PWA a partir del backend (buildeado antes para los tests)
   - cd ReservaTuTurnoApi/Api
   - dotnet build --configuration Release --runtime win-x64
-  - dotnet tool list -g
   - dotnet new details swashbuckle.aspnetcore.cli --diagnostics
-  - sh: which swagger
   - swagger tofile --output swagger.json bin/Release/net8.0/win-x64/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
   - cd ../..
