@@ -23,8 +23,8 @@ environment:
 install:
   - ps: >-
       $file = "./ReservaTuTurnoApi/Api/appsettings.Production.json";
-      (Get-Content $file).Replace("{db_server}", $env:db_server).Replace("{db_name}", $env:db_name).Replace("{db_username}", $env:db_username).Replace("{db_password}", $env:db_password) | Set-Content $file  
-# Instala para generar dtos a partir del backend
+      (Get-Content $file).Replace("{db_server}", $env:db_server).Replace("{db_name}", $env:db_name).Replace("{db_username}", $env:db_username).Replace("{db_password}", $env:db_password) | Set-Content $file
+  # Instala para generar dtos a partir del backend
   - dotnet tool install swashbuckle.aspnetcore.cli -g
   - dotnet tool install nswag.consolecore -g
   - dotnet --version
@@ -32,9 +32,10 @@ before_build:
   # Genera dtos en PWA a partir del backend (buildeado antes para los tests)
   - cd ReservaTuTurnoApi/Api
   - dotnet build --configuration Release --runtime win-x64
+  - dotnet tool list -g
   - swagger tofile --output swagger.json bin/Release/net8.0/win-x64/Api.dll v1
   - nswag openapi2tsclient /input:swagger.json /output:./../../ReservaTuTurnoPWA/src/api/clients.ts
-  - cd ../..  
+  - cd ../..
   # Compila la PWA
   - npm install --global yarn
   - cd ReservaTuTurnoPWA
@@ -45,7 +46,7 @@ before_build:
       Copy-Item -Path "./ReservaTuTurnoPWA/dist" -Destination "./ReservaTuTurnoAPI/Api/wwwroot" -Recurse
 build_script:
   - cmd: dotnet publish --framework net8.0 /p:EnvironmentName=Production --self-contained true -r win-x64 ReservaTuTurnoApi/Api --output %appveyor_build_folder%\dist
-test_script:  
+test_script:
   # Ejecuta tests
   - cd ReservaTuTurnoApi
   - dotnet test --configuration Release --runtime win-x64
