@@ -11,11 +11,7 @@ import {
 import useApiQuery from "../../../api/custom-hooks/use-api-query";
 import { Subtitulo } from "../../../ui/subtitulo";
 import FormHiddenInput from "../../../ui/user-input/form/form-hidden-input";
-import {
-  DuracionDelServicioArray,
-  IDuracionDelServicio,
-  convertirEnOpciones,
-} from "../../../utilidades";
+import { convertirEnOpciones } from "../../../utilidades";
 
 const Equipo = () => {
   const { data: profesionales } = useApiQuery({
@@ -31,11 +27,11 @@ const Equipo = () => {
     "id",
   );
 
-  const opcionesDuracion = convertirEnOpciones<IDuracionDelServicio>(
-    DuracionDelServicioArray,
-    "label",
-    "value",
-  );
+  // const opcionesDuracion = convertirEnOpciones<IDuracionDelServicio>(
+  //   DuracionDelServicioArray,
+  //   "label",
+  //   "value",
+  // );
 
   const { fields, append, remove } = useFieldArray({
     name: "profesionalesQueLoBrindan",
