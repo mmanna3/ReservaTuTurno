@@ -29,7 +29,8 @@ install:
   - dotnet tool install nswag.consolecore -g
   - dotnet --version
   - dotnet tool list -g
-  - sh: which swagger
+  - ps: >-
+      (gcm cmd).Path
 before_build:
   # Genera dtos en PWA a partir del backend (buildeado antes para los tests)
   - cd ReservaTuTurnoApi/Api
