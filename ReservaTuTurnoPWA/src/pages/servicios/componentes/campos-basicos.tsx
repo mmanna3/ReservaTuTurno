@@ -34,7 +34,7 @@ const CamposBasicos = () => {
       <FormAutocomplete<ServicioDTO>
         name="categoriaDeServicioId"
         label="Categoría"
-        placeholder="Seleccioná una categoría"
+        placeholder="Elegí una categoría"
         opciones={OpcionesCategorias}
         required
       />

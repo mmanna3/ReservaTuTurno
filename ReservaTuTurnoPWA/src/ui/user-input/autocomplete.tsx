@@ -78,21 +78,25 @@ export default function Autocomplete(props: IAutocompleteProps) {
         hayError={false}
         esRequerido={props.required}
       >
-        {selectedItem ? (
-          <span className="h-6">{selectedItem.valor}</span>
-        ) : (
-          <span className="h-6 text-grisclaro">{props.placeholder}</span>
-        )}
+        <div className="flex w-full">
+          {selectedItem ? (
+            <p className="h-6 max-w-[80%] truncate">{selectedItem.valor}</p>
+          ) : (
+            <p className="h-6 max-w-[80%] truncate text-grisclaro">
+              {props.placeholder}
+            </p>
+          )}
 
-        {props.Icono ? (
-          <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
-            <props.Icono className="size-5 stroke-[1.8px] text-rosa" />
-          </div>
-        ) : (
-          <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
-            <ChevronDownIcon className="size-5 stroke-[1.8px] text-rosa" />
-          </div>
-        )}
+          {props.Icono ? (
+            <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
+              <props.Icono className="size-5 stroke-[1.8px] text-rosa" />
+            </div>
+          ) : (
+            <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
+              <ChevronDownIcon className="size-5 stroke-[1.8px] text-rosa" />
+            </div>
+          )}
+        </div>
       </InputDisplay>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="h-82 w-64">

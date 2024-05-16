@@ -55,7 +55,7 @@ const Equipo = () => {
             <FormAutocomplete<ServiciosDelProfesionalDTO>
               name="profesionalId"
               label="Profesional"
-              placeholder="Seleccioná un profesional"
+              placeholder="Elegí un profesionalasdasadsdads"
               required
               opciones={opcionesProfesionales}
               array={{

@@ -114,7 +114,7 @@ const CrearTurnosPage = () => {
           <FormAutocomplete<TurnoDTO>
             name="servicioId"
             label="Servicio"
-            placeholder="Seleccioná el servicio"
+            placeholder="Elegí el servicio"
             opciones={OpcionesServicios}
             onOpcionSeleccionada={(servicio) => {
               actualizarProfesionalesDisponibles(servicio);
@@ -136,7 +136,7 @@ const CrearTurnosPage = () => {
           <FormAutocomplete<TurnoDTO>
             name="profesionalId"
             label="Profesional"
-            placeholder="Seleccioná el profesional"
+            placeholder="Elegí el profesional"
             opciones={profesionalesDisponibles}
             onOpcionSeleccionada={(profesional) =>
               setProfesionalId(Number(profesional.id))
