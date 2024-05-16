@@ -18,7 +18,7 @@ interface IProps {
   agendaId: number | null;
 }
 
-const AgendaServicios = (props: IProps) => {
+const Servicios = (props: IProps) => {
   const { id: profesionalId } = useParams();
 
   const {
@@ -167,4 +167,4 @@ const AgendaServicios = (props: IProps) => {
   );
 };
 
-export default AgendaServicios;
+export default Servicios;

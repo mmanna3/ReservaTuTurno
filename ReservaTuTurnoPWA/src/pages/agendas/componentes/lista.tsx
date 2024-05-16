@@ -6,9 +6,9 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import DiasDeLaSemana from "./dias-de-la-semana";
 import { FranjasHorarias } from "./franjas-horarias";
-import AgendaServicios from "./servicios";
+import Servicios from "./servicios";
 
-const AgendasDelProfesional = () => {
+const Lista = () => {
   const { id: profesionalId } = useParams();
   const { fields, append, remove } = useFieldArray({
     name: "agendas",
@@ -31,7 +31,7 @@ const AgendasDelProfesional = () => {
                 />
                 <DiasDeLaSemana parentName={`agendas.${index}`} />
                 <FranjasHorarias parentName={`agendas.${index}`} />
-                <AgendaServicios
+                <Servicios
                   parentName={`agendas.${index}`}
                   agendaId={getValues(`agendas.${index}.id`) || 0}
                 />
@@ -58,4 +58,4 @@ const AgendasDelProfesional = () => {
   );
 };
 
-export default AgendasDelProfesional;
+export default Lista;

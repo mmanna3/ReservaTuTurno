@@ -14,7 +14,7 @@ import Form from "@ui/user-input/form/form";
 import { BotonSubmit } from "@ui/user-input/form/form-boton-submit";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import AgendasDelProfesional from "./componentes/lista";
+import Lista from "./componentes/lista";
 
 const Agendas = () => {
   const { id: profesionalId } = useParams();
@@ -53,7 +53,7 @@ const Agendas = () => {
       <div className="w-full">
         <Form<ProfesionalDTO> onSubmit={onSubmit} defaultValues={profesional}>
           <Titulo>Agendas</Titulo>
-          <AgendasDelProfesional />
+          <Lista />
           <BotonSubmit texto="Guardar cambios" />
         </Form>
       </div>
