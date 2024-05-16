@@ -47,6 +47,14 @@ public class ProfesionalRepo : RepositorioABM<Profesional>, IProfesionalRepo
                 if (!franjasNuevas.Select(x => x.Id).Contains(franjaAnterior.Id))
                     Context.Entry(franjaAnterior).State = EntityState.Deleted;
             }
+            
+            foreach (var servicioAnterior in agendaAnterior.Servicios)
+            {
+                var serviciosNuevos = agendasNuevas.SelectMany(x => x.Servicios);
+
+                if (!serviciosNuevos.Select(x => x.Id).Contains(servicioAnterior.Id))
+                    Context.Entry(servicioAnterior).State = EntityState.Deleted;
+            }
         }
     }
 

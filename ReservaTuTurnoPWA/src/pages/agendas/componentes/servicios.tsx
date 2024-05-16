@@ -8,8 +8,9 @@ import { XCircleIcon } from "@heroicons/react/24/outline";
 import ContenidoConSpinnerYError from "@ui/contenido-con-spinner-y-error";
 import { Opcion } from "@ui/user-input/autocomplete";
 import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
+import FormHiddenInput from "@ui/user-input/form/form-hidden-input";
 import { useEffect, useState } from "react";
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { convertirEnOpciones } from "../../../utilidades";
 
@@ -44,8 +45,10 @@ const Servicios = (props: IProps) => {
     [],
   );
 
+  const parentName = `${props.parentName}.servicios`;
+
   const { fields, append, remove } = useFieldArray({
-    name: `${props.parentName}.servicios`,
+    name: parentName,
   });
 
   useEffect(() => {
@@ -93,8 +96,6 @@ const Servicios = (props: IProps) => {
     remove(index);
   };
 
-  const { register } = useFormContext();
-
   return (
     <ContenidoConSpinnerYError
       isLoading={isFetching || isLoading}
@@ -135,29 +136,26 @@ const Servicios = (props: IProps) => {
                   <XCircleIcon className="h-4 w-4 text-grisclaro" />
                 </div>
               </button>
-              <input
-                hidden
-                {...register(`${props.parentName}.servicios.${index}.id`, {
-                  valueAsNumber: true,
-                })}
+              <FormHiddenInput<AgendaServicioProfesionalDTO>
+                name="id"
+                array={{
+                  index: index,
+                  parentName: parentName,
+                }}
               />
-              <input
-                hidden
-                {...register(
-                  `${props.parentName}.servicios.${index}.agendaId`,
-                  {
-                    valueAsNumber: true,
-                  },
-                )}
+              <FormHiddenInput<AgendaServicioProfesionalDTO>
+                name="agendaId"
+                array={{
+                  index: index,
+                  parentName: parentName,
+                }}
               />
-              <input
-                hidden
-                {...register(
-                  `${props.parentName}.servicios.${index}.servicioProfesionalId`,
-                  {
-                    valueAsNumber: true,
-                  },
-                )}
+              <FormHiddenInput<AgendaServicioProfesionalDTO>
+                name="servicioProfesionalId"
+                array={{
+                  index: index,
+                  parentName: parentName,
+                }}
               />
             </div>
           );

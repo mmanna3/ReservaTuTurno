@@ -1,8 +1,9 @@
+import { useEffect } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { IFormComponent, obtenerNombreDelCampo } from "./form.utils";
 
 interface InputProps<T extends FieldValues> extends IFormComponent<T> {
-  value: string | number;
+  value?: string | number;
 }
 
 const FormHiddenInput = <T extends FieldValues>({
@@ -11,8 +12,9 @@ const FormHiddenInput = <T extends FieldValues>({
   const { register, setValue } = useFormContext();
 
   const fieldName = obtenerNombreDelCampo<T>(props.name, props.array);
-
-  setValue(fieldName, props.value);
+  useEffect(() => {
+    if (props.value) setValue(fieldName, props.value);
+  }, []);
 
   return <input type="hidden" {...register(fieldName)} />;
 };

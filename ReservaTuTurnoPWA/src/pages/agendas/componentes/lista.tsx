@@ -19,7 +19,6 @@ const Lista = () => {
   return (
     <>
       {fields.map((field, index) => {
-        console.log("field", field);
         return (
           <div key={field.id} className="mt-5 border-b pb-5">
             {
