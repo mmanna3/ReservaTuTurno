@@ -1,5 +1,6 @@
 import Modal from "@ui/modal";
-import { useCallback, useEffect, useState } from "react";
+import { useEffectOnce } from "@utilidades/useEffectOnce";
+import { useCallback, useState } from "react";
 import Picker, { PickerValue } from "react-mobile-picker";
 import InputDisplay from "./input-display";
 
@@ -23,14 +24,17 @@ export default function TimePicker(props: ITimePicker) {
 
   const [pickerValue, setPickerValue] = useState<PickerValue>(valorDefault);
 
-  useEffect(() => {
+  useEffectOnce(() => {
     handlePickerChange(valorDefault);
-  }, []);
+  });
 
-  const handlePickerChange = useCallback((newValue: PickerValue) => {
-    setPickerValue(newValue);
-    props.onChange && props.onChange(`${newValue.hora}:${newValue.minutos}`);
-  }, []);
+  const handlePickerChange = useCallback(
+    (newValue: PickerValue) => {
+      setPickerValue(newValue);
+      props.onChange && props.onChange(`${newValue.hora}:${newValue.minutos}`);
+    },
+    [props],
+  );
 
   return (
     <>

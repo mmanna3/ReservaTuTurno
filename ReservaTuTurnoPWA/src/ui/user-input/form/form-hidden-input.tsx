@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffectOnce } from "@utilidades/useEffectOnce";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { IFormComponent, obtenerNombreDelCampo } from "./form.utils";
 
@@ -12,9 +12,9 @@ const FormHiddenInput = <T extends FieldValues>({
   const { register, setValue } = useFormContext();
 
   const fieldName = obtenerNombreDelCampo<T>(props.name, props.array);
-  useEffect(() => {
+  useEffectOnce(() => {
     if (props.value) setValue(fieldName, props.value);
-  }, []);
+  });
 
   return <input type="hidden" {...register(fieldName)} />;
 };

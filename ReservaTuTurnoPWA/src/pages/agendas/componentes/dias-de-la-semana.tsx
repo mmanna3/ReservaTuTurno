@@ -1,5 +1,6 @@
 import { AgendaDTO } from "@api/clients";
 import FormHiddenInput from "@ui/user-input/form/form-hidden-input";
+import { useEffectOnce } from "@utilidades/useEffectOnce";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { DiaDeLaSemana } from "../../../utilidades";
@@ -57,10 +58,10 @@ const DiasDeLaSemana = (props: IProps) => {
     [],
   );
 
-  useEffect(() => {
+  useEffectOnce(() => {
     const a = getValues(`${props.parentName}.dias`);
     setDiasSeleccionados(getDiasSeleccionadosFromBitwise(a));
-  }, []);
+  });
 
   useEffect(() => {
     if (diasSeleccionados.length > 0)
