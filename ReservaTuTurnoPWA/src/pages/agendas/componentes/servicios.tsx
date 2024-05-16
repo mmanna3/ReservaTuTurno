@@ -6,8 +6,7 @@ import {
 import useApiQuery from "@api/custom-hooks/use-api-query";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import ContenidoConSpinnerYError from "@ui/contenido-con-spinner-y-error";
-import { Opcion } from "@ui/user-input/autocomplete";
-import FormAutocomplete from "@ui/user-input/form/form-autocomplete";
+import Autocomplete, { Opcion } from "@ui/user-input/autocomplete";
 import FormHiddenInput from "@ui/user-input/form/form-hidden-input";
 import { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
@@ -71,20 +70,22 @@ const Servicios = (props: IProps) => {
     setServiciosDisponibles(opciones);
   }, [fields, todosLosServiciosDelProfesional]);
 
-  const onAgregarServicio = (servicioOption: Opcion) => {
-    const servicio = todosLosServiciosDelProfesional.find(
-      (x) => x.servicioNombre === servicioOption.valor,
-    );
+  const onAgregarServicio = (servicioOption: Opcion | null) => {
+    if (servicioOption) {
+      const servicio = todosLosServiciosDelProfesional.find(
+        (x) => x.servicioNombre === servicioOption?.valor,
+      );
 
-    append({
-      id: 0,
-      agendaId: props.agendaId,
-      servicioProfesionalId: servicio?.id,
-      servicioProfesional: {
-        id: servicio?.id,
-        servicioNombre: servicio?.servicioNombre,
-      },
-    } as AgendaServicioProfesionalDTO);
+      append({
+        id: 0,
+        agendaId: props.agendaId,
+        servicioProfesionalId: servicio?.id,
+        servicioProfesional: {
+          id: servicio?.id,
+          servicioNombre: servicio?.servicioNombre,
+        },
+      } as AgendaServicioProfesionalDTO);
+    }
   };
 
   const quitarServicio = ({
@@ -103,19 +104,18 @@ const Servicios = (props: IProps) => {
       hasData={servicios === null ? false : true}
       mensajeSpinner="Cargando agendas 🗓️"
     >
-      <FormAutocomplete<ServiciosDelProfesionalDTO>
-        name="servicioNombre"
+      <Autocomplete
         label="Servicios"
         placeholder="Elegí un servicio"
         opciones={serviciosDisponibles}
-        onChange={onAgregarServicio}
+        onOpcionSeleccionada={onAgregarServicio}
       />
       <div className="ml-2 mt-3 flex flex-wrap gap-2">
         {fields.map((field, index) => {
           return (
             <div key={field.id}>
               <button
-                className="flex rounded-xl border p-1 text-sm text-grisclaro"
+                className="flex rounded-xl border px-2 py-1 text-sm text-grisclaro"
                 type="button"
                 onClick={() =>
                   quitarServicio({

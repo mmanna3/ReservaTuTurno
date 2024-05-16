@@ -116,10 +116,19 @@ const CrearTurnosPage = () => {
             label="Servicio"
             placeholder="Seleccioná el servicio"
             opciones={OpcionesServicios}
-            onChange={(servicio) => {
+            onOpcionSeleccionada={(servicio) => {
               actualizarProfesionalesDisponibles(servicio);
               setProfesionalId(undefined);
               setServicioId(Number(servicio.id));
+            }}
+            onLimpiar={() => {
+              setProfesionalesDisponibles([]);
+              setProfesionalId(undefined);
+              setServicioId(undefined);
+              // TODO
+              // BUG: Cuando limpiás el servicio, debería limpiarse también el profesional
+              // Lo más copado sería hacer esto con un ref del profesional
+              // setValue("profesionalId", null);
             }}
             required
           />
@@ -129,7 +138,9 @@ const CrearTurnosPage = () => {
             label="Profesional"
             placeholder="Seleccioná el profesional"
             opciones={profesionalesDisponibles}
-            onChange={(profesional) => setProfesionalId(Number(profesional.id))}
+            onOpcionSeleccionada={(profesional) =>
+              setProfesionalId(Number(profesional.id))
+            }
             required
           />
 

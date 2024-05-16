@@ -1,6 +1,6 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
 import { getProp } from "../../../utilidades";
-import Autocomplete, { IAutocompleteProps, Opcion } from "../autocomplete";
+import Autocomplete, { IAutocompleteProps } from "../autocomplete";
 import { IFormComponent, obtenerNombreDelCampo } from "./form.utils";
 
 interface IFormAutocomplete<T extends FieldValues>
@@ -17,11 +17,6 @@ const FormAutocomplete = <T extends FieldValues>(
 
   const fieldName = obtenerNombreDelCampo<T>(props.name, props.array);
   const errorMessage = getProp(errors, fieldName);
-
-  const customOnChange = (x: Opcion) => {
-    props.onChange && props.onChange(x);
-  };
-
   return (
     <>
       <Controller
@@ -33,9 +28,13 @@ const FormAutocomplete = <T extends FieldValues>(
             {...props}
             valorDefault={props.opciones.find((x) => x.id == value)}
             hayError={!!errorMessage}
-            onChange={(opcion) => {
-              customOnChange(opcion);
+            onOpcionSeleccionada={(opcion) => {
+              props.onOpcionSeleccionada && props.onOpcionSeleccionada(opcion);
               ReactHookFormOnChange(opcion.id);
+            }}
+            onLimpiar={() => {
+              props.onLimpiar && props.onLimpiar();
+              ReactHookFormOnChange(null);
             }}
           />
         )}

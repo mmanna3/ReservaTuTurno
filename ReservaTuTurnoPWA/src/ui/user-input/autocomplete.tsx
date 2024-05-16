@@ -27,7 +27,8 @@ export interface IAutocompleteProps {
   defaultValue?: Opcion;
   required?: boolean;
   Icono?: Icono;
-  onChange?: (arg: Opcion) => void;
+  onOpcionSeleccionada?: (arg: Opcion) => void;
+  onLimpiar?: () => void;
   hayError?: boolean;
   valorDefault?: Opcion;
 }
@@ -43,7 +44,14 @@ export default function Autocomplete(props: IAutocompleteProps) {
 
   useEffect(() => {
     setSelectedItem(valorDefault || null);
-  }, [valorDefault]);
+  }, [props.opciones, valorDefault]);
+
+  const limpiar = () => {
+    props.onLimpiar && props.onLimpiar();
+    setItems(props.opciones);
+    setSelectedItem(null);
+    setIsOpen(false);
+  };
 
   const onInputFiltroChange = (e: React.FormEvent<HTMLInputElement>) => {
     const textoIngresado = e.currentTarget.value;
@@ -52,7 +60,7 @@ export default function Autocomplete(props: IAutocompleteProps) {
   };
 
   const onOpcionClick = (opcion: Opcion) => {
-    props.onChange && props.onChange(opcion);
+    props.onOpcionSeleccionada && props.onOpcionSeleccionada(opcion);
     setSelectedItem(opcion);
     setIsOpen(false);
   };
@@ -64,34 +72,30 @@ export default function Autocomplete(props: IAutocompleteProps) {
 
   return (
     <div>
-      <div>
-        <div>
-          <InputDisplay
-            onClick={onInputClick}
-            label={props.label}
-            hayError={false}
-            esRequerido={props.required}
-          >
-            {selectedItem ? (
-              <span className="h-6">{selectedItem.valor}</span>
-            ) : (
-              <span className="h-6 text-grisclaro">{props.placeholder}</span>
-            )}
+      <InputDisplay
+        onClick={onInputClick}
+        label={props.label}
+        hayError={false}
+        esRequerido={props.required}
+      >
+        {selectedItem ? (
+          <span className="h-6">{selectedItem.valor}</span>
+        ) : (
+          <span className="h-6 text-grisclaro">{props.placeholder}</span>
+        )}
 
-            {props.Icono ? (
-              <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
-                <props.Icono className="size-5 stroke-[1.8px] text-rosa" />
-              </div>
-            ) : (
-              <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
-                <ChevronDownIcon className="size-5 stroke-[1.8px] text-rosa" />
-              </div>
-            )}
-          </InputDisplay>
-        </div>
-      </div>
+        {props.Icono ? (
+          <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
+            <props.Icono className="size-5 stroke-[1.8px] text-rosa" />
+          </div>
+        ) : (
+          <div className="bg-grisclaro/12 absolute right-4 top-4 rounded-lg p-2 shadow-sm">
+            <ChevronDownIcon className="size-5 stroke-[1.8px] text-rosa" />
+          </div>
+        )}
+      </InputDisplay>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <div className="h-80 w-64">
+        <div className="h-82 w-64">
           <Input
             tabIndex={-1}
             label="Buscar"
@@ -119,6 +123,16 @@ export default function Autocomplete(props: IAutocompleteProps) {
               No hay opciones disponibles
             </div>
           )}
+          <div className="flex justify-end">
+            <button
+              tabIndex={-1}
+              onClick={limpiar}
+              type="button"
+              className="mt-4 flex p-2 text-xs text-rosaoscuro underline"
+            >
+              Limpiar
+            </button>
+          </div>
         </div>
       </Modal>
     </div>
