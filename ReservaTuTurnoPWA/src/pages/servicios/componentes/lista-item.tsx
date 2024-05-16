@@ -14,7 +14,7 @@ export function ServicioListaItem(props: IProps) {
         <p className="mb-2 text-left text-base font-semibold text-negro">
           {servicio.nombre}
         </p>
-        <p className="text-left text-sm">{servicio.descripcion}</p>
+        <p className="truncate text-left text-sm">{servicio.descripcion}</p>
         <div className="mt-5 flex w-full justify-between text-sm">
           <p>{servicio.precioPorDefecto}$</p>
           <p>{servicio.duracionDelTurnoPorDefectoEnMinutos}min</p>
