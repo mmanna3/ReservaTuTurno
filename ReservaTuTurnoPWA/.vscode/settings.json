@@ -9,5 +9,26 @@
   "editor.snippetSuggestions": "top",
   "editor.wordWrap": "wordWrapColumn",
   "editor.wordWrapColumn": 120,
-  "editor.rulers": [120]
+  "editor.rulers": [120],
+  "workbench.editor.labelFormat": "short",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#b22850",
+    "activityBar.background": "#b22850",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#17340c",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#b22850",
+    "statusBar.background": "#881f3d",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#b22850",
+    "statusBarItem.remoteBackground": "#881f3d",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#881f3d",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#881f3d99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#881f3d"
 }
