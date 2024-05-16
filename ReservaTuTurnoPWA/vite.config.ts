@@ -9,6 +9,7 @@ export default defineConfig({
       "@api": "/src/api",
       "@ui": "/src/ui",
       "@assets": "/src/assets",
+      "@utilidades": "/src/utilidades",
     },
   },
   plugins: [

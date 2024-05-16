@@ -2,6 +2,7 @@ import { FranjaHorariaDTO } from "@api/clients";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import FormHiddenInput from "@ui/user-input/form/form-hidden-input";
 import FormTimePicker from "@ui/user-input/form/form-time-picker";
+import { useEffectOnce } from "@utilidades/useEffectOnce";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
 interface IProps {
@@ -15,7 +16,9 @@ export function FranjasHorarias(props: IProps) {
 
   const { getValues } = useFormContext();
 
-  if (fields.length == 0) append({});
+  useEffectOnce(() => {
+    if (fields.length === 0) append({});
+  });
 
   return (
     <>
@@ -58,13 +61,17 @@ export function FranjasHorarias(props: IProps) {
             />
           </div>
           <div className="mt-6 flex items-center ">
-            <button
-              onClick={() => remove(index)}
-              type="button"
-              className="rounded-lg bg-grisclarito/10 p-3 shadow-sm"
-            >
-              <TrashIcon className="size-5 stroke-[1.8px] text-grisclaro" />
-            </button>
+            {fields.length !== 1 ? (
+              <button
+                onClick={() => remove(index)}
+                type="button"
+                className="rounded-lg bg-grisclarito/10 p-3 shadow-sm"
+              >
+                <TrashIcon className="size-5 stroke-[1.8px] text-grisclaro" />
+              </button>
+            ) : (
+              <div className="w-11"></div>
+            )}
           </div>
         </div>
       ))}

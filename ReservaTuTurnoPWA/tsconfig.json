@@ -23,7 +23,8 @@
     "paths": {
       "@ui/*": ["./src/ui/*"],
       "@api/*": ["./src/api/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@utilidades/*": ["./src/utilidades/*"]
     },
     "types": ["node"] // This is needed to resolve the "path" module issue
   },
