@@ -54,7 +54,10 @@ const Agendas = () => {
         <Form<ProfesionalDTO> onSubmit={onSubmit} defaultValues={profesional}>
           <Titulo>Agendas</Titulo>
           <Lista />
-          <BotonSubmit texto="Guardar cambios" />
+          <BotonSubmit
+            texto="Guardar cambios"
+            estaDeshabilitado={mutation.isPending}
+          />
         </Form>
       </div>
     </ContenidoConSpinnerYError>
